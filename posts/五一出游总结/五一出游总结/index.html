@@ -216,10 +216,19 @@
     border-radius: 0 8px 8px 0;
   }
   
+   
+  .article-content .table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,255,0.2);
+  }
+  
   .article-content table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 0;
   }
   
   .article-content th {
@@ -227,6 +236,7 @@
     padding: 12px;
     text-align: left;
     border: 1px solid rgba(255,255,255,0.1);
+    white-space: nowrap;
   }
   
   .article-content td {
@@ -661,6 +671,16 @@
     
     
     const articleContents = document.querySelectorAll('.article-content');
+    articleContents.forEach(function(content) {
+      const tables = content.querySelectorAll('table');
+      tables.forEach(function(table) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      });
+    });
+    
     
     articleContents.forEach(function(content) {
       
@@ -1199,7 +1219,7 @@
     
     <div style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
       
-      <article style="flex: 1; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
+      <article style="flex: 1; max-width: 1000px; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         
         
         <div style="
@@ -1239,7 +1259,7 @@
         <div style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
           <span>📅 2026-05-07</span>
           
-          <span>📝 149 字</span>
+          <span>📝 151 字</span>
           <span>⏱️ 1 分钟</span>
         </div>
         
@@ -1273,7 +1293,7 @@
 
 
         
-        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px;">
+        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px; overflow-x: hidden;">
           <p><strong>你一句春不晚，我就到了真江南</strong></p>
 <h1 id="前言">前言</h1>
 <ul>
@@ -1475,7 +1495,9 @@
 <h2 id="玄武湖">玄武湖</h2>
 <ul>
 <li>南京一整天都在下雨，特别冷。进玄武湖景区，感觉和金沙江有点像，然后就走了（其实是走不动了）</li>
+<li>看同学给我发的图片，就是一个湖，没什么好看的</li>
 </ul>
+<h2 id="德基广场">德基广场</h2>
 
         </div>
         
@@ -1687,6 +1709,7 @@
         <li><a href="#大报恩寺遗址">大报恩寺遗址</a></li>
         <li><a href="#先锋书店">先锋书店</a></li>
         <li><a href="#玄武湖">玄武湖</a></li>
+        <li><a href="#德基广场">德基广场</a></li>
       </ul>
     </li>
   </ul>

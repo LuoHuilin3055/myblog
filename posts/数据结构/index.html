@@ -216,10 +216,19 @@
     border-radius: 0 8px 8px 0;
   }
   
+   
+  .article-content .table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+    border-radius: 8px;
+    border: 1px solid rgba(0,255,255,0.2);
+  }
+  
   .article-content table {
     width: 100%;
+    min-width: 600px;
     border-collapse: collapse;
-    margin: 20px 0;
+    margin: 0;
   }
   
   .article-content th {
@@ -227,6 +236,7 @@
     padding: 12px;
     text-align: left;
     border: 1px solid rgba(255,255,255,0.1);
+    white-space: nowrap;
   }
   
   .article-content td {
@@ -661,6 +671,16 @@
     
     
     const articleContents = document.querySelectorAll('.article-content');
+    articleContents.forEach(function(content) {
+      const tables = content.querySelectorAll('table');
+      tables.forEach(function(table) {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'table-wrapper';
+        table.parentNode.insertBefore(wrapper, table);
+        wrapper.appendChild(table);
+      });
+    });
+    
     
     articleContents.forEach(function(content) {
       
@@ -1199,7 +1219,7 @@
     
     <div style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
       
-      <article style="flex: 1; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
+      <article style="flex: 1; max-width: 1000px; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         
         
         <div style="
@@ -1275,7 +1295,7 @@
 
 
         
-        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px;">
+        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px; overflow-x: hidden;">
           <ul>
 <li>定义：
 <ul>
