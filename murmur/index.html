@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>碎碎念 | NGC 2237&#39;s Blog</title>
+    <title>Notes | NGC 2237&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -598,174 +598,114 @@
         
   
   
-  
-  
-  
-  
-  
-  
-  
-  
-  
   <style>
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
     
-    .timeline-container {
-      max-width: 800px;
-      margin: 0 auto;
-      position: relative;
+    .murmur-container {
+      animation: fadeIn 0.6s ease;
     }
     
-    .timeline-header {
-      margin-bottom: 40px;
-      animation: fadeInDown 0.8s ease;
-    }
-    
-    .timeline-header h2 {
-      color: #00ffff;
-      font-size: 1.5em;
-      margin: 0 0 10px;
-    }
-    
-    .timeline-header span {
-      color: #888;
-      font-size: 0.9em;
-    }
-    
-    .timeline {
-      position: relative;
-      padding-left: 30px;
-    }
-    
-    .timeline::before {
-      content: '';
-      position: absolute;
-      left: 10px;
-      top: 0;
-      bottom: 0;
-      width: 2px;
-      background: linear-gradient(to bottom, #00ffff, transparent);
-    }
-    
-    .timeline-year {
-      position: relative;
-      margin-bottom: 30px;
-    }
-    
-    .timeline-year::before {
-      content: '';
-      position: absolute;
-      left: -30px;
-      top: 6px;
-      width: 20px;
-      height: 20px;
-      border-radius: 50%;
-      background: #00ffff;
-      box-shadow: 0 0 10px rgba(0,255,255,0.5);
-    }
-    
-    .timeline-year h3 {
-      color: #00ffff;
-      font-size: 1.2em;
-      margin: 0 0 20px;
-    }
-    
-    .timeline-item {
-      position: relative;
-      margin-bottom: 20px;
-      padding: 20px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 8px;
+    .murmur-header {
+      text-align: center;
+      margin-bottom: 50px;
+      padding: 30px;
+      background: linear-gradient(135deg, rgba(0,255,255,0.1) 0%, rgba(0,255,255,0.05) 100%);
+      border-radius: 16px;
       border: 1px solid rgba(0,255,255,0.2);
-      transition: all 0.3s ease;
+    }
+    
+    .murmur-title {
+      font-size: clamp(2.5em, 5vw, 3.5em);
+      color: #00ffff;
+      margin: 0 0 15px;
+      text-shadow: 0 0 30px rgba(0,255,255,0.6);
+      letter-spacing: 3px;
+    }
+    
+    .murmur-subtitle {
+      color: #888;
+      font-size: 1.1em;
+      margin: 0;
+      font-style: italic;
+    }
+    
+    .murmur-list {
       display: flex;
+      flex-direction: column;
       gap: 20px;
     }
     
-    .timeline-item:hover {
-      background: rgba(0,255,255,0.05);
-      transform: translateX(10px);
-      box-shadow: 0 4px 15px rgba(0,255,255,0.3);
-    }
-    
-    .timeline-item::before {
-      content: '';
-      position: absolute;
-      left: -36px;
-      top: 28px;
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: #fff;
-      border: 2px solid #00ffff;
-    }
-    
-    .timeline-item-image {
-      flex-shrink: 0;
-      width: 100px;
-      height: 60px;
-      border-radius: 6px;
+    .murmur-item {
+      background: rgba(0,0,0,0.6);
+      border-radius: 12px;
+      border: 1px solid rgba(0,255,255,0.15);
+      padding: 20px 25px;
+      transition: all 0.3s ease;
+      position: relative;
       overflow: hidden;
     }
     
-    .timeline-item-image img {
+    .murmur-item::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      background: linear-gradient(to bottom, #00ffff, transparent);
+    }
+    
+    .murmur-item:hover {
+      background: rgba(0,255,255,0.08);
+      border-color: rgba(0,255,255,0.4);
+      transform: translateX(5px);
+      box-shadow: 0 4px 20px rgba(0,255,255,0.2);
+    }
+    
+    .murmur-date {
+      display: inline-block;
+      background: rgba(0,255,255,0.15);
+      color: #00ffff;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.85em;
+      margin-bottom: 12px;
+      font-family: 'SF Mono', Consolas, monospace;
+    }
+    
+    .murmur-content {
+      color: #ddd;
+      line-height: 1.8;
+      font-size: 1.05em;
+      margin: 0;
+      word-break: break-word;
+    }
+    
+    .murmur-content::before {
+      content: '// ';
+      color: #00ffff;
+      opacity: 0.6;
+    }
+    
+    .murmur-image-container {
+      margin-top: 15px;
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 100%;
+    }
+    
+    .murmur-image {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      border-radius: 8px;
       transition: transform 0.3s ease;
     }
     
-    .timeline-item:hover .timeline-item-image img {
-      transform: scale(1.1);
-    }
-    
-    .timeline-item-content {
-      flex: 1;
-    }
-    
-    .timeline-item-date {
-      color: #888;
-      font-size: 0.8em;
-      margin-bottom: 8px;
-    }
-    
-    .timeline-item-title {
-      color: #fff;
-      font-size: 1.1em;
-      margin: 0 0 10px;
-    }
-    
-    .timeline-item-title a {
-      color: #fff;
-      text-decoration: none;
-      transition: color 0.3s ease;
-    }
-    
-    .timeline-item-title a:hover {
-      color: #00ffff;
-    }
-    
-    .timeline-tags {
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-    
-    .timeline-tag {
-      font-size: 0.7em;
-      color: #00ffff;
-      background: rgba(0,255,255,0.1);
-      padding: 2px 8px;
-      border-radius: 10px;
+    .murmur-image:hover {
+      transform: scale(1.02);
     }
   </style>
   
@@ -777,41 +717,65 @@
     min-height: 100vh;
     padding: 120px 20px 60px;
     position: relative;
-  " id="page-top">
-    
+  ">
     <div style="
       position: absolute;
       top: 0;
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.85);
+      background: rgba(0,0,0,0.88);
       z-index: 0;
     "></div>
     
-    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
-      
-      <div style="text-align: center; margin-bottom: 60px;">
-        
-          <h1 style="
-            font-size: clamp(2.5em, 6vw, 3.5em);
-            color: #00ffff;
-            margin: 0;
-            text-shadow: 0 0 20px rgba(0,255,255,0.5);
-            letter-spacing: 2px;
-            animation: fadeInDown 0.8s ease;
-          ">碎碎念</h1>
-        
-        <div style="
-          width: 80px;
-          height: 3px;
-          background: linear-gradient(90deg, #00ffff, transparent);
-          margin: 20px auto 0;
-          animation: fadeInDown 0.8s ease 0.2s both;
-        "></div>
+    <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 1;" class="murmur-container">
+      <div class="murmur-header">
+        <div style="font-size: 1.2em; color: #00ffff; margin-bottom: 10px; opacity: 0.8;">[ Daily Notes ]</div>
+        <h1 class="murmur-title">Notes</h1>
+        <p class="murmur-subtitle">NGC 2237's Daily Life</p>
       </div>
       
-      
+      <div class="murmur-list">
+        
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-05-08</div>
+              <p class="murmur-content">心情不好就背单词吧，一背一个不吱声<br/>四级还是太有嚼劲了</p>
+              
+            </div>
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-05-08</div>
+              <p class="murmur-content">给网站增加了碎碎念部分<br/>它即将取代QQ空间，成为我新的日记本</p>
+              
+            </div>
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-05-07</div>
+              <p class="murmur-content">Finished the May Day trip summary, Jiangnan is really beautiful!</p>
+              
+            </div>
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-05-05</div>
+              <p class="murmur-content">Recently been practicing CTF challenges, feeling like I'm making progress!</p>
+              
+            </div>
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-04-23</div>
+              <p class="murmur-content">OpenClaw system meeting ended, everyone's projects are great!</p>
+              
+            </div>
+          
+            <div class="murmur-item">
+              <div class="murmur-date">2026-04-15</div>
+              <p class="murmur-content">It's getting hotter and hotter, summer is coming~</p>
+              
+            </div>
+          
+        
+      </div>
     </div>
   </div>
 
