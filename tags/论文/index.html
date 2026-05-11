@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>友链 | NGC 2237&#39;s Blog</title>
+    <title>论文 | NGC 2237&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -139,451 +139,6 @@
         }
     </style>
     
-<style>
-  @keyframes fadeIn {
-    from {
-      opacity: 0;
-      transform: translateY(20px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-  
-  .article-content h2 {
-    color: #00ffff;
-    font-size: clamp(1.5em, 3vw, 1.8em);
-    margin: 40px 0 20px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0,255,255,0.2);
-  }
-  
-  .article-content h3 {
-    color: #00ffff;
-    font-size: clamp(1.2em, 2.5vw, 1.4em);
-    margin: 30px 0 15px;
-  }
-  
-  .article-content p {
-    margin: 15px 0;
-    line-height: 1.8;
-  }
-  
-  .article-content ul,
-  .article-content ol {
-    margin: 15px 0;
-    padding-left: 30px;
-  }
-  
-  .article-content li {
-    margin: 8px 0;
-  }
-  
-  .article-content a {
-    color: #00ffff;
-    text-decoration: none;
-    border-bottom: 1px solid rgba(0,255,255,0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .article-content a:hover {
-    color: #fff;
-    border-bottom-color: #00ffff;
-  }
-  
-  .article-content img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin: 20px 0;
-    display: block;
-    box-shadow: 0 4px 15px rgba(0,255,255,0.3);
-    transition: all 0.3s ease;
-  }
-  
-  .article-content img:hover {
-    transform: scale(1.02);
-    box-shadow: 0 8px 25px rgba(0,255,255,0.5);
-  }
-  
-  .article-content blockquote {
-    border-left: 3px solid #00ffff;
-    padding: 10px 20px;
-    margin: 20px 0;
-    background: rgba(0,255,255,0.05);
-    border-radius: 0 8px 8px 0;
-  }
-  
-  .article-content table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-  }
-  
-  .article-content th {
-    background: rgba(0,255,255,0.1);
-    padding: 12px;
-    text-align: left;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .article-content td {
-    padding: 12px;
-    border: 1px solid rgba(255,255,255,0.1);
-  }
-  
-  .article-content tr:hover {
-    background: rgba(0,255,255,0.05);
-  }
-  
-   
-  .article-content pre,
-  .article-content .highlight pre {
-    background: #1e1e1e;
-    padding: 0;
-    border-radius: 8px;
-    overflow-x: auto;
-    margin: 20px 0;
-    border: 1px solid #333;
-    position: relative;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  }
-  
-  .article-content code,
-  .article-content .highlight code {
-    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
-    font-size: 0.9em;
-  }
-  
-  .article-content pre code,
-  .article-content .highlight pre code {
-    background: none;
-    padding: 0;
-  }
-  
-   
-  .article-content .chroma,
-  .article-content .highlight .chroma {
-    color: #d4d4d4;
-    background-color: #1e1e1e;
-    border-radius: 8px;
-    position: relative;
-  }
-  
-   
-  .article-content .chroma::before,
-  .article-content .highlight .chroma::before {
-    content: '📋';
-    position: absolute;
-    top: 10px;
-    right: 15px;
-    color: #888;
-    font-size: 0.9em;
-    cursor: pointer;
-    padding: 4px 8px;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.1);
-    transition: all 0.3s ease;
-    z-index: 10;
-  }
-  
-  .article-content .chroma:hover::before,
-  .article-content .highlight .chroma:hover::before {
-    color: #00ffff;
-    background: rgba(0,255,255,0.2);
-  }
-  
-   
-  .article-content .chroma .code,
-  .article-content .highlight .chroma .code {
-    padding: 20px;
-  }
-  
-   
-  .article-content .chroma .k,
-  .article-content .highlight .chroma .k {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kc,
-  .article-content .highlight .chroma .kc {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kd,
-  .article-content .highlight .chroma .kd {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kn,
-  .article-content .highlight .chroma .kn {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kp,
-  .article-content .highlight .chroma .kp {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kr,
-  .article-content .highlight .chroma .kr {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .kt,
-  .article-content .highlight .chroma .kt {
-    color: #8be9fd;
-  }
-  
-  .article-content .chroma .na,
-  .article-content .highlight .chroma .na {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .nc,
-  .article-content .highlight .chroma .nc {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .no,
-  .article-content .highlight .chroma .no {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .nd,
-  .article-content .highlight .chroma .nd {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .ni,
-  .article-content .highlight .chroma .ni {
-    color: #d4d4d4;
-  }
-  
-  .article-content .chroma .ne,
-  .article-content .highlight .chroma .ne {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .nf,
-  .article-content .highlight .chroma .nf {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .nl,
-  .article-content .highlight .chroma .nl {
-    color: #d4d4d4;
-  }
-  
-  .article-content .chroma .nn,
-  .article-content .highlight .chroma .nn {
-    color: #d4d4d4;
-  }
-  
-  .article-content .chroma .nx,
-  .article-content .highlight .chroma .nx {
-    color: #50fa7b;
-  }
-  
-  .article-content .chroma .py,
-  .article-content .highlight .chroma .py {
-    color: #d4d4d4;
-  }
-  
-  .article-content .chroma .nt,
-  .article-content .highlight .chroma .nt {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .nv,
-  .article-content .highlight .chroma .nv {
-    color: #d4d4d4;
-  }
-  
-  .article-content .chroma .l,
-  .article-content .highlight .chroma .l {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .ld,
-  .article-content .highlight .chroma .ld {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .s,
-  .article-content .highlight .chroma .s {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sa,
-  .article-content .highlight .chroma .sa {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sb,
-  .article-content .highlight .chroma .sb {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sc,
-  .article-content .highlight .chroma .sc {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .dl,
-  .article-content .highlight .chroma .dl {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sd,
-  .article-content .highlight .chroma .sd {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .s2,
-  .article-content .highlight .chroma .s2 {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .se,
-  .article-content .highlight .chroma .se {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sh,
-  .article-content .highlight .chroma .sh {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .si,
-  .article-content .highlight .chroma .si {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sx,
-  .article-content .highlight .chroma .sx {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .sr,
-  .article-content .highlight .chroma .sr {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .s1,
-  .article-content .highlight .chroma .s1 {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .ss,
-  .article-content .highlight .chroma .ss {
-    color: #f1fa8c;
-  }
-  
-  .article-content .chroma .m,
-  .article-content .highlight .chroma .m {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .mb,
-  .article-content .highlight .chroma .mb {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .mf,
-  .article-content .highlight .chroma .mf {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .mh,
-  .article-content .highlight .chroma .mh {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .mi,
-  .article-content .highlight .chroma .mi {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .mo,
-  .article-content .highlight .chroma .mo {
-    color: #bd93f9;
-  }
-  
-  .article-content .chroma .c,
-  .article-content .highlight .chroma .c {
-    color: #6272a4;
-  }
-  
-  .article-content .chroma .ch,
-  .article-content .highlight .chroma .ch {
-    color: #6272a4;
-  }
-  
-  .article-content .chroma .cm,
-  .article-content .highlight .chroma .cm {
-    color: #6272a4;
-  }
-  
-  .article-content .chroma .c1,
-  .article-content .highlight .chroma .c1 {
-    color: #6272a4;
-  }
-  
-  .article-content .chroma .cs,
-  .article-content .highlight .chroma .cs {
-    color: #6272a4;
-  }
-  
-  .article-content .chroma .o,
-  .article-content .highlight .chroma .o {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .ow,
-  .article-content .highlight .chroma .ow {
-    color: #ff79c6;
-  }
-  
-  .article-content .chroma .p,
-  .article-content .highlight .chroma .p {
-    color: #d4d4d4;
-  }
-  
-  @media (max-width: 768px) {
-    .article-content h2 {
-      font-size: 1.5em;
-    }
-    
-    .article-content h3 {
-      font-size: 1.2em;
-    }
-  }
-</style>
-<script>
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    const codeBlocks = document.querySelectorAll('.article-content .chroma, .article-content .highlight .chroma');
-    codeBlocks.forEach(block => {
-      block.addEventListener('click', function(e) {
-        if (e.target === this || e.target === this.querySelector('code')) {
-          const code = this.querySelector('code').textContent;
-          navigator.clipboard.writeText(code).then(() => {
-            const originalContent = this.style.content;
-            this.style.content = '✅';
-            setTimeout(() => {
-              this.style.content = '📋';
-            }, 2000);
-          }).catch(err => {
-            console.error('复制失败:', err);
-          });
-        }
-      });
-    });
-  });
-</script>
-
     
 <style>
   body {
@@ -1051,6 +606,18 @@
         
   
   
+  <style>
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
   
   <div style="
     background-image: url('https://LuoHuilin3055.github.io/myblog/images/background.jpg');
@@ -1059,9 +626,8 @@
     background-attachment: fixed;
     min-height: 100vh;
     padding: 120px 20px 60px;
-    background-color: #000000;
     position: relative;
-  ">
+  " id="page-top">
     
     <div style="
       position: absolute;
@@ -1069,96 +635,232 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0,0,0,0.7);
+      background: rgba(0,0,0,0.85);
       z-index: 0;
     "></div>
     
-    <div style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
       
-      <article style="background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
-        
-        
-        <div style="
-          margin: -40px -40px 30px -40px;
-          position: relative;
-          overflow: hidden;
-          border-radius: 15px 15px 0 0;
-        ">
-          <img 
-            src="https://LuoHuilin3055.github.io/myblog/images/background.jpg"
-            alt="友链"
-            loading="eager"
-            decoding="async"
-            style="
-              width: 100%;
-              height: auto;
-              max-height: 400px;
-              object-fit: cover;
-              display: block;
-              transition: transform 0.3s ease;
-            "
-          />
-          
-          <div style="
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100px;
-            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
-          "></div>
-        </div>
-        
-        
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">友链</h1>
-        
-        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px;">
-          
-          
+      
 
 
-<div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px; justify-content: center;">
+
+
+<div style="
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(0,255,255,0.1) 0%, rgba(0,255,255,0.05) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(0,255,255,0.2);
+">
+  <div style="
+    font-size: 1.2em;
+    color: #00ffff;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  ">[ Tag ]</div>
+  <h1 style="
+    font-size: clamp(2.5em, 5vw, 3.5em);
+    color: #00ffff;
+    margin: 0 0 15px;
+    text-shadow: 0 0 30px rgba(0,255,255,0.6);
+    letter-spacing: 3px;
+  ">论文</h1>
   
-  <a 
-    href="https://daochunhan25.site/" 
-    target="_blank" 
-    rel="noopener noreferrer"
-    style="
+    <p style="
+      color: #888;
+      font-size: 1.1em;
+      margin: 0;
+      font-style: italic;
+    ">Related Articles</p>
+  
+</div>
+
+      
+      
+      
+      
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+      
+      
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 30px;
+        ">
+          
+            
+
+<article style="
+  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+  border-radius: 16px;
+  border: 1px solid #222;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 20px 40px rgba(0,255,255,0.2)';"
+   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#222'; this.style.boxShadow='none'">
+  
+  
+  
+  
+  
+  <div style="
+    height: 4px;
+    background: linear-gradient(90deg, #00ffff, #0066ff);
+    width: 100%;
+  "></div>
+  
+  <div style="padding: 30px; flex: 1; display: flex; flex-direction: column;">
+    
+    <h2 style="
+      font-size: 1.8em;
+      margin: 0 0 15px;
+      line-height: 1.3;
+    ">
+      <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+      " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+        “四史”结课论文
+      </a>
+    </h2>
+    
+    
+    <div style="
       display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      padding: 15px;
-      border-radius: 50%;
-    "
-    onmouseover="this.style.transform='translateY(-5px)'; this.querySelector('img').style.boxShadow='0 6px 20px rgba(0,255,255,0.8)'; this.querySelector('img').style.borderColor='#00ffff'"
-    onmouseout="this.style.transform='translateY(0)'; this.querySelector('img').style.boxShadow='0 4px 15px rgba(0,255,255,0.3)'; this.querySelector('img').style.borderColor='rgba(0,255,255,0.5)'"
-  >
-    <div style="margin-bottom: 10px;">
-      <img 
-        src="https://img.daochunhan25.site/img/profile.png" 
-        alt="Daochunhan" 
-        style="
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          object-fit: cover;
-          border: 2px solid rgba(0,255,255,0.5);
-          box-shadow: 0 4px 15px rgba(0,255,255,0.3);
-          transition: all 0.3s ease;
-        "
-      />
+      gap: 20px;
+      color: #888;
+      font-size: 0.85em;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    ">
+      <span>📅 2026-05-11</span>
+      <span>📝 3490 字</span>
+      <span>⏱️ 9 分钟阅读</span>
     </div>
-    <h3 style="color: #00ffff; margin: 0 0 5px; font-size: 1em; text-align: center;">Daochunhan</h3>
-    <p style="color: #ccc; margin: 0; font-size: 0.8em; text-align: center; max-width: 100px;">大大大大大佬</p>
-  </a>
+    
+    
+    <div style="
+      color: #aaa;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-size: 0.95em;
+      flex: 1;
+    ">
+      融媒体语境下“四史”题材短视频的青年化传播研究 ——以B站“四史”主题视频作品为例 在当下媒介环境快速变化的背景下，短视频平台已经成为青年群体获取信息、接受思想教育的重要渠道。“四史”教育作为高校思想政治教育的重要内容，如何突破传统理论灌输 …
+    </div>
+    
+    
+    
+<div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+  
+  
+    
+    
+    <a href="/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: #00ffff;
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      大一下
+    </a>
+  
+    
+    
+    <a href="/myblog/tags/%E8%AE%BA%E6%96%87" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: #a5b4fc;
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      论文
+    </a>
   
 </div>
 
 
+    
+    
+    <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: #00ffff;
+      text-decoration: none;
+      font-size: 0.9em;
+      font-weight: 500;
+      padding: 8px 0;
+      border-bottom: 2px solid #00ffff;
+      transition: all 0.3s;
+      margin-top: auto;
+    " onmouseover="this.style.gap='12px'; this.style.color='#fff';"
+       onmouseout="this.style.gap='8px'; this.style.color='#00ffff';">
+      阅读文章
+      <span style="font-size: 1.2em;">→</span>
+    </a>
+  </div>
+</article>
+
+          
         </div>
-      </article>
+      
     </div>
   </div>
 
