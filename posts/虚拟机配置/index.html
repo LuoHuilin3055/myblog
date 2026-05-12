@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>虚拟机配置 | NGC 2237&#39;s Blog</title>
+    <title>智能系统安全运维与实践的笔记 | NGC 2237&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1114,11 +1114,11 @@
     },
     
     {
-      title: "虚拟机配置",
+      title: "智能系统安全运维与实践的笔记",
       url: "https:\/\/LuoHuilin3055.github.io\/myblog\/posts\/%E8%99%9A%E6%8B%9F%E6%9C%BA%E9%85%8D%E7%BD%AE\/",
-      content: "准备 VMware Workstation Pro Ubuntu的iso文件——Ubuntu 22.04.5 LTS (Jammy Jellyfish) Windows10的iso文件——下载 Windows 10 安装Ubuntu 打开VMware，选择\u0026quot;Create a New Virtual Machine\u0026quot; 选择\u0026quot;Typical\u0026quot;安装 -\u0026gt; …",
+      content: "配置虚拟机 准备 VMware Workstation Pro Ubuntu的iso文件——Ubuntu 22.04.5 LTS (Jammy Jellyfish) Windows10的iso文件——下载 Windows 10 安装Ubuntu 打开VMware，选择\u0026quot;Create a New Virtual Machine\u0026quot; 选择\u0026quot;Typical\u0026quot;安装 …",
       date: "2026-04-08",
-      tags: [ "虚拟机",  "计算机", ]
+      tags: [ "虚拟机",  "计算机",  "笔记",  "大一下", ]
     },
     
     {
@@ -1255,7 +1255,7 @@
         ">
           <img 
             src="https://LuoHuilin3055.github.io/myblog/images/7.jpg"
-            alt="虚拟机配置"
+            alt="智能系统安全运维与实践的笔记"
             loading="eager"
             decoding="async"
             style="
@@ -1279,12 +1279,12 @@
         </div>
         
         
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">虚拟机配置</h1>
+        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">智能系统安全运维与实践的笔记</h1>
         
         <div style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
           <span>📅 2026-04-08</span>
-          <span>✏️ 2026-04-08</span>
-          <span>📝 878 字</span>
+          <span>✏️ 2026-05-12</span>
+          <span>📝 1092 字</span>
           <span>⏱️ 3 分钟</span>
         </div>
         
@@ -1335,19 +1335,62 @@
       计算机
     </a>
   
+    
+    
+    <a href="/myblog/tags/%E7%AC%94%E8%AE%B0" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: #50fa7b;
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      笔记
+    </a>
+  
+    
+    
+    <a href="/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: #ffb86c;
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      大一下
+    </a>
+  
 </div>
 
 
         
         <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px; overflow-x: hidden;">
-          <h1 id="准备">准备</h1>
+          <h1 id="配置虚拟机">配置虚拟机</h1>
+<h2 id="准备">准备</h2>
 <ul>
 <li><code>VMware Workstation Pro</code></li>
 <li><code>Ubuntu</code>的<code>iso</code>文件——<a href="https://releases.ubuntu.com/jammy/">Ubuntu 22.04.5 LTS (Jammy Jellyfish)</a></li>
 <li><code>Windows10</code>的<code>iso</code>文件——<a href="https://www.microsoft.com/zh-cn/software-download/windows10">下载 Windows 10</a></li>
 </ul>
 <hr>
-<h1 id="安装ubuntu">安装Ubuntu</h1>
+<h2 id="安装ubuntu">安装Ubuntu</h2>
 <ul>
 <li>打开<code>VMware</code>，选择<code>&quot;Create a New Virtual Machine&quot;</code></li>
 <li>选择<code>&quot;Typical&quot;</code>安装 -&gt; <code>next</code></li>
@@ -1367,11 +1410,11 @@
 <li><code>settings</code> -&gt; <code>Network</code> -&gt; <code>Network Proxy</code> -&gt; <code>Manual</code></li>
 </ul>
 <hr>
-<h1 id="安装windows10">安装<code>Windows10</code></h1>
+<h2 id="安装windows10">安装<code>Windows10</code></h2>
 <ul>
 <li>基本安装
 <ul>
-<li>打开<code>VMware</code>，选择<code>&quot;Create a New Virtual Machine&quot;</code>[image/win2.png]</li>
+<li>打开<code>VMware</code>，选择<code>&quot;Create a New Virtual Machine&quot;</code></li>
 <li>选择<code>&quot;Typical&quot;</code>安装 -&gt; <code>next</code>  -&gt; 选择下载好的<code>iso</code>文件</li>
 <li>设置账号以及硬件配置等基本操作</li>
 <li>开机后进入安装界面</li>
@@ -1380,8 +1423,8 @@
 <li>配置代理同上</li>
 <li>安装客机增强件：
 <ul>
-<li><code>VM -&gt; install VMware Tools -&gt; 点击“此电脑”中的盘片 -&gt; 下载相关文件</code>![[Pasted image 20260506092053.png]]![[Pasted image 20260506092115.png]]</li>
-<li>右下角显示出<code>VM Tools</code>即为安装成功![[Pasted image 20260506091925.png]]</li>
+<li><code>VM -&gt; install VMware Tools -&gt; 点击“此电脑”中的盘片 -&gt; 下载相关文件</code></li>
+<li>右下角显示出<code>VM Tools</code>即为安装成功</li>
 </ul>
 </li>
 <li>共享文件
@@ -1399,7 +1442,44 @@
 </li>
 </ul>
 </li>
+<li>快照
+<ul>
+<li>创建快照
+<ul>
+<li>将虚拟机开机</li>
+<li>先点击<code>VMware</code>顶部菜单的<code>VM</code>,选择<code>Snapshot -&gt; take Snapshot</code></li>
+<li>在弹出的页面中输入快照名称与描述</li>
 </ul>
+</li>
+<li>恢复快照
+<ul>
+<li>在相同的页面点击<code>Reserve to Snapshot ...</code>即可</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>迁移</li>
+</ul>
+<hr>
+<h1 id="注册表">注册表</h1>
+<ul>
+<li>打开方式
+<ul>
+<li>快捷键<code>Win + R</code>打开运行窗口，输入<code>regedit</code>并在弹出的对话框中选择允许</li>
+</ul>
+</li>
+<li>五个<strong>根节点</strong>
+<ul>
+<li><strong><code>HKEY_CLASSES_ROOT</code></strong>：存储各类不同文件扩展名对应的默认打开程序</li>
+<li><strong><code>HKEY_CURRENT_USER</code></strong>：当前用户的配置数据信息</li>
+<li><strong><code>HKEY_LOCAL_MACHINE</code></strong>：硬件、计算机所有用户的配置数据信息</li>
+<li><strong><code>HKEY_USERS</code></strong>：计算机默认用户的配置文件和已知用户的配置文件的子项</li>
+<li><strong><code>HKEY_CURRENT_CONFIG</code></strong>：当前硬件配置信息</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h1 id="进程与线程">进程与线程</h1>
 
         </div>
         
@@ -1444,6 +1524,38 @@
           计算机
         </a>
       
+        <a href="https://LuoHuilin3055.github.io/tags/%E7%AC%94%E8%AE%B0" 
+           style="
+             padding: 6px 14px;
+             background: rgba(0, 255, 255, 0.15);
+             border: 1px solid rgba(0, 255, 255, 0.4);
+             border-radius: 20px;
+             color: #00ffff;
+             font-size: 0.9em;
+             text-decoration: none;
+             transition: all 0.3s ease;
+           "
+           onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
+          笔记
+        </a>
+      
+        <a href="https://LuoHuilin3055.github.io/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B" 
+           style="
+             padding: 6px 14px;
+             background: rgba(0, 255, 255, 0.15);
+             border: 1px solid rgba(0, 255, 255, 0.4);
+             border-radius: 20px;
+             color: #00ffff;
+             font-size: 0.9em;
+             text-decoration: none;
+             transition: all 0.3s ease;
+           "
+           onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
+          大一下
+        </a>
+      
     </div>
     
   </div>
@@ -1451,7 +1563,7 @@
   
   <div style="display: flex; gap: 10px;">
     <span style="color: #888; font-size: 0.9em;">分享：</span>
-    <a href="https://twitter.com/intent/tweet?text=%e8%99%9a%e6%8b%9f%e6%9c%ba%e9%85%8d%e7%bd%ae&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2f%25E8%2599%259A%25E6%258B%259F%25E6%259C%25BA%25E9%2585%258D%25E7%25BD%25AE%2f" 
+    <a href="https://twitter.com/intent/tweet?text=%e6%99%ba%e8%83%bd%e7%b3%bb%e7%bb%9f%e5%ae%89%e5%85%a8%e8%bf%90%e7%bb%b4%e4%b8%8e%e5%ae%9e%e8%b7%b5%e7%9a%84%e7%ac%94%e8%ae%b0&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2f%25E8%2599%259A%25E6%258B%259F%25E6%259C%25BA%25E9%2585%258D%25E7%25BD%25AE%2f" 
        target="_blank"
        style="
          padding: 6px 12px;
@@ -1609,20 +1721,23 @@
           font-size: 1em;
           transition: all 0.3s ease;
         " onmouseover="this.style.color='#fff'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#00ffff'; this.style.paddingLeft='0'">
-          虚拟机配置
+          智能系统安全运维与实践的笔记
         </a>
       </li>
     </ul>
     
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#准备">准备</a></li>
-    <li><a href="#安装ubuntu">安装Ubuntu</a>
+    <li><a href="#配置虚拟机">配置虚拟机</a>
       <ul>
+        <li><a href="#准备">准备</a></li>
+        <li><a href="#安装ubuntu">安装Ubuntu</a></li>
         <li><a href="#配置代理">配置代理</a></li>
+        <li><a href="#安装windows10">安装<code>Windows10</code></a></li>
       </ul>
     </li>
-    <li><a href="#安装windows10">安装<code>Windows10</code></a></li>
+    <li><a href="#注册表">注册表</a></li>
+    <li><a href="#进程与线程">进程与线程</a></li>
   </ul>
 </nav>
   </div>
