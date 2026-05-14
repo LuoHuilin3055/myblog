@@ -1275,25 +1275,25 @@
 
     </main>
     
-  <footer style="background-color: #000; padding: 20px; position: relative; bottom: 0; width: 100%;" role="contentinfo">
+  <footer style="background-color: var(--bg-secondary); padding: 20px; position: relative; bottom: 0; width: 100%;" role="contentinfo">
   <style>
     .ananke-socials a {
-      color: #fff !important;
+      color: var(--text-primary) !important;
     }
     .ananke-socials a:hover {
-      color: #00ffff !important;
+      color: var(--accent-color) !important;
     }
     .runtime {
       text-align: center;
       margin-top: 20px;
-      color: #00ffff;
+      color: var(--accent-color);
       font-size: 0.9rem;
       padding-top: 10px;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      border-top: 1px solid var(--border-color);
     }
   </style>
   <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
-    <a href="https://LuoHuilin3055.github.io/myblog/" style="color: #fff; font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;" onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+    <a href="https://LuoHuilin3055.github.io/myblog/" style="color: var(--text-primary); font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;" onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
       &copy;  NGC 2237's Blog 2026 
     </a>
     <div><div class="ananke-socials"></div>

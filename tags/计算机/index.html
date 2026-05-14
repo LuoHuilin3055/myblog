@@ -838,16 +838,16 @@
             
 
 <article style="
-  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+  background: var(--bg-card);
   border-radius: 16px;
-  border: 1px solid #222;
+  border: var(--card-border);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 20px 40px rgba(0,255,255,0.2)';"
-   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#222'; this.style.boxShadow='none'">
+" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 20px 40px ' + getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover');"
+   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-color'); this.style.boxShadow='none'">
   
   
   
@@ -855,7 +855,7 @@
     position: relative;
     height: 200px;
     overflow: hidden;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    background: var(--bg-hover);
   ">
     <img 
       src="https://LuoHuilin3055.github.io/myblog/images/12.jpg"
@@ -886,7 +886,7 @@
   
   <div style="
     height: 4px;
-    background: linear-gradient(90deg, #00ffff, #0066ff);
+    background: var(--gradient-accent);
     width: 100%;
   "></div>
   
@@ -898,10 +898,10 @@
       line-height: 1.3;
     ">
       <a href="https://LuoHuilin3055.github.io/myblog/posts/python%E5%A4%8D%E4%B9%A0/" style="
-        color: #fff;
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s;
-      " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+      " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
         Python复习
       </a>
     </h2>
@@ -910,7 +910,7 @@
     <div style="
       display: flex;
       gap: 20px;
-      color: #888;
+      color: var(--text-muted);
       font-size: 0.85em;
       margin-bottom: 20px;
       flex-wrap: wrap;
@@ -922,7 +922,7 @@
     
     
     <div style="
-      color: #aaa;
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 20px;
       font-size: 0.95em;
@@ -1034,36 +1034,35 @@
       align-items: center;
       gap: 8px;
       background: transparent;
-      color: #00ffff;
+      color: var(--accent-color);
       text-decoration: none;
       font-size: 0.9em;
       font-weight: 500;
       padding: 8px 0;
-      border-bottom: 2px solid #00ffff;
+      border-bottom: 2px solid var(--accent-color);
       transition: all 0.3s;
       margin-top: auto;
-    " onmouseover="this.style.gap='12px'; this.style.color='#fff';"
-       onmouseout="this.style.gap='8px'; this.style.color='#00ffff';">
+    " onmouseover="this.style.gap='12px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');"
+       onmouseout="this.style.gap='8px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">
       阅读文章
       <span style="font-size: 1.2em;">→</span>
     </a>
   </div>
 </article>
-
           
             
 
 <article style="
-  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+  background: var(--bg-card);
   border-radius: 16px;
-  border: 1px solid #222;
+  border: var(--card-border);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 20px 40px rgba(0,255,255,0.2)';"
-   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#222'; this.style.boxShadow='none'">
+" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 20px 40px ' + getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover');"
+   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-color'); this.style.boxShadow='none'">
   
   
   
@@ -1071,7 +1070,7 @@
     position: relative;
     height: 200px;
     overflow: hidden;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    background: var(--bg-hover);
   ">
     <img 
       src="https://LuoHuilin3055.github.io/myblog/images/background.jpg"
@@ -1102,7 +1101,7 @@
   
   <div style="
     height: 4px;
-    background: linear-gradient(90deg, #00ffff, #0066ff);
+    background: var(--gradient-accent);
     width: 100%;
   "></div>
   
@@ -1114,10 +1113,10 @@
       line-height: 1.3;
     ">
       <a href="https://LuoHuilin3055.github.io/myblog/posts/linux/" style="
-        color: #fff;
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s;
-      " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+      " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
         Linux学习记录
       </a>
     </h2>
@@ -1126,7 +1125,7 @@
     <div style="
       display: flex;
       gap: 20px;
-      color: #888;
+      color: var(--text-muted);
       font-size: 0.85em;
       margin-bottom: 20px;
       flex-wrap: wrap;
@@ -1138,7 +1137,7 @@
     
     
     <div style="
-      color: #aaa;
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 20px;
       font-size: 0.95em;
@@ -1204,36 +1203,35 @@
       align-items: center;
       gap: 8px;
       background: transparent;
-      color: #00ffff;
+      color: var(--accent-color);
       text-decoration: none;
       font-size: 0.9em;
       font-weight: 500;
       padding: 8px 0;
-      border-bottom: 2px solid #00ffff;
+      border-bottom: 2px solid var(--accent-color);
       transition: all 0.3s;
       margin-top: auto;
-    " onmouseover="this.style.gap='12px'; this.style.color='#fff';"
-       onmouseout="this.style.gap='8px'; this.style.color='#00ffff';">
+    " onmouseover="this.style.gap='12px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');"
+       onmouseout="this.style.gap='8px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">
       阅读文章
       <span style="font-size: 1.2em;">→</span>
     </a>
   </div>
 </article>
-
           
             
 
 <article style="
-  background: linear-gradient(135deg, #0a0a0a 0%, #111111 100%);
+  background: var(--bg-card);
   border-radius: 16px;
-  border: 1px solid #222;
+  border: var(--card-border);
   overflow: hidden;
   transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
   cursor: pointer;
   display: flex;
   flex-direction: column;
-" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 20px 40px rgba(0,255,255,0.2)';"
-   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor='#222'; this.style.boxShadow='none'">
+" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 20px 40px ' + getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover');"
+   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-color'); this.style.boxShadow='none'">
   
   
   
@@ -1241,7 +1239,7 @@
     position: relative;
     height: 200px;
     overflow: hidden;
-    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    background: var(--bg-hover);
   ">
     <img 
       src="https://LuoHuilin3055.github.io/myblog/images/15.jpg"
@@ -1272,7 +1270,7 @@
   
   <div style="
     height: 4px;
-    background: linear-gradient(90deg, #00ffff, #0066ff);
+    background: var(--gradient-accent);
     width: 100%;
   "></div>
   
@@ -1284,10 +1282,10 @@
       line-height: 1.3;
     ">
       <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" style="
-        color: #fff;
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s;
-      " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+      " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
         智能系统安全运维与实践的笔记
       </a>
     </h2>
@@ -1296,7 +1294,7 @@
     <div style="
       display: flex;
       gap: 20px;
-      color: #888;
+      color: var(--text-muted);
       font-size: 0.85em;
       margin-bottom: 20px;
       flex-wrap: wrap;
@@ -1308,7 +1306,7 @@
     
     
     <div style="
-      color: #aaa;
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 20px;
       font-size: 0.95em;
@@ -1416,22 +1414,21 @@
       align-items: center;
       gap: 8px;
       background: transparent;
-      color: #00ffff;
+      color: var(--accent-color);
       text-decoration: none;
       font-size: 0.9em;
       font-weight: 500;
       padding: 8px 0;
-      border-bottom: 2px solid #00ffff;
+      border-bottom: 2px solid var(--accent-color);
       transition: all 0.3s;
       margin-top: auto;
-    " onmouseover="this.style.gap='12px'; this.style.color='#fff';"
-       onmouseout="this.style.gap='8px'; this.style.color='#00ffff';">
+    " onmouseover="this.style.gap='12px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');"
+       onmouseout="this.style.gap='8px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">
       阅读文章
       <span style="font-size: 1.2em;">→</span>
     </a>
   </div>
 </article>
-
           
         </div>
       
@@ -1440,25 +1437,25 @@
 
     </main>
     
-  <footer style="background-color: #000; padding: 20px; position: relative; bottom: 0; width: 100%;" role="contentinfo">
+  <footer style="background-color: var(--bg-secondary); padding: 20px; position: relative; bottom: 0; width: 100%;" role="contentinfo">
   <style>
     .ananke-socials a {
-      color: #fff !important;
+      color: var(--text-primary) !important;
     }
     .ananke-socials a:hover {
-      color: #00ffff !important;
+      color: var(--accent-color) !important;
     }
     .runtime {
       text-align: center;
       margin-top: 20px;
-      color: #00ffff;
+      color: var(--accent-color);
       font-size: 0.9rem;
       padding-top: 10px;
-      border-top: 1px solid rgba(0, 255, 255, 0.2);
+      border-top: 1px solid var(--border-color);
     }
   </style>
   <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
-    <a href="https://LuoHuilin3055.github.io/myblog/" style="color: #fff; font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;" onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color='#fff'">
+    <a href="https://LuoHuilin3055.github.io/myblog/" style="color: var(--text-primary); font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;" onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
       &copy;  NGC 2237's Blog 2026 
     </a>
     <div><div class="ananke-socials"></div>
