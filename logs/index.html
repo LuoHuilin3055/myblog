@@ -14,8 +14,8 @@
             --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
             --primary-color: #00ffff;
             --secondary-color: #a5b4fc;
-            --bg-primary: #000000;
-            --bg-secondary: #1e293b;
+            --bg-primary: #111111;
+            --bg-secondary: #111111;
             --text-primary: #ffffff;
             --text-secondary: #cbd5e1;
             --text-muted: #94a3b8;
@@ -144,7 +144,7 @@
    
   .theme-toggle {
     background: transparent;
-    border: 2px solid rgba(0,255,255,0.5);
+    border: none;
     border-radius: 50%;
     width: 40px;
     height: 40px;
@@ -152,14 +152,15 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 1.2em;
+    font-size: 1.3em;
     transition: all 0.3s ease;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
   }
 
   .theme-toggle:hover {
-    border-color: #00ffff;
-    box-shadow: 0 0 15px rgba(0,255,255,0.5);
-    transform: rotate(20deg);
+    transform: rotate(20deg) scale(1.1);
+    opacity: 0.8;
   }
 
    
@@ -187,7 +188,7 @@
 
    
   [data-theme="dark"] {
-    --bg-primary: #000000;
+    --bg-primary: #111111;
     --bg-secondary: #111111;
     --bg-card: #1a1d29;
     --bg-hover: #252836;
@@ -423,7 +424,6 @@
     });
   });
 </script>
-
 </head>
 <body style="background-color: var(--bg-primary); margin: 0; padding: 0;">
     
@@ -479,9 +479,6 @@
             </a>
             
             
-            <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
-            
-            
             <a href="https://LuoHuilin3055.github.io/myblog/friends" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
                onmouseover="this.style.color='#00ffff'" 
                onmouseout="this.style.color='white'">
@@ -489,7 +486,7 @@
             </a>
             
             
-            <div style="position: relative;">
+            <div style="position: relative; display: flex; align-items: center;">
                 <input type="text" id="search-input" placeholder="搜索..." 
                        style="
                          background: var(--bg-card);
@@ -500,9 +497,10 @@
                          font-size: 0.9em;
                          backdrop-filter: blur(5px);
                          transition: all 0.3s ease;
+                         width: 150px;
                        " 
-                       onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 0 10px ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-glow'); document.getElementById('search-results').style.display='block'"
-                       onblur="setTimeout(function() { document.getElementById('search-results').style.display='none'; }, 200)"
+                       onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 0 10px ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-glow'); this.style.width='200px'; document.getElementById('search-results').style.display='block'"
+                       onblur="this.style.width='150px'; setTimeout(function() { document.getElementById('search-results').style.display='none'; }, 200)"
                        onkeyup="performSearch(this.value)" />
                 <button style="
                   position: absolute;
@@ -533,6 +531,11 @@
                   z-index: 1000;
                   backdrop-filter: blur(10px);
                 "></div>
+                
+                
+                <button class="theme-toggle" onclick="toggleTheme()" title="切换主题" style="
+                  margin-left: 15px;
+                ">🌙</button>
             </div>
         </div>
     </nav>
@@ -704,7 +707,7 @@
   
   
   document.addEventListener('click', function(e) {
-    const searchContainer = document.querySelector('div[style*="position: relative;"]');
+    const searchContainer = document.querySelector('div[style*="position: relative; display: flex; align-items: center;"]');
     const searchResults = document.getElementById('search-results');
     
     if (searchContainer && !searchContainer.contains(e.target)) {

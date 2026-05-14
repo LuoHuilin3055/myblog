@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>#AI on NGC 2237&#39;s Blog</title>
+    <link>http://localhost:1313/myblog/tags/%23ai/</link>
+    <description>Recent content in #AI on NGC 2237&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Fri, 10 Apr 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/myblog/tags/%23ai/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ex-skills搭建记录</title>
+      <link>http://localhost:1313/myblog/posts/ex-skills/</link>
+      <pubDate>Thu, 09 Apr 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/myblog/posts/ex-skills/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;https://github.com/titanwings/ex-skill?tab=readme-ov-file&#34;&gt;titanwings/ex-skill: 致你忘不掉的那个TA，你们干大模型都是码圣 It&amp;rsquo;s giving rebirth era. Welcome to Digital Life 1.0. 🫶&lt;/a&gt;&lt;/p&gt;&#xA;&lt;h1 id=&#34;前言&#34;&gt;前言&lt;/h1&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;1天前刚刚装完虚拟机，看见一篇文章讲&amp;quot;colleague.skill&amp;quot;，又不想学习，于是就想着弄一个来试试。同时呢又害怕记忆不太好，于是就写了这个博客来记录一下，所以这篇文章&lt;em&gt;技术含量不高且操作繁琐&lt;/em&gt;&lt;/li&gt;&#xA;&lt;li&gt;我是菜鸟&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h1 id=&#34;步骤&#34;&gt;步骤&lt;/h1&gt;&#xA;&lt;h2 id=&#34;更新系统&#34;&gt;更新系统&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt update &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt upgrade -y&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装基础工具&#34;&gt;安装基础工具&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo apt install -y git curl nodejs npm python3 python3-pip&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h2 id=&#34;安装openclaw&#34;&gt;安装&lt;code&gt;OpenClaw&lt;/code&gt;&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sudo npm install -g openclaw&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h1 id=&#34;可以同时做&#34;&gt;可以同时做&lt;/h1&gt;&#xA;&lt;h2 id=&#34;提取聊天记录&#34;&gt;提取聊天记录&lt;/h2&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/amtech/tool-WeChatMsg&#34;&gt;amtech/tool-WeChatMsg: 提取微信聊天记录，将其导出成HTML、Word、CSV文档永久保存，对聊天记录进行分析生成年度聊天报告&lt;/a&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;</description>
+    </item>
+  </channel>
+</rss>
