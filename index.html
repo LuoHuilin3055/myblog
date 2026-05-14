@@ -733,14 +733,14 @@
   
   <div style="
     position: absolute;
-    top: -100px;
+    top: -150px;
     left: 0;
     right: 0;
-    bottom: -100px;
+    bottom: -50px;
     background-image: url('https://LuoHuilin3055.github.io/myblog/images/background.jpg');
     background-size: cover;
-    background-position: center 30%;
-    transform: scale(1.1);
+    background-position: center 25%;
+    transform: scale(1.05);
     transition: transform 0.8s ease;
   " id="hero-bg"></div>
   
@@ -752,10 +752,11 @@
     right: 0;
     bottom: 0;
     background: linear-gradient(
-      135deg,
-      rgba(0,0,0,0.4) 0%,
-      rgba(0,0,0,0.2) 50%,
-      rgba(0,0,0,0.5) 100%
+      180deg,
+      rgba(0,0,0,0.3) 0%,
+      rgba(0,0,0,0.1) 30%,
+      rgba(0,0,0,0.1) 70%,
+      rgba(0,0,0,0.4) 100%
     );
   "></div>
   
@@ -844,7 +845,7 @@
       window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const rate = scrolled * 0.3;
-        heroBg.style.transform = 'scale(1.1) translateY(' + rate + 'px)';
+        heroBg.style.transform = 'scale(1.05) translateY(' + rate + 'px)';
       });
     }
   });
