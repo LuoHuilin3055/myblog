@@ -468,25 +468,28 @@
             <a href="https://LuoHuilin3055.github.io/myblog/tags" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
                onmouseover="this.style.color='#00ffff'" 
                onmouseout="this.style.color='white'">
-                Tags
+                标签
             </a>
             
             
             <a href="https://LuoHuilin3055.github.io/myblog/categories" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
                onmouseover="this.style.color='#00ffff'" 
                onmouseout="this.style.color='white'">
-                Archive
+                归档
             </a>
             
             
             <a href="https://LuoHuilin3055.github.io/myblog/friends" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
                onmouseover="this.style.color='#00ffff'" 
                onmouseout="this.style.color='white'">
-                Friends
+                友链
             </a>
             
             
-            <div style="position: relative; display: flex; align-items: center;">
+            <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
+            
+            
+            <div style="position: relative;">
                 <input type="text" id="search-input" placeholder="搜索..." 
                        style="
                          background: var(--bg-card);
@@ -531,11 +534,6 @@
                   z-index: 1000;
                   backdrop-filter: blur(10px);
                 "></div>
-                
-                
-                <button class="theme-toggle" onclick="toggleTheme()" title="切换主题" style="
-                  margin-left: 15px;
-                ">🌙</button>
             </div>
         </div>
     </nav>
@@ -707,7 +705,7 @@
   
   
   document.addEventListener('click', function(e) {
-    const searchContainer = document.querySelector('div[style*="position: relative; display: flex; align-items: center;"]');
+    const searchContainer = document.querySelector('div[style*="position: relative;"]');
     const searchResults = document.getElementById('search-results');
     
     if (searchContainer && !searchContainer.contains(e.target)) {
