@@ -165,17 +165,25 @@
 
    
   :root {
-    --bg-primary: #ffffff;
-    --bg-secondary: #f5f5f5;
+    --bg-primary: #f8fafc;
+    --bg-secondary: #f1f5f9;
     --bg-card: #ffffff;
-    --text-primary: #333333;
-    --text-secondary: #666666;
-    --text-muted: #888888;
-    --border-color: #e0e0e0;
-    --accent-color: #00bcd4;
-    --accent-hover: #00acc1;
-    --shadow: rgba(0,0,0,0.1);
-    --shadow-hover: rgba(0,0,0,0.2);
+    --bg-hover: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --border-color: #e2e8f0;
+    --border-light: #f1f5f9;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-light: #dbeafe;
+    --accent-glow: rgba(59, 130, 246, 0.15);
+    --shadow: rgba(0, 0, 0, 0.05);
+    --shadow-hover: rgba(59, 130, 246, 0.15);
+    --shadow-card: rgba(0, 0, 0, 0.08);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-border: 1px solid #e2e8f0;
   }
 
    
@@ -183,14 +191,22 @@
     --bg-primary: #000000;
     --bg-secondary: #111111;
     --bg-card: #1a1d29;
+    --bg-hover: #252836;
     --text-primary: #ffffff;
     --text-secondary: #cccccc;
     --text-muted: #888888;
     --border-color: #2a2d3a;
+    --border-light: #1e2130;
     --accent-color: #00ffff;
     --accent-hover: #00cccc;
-    --shadow: rgba(0,0,0,0.3);
-    --shadow-hover: rgba(0,255,255,0.2);
+    --accent-light: rgba(0, 255, 255, 0.1);
+    --accent-glow: rgba(0, 255, 255, 0.2);
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 255, 255, 0.2);
+    --shadow-card: rgba(0, 0, 0, 0.4);
+    --gradient-primary: linear-gradient(135deg, #00ffff 0%, #a5b4fc 100%);
+    --gradient-accent: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+    --card-border: 1px solid #2a2d3a;
   }
 
   body {
@@ -894,8 +910,8 @@
   </div>
 
   
-  <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px 60px; background-color: #000000;">
-    <h2 style="font-size: 2em; color: #00ffff; margin-bottom: 30px;">📝 最新文章</h2>
+  <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px 60px; background-color: var(--bg-secondary);">
+    <h2 style="font-size: 2em; color: var(--accent-color); margin-bottom: 30px;">📝 最新文章</h2>
     
     <div style="display: flex; gap: 40px; align-items: flex-start;">
       
@@ -905,17 +921,17 @@
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -936,12 +952,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="color: #fff; text-decoration: none;">“四史”结课论文</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="color: var(--text-primary); text-decoration: none;">“四史”结课论文</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-05-11 | 9 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               融媒体语境下“四史”题材短视频的青年化传播研究 ——以B站“四史”主题视频作品为例 在当下媒介环境快速变化的背景下，短视频平台已经成为青年群体获取信息、接受思想 …
             </div>
             
@@ -998,31 +1014,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1043,12 +1060,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/" style="color: #fff; text-decoration: none;">五一出游总结</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/" style="color: var(--text-primary); text-decoration: none;">五一出游总结</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-05-07 | 6 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               你一句春不晚，我就到了真江南
 前言 感谢CUC的五天读书周与五一连在一起放，上学期期末就想去江南玩，但一直没找到人陪我，刚好放假这段时间高一的妹妹要考试，索性让 …
             </div>
@@ -1085,31 +1102,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1130,12 +1148,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/python%E5%A4%8D%E4%B9%A0/" style="color: #fff; text-decoration: none;">Python复习</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/python%E5%A4%8D%E4%B9%A0/" style="color: var(--text-primary); text-decoration: none;">Python复习</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-23 | 3 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
                📘 Python期中复习讲义（零基础版） 一、Python到底是什么（先建立概念） Python就是一种“写给电脑看的语言”，用来做三件事：
 计算（比如算土地 …
             </div>
@@ -1235,31 +1253,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/python%E5%A4%8D%E4%B9%A0/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1280,12 +1299,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: #fff; text-decoration: none;">数据结构</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="color: var(--text-primary); text-decoration: none;">数据结构</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-09 | 7 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
                定义： 在一些特定的、特殊的需求场景下，以往所学的数据类型无法基于需求合理地组织数据，此时就需要自己设计一套新的数据组织形式来解决问题，也就是数据结构 数据结 …
             </div>
             
@@ -1321,31 +1340,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1366,12 +1386,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/linux/" style="color: #fff; text-decoration: none;">Linux学习记录</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/linux/" style="color: var(--text-primary); text-decoration: none;">Linux学习记录</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-08 | 3 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               新建文件 # 创建空文件 touch my_script.py # 然后用编辑器打开 nano my_script.py # 完成后，Ctrl+O保存 …
             </div>
             
@@ -1428,31 +1448,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/linux/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1473,12 +1494,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E6%8C%87%E5%8D%97/" style="color: #fff; text-decoration: none;">作业提交</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E6%8C%87%E5%8D%97/" style="color: var(--text-primary); text-decoration: none;">作业提交</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-08 | 1 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               写一份指南，避免下次提交作业时又去骚扰AI
 1.确保当前工作区干净 git status 2.创建并切换到新分支 git checkout -b 0x02 3. …
             </div>
@@ -1515,31 +1536,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E6%8C%87%E5%8D%97/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1560,12 +1582,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" style="color: #fff; text-decoration: none;">智能系统安全运维与实践的笔记</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" style="color: var(--text-primary); text-decoration: none;">智能系统安全运维与实践的笔记</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-08 | 4 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               配置虚拟机 准备 VMware Workstation Pro Ubuntu的iso文件——Ubuntu 22.04.5 LTS (Jammy …
             </div>
             
@@ -1664,31 +1686,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1709,12 +1732,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/ctf/" style="color: #fff; text-decoration: none;">CTF学习记录</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/ctf/" style="color: var(--text-primary); text-decoration: none;">CTF学习记录</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-04-02 | 4 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               2018 DEFCON Quals ghettohackers: Throwback 题目描述 …
             </div>
             
@@ -1792,31 +1815,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/ctf/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1837,12 +1861,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="color: #fff; text-decoration: none;">Java蓝桥杯备赛记录</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="color: var(--text-primary); text-decoration: none;">Java蓝桥杯备赛记录</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-03-23 | 32 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               emm，作者学了两周放弃了
 题型结构 结果填空——2题，5分一题 程序设计——6题，10，10，15，15，20，20，共140 基础语法 运算符 1、算术运算 …
             </div>
@@ -1879,31 +1903,32 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
           
           <div style="
-            background: #111;
+            background: var(--bg-card);
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,255,255,0.2);
+            box-shadow: var(--shadow-card);
             padding: 25px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: 1px solid #333;
+            border: var(--card-border);
             display: flex;
             flex-direction: column;
             height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.4)'; this.style.border='1px solid #00ffff';"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 4px 15px rgba(0,255,255,0.2)'; this.style.border='1px solid #333';">
+          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
+             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
             
             
             
@@ -1924,12 +1949,12 @@
             
             
             <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E9%A2%98%E7%9B%AE/" style="color: #fff; text-decoration: none;">Java题目记录</a>
+              <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E9%A2%98%E7%9B%AE/" style="color: var(--text-primary); text-decoration: none;">Java题目记录</a>
             </h3>
-            <div style="color: #888; font-size: 0.85em; margin-bottom: 15px;">
+            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
               2026-03-21 | 22 分钟
             </div>
-            <div style="color: #ccc; line-height: 1.6; margin-bottom: 20px; flex: 1;">
+            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
               流程控制 成绩等级判断 要求：输入一个百分制成绩（0-100），输出对应的等级
 90-100：A
 80-89：B
@@ -1991,15 +2016,16 @@
             
             <a href="https://LuoHuilin3055.github.io/myblog/posts/java%E5%AD%A6%E4%B9%A0/%E9%A2%98%E7%9B%AE/" style="
               display: inline-block;
-              background: #00ffff;
-              color: #000;
+              background: var(--accent-color);
+              color: white;
               padding: 8px 20px;
               border-radius: 25px;
               text-decoration: none;
               font-weight: bold;
               margin-top: 15px;
               text-align: center;
-            ">阅读全文 →</a>
+              transition: background 0.3s;
+            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
           </div>
           
           
@@ -2011,11 +2037,12 @@
         
         
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2024,11 +2051,11 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #3498db;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2045,7 +2072,7 @@
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto 15px;
-    border: 3px solid #3a5a8c;
+    border: 3px solid var(--accent-color);
   ">
     <img src="https://LuoHuilin3055.github.io/myblog/images/ChenJM.jpg" alt="Avatar" style="
       width: 100%;
@@ -2056,7 +2083,7 @@
   
   
   <h3 style="
-    color: #fff;
+    color: var(--text-primary);
     font-size: 1.5em;
     margin: 0 0 8px;
     font-weight: 500;
@@ -2064,7 +2091,7 @@
   
   
   <p style="
-    color: #888;
+    color: var(--text-secondary);
     font-size: 0.9em;
     margin: 0 0 20px;
   ">Hi, there ~ 👋</p>
@@ -2077,12 +2104,12 @@
     margin-bottom: 20px;
   ">
     <div style="text-align: center;">
-      <div style="color: #fff; font-size: 1.2em; font-weight: bold;">10</div>
-      <div style="color: #888; font-size: 0.8em;">文章</div>
+      <div style="color: var(--text-primary); font-size: 1.2em; font-weight: bold;">10</div>
+      <div style="color: var(--text-muted); font-size: 0.8em;">文章</div>
     </div>
     <div style="text-align: center;">
-      <div style="color: #fff; font-size: 1.2em; font-weight: bold;">12</div>
-      <div style="color: #888; font-size: 0.8em;">标签</div>
+      <div style="color: var(--text-primary); font-size: 1.2em; font-weight: bold;">12</div>
+      <div style="color: var(--text-muted); font-size: 0.8em;">标签</div>
     </div>
   </div>
   
@@ -2090,14 +2117,14 @@
   
   <a href="https://github.com/LuoHuilin3055" target="_blank" style="
     display: block;
-    background: #3a5a8c;
-    color: #fff;
+    background: var(--accent-color);
+    color: white;
     padding: 12px 20px;
     border-radius: 8px;
     text-decoration: none;
     font-weight: 500;
     transition: background 0.3s;
-  " onmouseover="this.style.background='#4a6a9c'" onmouseout="this.style.background='#3a5a8c'">
+  " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">
     <span style="display: inline-flex; align-items: center; gap: 8px;">
       <svg style="width: 18px; height: 18px;" fill="currentColor" viewBox="0 0 24 24">
         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
@@ -2108,17 +2135,17 @@
   
   </div>
 </div>
-
         
         
         
 
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2131,7 +2158,7 @@
       <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2141,7 +2168,7 @@
   
   
   <div style="
-    color: #aaa;
+    color: var(--text-secondary);
     font-size: 0.9em;
     line-height: 1.6;
   ">
@@ -2149,16 +2176,16 @@
   </div>
 </div>
 
-
         
         
         
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 25px 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
   text-align: center;
 ">
   
@@ -2169,12 +2196,12 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #00ffff;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
       <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2187,16 +2214,16 @@
     font-family: 'SF Mono', 'Consolas', monospace;
     font-size: 2.5em;
     font-weight: 700;
-    color: #00ffff;
+    color: var(--accent-color);
     letter-spacing: 2px;
-    text-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+    text-shadow: 0 0 20px var(--accent-glow);
     margin-bottom: 10px;
   " id="clock-time">--:--:--</div>
   
   
   <div style="
     font-size: 0.95em;
-    color: #888;
+    color: var(--text-muted);
     margin-bottom: 15px;
   " id="clock-date">----年--月--日</div>
   
@@ -2207,7 +2234,7 @@
     gap: 8px;
   ">
     <span id="clock-weekday" style="
-      color: #aaa;
+      color: var(--text-secondary);
       font-size: 0.9em;
     ">---</span>
   </div>
@@ -2237,18 +2264,18 @@
   setInterval(updateClock, 1000);
 })();
 </script>
-
         
         
         
 
 
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2261,7 +2288,7 @@
       <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2275,19 +2302,19 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/" style="
       display: block;
       padding: 12px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.95em;
         margin-bottom: 5px;
         line-height: 1.4;
       ">五一出游总结</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
       ">2026-05-07</div>
     </a>
@@ -2295,19 +2322,19 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/ctf/" style="
       display: block;
       padding: 12px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.95em;
         margin-bottom: 5px;
         line-height: 1.4;
       ">CTF学习记录</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
       ">2026-04-02</div>
     </a>
@@ -2315,15 +2342,15 @@
   </div>
 </div>
 
-
         
         
         <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2332,11 +2359,11 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #00ffff;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M12 6v12c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0-2c-4.42 0-8 3.58-8 8s3.58 8 8 8v-2.45c-2.5-.75-4.5-2.72-4.5-5.55s2-4.8 4.5-5.55v-2.45zM13 2v2h6v-2h-6z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2352,13 +2379,13 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" style="
       display: block;
       padding: 10px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.9em;
         margin-bottom: 5px;
         line-height: 1.4;
@@ -2367,7 +2394,7 @@
         white-space: nowrap;
       ">智能系统安全运维与实践的笔记</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
         font-family: Comic Sans MS, cursive;
       ">
@@ -2380,13 +2407,13 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" style="
       display: block;
       padding: 10px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.9em;
         margin-bottom: 5px;
         line-height: 1.4;
@@ -2395,7 +2422,7 @@
         white-space: nowrap;
       ">“四史”结课论文</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
         font-family: Comic Sans MS, cursive;
       ">
@@ -2408,13 +2435,13 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/%E4%BA%94%E4%B8%80%E5%87%BA%E6%B8%B8%E6%80%BB%E7%BB%93/" style="
       display: block;
       padding: 10px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.9em;
         margin-bottom: 5px;
         line-height: 1.4;
@@ -2423,7 +2450,7 @@
         white-space: nowrap;
       ">五一出游总结</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
         font-family: Comic Sans MS, cursive;
       ">
@@ -2436,13 +2463,13 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/python%E5%A4%8D%E4%B9%A0/" style="
       display: block;
       padding: 10px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.9em;
         margin-bottom: 5px;
         line-height: 1.4;
@@ -2451,7 +2478,7 @@
         white-space: nowrap;
       ">Python复习</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
         font-family: Comic Sans MS, cursive;
       ">
@@ -2464,13 +2491,13 @@
     <a href="https://LuoHuilin3055.github.io/myblog/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" style="
       display: block;
       padding: 10px;
-      background: #252836;
+      background: var(--bg-hover);
       border-radius: 8px;
       text-decoration: none;
       transition: background 0.3s;
-    " onmouseover="this.style.background='#2f3444'" onmouseout="this.style.background='#252836'">
+    " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover');">
       <div style="
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.9em;
         margin-bottom: 5px;
         line-height: 1.4;
@@ -2479,7 +2506,7 @@
         white-space: nowrap;
       ">数据结构</div>
       <div style="
-        color: #666;
+        color: var(--text-muted);
         font-size: 0.8em;
         font-family: Comic Sans MS, cursive;
       ">
@@ -2496,11 +2523,12 @@
         
 
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2513,7 +2541,7 @@
       <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2529,139 +2557,139 @@
   ">
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E7%AC%94%E8%AE%B0/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       笔记
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       大一下
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       计算机
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E9%9A%8F%E7%AC%94/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       随笔
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       蓝桥杯
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/ctf/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       CTF
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/java/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       Java
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/python/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       Python
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E5%8F%8B%E9%93%BE/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       友链
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E6%97%A5%E5%BF%97/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       日志
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       虚拟机
     </a>
     
     <a href="https://LuoHuilin3055.github.io/myblog/tags/%E8%AE%BA%E6%96%87/" style="
-      color: #aaa;
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.85em;
       transition: all 0.3s;
       line-height: 1.8;
-    " onmouseover="this.style.color='#00ffff'; this.style.transform='scale(1.1)'" onmouseout="this.style.color='#aaa'; this.style.transform='scale(1)'">
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
       论文
     </a>
     
   </div>
 </div>
 
-
         
         
         
 
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2674,7 +2702,7 @@
       <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM9 10H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm-8 4H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2695,14 +2723,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #2a2d3a;
+      border-bottom: 1px solid var(--border-color);
       text-decoration: none;
       transition: color 0.3s;
-    " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color=''">
-      <span style="color: #aaa; font-size: 0.95em;">2026年5月</span>
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" onmouseout="this.style.color=''">
+      <span style="color: var(--text-secondary); font-size: 0.95em;">2026年5月</span>
       <span style="
-        color: #fff;
-        background: #3a3f4f;
+        color: var(--text-primary);
+        background: var(--bg-hover);
         padding: 2px 8px;
         border-radius: 10px;
         font-size: 0.8em;
@@ -2722,14 +2750,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #2a2d3a;
+      border-bottom: 1px solid var(--border-color);
       text-decoration: none;
       transition: color 0.3s;
-    " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color=''">
-      <span style="color: #aaa; font-size: 0.95em;">2026年4月</span>
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" onmouseout="this.style.color=''">
+      <span style="color: var(--text-secondary); font-size: 0.95em;">2026年4月</span>
       <span style="
-        color: #fff;
-        background: #3a3f4f;
+        color: var(--text-primary);
+        background: var(--bg-hover);
         padding: 2px 8px;
         border-radius: 10px;
         font-size: 0.8em;
@@ -2749,14 +2777,14 @@
       justify-content: space-between;
       align-items: center;
       padding: 10px 0;
-      border-bottom: 1px solid #2a2d3a;
+      border-bottom: 1px solid var(--border-color);
       text-decoration: none;
       transition: color 0.3s;
-    " onmouseover="this.style.color='#00ffff'" onmouseout="this.style.color=''">
-      <span style="color: #aaa; font-size: 0.95em;">2026年3月</span>
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" onmouseout="this.style.color=''">
+      <span style="color: var(--text-secondary); font-size: 0.95em;">2026年3月</span>
       <span style="
-        color: #fff;
-        background: #3a3f4f;
+        color: var(--text-primary);
+        background: var(--bg-hover);
         padding: 2px 8px;
         border-radius: 10px;
         font-size: 0.8em;
@@ -2772,11 +2800,12 @@
         
         
         <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   <div style="
     display: flex;
@@ -2784,11 +2813,11 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #00ffff;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2801,10 +2830,10 @@
       
         <div style="
           padding: 6px 0;
-          border-bottom: 1px solid #2a2d3a;
+          border-bottom: 1px solid var(--border-color);
         ">
           <div style="
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.85em;
             margin-bottom: 4px;
             font-family: Comic Sans MS, cursive;
@@ -2812,7 +2841,7 @@
             2026/05/13
           </div>
           <div style="
-            color: #999;
+            color: var(--text-secondary);
             font-size: 0.9em;
             line-height: 1.8;
             white-space: pre-line;
@@ -2824,10 +2853,10 @@
       
         <div style="
           padding: 6px 0;
-          border-bottom: 1px solid #2a2d3a;
+          border-bottom: 1px solid var(--border-color);
         ">
           <div style="
-            color: #666;
+            color: var(--text-muted);
             font-size: 0.85em;
             margin-bottom: 4px;
             font-family: Comic Sans MS, cursive;
@@ -2835,7 +2864,7 @@
             2026/05/12
           </div>
           <div style="
-            color: #999;
+            color: var(--text-secondary);
             font-size: 0.9em;
             line-height: 1.8;
             white-space: pre-line;
@@ -2849,16 +2878,16 @@
       <a href="/myblog/murmur/" style="
         display: block;
         text-align: center;
-        color: #fff;
+        color: var(--text-primary);
         font-size: 0.85em;
         padding: 10px;
         border-radius: 6px;
-        background: rgba(0,255,255,0.1);
+        background: var(--accent-light);
         text-decoration: none;
         margin-top: 8px;
         font-family: Comic Sans MS, cursive;
         transition: background 0.3s;
-      " onmouseover="this.style.background='rgba(0,255,255,0.2)';" onmouseout="this.style.background='rgba(0,255,255,0.1)';">
+      " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-glow');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');">
         More →
       </a>
     
@@ -2868,11 +2897,12 @@
         
         
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2881,11 +2911,11 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #3498db;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L3.16 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.58 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -2901,8 +2931,8 @@
       justify-content: space-between;
       align-items: center;
     ">
-      <span style="color: #888; font-size: 0.9em;">建站时间：</span>
-      <span style="color: #fff; font-size: 0.9em;">2026-03-21</span>
+      <span style="color: var(--text-muted); font-size: 0.9em;">建站时间：</span>
+      <span style="color: var(--text-primary); font-size: 0.9em;">2026-03-21</span>
     </div>
     
     
@@ -2911,8 +2941,8 @@
       justify-content: space-between;
       align-items: center;
     ">
-      <span style="color: #888; font-size: 0.9em;">文章数目：</span>
-      <span style="color: #fff; font-size: 0.9em;">10</span>
+      <span style="color: var(--text-muted); font-size: 0.9em;">文章数目：</span>
+      <span style="color: var(--text-primary); font-size: 0.9em;">10</span>
     </div>
     
     
@@ -2921,8 +2951,8 @@
       justify-content: space-between;
       align-items: center;
     ">
-      <span style="color: #888; font-size: 0.9em;">本站总字数：</span>
-      <span style="color: #fff; font-size: 0.9em;">
+      <span style="color: var(--text-muted); font-size: 0.9em;">本站总字数：</span>
+      <span style="color: var(--text-primary); font-size: 0.9em;">
         
         
           
@@ -2955,8 +2985,8 @@
       justify-content: space-between;
       align-items: center;
     ">
-      <span style="color: #888; font-size: 0.9em;">本站访客数：</span>
-      <span id="busuanzi_value_site_uv" style="color: #fff; font-size: 0.9em;">统计中...</span>
+      <span style="color: var(--text-muted); font-size: 0.9em;">本站访客数：</span>
+      <span id="busuanzi_value_site_uv" style="color: var(--text-primary); font-size: 0.9em;">统计中...</span>
     </div>
     
     
@@ -2965,21 +2995,21 @@
       justify-content: space-between;
       align-items: center;
     ">
-      <span style="color: #888; font-size: 0.9em;">本站总浏览量：</span>
-      <span id="busuanzi_value_site_pv" style="color: #fff; font-size: 0.9em;">统计中...</span>
+      <span style="color: var(--text-muted); font-size: 0.9em;">本站总浏览量：</span>
+      <span id="busuanzi_value_site_pv" style="color: var(--text-primary); font-size: 0.9em;">统计中...</span>
     </div>
   </div>
 </div>
-
         
         
         
 <div style="
-  background: #1a1d29;
+  background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
-  border: 1px solid #2a2d3a;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
 ">
   
   <div style="
@@ -2988,14 +3018,14 @@
     gap: 10px;
     margin-bottom: 15px;
   ">
-    <svg style="width: 20px; height: 20px; color: #00ffff;" fill="currentColor" viewBox="0 0 24 24">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
       <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71">
       </path>
       <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71">
       </path>
     </svg>
     <h4 style="
-      color: #fff;
+      color: var(--text-primary);
       font-size: 1.1em;
       margin: 0;
       font-weight: 500;
@@ -3013,18 +3043,18 @@
           gap: 12px;
           padding: 10px;
           border-radius: 10px;
-          background: rgba(0,255,255,0.05);
+          background: var(--bg-hover);
           text-decoration: none;
           transition: all 0.3s ease;
-        " onmouseover="this.style.background='rgba(0,255,255,0.15)'; this.style.transform='translateX(5px)';"
-           onmouseout="this.style.background='rgba(0,255,255,0.05)'; this.style.transform='translateX(0)';">
+        " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light'); this.style.transform='translateX(5px)';"
+           onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover'); this.style.transform='translateX(0)';">
           
           <div style="
             width: 40px;
             height: 40px;
             border-radius: 50%;
             overflow: hidden;
-            border: 2px solid #00ffff;
+            border: 2px solid var(--accent-color);
             flex-shrink: 0;
           ">
             <img src="https://img.daochunhan25.site/img/profile.png" alt="Daochunhan" style="
@@ -3036,10 +3066,10 @@
           
           
           <div style="flex: 1; min-width: 0;">
-            <div style="color: #fff; font-size: 0.95em; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <div style="color: var(--text-primary); font-size: 0.95em; font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               Daochunhan
             </div>
-            <div style="color: #888; font-size: 0.75em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            <div style="color: var(--text-muted); font-size: 0.75em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
               大大大大大佬
             </div>
           </div>
