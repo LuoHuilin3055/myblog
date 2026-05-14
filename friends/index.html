@@ -937,16 +937,16 @@
             <div style="position: relative;">
                 <input type="text" id="search-input" placeholder="搜索..." 
                        style="
-                         background: rgba(0,0,0,0.7);
-                         border: 1px solid rgba(0,255,255,0.3);
+                         background: var(--bg-card);
+                         border: var(--card-border);
                          border-radius: 20px;
                          padding: 6px 12px;
-                         color: #fff;
+                         color: var(--text-primary);
                          font-size: 0.9em;
                          backdrop-filter: blur(5px);
                          transition: all 0.3s ease;
                        " 
-                       onfocus="this.style.borderColor='#00ffff'; this.style.boxShadow='0 0 10px rgba(0,255,255,0.3)'; document.getElementById('search-results').style.display='block'"
+                       onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 0 10px ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-glow'); document.getElementById('search-results').style.display='block'"
                        onblur="setTimeout(function() { document.getElementById('search-results').style.display='none'; }, 200)"
                        onkeyup="performSearch(this.value)" />
                 <button style="
@@ -956,7 +956,7 @@
                   transform: translateY(-50%);
                   background: transparent;
                   border: none;
-                  color: #00ffff;
+                  color: var(--accent-color);
                   cursor: pointer;
                   font-size: 1em;
                 " onclick="performSearch(document.getElementById('search-input').value)">🔍</button>
@@ -968,8 +968,8 @@
                   right: 0;
                   width: 300px;
                   max-height: 300px;
-                  background: rgba(0,0,0,0.9);
-                  border: 1px solid rgba(0,255,255,0.3);
+                  background: var(--bg-card);
+                  border: var(--card-border);
                   border-radius: 10px;
                   padding: 10px;
                   margin-top: 5px;
@@ -1103,6 +1103,10 @@
   
   function performSearch(query) {
     const resultsContainer = document.getElementById('search-results');
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+    const textPrimary = getComputedStyle(document.documentElement).getPropertyValue('--text-primary');
+    const textMuted = getComputedStyle(document.documentElement).getPropertyValue('--text-muted');
+    const accentLight = getComputedStyle(document.documentElement).getPropertyValue('--accent-light');
     
     if (!query.trim()) {
       resultsContainer.innerHTML = '';
@@ -1123,20 +1127,20 @@
         <a href="${item.url}" style="
           display: block;
           padding: 12px;
-          color: #fff;
+          color: ${textPrimary};
           text-decoration: none;
           border-radius: 5px;
           transition: all 0.3s ease;
           margin-bottom: 8px;
-        " onmouseover="this.style.background='rgba(0,255,255,0.1)'; this.style.color='#00ffff'" onmouseout="this.style.background='none'; this.style.color='#fff'">
+        " onmouseover="this.style.background='${accentLight}'; this.style.color='${accentColor}'" onmouseout="this.style.background='none'; this.style.color='${textPrimary}'">
           <div style="font-weight: bold; margin-bottom: 5px; font-size: 1em;">${item.title}</div>
-          <div style="font-size: 0.8em; color: #aaa; margin-bottom: 5px;">${item.date}</div>
-          ${item.tags.length > 0 ? `<div style="font-size: 0.7em; color: #00ffff; display: flex; flex-wrap: wrap; gap: 4px;">${item.tags.map(tag => `<span style="background: rgba(0,255,255,0.1); padding: 2px 8px; border-radius: 10px;">${tag}</span>`).join('')}</div>` : ''}
+          <div style="font-size: 0.8em; color: ${textMuted}; margin-bottom: 5px;">${item.date}</div>
+          ${item.tags.length > 0 ? `<div style="font-size: 0.7em; color: ${accentColor}; display: flex; flex-wrap: wrap; gap: 4px;">${item.tags.map(tag => `<span style="background: ${accentLight}; padding: 2px 8px; border-radius: 10px;">${tag}</span>`).join('')}</div>` : ''}
         </a>
       `).join('');
     } else {
       resultsContainer.innerHTML = `
-        <div style="padding: 20px; text-align: center; color: #aaa;">
+        <div style="padding: 20px; text-align: center; color: ${textMuted};">
           没有找到相关内容
         </div>
       `;
