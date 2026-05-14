@@ -165,25 +165,25 @@
 
    
   :root {
-    --bg-primary: #f8fafc;
-    --bg-secondary: #f1f5f9;
+    --bg-primary: #f1f5f9;
+    --bg-secondary: #e2e8f0;
     --bg-card: #ffffff;
     --bg-hover: #f8fafc;
     --text-primary: #1e293b;
-    --text-secondary: #475569;
-    --text-muted: #94a3b8;
-    --border-color: #e2e8f0;
-    --border-light: #f1f5f9;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    --border-light: #e2e8f0;
     --accent-color: #3b82f6;
     --accent-hover: #2563eb;
     --accent-light: #dbeafe;
-    --accent-glow: rgba(59, 130, 246, 0.15);
-    --shadow: rgba(0, 0, 0, 0.05);
-    --shadow-hover: rgba(59, 130, 246, 0.15);
-    --shadow-card: rgba(0, 0, 0, 0.08);
+    --accent-glow: rgba(59, 130, 246, 0.2);
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(59, 130, 246, 0.2);
+    --shadow-card: rgba(0, 0, 0, 0.12);
     --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-    --card-border: 1px solid #e2e8f0;
+    --card-border: 1px solid #cbd5e1;
   }
 
    
@@ -843,6 +843,7 @@
   cursor: pointer;
   display: flex;
   flex-direction: column;
+  box-shadow: var(--shadow-card);
 " onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 20px 40px ' + getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover');"
    onmouseout="this.style.transform='translateY(0)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-color'); this.style.boxShadow='none'">
   
