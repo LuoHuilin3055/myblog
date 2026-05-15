@@ -544,6 +544,14 @@
   const searchData = [
     
     {
+      title: "乱七八糟的WP",
+      url: "https:\/\/LuoHuilin3055.github.io\/myblog\/posts\/nssctf\/",
+      content: "Misc [SEETF 2023]1337 Word Search 题目链接：[[SEETF 2023]1337 Word Search - NSSCTF](https:\/\/www.nssctf.cn\/problem\/4207)\n思路 先看题目描述：这是一个大型的字谜游戏。在网格中找到隐藏的flag，可以在八个方向中的任何一个方向（水平、垂直或对角线）找到。——可以猜测是一道单词搜索题 再看附件： …",
+      date: "2026-05-15",
+      tags: [ "CTF",  "WP", ]
+    },
+    
+    {
       title: "“四史”结课论文",
       url: "https:\/\/LuoHuilin3055.github.io\/myblog\/posts\/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87\/",
       content: "融媒体语境下“四史”题材短视频的青年化传播研究 ——以B站“四史”主题视频作品为例 在当下媒介环境快速变化的背景下，短视频平台已经成为青年群体获取信息、接受思想教育的重要渠道。“四史”教育作为高校思想政治教育的重要内容，如何突破传统理论灌输模式，实现青年化、网络化、情感化传播，成为当前传播实践中的重要课题。相比传统纪录片、课堂宣讲等形式，短视频凭借节奏快、互动强、情绪浓度高等特点，更容易引发青年受 …",
@@ -613,14 +621,6 @@
       content: "配置虚拟机 准备 VMware Workstation Pro Ubuntu的iso文件——Ubuntu 22.04.5 LTS (Jammy Jellyfish) Windows10的iso文件——下载 Windows 10 安装Ubuntu 打开VMware，选择\u0026quot;Create a New Virtual Machine\u0026quot; 选择\u0026quot;Typical\u0026quot;安装 …",
       date: "2026-04-08",
       tags: [ "虚拟机",  "计算机",  "笔记",  "大一下", ]
-    },
-    
-    {
-      title: "CTF学习记录",
-      url: "https:\/\/LuoHuilin3055.github.io\/myblog\/posts\/ctf\/",
-      content: "2018 DEFCON Quals ghettohackers: Throwback 题目描述 Anyo!e!howouldsacrificepo!icyforexecu!!onspeedthink!securityisacomm!ditytop!urintoasy!tem! 思路 一种方法是补全叹号内容得到flag flag{Anyone who would sacrifice policy …",
-      date: "2026-04-02",
-      tags: [ "CTF",  "笔记",  "大一下", ]
     },
     
     {
@@ -1018,7 +1018,7 @@
       font-size: 1.1em;
       margin: 0;
       font-style: italic;
-    ">Total 12 Tags</p>
+    ">Total 13 Tags</p>
   
 </div>
 
@@ -1068,6 +1068,8 @@
                 
                   
                 
+                  
+                
                 
                   
                   
@@ -1078,7 +1080,7 @@
                     background: linear-gradient(to top, #00ffff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="CTF 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1111,7 +1113,7 @@
                     background: linear-gradient(to top, #00d4ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="Java 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1144,7 +1146,7 @@
                     background: linear-gradient(to top, #00b8ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="Python 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1172,12 +1174,45 @@
                   
                   
                   
-                  <a href="/myblog/tags/%E5%8F%8B%E9%93%BE/" class="tag-bar" style="
+                  <a href="/myblog/tags/wp/" class="tag-bar" style="
                     flex: 1;
                     background: linear-gradient(to top, #00a8ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
+                    cursor: pointer;
+                    position: relative;
+                  " title="WP 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
+                    
+                    <div style="
+                      position: absolute;
+                      top: -30px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background: rgba(0,0,0,0.8);
+                      color: #fff;
+                      padding: 4px 8px;
+                      border-radius: 4px;
+                      font-size: 0.7em;
+                      white-space: nowrap;
+                      opacity: 0;
+                      transition: opacity 0.2s ease;
+                      z-index: 10;
+                    " onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
+                      WP 1篇
+                    </div>
+                  </a>
+                
+                  
+                  
+                  
+                  
+                  <a href="/myblog/tags/%E5%8F%8B%E9%93%BE/" class="tag-bar" style="
+                    flex: 1;
+                    background: linear-gradient(to top, #0096ff, #0066ff);
+                    border-radius: 2px 2px 0 0;
+                    transition: all 0.3s ease;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="友链 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1207,13 +1242,13 @@
                   
                   <a href="/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0096ff, #0066ff);
+                    background: linear-gradient(to top, #0084ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 63.33333333333333px;
+                    height: 58px;
                     cursor: pointer;
                     position: relative;
-                  " title="大一下 4篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
+                  " title="大一下 3篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
                     
                     <div style="
                       position: absolute;
@@ -1230,7 +1265,7 @@
                       transition: opacity 0.2s ease;
                       z-index: 10;
                     " onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
-                      大一下 4篇
+                      大一下 3篇
                     </div>
                   </a>
                 
@@ -1240,10 +1275,10 @@
                   
                   <a href="/myblog/tags/%E6%97%A5%E5%BF%97/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0084ff, #0066ff);
+                    background: linear-gradient(to top, #0072ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="日志 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1273,13 +1308,13 @@
                   
                   <a href="/myblog/tags/%E7%AC%94%E8%AE%B0/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0072ff, #0066ff);
+                    background: linear-gradient(to top, #0060ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 76.66666666666667px;
+                    height: 74px;
                     cursor: pointer;
                     position: relative;
-                  " title="笔记 5篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
+                  " title="笔记 4篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
                     
                     <div style="
                       position: absolute;
@@ -1296,7 +1331,7 @@
                       transition: opacity 0.2s ease;
                       z-index: 10;
                     " onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
-                      笔记 5篇
+                      笔记 4篇
                     </div>
                   </a>
                 
@@ -1306,10 +1341,10 @@
                   
                   <a href="/myblog/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0060ff, #0066ff);
+                    background: linear-gradient(to top, #0048ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 36.666666666666664px;
+                    height: 42px;
                     cursor: pointer;
                     position: relative;
                   " title="蓝桥杯 2篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1339,10 +1374,10 @@
                   
                   <a href="/myblog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0048ff, #0066ff);
+                    background: linear-gradient(to top, #0030ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="虚拟机 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1372,10 +1407,10 @@
                   
                   <a href="/myblog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #0030ff, #0066ff);
+                    background: linear-gradient(to top, #00ffff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 50px;
+                    height: 58px;
                     cursor: pointer;
                     position: relative;
                   " title="计算机 3篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1405,10 +1440,10 @@
                   
                   <a href="/myblog/tags/%E8%AE%BA%E6%96%87/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #00ffff, #0066ff);
+                    background: linear-gradient(to top, #00d4ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 23.333333333333332px;
+                    height: 26px;
                     cursor: pointer;
                     position: relative;
                   " title="论文 1篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1438,10 +1473,10 @@
                   
                   <a href="/myblog/tags/%E9%9A%8F%E7%AC%94/" class="tag-bar" style="
                     flex: 1;
-                    background: linear-gradient(to top, #00d4ff, #0066ff);
+                    background: linear-gradient(to top, #00b8ff, #0066ff);
                     border-radius: 2px 2px 0 0;
                     transition: all 0.3s ease;
-                    height: 50px;
+                    height: 58px;
                     cursor: pointer;
                     position: relative;
                   " title="随笔 3篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
@@ -1588,7 +1623,7 @@
             
               
               
-              <a href="/myblog/tags/%E5%8F%8B%E9%93%BE/" id="tag-3" style="
+              <a href="/myblog/tags/wp/" id="tag-3" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1610,7 +1645,7 @@
                     background: #00a8ff;
                     margin-right: 8px;
                   "></span>
-                  友链
+                  WP
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1623,7 +1658,7 @@
             
               
               
-              <a href="/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B/" id="tag-4" style="
+              <a href="/myblog/tags/%E5%8F%8B%E9%93%BE/" id="tag-4" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1645,7 +1680,7 @@
                     background: #0096ff;
                     margin-right: 8px;
                   "></span>
-                  大一下
+                  友链
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1653,12 +1688,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">4</span>
+                ">1</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E6%97%A5%E5%BF%97/" id="tag-5" style="
+              <a href="/myblog/tags/%E5%A4%A7%E4%B8%80%E4%B8%8B/" id="tag-5" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1680,7 +1715,7 @@
                     background: #0084ff;
                     margin-right: 8px;
                   "></span>
-                  日志
+                  大一下
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1688,12 +1723,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">1</span>
+                ">3</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E7%AC%94%E8%AE%B0/" id="tag-6" style="
+              <a href="/myblog/tags/%E6%97%A5%E5%BF%97/" id="tag-6" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1715,7 +1750,7 @@
                     background: #0072ff;
                     margin-right: 8px;
                   "></span>
-                  笔记
+                  日志
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1723,12 +1758,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">5</span>
+                ">1</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" id="tag-7" style="
+              <a href="/myblog/tags/%E7%AC%94%E8%AE%B0/" id="tag-7" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1750,7 +1785,7 @@
                     background: #0060ff;
                     margin-right: 8px;
                   "></span>
-                  蓝桥杯
+                  笔记
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1758,12 +1793,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">2</span>
+                ">4</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" id="tag-8" style="
+              <a href="/myblog/tags/%E8%93%9D%E6%A1%A5%E6%9D%AF/" id="tag-8" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1785,7 +1820,7 @@
                     background: #0048ff;
                     margin-right: 8px;
                   "></span>
-                  虚拟机
+                  蓝桥杯
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1793,12 +1828,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">1</span>
+                ">2</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" id="tag-9" style="
+              <a href="/myblog/tags/%E8%99%9A%E6%8B%9F%E6%9C%BA/" id="tag-9" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1820,7 +1855,7 @@
                     background: #0030ff;
                     margin-right: 8px;
                   "></span>
-                  计算机
+                  虚拟机
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1828,12 +1863,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">3</span>
+                ">1</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E8%AE%BA%E6%96%87/" id="tag-10" style="
+              <a href="/myblog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA/" id="tag-10" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1855,7 +1890,7 @@
                     background: #00ffff;
                     margin-right: 8px;
                   "></span>
-                  论文
+                  计算机
                 </span>
                 <span style="
                   font-size: 0.8em;
@@ -1863,12 +1898,12 @@
                   background: rgba(0,0,0,0.3);
                   padding: 1px 6px;
                   border-radius: 10px;
-                ">1</span>
+                ">3</span>
               </a>
             
               
               
-              <a href="/myblog/tags/%E9%9A%8F%E7%AC%94/" id="tag-11" style="
+              <a href="/myblog/tags/%E8%AE%BA%E6%96%87/" id="tag-11" style="
                 display: inline-flex;
                 align-items: center;
                 justify-content: space-between;
@@ -1888,6 +1923,41 @@
                     height: 6px;
                     border-radius: 50%;
                     background: #00d4ff;
+                    margin-right: 8px;
+                  "></span>
+                  论文
+                </span>
+                <span style="
+                  font-size: 0.8em;
+                  color: #888;
+                  background: rgba(0,0,0,0.3);
+                  padding: 1px 6px;
+                  border-radius: 10px;
+                ">1</span>
+              </a>
+            
+              
+              
+              <a href="/myblog/tags/%E9%9A%8F%E7%AC%94/" id="tag-12" style="
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+                text-decoration: none;
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-weight: 500;
+                font-size: 0.9em;
+                color: #fff;
+                background: rgba(0,0,0,0.4);
+                border: 1px solid rgba(0,255,255,0.2);
+                transition: all 0.2s ease;
+              " onmouseover="this.style.background='rgba(0,255,255,0.1)'; this.style.borderColor='#00ffff';" onmouseout="this.style.background='rgba(0,0,0,0.4)'; this.style.borderColor='rgba(0,255,255,0.2)';">
+                <span style="display: flex; align-items: center;">
+                  <span style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: #00b8ff;
                     margin-right: 8px;
                   "></span>
                   随笔

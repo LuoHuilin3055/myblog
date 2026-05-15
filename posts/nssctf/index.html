@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>Linux学习记录 | NGC 2237&#39;s Blog</title>
+    <title>乱七八糟的WP | NGC 2237&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1334,7 +1334,7 @@
   
   
   <div style="
-    background-image: url('https://LuoHuilin3055.github.io/myblog/images/16.jpg');
+    background-image: url('https://LuoHuilin3055.github.io/myblog/images/17.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1366,8 +1366,8 @@
           border-radius: 15px 15px 0 0;
         ">
           <img 
-            src="https://LuoHuilin3055.github.io/myblog/images/16.jpg"
-            alt="Linux学习记录"
+            src="https://LuoHuilin3055.github.io/myblog/images/17.jpg"
+            alt="乱七八糟的WP"
             loading="eager"
             decoding="async"
             style="
@@ -1391,13 +1391,13 @@
         </div>
         
         
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">Linux学习记录</h1>
+        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">乱七八糟的WP</h1>
         
         <div style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-          <span>📅 2026-04-08</span>
-          <span>✏️ 2026-04-08</span>
-          <span>📝 1119 字</span>
-          <span>⏱️ 3 分钟</span>
+          <span>📅 2026-05-15</span>
+          <span>✏️ 2026-05-15</span>
+          <span>📝 660 字</span>
+          <span>⏱️ 2 分钟</span>
         </div>
         
         
@@ -1407,7 +1407,7 @@
   
     
     
-    <a href="/myblog/tags/%E7%AC%94%E8%AE%B0" 
+    <a href="/myblog/tags/ctf" 
        style="
          display: inline-flex;
          align-items: center;
@@ -1423,12 +1423,12 @@
        "
        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
-      笔记
+      CTF
     </a>
   
     
     
-    <a href="/myblog/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA" 
+    <a href="/myblog/tags/wp" 
        style="
          display: inline-flex;
          align-items: center;
@@ -1444,7 +1444,7 @@
        "
        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
-      计算机
+      WP
     </a>
   
 </div>
@@ -1452,249 +1452,79 @@
 
         
         <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px; overflow-x: hidden;">
-          <h1 id="新建文件">新建文件</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 创建空文件</span>
-</span></span><span class="line"><span class="cl">touch my_script.py
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 然后用编辑器打开</span>
-</span></span><span class="line"><span class="cl">nano my_script.py
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 完成后，Ctrl+O保存，Enter确认文件名，Ctrl+X退出</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># python3 文件名  运行</span>
-</span></span></code></pre></div><hr>
-<h1 id="修改文件名">修改文件名</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">mv admin.exe admin.png
-</span></span></code></pre></div><hr>
-<h1 id="拥有的工具">拥有的工具</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">sudo apt update
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">sudo apt install <span class="se">\
-</span></span></span><span class="line"><span class="cl">binwalk <span class="se">\ </span>   
-</span></span><span class="line"><span class="cl">foremost <span class="se">\
-</span></span></span><span class="line"><span class="cl">steghide <span class="se">\
-</span></span></span><span class="line"><span class="cl">binutils <span class="se">\
-</span></span></span><span class="line"><span class="cl">file <span class="se">\
-</span></span></span><span class="line"><span class="cl">vim-common <span class="se">\
-</span></span></span><span class="line"><span class="cl">libimage-exiftool-perl -y
-</span></span><span class="line"><span class="cl">pngcheck <span class="se">\
-</span></span></span></code></pre></div><hr>
-<h1 id="判断文件类型">判断文件类型</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk 文件
-</span></span></code></pre></div><hr>
-<h1 id="提取数据">提取数据</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">binwalk -e 文件
-</span></span></code></pre></div><hr>
-<h1 id="ghex使用指南"><code>GHEX</code>使用指南</h1>
-<h3 id="一启动-ghex">一、启动 GHex</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 命令行启动</span>
-</span></span><span class="line"><span class="cl">ghex
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 直接打开文件</span>
-</span></span><span class="line"><span class="cl">ghex 文件名
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 以只读模式打开（避免误修改）</span>
-</span></span><span class="line"><span class="cl">ghex -r 文件名
-</span></span></code></pre></div><h3 id="打开保存文件">打开/保存文件</h3>
-<table>
-  <thead>
-      <tr>
-          <th>操作</th>
-          <th>快捷键</th>
-          <th>菜单路径</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>打开文件</td>
-          <td><code>Ctrl + O</code></td>
-          <td>File → Open</td>
-      </tr>
-      <tr>
-          <td>保存文件</td>
-          <td><code>Ctrl + S</code></td>
-          <td>File → Save</td>
-      </tr>
-      <tr>
-          <td>另存为</td>
-          <td><code>Ctrl + Shift + S</code></td>
-          <td>File → Save As</td>
-      </tr>
-      <tr>
-          <td>关闭文件</td>
-          <td><code>Ctrl + W</code></td>
-          <td>File → Close</td>
-      </tr>
-      <tr>
-          <td>退出程序</td>
-          <td><code>Ctrl + Q</code></td>
-          <td>File → Quit</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="2-编辑操作">2. 编辑操作</h3>
-<table>
-  <thead>
-      <tr>
-          <th>操作</th>
-          <th>快捷键</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>撤销</td>
-          <td><code>Ctrl + Z</code></td>
-          <td>撤销上一步修改</td>
-      </tr>
-      <tr>
-          <td>重做</td>
-          <td><code>Ctrl + Shift + Z</code></td>
-          <td>恢复撤销的操作</td>
-      </tr>
-      <tr>
-          <td>剪切</td>
-          <td><code>Ctrl + X</code></td>
-          <td>剪切选中内容</td>
-      </tr>
-      <tr>
-          <td>复制</td>
-          <td><code>Ctrl + C</code></td>
-          <td>复制选中内容</td>
-      </tr>
-      <tr>
-          <td>粘贴</td>
-          <td><code>Ctrl + V</code></td>
-          <td>粘贴十六进制数据</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="3-查找功能">3. 查找功能</h3>
-<table>
-  <thead>
-      <tr>
-          <th>操作</th>
-          <th>快捷键</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>查找</td>
-          <td><code>Ctrl + F</code></td>
-          <td>查找十六进制值或文本</td>
-      </tr>
-      <tr>
-          <td>查找下一个</td>
-          <td><code>Ctrl + G</code></td>
-          <td>重复上次查找</td>
-      </tr>
-      <tr>
-          <td>跳转到地址</td>
-          <td><code>Ctrl + J</code></td>
-          <td>直接跳转到指定偏移位置</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="4-视图调整">4. 视图调整</h3>
-<table>
-  <thead>
-      <tr>
-          <th>操作</th>
-          <th>说明</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>View → 8/16/24 bytes per row</td>
-          <td>调整每行显示的字节数</td>
-      </tr>
-      <tr>
-          <td>View → Show ASCII view</td>
-          <td>显示/隐藏 ASCII 区域</td>
-      </tr>
-      <tr>
-          <td>View → Statusbar</td>
-          <td>显示/隐藏状态栏</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="5-插入与删除">5. 插入与删除</h3>
-<table>
-  <thead>
-      <tr>
-          <th>模式</th>
-          <th>说明</th>
-          <th>激活方式</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>覆盖模式</strong>（默认）</td>
-          <td>新数据覆盖原有数据，文件大小不变</td>
-          <td>按 <code>Insert</code> 键切换</td>
-      </tr>
-      <tr>
-          <td><strong>插入模式</strong></td>
-          <td>插入新数据，文件大小增加</td>
-          <td>按 <code>Insert</code> 键切换</td>
-      </tr>
-  </tbody>
-</table>
-<p>状态栏会显示当前模式（OVR 或 INS）。</p>
-<p><strong>注意</strong>：在插入模式下删除会真正删除字节，改变文件大小。</p>
-<h3 id="6选择与操作">6.选择与操作</h3>
-<h3 id="选择字节范围">选择字节范围</h3>
+          <h1 id="misc"><code>Misc</code></h1>
+<h2 id="seetf-20231337-word-search"><code>[SEETF 2023]1337 Word Search</code></h2>
+<p>题目链接：<code>[[SEETF 2023]1337 Word Search - NSSCTF](https://www.nssctf.cn/problem/4207)</code></p>
+<h3 id="思路">思路</h3>
 <ul>
-<li><strong>鼠标拖拽</strong>：直接选择</li>
-<li><strong>Shift + 方向键</strong>：扩展选择</li>
-<li><strong>Ctrl + A</strong>：全选</li>
+<li>先看题目描述：<strong>这是一个大型的字谜游戏。在网格中找到隐藏的<code>flag</code>，可以在八个方向中的任何一个方向（水平、垂直或对角线）找到。</strong>——可以猜测是一道单词搜索题</li>
+<li>再看附件：文件解压后看见一大堆乱字符，于是我们看：
+<ul>
+<li>有没有图片？——没有，所以不是图片隐写</li>
+<li>有没有压缩包？——没有，所以不是压缩密码</li>
+<li>是不是编码？不像，因为没有规律且有<code>{}</code>与<code>_</code>，不像<code>base64</code></li>
+<li>同时也结合题目强调的<code>grid</code>（网格），说明：这些字符不是一整串，而应该按照二维矩阵理解</li>
 </ul>
-<h3 id="复制选中的数据">复制选中的数据</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 选中一段数据后 Ctrl+C</span>
-</span></span><span class="line"><span class="cl"><span class="c1"># 可以粘贴到文本编辑器，格式如下：</span>
-</span></span><span class="line"><span class="cl">00000000: <span class="m">48</span> <span class="m">65</span> 6c 6c 6f <span class="m">20</span> <span class="m">57</span> 6f <span class="m">72</span> 6c <span class="m">64</span> 0a  Hello World.
-</span></span></code></pre></div><h3 id="常见问题">常见问题</h3>
-<table>
-  <thead>
-      <tr>
-          <th>问题</th>
-          <th>解决方法</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>文件无法保存（权限不足）</td>
-          <td><code>sudo ghex 文件名</code> 重新打开</td>
-      </tr>
-      <tr>
-          <td>修改后文件损坏</td>
-          <td>检查是否破坏了文件结构（如 ELF 头、校验和）</td>
-      </tr>
-      <tr>
-          <td>找不到某个字节序列</td>
-          <td>确认搜索模式（十六进制还是文本），区分大小写</td>
-      </tr>
-      <tr>
-          <td>粘贴不进去</td>
-          <td>检查是否处于插入模式，或者先选中替换区域</td>
-      </tr>
-  </tbody>
-</table>
-<h3 id="快速参考卡片">快速参考卡片</h3>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 常用快捷键</span>
-</span></span><span class="line"><span class="cl">Ctrl+O     <span class="c1"># 打开文件</span>
-</span></span><span class="line"><span class="cl">Ctrl+S     <span class="c1"># 保存</span>
-</span></span><span class="line"><span class="cl">Ctrl+F     <span class="c1"># 查找</span>
-</span></span><span class="line"><span class="cl">Ctrl+G     <span class="c1"># 查找下一个</span>
-</span></span><span class="line"><span class="cl">Ctrl+J     <span class="c1"># 跳转到地址</span>
-</span></span><span class="line"><span class="cl">Ctrl+Z     <span class="c1"># 撤销</span>
-</span></span><span class="line"><span class="cl">Insert     <span class="c1"># 切换覆盖/插入模式</span>
+</li>
+<li>而<code>flag</code>格式给了：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">SEE{}
+</span></span></code></pre></div><ul>
+<li>所以核心思路就是：
+<ol>
+<li>把整个文本按照“矩阵”处理</li>
+<li>从所有 <code>S</code> 开始搜索</li>
+<li>朝 8 个方向尝试读取字符串</li>
+<li>找到完整 <code>SEE{...}</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="exp"><code>EXP</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>   <span class="c1"># →</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># ←</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>   <span class="c1"># ↓</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># ↑</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>   <span class="c1"># ↘</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># ↖</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># ↙</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># ↗</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1"># 常用命令行</span>
-</span></span><span class="line"><span class="cl">ghex file.bin           <span class="c1"># 打开文件</span>
-</span></span><span class="line"><span class="cl">ghex -r file.bin        <span class="c1"># 只读打开</span>
-</span></span><span class="line"><span class="cl">ghex -n <span class="m">1024</span> new.bin    <span class="c1"># 创建新文件（1024字节）</span>
-</span></span></code></pre></div><h1></h1>
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;wordsearch1.txt&#34;</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span> <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">dx</span><span class="p">,</span><span class="n">dy</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;SEE{&#34;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;}&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">x</span> <span class="o">+=</span> <span class="n">dx</span>
+</span></span><span class="line"><span class="cl">                <span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span>
+</span></span></code></pre></div><p>运行脚本后得到<code>flag</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">SEE{you_found_me_now_try_the_1337er_one}
+</span></span></code></pre></div><hr>
+<h1 id="web"><code>Web</code></h1>
+<h2></h2>
 
         </div>
         
@@ -1707,7 +1537,7 @@
     <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
       <span style="color: #888; font-size: 0.9em;">标签：</span>
       
-        <a href="https://LuoHuilin3055.github.io/tags/%E7%AC%94%E8%AE%B0" 
+        <a href="https://LuoHuilin3055.github.io/tags/ctf" 
            style="
              padding: 6px 14px;
              background: rgba(0, 255, 255, 0.15);
@@ -1720,10 +1550,10 @@
            "
            onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
            onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
-          笔记
+          CTF
         </a>
       
-        <a href="https://LuoHuilin3055.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA" 
+        <a href="https://LuoHuilin3055.github.io/tags/wp" 
            style="
              padding: 6px 14px;
              background: rgba(0, 255, 255, 0.15);
@@ -1736,7 +1566,7 @@
            "
            onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
            onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
-          计算机
+          WP
         </a>
       
     </div>
@@ -1746,7 +1576,7 @@
   
   <div style="display: flex; gap: 10px;">
     <span style="color: #888; font-size: 0.9em;">分享：</span>
-    <a href="https://twitter.com/intent/tweet?text=Linux%e5%ad%a6%e4%b9%a0%e8%ae%b0%e5%bd%95&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2flinux%2f" 
+    <a href="https://twitter.com/intent/tweet?text=%e4%b9%b1%e4%b8%83%e5%85%ab%e7%b3%9f%e7%9a%84WP&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2fnssctf%2f" 
        target="_blank"
        style="
          padding: 6px 12px;
@@ -1759,7 +1589,7 @@
        "
        onmouseover="this.style.opacity='0.8'"
        onmouseout="this.style.opacity='1'">Twitter</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2flinux%2f" 
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2fnssctf%2f" 
        target="_blank"
        style="
          padding: 6px 12px;
@@ -1780,7 +1610,7 @@
 <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #333;">
   <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
     
-    <a href="/myblog/posts/%E4%BD%9C%E4%B8%9A%E6%8F%90%E4%BA%A4%E6%8C%87%E5%8D%97/" 
+    <a href="/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" 
        style="
          flex: 1;
          min-width: 200px;
@@ -1795,29 +1625,12 @@
        onmouseover="this.style.borderColor='#00ffff'; this.style.background='rgba(0,255,255,0.1)'"
        onmouseout="this.style.borderColor='#333'; this.style.background='rgba(0,0,0,0.5)'">
       <div style="font-size: 0.8em; color: #888; margin-bottom: 5px;">← 上一篇</div>
-      <div style="font-weight: bold; color: #00ffff;">作业提交</div>
+      <div style="font-weight: bold; color: #00ffff;">“四史”结课论文</div>
     </a>
     
     
     
-    <a href="/myblog/posts/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" 
-       style="
-         flex: 1;
-         min-width: 200px;
-         padding: 15px 20px;
-         background: rgba(0,0,0,0.5);
-         border: 1px solid #333;
-         border-radius: 10px;
-         color: #fff;
-         text-decoration: none;
-         text-align: right;
-         transition: all 0.3s ease;
-       "
-       onmouseover="this.style.borderColor='#00ffff'; this.style.background='rgba(0,255,255,0.1)'"
-       onmouseout="this.style.borderColor='#333'; this.style.background='rgba(0,0,0,0.5)'">
-      <div style="font-size: 0.8em; color: #888; margin-bottom: 5px;">下一篇 →</div>
-      <div style="font-weight: bold; color: #00ffff;">数据结构</div>
-    </a>
+    <div style="flex: 1; min-width: 200px;"></div>
     
   </div>
 </div>
@@ -1904,38 +1717,28 @@
           font-size: 1em;
           transition: all 0.3s ease;
         " onmouseover="this.style.color='#fff'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#00ffff'; this.style.paddingLeft='0'">
-          Linux学习记录
+          乱七八糟的WP
         </a>
       </li>
     </ul>
     
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#新建文件">新建文件</a></li>
-    <li><a href="#修改文件名">修改文件名</a></li>
-    <li><a href="#拥有的工具">拥有的工具</a></li>
-    <li><a href="#判断文件类型">判断文件类型</a></li>
-    <li><a href="#提取数据">提取数据</a></li>
-    <li><a href="#ghex使用指南"><code>GHEX</code>使用指南</a>
+    <li><a href="#misc"><code>Misc</code></a>
       <ul>
-        <li>
+        <li><a href="#seetf-20231337-word-search"><code>[SEETF 2023]1337 Word Search</code></a>
           <ul>
-            <li><a href="#一启动-ghex">一、启动 GHex</a></li>
-            <li><a href="#打开保存文件">打开/保存文件</a></li>
-            <li><a href="#2-编辑操作">2. 编辑操作</a></li>
-            <li><a href="#3-查找功能">3. 查找功能</a></li>
-            <li><a href="#4-视图调整">4. 视图调整</a></li>
-            <li><a href="#5-插入与删除">5. 插入与删除</a></li>
-            <li><a href="#6选择与操作">6.选择与操作</a></li>
-            <li><a href="#选择字节范围">选择字节范围</a></li>
-            <li><a href="#复制选中的数据">复制选中的数据</a></li>
-            <li><a href="#常见问题">常见问题</a></li>
-            <li><a href="#快速参考卡片">快速参考卡片</a></li>
+            <li><a href="#思路">思路</a></li>
+            <li><a href="#exp"><code>EXP</code></a></li>
           </ul>
         </li>
       </ul>
     </li>
-    <li></li>
+    <li><a href="#web"><code>Web</code></a>
+      <ul>
+        <li></li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>

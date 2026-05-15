@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>CTF on NGC 2237&#39;s Blog</title>
-    <link>https://LuoHuilin3055.github.io/myblog/tags/ctf/</link>
-    <description>Recent content in CTF on NGC 2237&#39;s Blog</description>
+    <title>WP on NGC 2237&#39;s Blog</title>
+    <link>https://LuoHuilin3055.github.io/myblog/tags/wp/</link>
+    <description>Recent content in WP on NGC 2237&#39;s Blog</description>
     <generator>Hugo</generator>
     <language>zh-cn</language>
     <lastBuildDate>Fri, 15 May 2026 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://LuoHuilin3055.github.io/myblog/tags/ctf/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="https://LuoHuilin3055.github.io/myblog/tags/wp/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>乱七八糟的WP</title>
       <link>https://LuoHuilin3055.github.io/myblog/posts/nssctf/</link>
