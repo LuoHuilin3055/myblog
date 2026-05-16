@@ -1,0 +1,58 @@
+{{ $src := .src }}
+{{ $alt := .alt | default "" }}
+{{ $class := .class | default "" }}
+{{ $style := .style | default "" }}
+{{ $loading := .loading | default "lazy" }}
+{{ $width := .width | default "" }}
+{{ $height := .height | default "" }}
+
+{{ if $src }}
+<figure style="margin: 0; position: relative; overflow: hidden; border-radius: 8px; {{ $style }}">
+  <img 
+    src="{{ $src | absURL }}"
+    alt="{{ $alt }}"
+    class="{{ $class }}"
+    loading="{{ $loading }}"
+    decoding="async"
+    {{ if $width }}width="{{ $width }}"{{ end }}
+    {{ if $height }}height="{{ $height }}"{{ end }}
+    style="
+      width: 100%;
+      height: auto;
+      display: block;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+    "
+    onload="this.style.opacity='1'; this.parentElement.querySelector('.image-placeholder').style.display='none';"
+    onerror="this.style.opacity='1'; this.parentElement.querySelector('.image-placeholder').style.display='none';"
+  />
+  <!-- 占位符 -->
+  <div class="image-placeholder" style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+  ">
+    <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#00ffff" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+      <circle cx="8.5" cy="8.5" r="1.5"/>
+      <polyline points="21 15 16 10 5 21"/>
+    </svg>
+  </div>
+  {{ if $alt }}
+  <figcaption style="
+    padding: 10px;
+    text-align: center;
+    color: #888;
+    font-size: 0.9em;
+    background: rgba(0,0,0,0.5);
+  ">{{ $alt }}</figcaption>
+  {{ end }}
+</figure>
+{{ end }}

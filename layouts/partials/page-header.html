@@ -1,0 +1,35 @@
+<!-- 页面头部组件 -->
+{{ $prefix := .Prefix | default "[ Page ]" }}
+{{ $title := .Title | default "Title" }}
+{{ $subtitle := .Subtitle | default "" }}
+
+<div style="
+  text-align: center;
+  margin-bottom: 50px;
+  padding: 30px;
+  background: linear-gradient(135deg, rgba(0,255,255,0.1) 0%, rgba(0,255,255,0.05) 100%);
+  border-radius: 16px;
+  border: 1px solid rgba(0,255,255,0.2);
+">
+  <div style="
+    font-size: 1.2em;
+    color: #00ffff;
+    margin-bottom: 10px;
+    opacity: 0.8;
+  ">{{ $prefix }}</div>
+  <h1 style="
+    font-size: clamp(2.5em, 5vw, 3.5em);
+    color: #00ffff;
+    margin: 0 0 15px;
+    text-shadow: 0 0 30px rgba(0,255,255,0.6);
+    letter-spacing: 3px;
+  ">{{ $title }}</h1>
+  {{ if $subtitle }}
+    <p style="
+      color: #888;
+      font-size: 1.1em;
+      margin: 0;
+      font-style: italic;
+    ">{{ $subtitle }}</p>
+  {{ end }}
+</div>

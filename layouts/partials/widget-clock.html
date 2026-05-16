@@ -1,0 +1,86 @@
+<!-- 实时时钟卡片 -->
+<div style="
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 25px 20px;
+  margin-bottom: 20px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+  text-align: center;
+">
+  <!-- 时钟图标 -->
+  <div style="
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  ">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+      <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+    </svg>
+    <h4 style="
+      color: var(--text-primary);
+      font-size: 1.1em;
+      margin: 0;
+      font-weight: 500;
+      font-family: KaiTi, STKaiti, serif;
+    ">时间</h4>
+  </div>
+  
+  <!-- 时钟显示 -->
+  <div style="
+    font-family: 'SF Mono', 'Consolas', monospace;
+    font-size: 2.5em;
+    font-weight: 700;
+    color: var(--accent-color);
+    letter-spacing: 2px;
+    text-shadow: 0 0 20px var(--accent-glow);
+    margin-bottom: 10px;
+  " id="clock-time">--:--:--</div>
+  
+  <!-- 日期显示 -->
+  <div style="
+    font-size: 0.95em;
+    color: var(--text-muted);
+    margin-bottom: 15px;
+  " id="clock-date">----年--月--日</div>
+  
+  <!-- 星期显示 -->
+  <div style="
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+  ">
+    <span id="clock-weekday" style="
+      color: var(--text-secondary);
+      font-size: 0.9em;
+    ">---</span>
+  </div>
+</div>
+
+<!-- 时钟脚本 -->
+<script>
+(function() {
+  function updateClock() {
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    
+    const weekdays = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
+    const weekday = weekdays[now.getDay()];
+    
+    document.getElementById('clock-time').textContent = hours + ':' + minutes + ':' + seconds;
+    document.getElementById('clock-date').textContent = year + '年' + month + '月' + day + '日';
+    document.getElementById('clock-weekday').textContent = weekday;
+  }
+  
+  updateClock();
+  setInterval(updateClock, 1000);
+})();
+</script>

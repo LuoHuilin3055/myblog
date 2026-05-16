@@ -1,0 +1,308 @@
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $bgImage := "images/background.jpg" | absURL }}
+  
+  <!-- 判断是否为月度归档页面 -->
+  {{ $isMonthlyArchive := false }}
+  {{ $archiveYear := 0 }}
+  {{ $archiveMonth := 0 }}
+  
+  <!-- 从URL路径提取年份和月份 -->
+  {{ $pathParts := split .RelPermalink "/" }}
+  {{ if ge (len $pathParts) 5 }}
+    {{ if eq (index $pathParts 1) "myblog" }}
+      {{ if eq (index $pathParts 2) "posts" }}
+        {{ $yearStr := index $pathParts 3 }}
+        {{ $monthStr := index $pathParts 4 }}
+        {{ if and (eq (len $yearStr) 4) (eq (len $monthStr) 2) }}
+          {{ $archiveYear = int $yearStr }}
+          {{ $archiveMonth = int $monthStr }}
+          {{ if and (ge $archiveYear 2000) (le $archiveYear 2100) (ge $archiveMonth 1) (le $archiveMonth 12) }}
+            {{ $isMonthlyArchive = true }}
+          {{ end }}
+        {{ end }}
+      {{ end }}
+    {{ end }}
+  {{ end }}
+  
+  <style>
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .timeline-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .timeline-header {
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .timeline-header h2 {
+      color: #00ffff;
+      font-size: 1.5em;
+      margin: 0 0 10px;
+    }
+    
+    .timeline-header span {
+      color: #888;
+      font-size: 0.9em;
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #00ffff, transparent);
+    }
+    
+    .timeline-year {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    
+    .timeline-year::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00ffff;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    
+    .timeline-year h3 {
+      color: #00ffff;
+      font-size: 1.2em;
+      margin: 0 0 20px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 8px;
+      border: 1px solid rgba(0,255,255,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .timeline-item:hover {
+      background: rgba(0,255,255,0.05);
+      transform: translateX(10px);
+      box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 28px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #00ffff;
+    }
+    
+    .timeline-item-image {
+      flex-shrink: 0;
+      width: 100px;
+      height: 60px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .timeline-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:hover .timeline-item-image img {
+      transform: scale(1.1);
+    }
+    
+    .timeline-item-content {
+      flex: 1;
+    }
+    
+    .timeline-item-date {
+      color: #888;
+      font-size: 0.8em;
+      margin-bottom: 8px;
+    }
+    
+    .timeline-item-title {
+      color: #fff;
+      font-size: 1.1em;
+      margin: 0 0 10px;
+    }
+    
+    .timeline-item-title a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .timeline-item-title a:hover {
+      color: #00ffff;
+    }
+    
+    .timeline-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
+    .timeline-tag {
+      font-size: 0.7em;
+      color: #00ffff;
+      background: rgba(0,255,255,0.1);
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+  </style>
+  
+  <div style="
+    background-image: url('{{ $bgImage }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    position: relative;
+  " id="page-top">
+    <!-- 背景遮罩 -->
+    <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 0;
+    "></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <!-- 页面标题 -->
+      {{ if $isMonthlyArchive }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Archive ]" 
+          "Title" (printf "%d年%d月" $archiveYear $archiveMonth) 
+          "Subtitle" "Monthly Collection" 
+        ) }}
+      {{ else if eq .Section "posts" }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Blog ]" 
+          "Title" .Title 
+          "Subtitle" (printf "%s's Writing Journey" .Site.Params.author) 
+        ) }}
+      {{ else }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Page ]" 
+          "Title" .Title 
+          "Subtitle" "" 
+        ) }}
+      {{ end }}
+      
+      {{ if $isMonthlyArchive }}
+        <!-- 月度归档页面 - 显示文章卡片 -->
+        {{ $posts := where .Site.RegularPages "Type" "posts" }}
+        {{ $filteredPosts := slice }}
+        {{ range $posts }}
+          {{ if not .IsNode }}
+            {{ if and (eq .Date.Year $archiveYear) (eq .Date.Month $archiveMonth) }}
+              {{ $filteredPosts = $filteredPosts | append . }}
+            {{ end }}
+          {{ end }}
+        {{ end }}
+        
+        <!-- 按日期降序排序 -->
+        {{ $filteredPosts = sort $filteredPosts "Date" "desc" }}
+        
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 30px;
+        ">
+          {{ range $filteredPosts }}
+            {{ partial "article-card.html" . }}
+          {{ end }}
+        </div>
+        
+        <!-- 如果没有文章 -->
+        {{ if eq (len $filteredPosts) 0 }}
+        <div style="
+          text-align: center;
+          padding: 80px 20px;
+          color: #666;
+          background: rgba(0,0,0,0.5);
+          border-radius: 16px;
+          border: 1px solid #333;
+        ">
+          <p style="font-size: 1.2em;">{{ $archiveYear }}年{{ $archiveMonth }}月暂无文章</p>
+        </div>
+        {{ end }}
+      {{ else if eq .Section "posts" }}
+        <!-- Posts 列表页面 - 显示卡片布局 -->
+        {{ $posts := where .Site.RegularPages "Type" "posts" }}
+        <div style="
+          display: grid;
+          grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+          gap: 30px;
+        ">
+          {{ range $posts }}
+            {{ if not .IsNode }}
+              {{ partial "article-card.html" . }}
+            {{ end }}
+          {{ end }}
+        </div>
+        
+        <!-- 如果没有文章 -->
+        {{ if eq (len .Pages) 0 }}
+        <div style="
+          text-align: center;
+          padding: 80px 20px;
+          color: #666;
+          background: rgba(0,0,0,0.5);
+          border-radius: 16px;
+          border: 1px solid #333;
+        ">
+          <p style="font-size: 1.2em;">暂无文章，敬请期待...</p>
+        </div>
+        {{ end }}
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}

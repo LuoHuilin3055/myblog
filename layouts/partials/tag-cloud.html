@@ -1,0 +1,47 @@
+{{ $tags := .Site.Taxonomies.tags }}
+{{ if $tags }}
+{{ $totalPosts := len .Site.RegularPages }}
+<div style="max-width: 1200px; margin: 40px auto; padding: 0 20px;">
+  <h2 style="font-size: 2em; color: #00ffff; margin-bottom: 20px;">🏷️ 标签云</h2>
+  <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">
+    {{ $colors := slice 
+      "linear-gradient(135deg, #00ffff, #0066ff)" 
+      "linear-gradient(135deg, #00ccff, #0044cc)" 
+      "linear-gradient(135deg, #0099ff, #003399)" 
+      "linear-gradient(135deg, #0066ff, #002266)" 
+      "linear-gradient(135deg, #0033ff, #001133)" 
+      "linear-gradient(135deg, #3399ff, #113366)" 
+      "linear-gradient(135deg, #66ccff, #226699)" 
+      "linear-gradient(135deg, #99ddff, #3388aa)" 
+      "linear-gradient(135deg, #00cccc, #006666)" 
+      "linear-gradient(135deg, #009999, #004444)"
+    }}
+    {{ range $index, $taxonomy := $tags }}
+      {{ $name := $taxonomy.Page.Title }}
+      {{ $count := len $taxonomy.Pages }}
+      {{ $colorIndex := mod $index (len $colors) }}
+      {{ $color := index $colors $colorIndex }}
+      {{ $fontSize := add 0.9 (mul 0.15 (math.Log $count)) }}
+      <a href="{{ .Page.RelPermalink | absURL }}" 
+         style="
+           font-size: {{ $fontSize }}em;
+           padding: 8px 16px;
+           background: {{ $color }};
+           border: 1px solid rgba(0,255,255,0.3);
+           border-radius: 25px;
+           color: #000;
+           text-decoration: none;
+           transition: all 0.3s ease;
+           display: inline-flex;
+           align-items: center;
+           gap: 6px;
+         "
+         onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 4px 12px rgba(0,255,255,0.5)'"
+         onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='none'">
+        <span>{{ $name }}</span>
+        <span style="background: rgba(0,0,0,0.2); padding: 2px 8px; border-radius: 12px; font-size: 0.75em;">{{ $count }}</span>
+      </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

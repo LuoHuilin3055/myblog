@@ -1,0 +1,161 @@
+<header style="background: transparent; padding: 20px 0; position: absolute; top: 0; left: 0; right: 0; z-index: 100;">
+    <nav style="max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center;">
+        <!-- 左上角博客标题 -->
+        <a href="{{ "" | absURL }}" style="color: #00ffff; font-size: 1.5em; text-decoration: none; font-weight: bold; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
+            {{ .Site.Title }}
+        </a>
+        <!-- 右上角导航菜单 -->
+        <div style="display: flex; gap: 30px; align-items: center;">
+            {{ range .Site.Menus.main }}
+            <a href="{{ .URL | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
+               onmouseover="this.style.color='#00ffff'" 
+               onmouseout="this.style.color='white'">
+                {{ .Name }}
+            </a>
+            {{ end }}
+            
+            <!-- 页面标签 -->
+            <a href="{{ "tags" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
+               onmouseover="this.style.color='#00ffff'" 
+               onmouseout="this.style.color='white'">
+                标签
+            </a>
+            
+            <!-- 归档 -->
+            <a href="{{ "categories" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
+               onmouseover="this.style.color='#00ffff'" 
+               onmouseout="this.style.color='white'">
+                归档
+            </a>
+            
+            <!-- 友链 -->
+            <a href="{{ "friends" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
+               onmouseover="this.style.color='#00ffff'" 
+               onmouseout="this.style.color='white'">
+                友链
+            </a>
+            
+            <!-- 主题切换 -->
+            <button class="theme-toggle" onclick="toggleTheme()" title="切换主题">🌙</button>
+            
+            <!-- 搜索 -->
+            <div style="position: relative;">
+                <input type="text" id="search-input" placeholder="搜索..." 
+                       style="
+                         background: var(--bg-card);
+                         border: var(--card-border);
+                         border-radius: 20px;
+                         padding: 6px 12px;
+                         color: var(--text-primary);
+                         font-size: 0.9em;
+                         backdrop-filter: blur(5px);
+                         transition: all 0.3s ease;
+                         width: 150px;
+                       " 
+                       onfocus="this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 0 10px ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-glow'); this.style.width='200px'; document.getElementById('search-results').style.display='block'"
+                       onblur="this.style.width='150px'; setTimeout(function() { document.getElementById('search-results').style.display='none'; }, 200)"
+                       onkeyup="performSearch(this.value)" />
+                <button style="
+                  position: absolute;
+                  right: 8px;
+                  top: 50%;
+                  transform: translateY(-50%);
+                  background: transparent;
+                  border: none;
+                  color: var(--accent-color);
+                  cursor: pointer;
+                  font-size: 1em;
+                " onclick="performSearch(document.getElementById('search-input').value)">🔍</button>
+                
+                <!-- 搜索结果 -->
+                <div id="search-results" style="
+                  position: absolute;
+                  top: 100%;
+                  right: 0;
+                  width: 300px;
+                  max-height: 300px;
+                  background: var(--bg-card);
+                  border: var(--card-border);
+                  border-radius: 10px;
+                  padding: 10px;
+                  margin-top: 5px;
+                  display: none;
+                  overflow-y: auto;
+                  z-index: 1000;
+                  backdrop-filter: blur(10px);
+                "></div>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<script>
+  // 搜索数据
+  const searchData = [
+    {{ range .Site.RegularPages }}
+    {
+      title: "{{ .Title }}",
+      url: "{{ .Permalink }}",
+      content: "{{ .Content | plainify | truncate 200 }}",
+      date: "{{ .Date.Format "2006-01-02" }}",
+      tags: [{{ range .Params.tags }} "{{ . }}", {{ end }}]
+    },
+    {{ end }}
+  ];
+  
+  function performSearch(query) {
+    const resultsContainer = document.getElementById('search-results');
+    const accentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color');
+    const textPrimary = getComputedStyle(document.documentElement).getPropertyValue('--text-primary');
+    const textMuted = getComputedStyle(document.documentElement).getPropertyValue('--text-muted');
+    const accentLight = getComputedStyle(document.documentElement).getPropertyValue('--accent-light');
+    
+    if (!query.trim()) {
+      resultsContainer.innerHTML = '';
+      return;
+    }
+    
+    // 模糊搜索
+    const results = searchData.filter(item => {
+      const searchTerm = query.toLowerCase();
+      return item.title.toLowerCase().includes(searchTerm) || 
+             item.content.toLowerCase().includes(searchTerm) ||
+             item.tags.some(tag => tag.toLowerCase().includes(searchTerm));
+    });
+    
+    // 显示搜索结果
+    if (results.length > 0) {
+      resultsContainer.innerHTML = results.map(item => `
+        <a href="${item.url}" style="
+          display: block;
+          padding: 12px;
+          color: ${textPrimary};
+          text-decoration: none;
+          border-radius: 5px;
+          transition: all 0.3s ease;
+          margin-bottom: 8px;
+        " onmouseover="this.style.background='${accentLight}'; this.style.color='${accentColor}'" onmouseout="this.style.background='none'; this.style.color='${textPrimary}'">
+          <div style="font-weight: bold; margin-bottom: 5px; font-size: 1em;">${item.title}</div>
+          <div style="font-size: 0.8em; color: ${textMuted}; margin-bottom: 5px;">${item.date}</div>
+          ${item.tags.length > 0 ? `<div style="font-size: 0.7em; color: ${accentColor}; display: flex; flex-wrap: wrap; gap: 4px;">${item.tags.map(tag => `<span style="background: ${accentLight}; padding: 2px 8px; border-radius: 10px;">${tag}</span>`).join('')}</div>` : ''}
+        </a>
+      `).join('');
+    } else {
+      resultsContainer.innerHTML = `
+        <div style="padding: 20px; text-align: center; color: ${textMuted};">
+          没有找到相关内容
+        </div>
+      `;
+    }
+  }
+  
+  // 点击外部关闭搜索结果
+  document.addEventListener('click', function(e) {
+    const searchContainer = document.querySelector('div[style*="position: relative;"]');
+    const searchResults = document.getElementById('search-results');
+    
+    if (searchContainer && !searchContainer.contains(e.target)) {
+      searchResults.style.display = 'none';
+    }
+  });
+</script>

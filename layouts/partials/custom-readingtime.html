@@ -1,0 +1,30 @@
+{{/* 自定义阅读时间统计 - 适合中英文混合 */}}
+{{- $content := .Content -}}
+
+{{- /* 移除HTML标签 */ -}}
+{{- $textContent := replaceRE "<[^>]+>" "" $content -}}
+
+{{- /* 统计中文字符数 - 使用Go的Unicode正则表达式格式 */ -}}
+{{- $chineseChars := findRE "[\\x{4e00}-\\x{9fa5}]" $textContent -}}
+{{- $chineseCount := len $chineseChars -}}
+
+{{- /* 统计英文字母数 */ -}}
+{{- $englishChars := findRE "[a-zA-Z]" $textContent -}}
+{{- $englishCount := len $englishChars -}}
+
+{{- /* 统计数字 */ -}}
+{{- $numbers := findRE "[0-9]" $textContent -}}
+{{- $numberCount := len $numbers -}}
+
+{{- /* 总字数 */ -}}
+{{- $totalChars := add $chineseCount $englishCount $numberCount -}}
+
+{{- /* 中文阅读速度：约400字/分钟，英文：约200词/分钟（英文按词计，约5字符=1词） */ -}}
+{{- $readingSpeed := 400 -}}
+{{- $readingTime := div (float $totalChars) (float $readingSpeed) -}}
+{{- $readingTime = math.Ceil $readingTime -}}
+{{- if lt $readingTime 1 -}}
+{{- $readingTime = 1 -}}
+{{- end -}}
+
+{{- return $readingTime -}}

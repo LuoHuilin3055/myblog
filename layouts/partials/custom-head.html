@@ -1,0 +1,301 @@
+<!-- 全局字体样式 -->
+<style>
+  /* 主题切换按钮样式 */
+  .theme-toggle {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3em;
+    transition: all 0.3s ease;
+    color: white;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  }
+
+  .theme-toggle:hover {
+    transform: rotate(20deg) scale(1.1);
+    opacity: 0.8;
+  }
+
+  /* 白天模式样式 - 清新现代风格 */
+  :root {
+    --bg-primary: #f1f5f9;
+    --bg-secondary: #e2e8f0;
+    --bg-card: #ffffff;
+    --bg-hover: #f8fafc;
+    --text-primary: #1e293b;
+    --text-secondary: #334155;
+    --text-muted: #64748b;
+    --border-color: #cbd5e1;
+    --border-light: #e2e8f0;
+    --accent-color: #3b82f6;
+    --accent-hover: #2563eb;
+    --accent-light: #dbeafe;
+    --accent-glow: rgba(59, 130, 246, 0.2);
+    --shadow: rgba(0, 0, 0, 0.08);
+    --shadow-hover: rgba(59, 130, 246, 0.2);
+    --shadow-card: rgba(0, 0, 0, 0.12);
+    --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --gradient-accent: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    --card-border: 1px solid #cbd5e1;
+  }
+
+  /* 黑夜模式样式 (默认) */
+  [data-theme="dark"] {
+    --bg-primary: #111111;
+    --bg-secondary: #111111;
+    --bg-card: #1a1d29;
+    --bg-hover: #252836;
+    --text-primary: #ffffff;
+    --text-secondary: #cccccc;
+    --text-muted: #888888;
+    --border-color: #2a2d3a;
+    --border-light: #1e2130;
+    --accent-color: #00ffff;
+    --accent-hover: #00cccc;
+    --accent-light: rgba(0, 255, 255, 0.1);
+    --accent-glow: rgba(0, 255, 255, 0.2);
+    --shadow: rgba(0, 0, 0, 0.3);
+    --shadow-hover: rgba(0, 255, 255, 0.2);
+    --shadow-card: rgba(0, 0, 0, 0.4);
+    --gradient-primary: linear-gradient(135deg, #00ffff 0%, #a5b4fc 100%);
+    --gradient-accent: linear-gradient(135deg, #00ffff 0%, #0080ff 100%);
+    --card-border: 1px solid #2a2d3a;
+  }
+
+  body {
+    font-family: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+    line-height: 2;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+
+  * {
+    font-family: inherit;
+    line-height: inherit;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+    line-height: 1.8;
+    color: var(--text-primary);
+  }
+
+  code {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    background: transparent !important;
+    padding: 0 !important;
+    font-weight: normal !important;
+  }
+  
+  pre {
+    font-family: inherit !important;
+    font-size: inherit !important;
+    color: inherit !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow-x: visible !important;
+    overflow-y: visible !important;
+    overflow: visible !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+  }
+
+  a, button {
+    font-family: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+    color: var(--text-primary);
+  }
+
+  input, textarea, select {
+    font-family: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+    color: var(--text-primary);
+  }
+
+  /* 图片滑动容器 */
+  .image-slider-container {
+    width: 100%;
+    overflow: hidden;
+    margin: 20px 0;
+    position: relative;
+  }
+
+  .image-slider {
+    display: flex;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    gap: 15px;
+    padding: 10px 0;
+    white-space: nowrap;
+  }
+
+  .image-slider::-webkit-scrollbar {
+    display: none;
+  }
+
+  .image-slider {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .image-slider img {
+    flex-shrink: 0;
+    width: 280px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .image-slider img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 30px var(--shadow-hover);
+  }
+
+  .slider-hint {
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.85em;
+    margin-top: 5px;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* 单张图片样式 */
+  .single-image-container {
+    text-align: center;
+    margin: 20px 0;
+  }
+
+  .single-image-container img {
+    max-width: 100%;
+    height: auto;
+    max-height: 500px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .single-image-container img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px var(--shadow-hover);
+  }
+</style>
+
+<script>
+  // 主题切换功能
+  function toggleTheme() {
+    const body = document.body;
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    
+    // 更新按钮图标
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+      toggleBtn.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+    }
+  }
+
+  // 页面加载时恢复保存的主题
+  window.addEventListener('DOMContentLoaded', function() {
+    const savedTheme = localStorage.getItem('theme') || 'dark';
+    document.body.setAttribute('data-theme', savedTheme);
+    
+    // 更新按钮图标
+    const toggleBtn = document.querySelector('.theme-toggle');
+    if (toggleBtn) {
+      toggleBtn.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+    }
+  });
+</script>
+
+<!-- 不蒜子网站统计 -->
+<script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!-- 图片滑动效果脚本 -->
+<script>
+  window.addEventListener('DOMContentLoaded', function() {
+    console.log('Image slider script loaded');
+    
+    // 找到所有文章内容区域
+    const articleContents = document.querySelectorAll('.article-content');
+    
+    if (articleContents.length === 0) {
+      console.log('No article-content found');
+      return;
+    }
+    
+    articleContents.forEach(function(content) {
+      // 找到所有包含图片的段落
+      const paragraphs = content.querySelectorAll('p');
+      
+      paragraphs.forEach(function(p) {
+        const images = p.querySelectorAll('img');
+        
+        if (images.length > 1) {
+          console.log('Found multiple images:', images.length);
+          
+          // 多张图片 - 创建滑动容器
+          const container = document.createElement('div');
+          container.className = 'image-slider-container';
+          
+          const slider = document.createElement('div');
+          slider.className = 'image-slider';
+          
+          // 将图片移到滑动容器中
+          images.forEach(function(img) {
+            img.className = 'slider-image';
+            slider.appendChild(img);
+          });
+          
+          container.appendChild(slider);
+          
+          // 添加滑动提示
+          const hint = document.createElement('div');
+          hint.className = 'slider-hint';
+          hint.textContent = '← 左右滑动查看更多图片 →';
+          container.appendChild(hint);
+          
+          // 在段落后面插入滑动容器
+          p.parentNode.insertBefore(container, p.nextSibling);
+          
+          // 清空原段落中的图片引用文本
+          p.innerHTML = p.innerHTML.replace(/!\[.*?\]\(.*?\)/g, '').trim();
+          
+          // 如果段落现在为空，隐藏它
+          if (!p.textContent.trim()) {
+            p.style.display = 'none';
+          }
+        } else if (images.length === 1) {
+          // 单张图片 - 创建单张图片容器
+          const container = document.createElement('div');
+          container.className = 'single-image-container';
+          
+          const img = images[0];
+          container.appendChild(img);
+          
+          // 替换段落内容
+          p.innerHTML = '';
+          p.appendChild(container);
+        }
+      });
+    });
+  });
+</script>

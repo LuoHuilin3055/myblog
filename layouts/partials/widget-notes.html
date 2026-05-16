@@ -1,0 +1,75 @@
+<div style="
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+">
+  <div style="
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  ">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+    </svg>
+    <h4 style="
+      color: var(--text-primary);
+      font-size: 1.1em;
+      margin: 0;
+      font-weight: 500;
+      font-family: KaiTi, STKaiti, serif;
+    ">碎碎念</h4>
+  </div>
+  
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    {{ if .Site.Data.murmurs }}
+      {{ range first 2 (sort .Site.Data.murmurs "date" "desc") }}
+        <div style="
+          padding: 6px 0;
+          border-bottom: 1px solid var(--border-color);
+        ">
+          <div style="
+            color: var(--text-muted);
+            font-size: 0.85em;
+            margin-bottom: 4px;
+            font-family: Comic Sans MS, cursive;
+          ">
+            {{ replace .date "-" "/" }}
+          </div>
+          <div style="
+            color: var(--text-secondary);
+            font-size: 0.9em;
+            line-height: 1.8;
+            white-space: pre-line;
+            word-break: break-all;
+          ">
+            {{ trim .content " \t\n\r" }}
+          </div>
+        </div>
+      {{ end }}
+      
+      <a href="/myblog/murmur/" style="
+        display: block;
+        text-align: center;
+        color: var(--text-primary);
+        font-size: 0.85em;
+        padding: 10px;
+        border-radius: 6px;
+        background: var(--accent-light);
+        text-decoration: none;
+        margin-top: 8px;
+        font-family: Comic Sans MS, cursive;
+        transition: background 0.3s;
+      " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-glow');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');">
+        More →
+      </a>
+    {{ else }}
+      <div style="color: var(--text-muted); text-align: center; padding: 20px;">
+        No notes yet
+      </div>
+    {{ end }}
+  </div>
+</div>

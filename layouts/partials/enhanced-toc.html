@@ -1,0 +1,362 @@
+{{ if .TableOfContents }}
+<div style="
+  position: fixed;
+  right: 30px;
+  top: 100px;
+  height: fit-content;
+  min-height: 300px;
+  background: rgba(0,0,0,0.9);
+  border-radius: 12px;
+  padding: 20px;
+  border: 1px solid rgba(0,255,255,0.3);
+  max-height: 85vh;
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  min-width: 320px;
+  width: 350px;
+" id="toc-container">
+  <div style="
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+  ">
+    <h3 style="color: #00ffff; margin: 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
+      <span style="font-size: 1.2em;">📋</span>
+      <span>目录</span>
+    </h3>
+    <button 
+      onclick="toggleTOC()"
+      style="
+        background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0.05));
+        border: 1px solid rgba(0,255,255,0.4);
+        color: #00ffff;
+        padding: 6px 12px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 0.85em;
+        transition: all 0.3s ease;
+        box-shadow: 0 2px 8px rgba(0,255,255,0.1);
+        backdrop-filter: blur(5px);
+        position: relative;
+        overflow: hidden;
+      "
+      onmouseover="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.2), rgba(0,255,255,0.1))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 4px 12px rgba(0,255,255,0.3)'; this.style.transform='translateY(-2px)'
+      onmouseout="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0.05))'; this.style.borderColor='rgba(0,255,255,0.4)'; this.style.boxShadow='0 2px 8px rgba(0,255,255,0.1)'; this.style.transform='translateY(0)'
+    >
+      <span style="display: flex; align-items: center; gap: 6px;">
+        <span style="font-size: 1.1em;">📋</span>
+        <span id="toc-toggle-text">收起</span>
+      </span>
+    </button>
+  </div>
+  
+  <div class="enhanced-toc" style="
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    max-height: 1000px;
+    opacity: 1;
+    overflow: visible;
+  " id="toc-content">
+    <!-- 文章主标题 -->
+    <ul>
+      <li>
+        <a href="#" style="
+          color: #00ffff;
+          font-weight: bold;
+          text-decoration: none;
+          display: block;
+          padding: 8px 0;
+          font-size: 1em;
+          transition: all 0.3s ease;
+        " onmouseover="this.style.color='#fff'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#00ffff'; this.style.paddingLeft='0'">
+          {{ .Title }}
+        </a>
+      </li>
+    </ul>
+    <!-- Markdown 目录 -->
+    {{ .TableOfContents }}
+  </div>
+</div>
+{{ end }}
+
+<!-- 回顶按钮 -->
+<div style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
+  <button 
+    onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
+    style="
+      background: linear-gradient(135deg, rgba(0,255,255,0.3), rgba(0,255,255,0.1));
+      border: 2px solid #00ffff;
+      color: #00ffff;
+      padding: 15px 20px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1.4em;
+      transition: all 0.3s ease;
+      box-shadow: 0 6px 20px rgba(0,255,255,0.5);
+      backdrop-filter: blur(10px);
+      opacity: 1;
+      visibility: visible;
+    "
+    onmouseover="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.4), rgba(0,255,255,0.2))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.7)'; this.style.transform='translateY(-5px)'
+    onmouseout="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.3), rgba(0,255,255,0.1))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 6px 20px rgba(0,255,255,0.5)'; this.style.transform='translateY(0)'
+  >
+    ↑
+  </button>
+</div>
+
+<style>
+  .enhanced-toc ul {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+  }
+  
+  .enhanced-toc li {
+    margin: 8px 0;
+    position: relative;
+  }
+  
+  .enhanced-toc li::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+    height: 6px;
+    background: rgba(0,255,255,0.5);
+    border-radius: 50%;
+    transition: all 0.3s ease;
+  }
+  
+  .enhanced-toc li:hover::before {
+    background: #00ffff;
+    transform: translateY(-50%) scale(1.3);
+  }
+  
+  .enhanced-toc a {
+    color: #ccc;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: block;
+    padding: 4px 0;
+    font-size: 0.9em;
+    line-height: 1.5;
+  }
+  
+  .enhanced-toc a:hover {
+    color: #00ffff;
+    padding-left: 8px;
+  }
+  
+  .enhanced-toc a.active {
+    color: #00ffff;
+    font-weight: bold;
+    padding-left: 8px;
+    background: rgba(0,255,255,0.1);
+    border-left: 3px solid #00ffff;
+    padding-left: 12px;
+    border-radius: 0 4px 4px 0;
+  }
+  
+  .enhanced-toc a.active::before {
+    content: '▸';
+    margin-right: 5px;
+  }
+  
+  .enhanced-toc ul ul {
+    padding-left: 20px;
+    margin-top: 8px;
+    border-left: 2px solid rgba(0,255,255,0.2);
+  }
+  
+  .enhanced-toc ul ul li {
+    margin: 6px 0;
+  }
+  
+  .enhanced-toc ul ul li::before {
+    left: -12px;
+    width: 4px;
+    height: 4px;
+  }
+  
+  /* 滚动条样式 */
+  #toc-container::-webkit-scrollbar {
+    width: 8px;
+  }
+  
+  #toc-container::-webkit-scrollbar-track {
+    background: rgba(0,0,0,0.3);
+    border-radius: 4px;
+  }
+  
+  #toc-container::-webkit-scrollbar-thumb {
+    background: rgba(0,255,255,0.3);
+    border-radius: 4px;
+    transition: all 0.3s ease;
+  }
+  
+  #toc-container::-webkit-scrollbar-thumb:hover {
+    background: rgba(0,255,255,0.5);
+  }
+  
+  /* 目录项展开/折叠按钮 */
+  .toc-toggle {
+    background: none;
+    border: none;
+    color: #00ffff;
+    cursor: pointer;
+    font-size: 0.8em;
+    margin-right: 5px;
+    transition: all 0.3s ease;
+  }
+  
+  .toc-toggle:hover {
+    color: #fff;
+    transform: rotate(90deg);
+  }
+  
+  /* 响应式设计 */
+  @media (max-width: 1024px) {
+    #toc-container {
+      position: relative;
+      right: auto;
+      top: auto;
+      width: 100%;
+      max-width: 400px;
+      margin: 0 auto 30px;
+      max-height: 400px;
+    }
+    
+    div[style*="bottom: 30px; right: 30px;"] {
+      right: 20px;
+      bottom: 20px;
+    }
+    
+    div[style*="bottom: 30px; right: 30px;"] button {
+      padding: 12px 16px;
+      font-size: 1.2em;
+    }
+  }
+  
+  /* 目录容器动画 */
+  #toc-container:hover {
+    box-shadow: 0 10px 40px rgba(0,255,255,0.6);
+    transform: translateY(-2px);
+  }
+  
+  /* 目录项动画 */
+  .enhanced-toc li {
+    transition: all 0.3s ease;
+  }
+  
+  .enhanced-toc li:hover {
+    transform: translateX(5px);
+  }
+</style>
+
+<script>
+  let tocCollapsed = false;
+  
+  function toggleTOC() {
+    const tocContent = document.getElementById('toc-content');
+    const button = event.target.closest('button');
+    const buttonText = document.getElementById('toc-toggle-text');
+    
+    if (tocCollapsed) {
+      tocContent.style.maxHeight = '1000px';
+      tocContent.style.opacity = '1';
+      buttonText.textContent = '收起';
+    } else {
+      tocContent.style.maxHeight = '0';
+      tocContent.style.opacity = '0';
+      buttonText.textContent = '展开';
+    }
+    
+    tocCollapsed = !tocCollapsed;
+  }
+  
+  // 高亮当前章节
+  document.addEventListener('DOMContentLoaded', function() {
+    // 目录高亮逻辑
+    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
+    const tocLinks = document.querySelectorAll('.enhanced-toc a');
+    
+    if (headings.length > 0 && tocLinks.length > 0) {
+      const observerOptions = {
+        root: null,
+        rootMargin: '-10% 0px -80% 0px',
+        threshold: 0
+      };
+      
+      const observer = new IntersectionObserver(function(entries) {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.getAttribute('id');
+            tocLinks.forEach(link => {
+              link.classList.remove('active');
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+                // 自动滚动到当前高亮的目录项
+                const tocContainer = document.getElementById('toc-container');
+                const activeLink = link;
+                
+                if (tocContainer && activeLink) {
+                  // 计算滚动位置，使高亮项居中
+                  // 注意：使用getBoundingClientRect来获取相对于容器的位置
+                  const containerRect = tocContainer.getBoundingClientRect();
+                  const linkRect = activeLink.getBoundingClientRect();
+                  
+                  // 计算相对于容器的偏移量
+                  const relativeTop = linkRect.top - containerRect.top;
+                  
+                  // 计算滚动位置，使高亮项居中
+                  const scrollPosition = tocContainer.scrollTop + relativeTop - (containerRect.height / 2) + (linkRect.height / 2);
+                  
+                  // 确保滚动位置在合理范围内
+                  const finalScrollPosition = Math.max(0, scrollPosition);
+                  
+                  // 使用平滑滚动
+                  tocContainer.scrollTo({
+                    top: finalScrollPosition,
+                    behavior: 'smooth'
+                  });
+                }
+              }
+            });
+          }
+        });
+      }, observerOptions);
+      
+      headings.forEach(heading => {
+        if (heading.getAttribute('id')) {
+          observer.observe(heading);
+        }
+      });
+    }
+    
+    // 添加目录项展开/折叠功能
+    const tocItems = document.querySelectorAll('.enhanced-toc li');
+    tocItems.forEach(item => {
+      const sublist = item.querySelector('ul');
+      if (sublist) {
+        const toggle = document.createElement('button');
+        toggle.className = 'toc-toggle';
+        toggle.innerHTML = '▶';
+        toggle.onclick = function() {
+          sublist.style.display = sublist.style.display === 'none' ? 'block' : 'none';
+          this.innerHTML = sublist.style.display === 'none' ? '▶' : '▼';
+        };
+        const link = item.querySelector('a');
+        if (link) {
+          link.parentNode.insertBefore(toggle, link);
+        }
+      }
+    });
+  });
+</script>

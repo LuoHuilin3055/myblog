@@ -1,0 +1,49 @@
+<!-- 标签云 -->
+{{ if .Site.Taxonomies.tags }}
+<div style="
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+">
+  <!-- 标题 -->
+  <div style="
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  ">
+    <svg style="width: 20px; height: 20px; color: #9b59b6;" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M21.41 11.58l-9-9C12.05 2.22 11.55 2 11 2H4c-1.1 0-2 .9-2 2v7c0 .55.22 1.05.59 1.42l9 9c.36.36.86.58 1.41.58.55 0 1.05-.22 1.41-.59l7-7c.37-.36.59-.86.59-1.41 0-.55-.23-1.06-.59-1.42zM5.5 7C4.67 7 4 6.33 4 5.5S4.67 4 5.5 4 7 4.67 7 5.5 6.33 7 5.5 7z"/>
+    </svg>
+    <h4 style="
+      color: var(--text-primary);
+      font-size: 1.1em;
+      margin: 0;
+      font-weight: 500;
+      font-family: KaiTi, STKaiti, serif;
+    ">标签</h4>
+  </div>
+  
+  <!-- 标签列表 -->
+  <div style="
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  ">
+    {{ range .Site.Taxonomies.tags.ByCount }}
+    <a href="{{ .Page.Permalink }}" style="
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.85em;
+      transition: all 0.3s;
+      line-height: 1.8;
+    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
+      {{ .Page.Title }}
+    </a>
+    {{ end }}
+  </div>
+</div>
+{{ end }}

@@ -1,0 +1,43 @@
+{{ if .Params.tags }}
+<div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+  {{ $colors := slice 
+    "#00ffff" 
+    "#a5b4fc" 
+    "#50fa7b" 
+    "#ffb86c" 
+    "#ff79c6" 
+    "#bd93f9" 
+    "#ff5555" 
+    "#8be9fd" 
+    "#f1fa8c" 
+    "#ff79c6" 
+    "#6272a4" 
+    "#8884d8" 
+    "#95e1d3" 
+    "#f38181" 
+    "#fce38a" 
+  }}
+  {{ range $index, $tag := .Params.tags }}
+    {{ $colorIndex := mod $index (len $colors) }}
+    {{ $tagColor := index $colors $colorIndex }}
+    <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: {{ $tagColor }};
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      {{ $tag }}
+    </a>
+  {{ end }}
+</div>
+{{ end }}

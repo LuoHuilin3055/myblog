@@ -1,0 +1,136 @@
+{{ $image := "images/background.jpg" | absURL }}
+{{ $title := .Site.Params.site_title | default "NGC 2237" }}
+{{ $description := .Site.Params.description }}
+
+<!-- Hero 区域 -->
+<div style="
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+">
+  <!-- 背景图片 -->
+  <div style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('{{ $image }}');
+    background-size: cover;
+    background-position: center top;
+    transform: scale(1);
+    transition: transform 0.8s ease;
+  " id="hero-bg"></div>
+  
+  <!-- 渐变遮罩 -->
+  <div style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      180deg,
+      rgba(0,0,0,0.2) 0%,
+      rgba(0,0,0,0.1) 50%,
+      rgba(0,0,0,0.3) 100%
+    );
+  "></div>
+  
+  <!-- 内容区域 -->
+  <div style="
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+  ">
+    <h1 style="
+      color: white;
+      font-size: clamp(2.5em, 8vw, 4.5em);
+      margin: 0;
+      text-shadow: 2px 2px 10px rgba(0,0,0,0.8);
+      font-weight: 300;
+      letter-spacing: 3px;
+      animation: fadeInUp 1s ease;
+    ">{{ $title }}</h1>
+    
+    {{ if $description }}
+    <p style="
+      color: rgba(255,255,255,0.9);
+      font-size: clamp(1.1em, 3vw, 1.8em);
+      margin: 25px 0 0;
+      text-shadow: 1px 1px 6px rgba(0,0,0,0.6);
+      font-weight: 300;
+      letter-spacing: 2px;
+      animation: fadeInUp 1s ease 0.3s both;
+      text-align: center;
+      max-width: 800px;
+      padding: 0 20px;
+    ">{{ $description }}</p>
+    {{ end }}
+    
+    <!-- 向下滚动提示 -->
+    <div style="
+      position: absolute;
+      bottom: 50px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      cursor: pointer;
+    " onclick="document.getElementById('content').scrollIntoView({behavior: 'smooth'})">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.5" style="opacity: 0.7;">
+        <polyline points="6 9 12 15 18 9"></polyline>
+      </svg>
+    </div>
+  </div>
+</div>
+
+<!-- 动画样式 -->
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    40% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+    60% {
+      transform: translateX(-50%) translateY(-5px);
+    }
+  }
+</style>
+
+<!-- 视差滚动效果 -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const heroBg = document.getElementById('hero-bg');
+    if (heroBg) {
+      window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * 0.2;
+        heroBg.style.transform = 'scale(1) translateY(' + rate + 'px)';
+      });
+    }
+  });
+</script>

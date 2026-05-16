@@ -1,0 +1,529 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $coverImage := .Params.cover | default "" }}
+  {{ $bgImage := $coverImage | default "images/background.jpg" | absURL }}
+  
+  <div style="
+    background-image: url('{{ $bgImage }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    background-color: #000000;
+    position: relative;
+  ">
+    <!-- 背景遮罩 -->
+    <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 0;
+    "></div>
+    
+    <div style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
+      <!-- 文章内容 -->
+      <article style="background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
+        <!-- 封面图片 -->
+        {{ if $coverImage }}
+        <div style="
+          margin: -40px -40px 30px -40px;
+          position: relative;
+          overflow: hidden;
+          border-radius: 15px 15px 0 0;
+        ">
+          <img 
+            src="{{ $coverImage | absURL }}"
+            alt="{{ .Title }}"
+            loading="eager"
+            decoding="async"
+            style="
+              width: 100%;
+              height: auto;
+              max-height: 400px;
+              object-fit: cover;
+              display: block;
+              transition: transform 0.3s ease;
+            "
+          />
+          <!-- 渐变遮罩 -->
+          <div style="
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.9) 100%);
+          "></div>
+        </div>
+        {{ end }}
+        
+        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: {{ if $coverImage }}-20px{{ else }}0{{ end }} 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">{{ .Title }}</h1>
+        
+        <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px;">
+          <!-- 友链列表 -->
+          {{ partial "friends.html" . }}
+        </div>
+      </article>
+    </div>
+  </div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}
+
+{{ define "head" }}
+<style>
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .article-content h2 {
+    color: #00ffff;
+    font-size: clamp(1.5em, 3vw, 1.8em);
+    margin: 40px 0 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,255,255,0.2);
+  }
+  
+  .article-content h3 {
+    color: #00ffff;
+    font-size: clamp(1.2em, 2.5vw, 1.4em);
+    margin: 30px 0 15px;
+  }
+  
+  .article-content p {
+    margin: 15px 0;
+    line-height: 1.8;
+  }
+  
+  .article-content ul,
+  .article-content ol {
+    margin: 15px 0;
+    padding-left: 30px;
+  }
+  
+  .article-content li {
+    margin: 8px 0;
+  }
+  
+  .article-content a {
+    color: #00ffff;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(0,255,255,0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .article-content a:hover {
+    color: #fff;
+    border-bottom-color: #00ffff;
+  }
+  
+  .article-content img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+    box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+    transition: all 0.3s ease;
+  }
+  
+  .article-content img:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 25px rgba(0,255,255,0.5);
+  }
+  
+  .article-content blockquote {
+    border-left: 3px solid #00ffff;
+    padding: 10px 20px;
+    margin: 20px 0;
+    background: rgba(0,255,255,0.05);
+    border-radius: 0 8px 8px 0;
+  }
+  
+  .article-content table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+  }
+  
+  .article-content th {
+    background: rgba(0,255,255,0.1);
+    padding: 12px;
+    text-align: left;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .article-content td {
+    padding: 12px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  
+  .article-content tr:hover {
+    background: rgba(0,255,255,0.05);
+  }
+  
+  /* 代码高亮样式 - 优化MD渲染 */
+  .article-content pre,
+  .article-content .highlight pre {
+    background: #1e1e1e;
+    padding: 0;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 20px 0;
+    border: 1px solid #333;
+    position: relative;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  }
+  
+  .article-content code,
+  .article-content .highlight code {
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9em;
+  }
+  
+  .article-content pre code,
+  .article-content .highlight pre code {
+    background: none;
+    padding: 0;
+  }
+  
+  /* 代码块整体样式 */
+  .article-content .chroma,
+  .article-content .highlight .chroma {
+    color: #d4d4d4;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    position: relative;
+  }
+  
+  /* 复制按钮 */
+  .article-content .chroma::before,
+  .article-content .highlight .chroma::before {
+    content: '📋';
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    color: #888;
+    font-size: 0.9em;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 4px;
+    background: rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    z-index: 10;
+  }
+  
+  .article-content .chroma:hover::before,
+  .article-content .highlight .chroma:hover::before {
+    color: #00ffff;
+    background: rgba(0,255,255,0.2);
+  }
+  
+  /* 代码内容 */
+  .article-content .chroma .code,
+  .article-content .highlight .chroma .code {
+    padding: 20px;
+  }
+  
+  /* 代码高亮颜色 - 优化效果 */
+  .article-content .chroma .k,
+  .article-content .highlight .chroma .k {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kc,
+  .article-content .highlight .chroma .kc {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kd,
+  .article-content .highlight .chroma .kd {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kn,
+  .article-content .highlight .chroma .kn {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kp,
+  .article-content .highlight .chroma .kp {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kr,
+  .article-content .highlight .chroma .kr {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .kt,
+  .article-content .highlight .chroma .kt {
+    color: #8be9fd;
+  }
+  
+  .article-content .chroma .na,
+  .article-content .highlight .chroma .na {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .nc,
+  .article-content .highlight .chroma .nc {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .no,
+  .article-content .highlight .chroma .no {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .nd,
+  .article-content .highlight .chroma .nd {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .ni,
+  .article-content .highlight .chroma .ni {
+    color: #d4d4d4;
+  }
+  
+  .article-content .chroma .ne,
+  .article-content .highlight .chroma .ne {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .nf,
+  .article-content .highlight .chroma .nf {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .nl,
+  .article-content .highlight .chroma .nl {
+    color: #d4d4d4;
+  }
+  
+  .article-content .chroma .nn,
+  .article-content .highlight .chroma .nn {
+    color: #d4d4d4;
+  }
+  
+  .article-content .chroma .nx,
+  .article-content .highlight .chroma .nx {
+    color: #50fa7b;
+  }
+  
+  .article-content .chroma .py,
+  .article-content .highlight .chroma .py {
+    color: #d4d4d4;
+  }
+  
+  .article-content .chroma .nt,
+  .article-content .highlight .chroma .nt {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .nv,
+  .article-content .highlight .chroma .nv {
+    color: #d4d4d4;
+  }
+  
+  .article-content .chroma .l,
+  .article-content .highlight .chroma .l {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .ld,
+  .article-content .highlight .chroma .ld {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .s,
+  .article-content .highlight .chroma .s {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sa,
+  .article-content .highlight .chroma .sa {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sb,
+  .article-content .highlight .chroma .sb {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sc,
+  .article-content .highlight .chroma .sc {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .dl,
+  .article-content .highlight .chroma .dl {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sd,
+  .article-content .highlight .chroma .sd {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .s2,
+  .article-content .highlight .chroma .s2 {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .se,
+  .article-content .highlight .chroma .se {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sh,
+  .article-content .highlight .chroma .sh {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .si,
+  .article-content .highlight .chroma .si {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sx,
+  .article-content .highlight .chroma .sx {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .sr,
+  .article-content .highlight .chroma .sr {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .s1,
+  .article-content .highlight .chroma .s1 {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .ss,
+  .article-content .highlight .chroma .ss {
+    color: #f1fa8c;
+  }
+  
+  .article-content .chroma .m,
+  .article-content .highlight .chroma .m {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .mb,
+  .article-content .highlight .chroma .mb {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .mf,
+  .article-content .highlight .chroma .mf {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .mh,
+  .article-content .highlight .chroma .mh {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .mi,
+  .article-content .highlight .chroma .mi {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .mo,
+  .article-content .highlight .chroma .mo {
+    color: #bd93f9;
+  }
+  
+  .article-content .chroma .c,
+  .article-content .highlight .chroma .c {
+    color: #6272a4;
+  }
+  
+  .article-content .chroma .ch,
+  .article-content .highlight .chroma .ch {
+    color: #6272a4;
+  }
+  
+  .article-content .chroma .cm,
+  .article-content .highlight .chroma .cm {
+    color: #6272a4;
+  }
+  
+  .article-content .chroma .c1,
+  .article-content .highlight .chroma .c1 {
+    color: #6272a4;
+  }
+  
+  .article-content .chroma .cs,
+  .article-content .highlight .chroma .cs {
+    color: #6272a4;
+  }
+  
+  .article-content .chroma .o,
+  .article-content .highlight .chroma .o {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .ow,
+  .article-content .highlight .chroma .ow {
+    color: #ff79c6;
+  }
+  
+  .article-content .chroma .p,
+  .article-content .highlight .chroma .p {
+    color: #d4d4d4;
+  }
+  
+  @media (max-width: 768px) {
+    .article-content h2 {
+      font-size: 1.5em;
+    }
+    
+    .article-content h3 {
+      font-size: 1.2em;
+    }
+  }
+</style>
+<script>
+  // 代码块复制功能
+  document.addEventListener('DOMContentLoaded', function() {
+    const codeBlocks = document.querySelectorAll('.article-content .chroma, .article-content .highlight .chroma');
+    codeBlocks.forEach(block => {
+      block.addEventListener('click', function(e) {
+        if (e.target === this || e.target === this.querySelector('code')) {
+          const code = this.querySelector('code').textContent;
+          navigator.clipboard.writeText(code).then(() => {
+            const originalContent = this.style.content;
+            this.style.content = '✅';
+            setTimeout(() => {
+              this.style.content = '📋';
+            }, 2000);
+          }).catch(err => {
+            console.error('复制失败:', err);
+          });
+        }
+      });
+    });
+  });
+</script>
+{{ end }}

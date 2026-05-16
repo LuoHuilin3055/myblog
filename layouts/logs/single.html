@@ -1,0 +1,277 @@
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $bgImage := .Params.cover | default "images/background.jpg" | absURL }}
+  
+  <style>
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .article-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      display: flex;
+      gap: 40px;
+      position: relative;
+      z-index: 1;
+    }
+    
+    .article-content-wrapper {
+      flex: 1;
+      background: rgba(0,0,0,0.7);
+      border-radius: 16px;
+      padding: 40px;
+      border: 1px solid rgba(0,255,255,0.2);
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .article-header {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    
+    .article-title {
+      color: #00ffff;
+      font-size: 2.5em;
+      margin: 0 0 20px;
+      text-shadow: 0 0 20px rgba(0,255,255,0.5);
+    }
+    
+    .article-meta {
+      color: #888;
+      font-size: 0.9em;
+      margin-bottom: 30px;
+    }
+    
+    .article-meta span {
+      margin: 0 10px;
+    }
+    
+    .article-content {
+      color: #fff;
+      line-height: 2.2;
+    }
+    
+    .article-content p {
+      margin-bottom: 25px;
+      text-indent: 2em;
+    }
+    
+    .article-content h1, .article-content h2, .article-content h3, .article-content h4, .article-content h5, .article-content h6 {
+      color: #00ffff;
+      margin: 40px 0 25px;
+      line-height: 1.6;
+    }
+    
+    .article-content ul, .article-content ol {
+      margin: 25px 0;
+      padding-left: 2em;
+      line-height: 2.2;
+    }
+    
+    .article-content li {
+      margin-bottom: 12px;
+    }
+    
+    .article-content ul li {
+      list-style-type: disc;
+    }
+    
+    .article-content ol li {
+      list-style-type: decimal;
+    }
+    
+    .article-content blockquote {
+      border-left: 4px solid #00ffff;
+      padding-left: 20px;
+      margin: 25px 0;
+      color: #aaa;
+      font-style: italic;
+      line-height: 2;
+    }
+    
+    .article-content pre {
+      background: rgba(0,0,0,0.8);
+      border: 1px solid rgba(0,255,255,0.3);
+      border-radius: 8px;
+      padding: 20px;
+      margin: 25px 0;
+      overflow-x: auto;
+      line-height: 1.8;
+    }
+    
+    .article-content code {
+      background: rgba(0,255,255,0.1);
+      color: #00ffff;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 0.9em;
+    }
+    
+    .article-content pre code {
+      background: none;
+      padding: 0;
+      color: #fff;
+    }
+    
+    .article-content hr {
+      border: none;
+      border-top: 1px solid rgba(0,255,255,0.3);
+      margin: 40px 0;
+    }
+    
+    .article-content table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 25px 0;
+    }
+    
+    .article-content th, .article-content td {
+      border: 1px solid rgba(0,255,255,0.3);
+      padding: 12px;
+      text-align: left;
+      color: #fff;
+    }
+    
+    .article-content th {
+      background: rgba(0,255,255,0.1);
+      color: #00ffff;
+    }
+    
+    .article-content img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 8px;
+      margin: 25px 0;
+    }
+    
+    .article-content strong {
+      color: #00ffff;
+      font-weight: bold;
+    }
+    
+    .article-content em {
+      color: #aaa;
+      font-style: italic;
+    }
+    
+    .article-content a {
+      color: #00ffff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .article-content a:hover {
+      text-decoration: underline;
+    }
+    
+    .article-tags {
+      margin-top: 40px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    
+    .article-tag {
+      font-size: 0.8em;
+      color: #00ffff;
+      background: rgba(0,255,255,0.1);
+      padding: 5px 15px;
+      border-radius: 20px;
+    }
+    
+    .toc-sidebar {
+      flex-shrink: 0;
+      width: 300px;
+    }
+    
+    @media (max-width: 1024px) {
+      .article-container {
+        flex-direction: column;
+      }
+      
+      .toc-sidebar {
+        width: 100%;
+      }
+      
+      .article-content-wrapper {
+        order: 2;
+      }
+      
+      .toc-sidebar {
+        order: 1;
+      }
+    }
+  </style>
+  
+  <div style="
+    background-image: url('{{ $bgImage }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    position: relative;
+  " id="page-top">
+    <!-- 背景遮罩 -->
+    <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 0;
+    "></div>
+    
+    <div class="article-container">
+      <!-- 文章内容 -->
+      <div class="article-content-wrapper">
+        <!-- 文章头部 -->
+        <div class="article-header">
+          <h1 class="article-title">{{ .Title }}</h1>
+          <div class="article-meta">
+            <span>📅 {{ dateFormat "2006-01-02" .Date }}</span>
+            {{ if ne .Date .Lastmod }}
+            <span>✏️ {{ dateFormat "2006-01-02" .Lastmod }}</span>
+            {{ end }}
+          </div>
+        </div>
+        
+        <!-- 文章内容 -->
+        <div class="article-content">
+          {{ .Content }}
+          
+          <!-- 文章标签 -->
+          {{ if .Params.tags }}
+            <div class="article-tags">
+              {{ range .Params.tags }}
+                <span class="article-tag">{{ . }}</span>
+              {{ end }}
+            </div>
+          {{ end }}
+        </div>
+      </div>
+      
+      <!-- 右侧目录栏 -->
+      <div class="toc-sidebar">
+        {{ partial "enhanced-toc.html" . }}
+      </div>
+    </div>
+  </div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}

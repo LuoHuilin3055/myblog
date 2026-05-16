@@ -1,0 +1,49 @@
+<footer style="background-color: var(--bg-secondary); padding: 20px; position: relative; bottom: 0; width: 100%;" role="contentinfo">
+  <style>
+    .ananke-socials a {
+      color: var(--text-primary) !important;
+    }
+    .ananke-socials a:hover {
+      color: var(--accent-color) !important;
+    }
+    .runtime {
+      text-align: center;
+      margin-top: 20px;
+      color: var(--accent-color);
+      font-size: 0.9rem;
+      padding-top: 10px;
+      border-top: 1px solid var(--border-color);
+    }
+  </style>
+  <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+    <a href="{{ .Site.Home.Permalink }}" style="color: var(--text-primary); font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;" onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color')" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-primary')">
+      &copy; {{ with .Site.Copyright | compare.Default .Site.Title }} {{ . | safe.HTML }} {{ now.Format "2006"}} {{ end }}
+    </a>
+    <div>{{ partials.IncludeCached "social/follow.html" . }}</div>
+  </div>
+  <div class="runtime" id="runtime">
+    本站居然运行了 <span id="runtime-count">0</span> 天 0 小时 0 分 0 秒❤️
+  </div>
+  <script>
+    // 网站开始运行时间
+    const startTime = new Date('2026-03-21 00:00:00').getTime();
+    
+    function updateRuntime() {
+      const now = new Date().getTime();
+      const diff = now - startTime;
+      
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+      
+      document.getElementById('runtime').innerHTML = `本站居然运行了 ${days} 天 ${hours} 小时 ${minutes} 分 ${seconds} 秒❤️`;
+    }
+    
+    // 初始更新
+    updateRuntime();
+    
+    // 每秒更新
+    setInterval(updateRuntime, 1000);
+  </script>
+</footer>

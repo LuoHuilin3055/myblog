@@ -1,0 +1,67 @@
+<div style="
+  background: var(--bg-card);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  border: var(--card-border);
+  box-shadow: var(--shadow-card);
+">
+  <!-- 标题 -->
+  <div style="
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  ">
+    <svg style="width: 20px; height: 20px; color: var(--accent-color);" fill="currentColor" viewBox="0 0 24 24">
+      <path d="M12 6v12c3.31 0 6-2.69 6-6s-2.69-6-6-6zm0-2c-4.42 0-8 3.58-8 8s3.58 8 8 8v-2.45c-2.5-.75-4.5-2.72-4.5-5.55s2-4.8 4.5-5.55v-2.45zM13 2v2h6v-2h-6z"/>
+    </svg>
+    <h4 style="
+      color: var(--text-primary);
+      font-size: 1.1em;
+      margin: 0;
+      font-weight: 500;
+      font-family: KaiTi, STKaiti, serif;
+    ">最新更新</h4>
+  </div>
+  
+  <!-- 更新列表 -->
+  <div style="display: flex; flex-direction: column; gap: 10px;">
+    {{ $posts := where .Site.RegularPages "Type" "posts" }}
+    {{ $sortedPosts := sort $posts "Params.lastmod" "desc" }}
+    {{ range first 5 $sortedPosts }}
+    <a href="{{ .Permalink }}" style="
+      display: block;
+      padding: 10px;
+      background: rgba(0,0,0,0.3);
+      border-radius: 8px;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid rgba(0,255,255,0.1);
+    " onmouseover="this.style.background='rgba(0,255,255,0.1)'; this.style.borderColor='rgba(0,255,255,0.3)';" onmouseout="this.style.background='rgba(0,0,0,0.3)'; this.style.borderColor='rgba(0,255,255,0.1)';">
+      <div style="
+        color: #fff;
+        font-size: 0.9em;
+        margin-bottom: 5px;
+        line-height: 1.4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      ">{{ .Title }}</div>
+      <div style="
+        color: #888;
+        font-size: 0.8em;
+        font-family: Comic Sans MS, cursive;
+      ">
+        {{ if .Params.lastmod }}
+          {{ dateFormat "2006/01/02" .Params.lastmod }}
+        {{ else }}
+          {{ dateFormat "2006/01/02" .Date }}
+        {{ end }}
+      </div>
+    </a>
+    {{ else }}
+    <div style="color: var(--text-muted); text-align: center; padding: 20px;">暂无文章</div>
+    {{ end }}
+  </div>
+</div>

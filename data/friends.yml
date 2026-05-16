@@ -1,0 +1,11 @@
+# 友链数据
+# 格式：
+# - name: 网站名称
+#   url: 网站链接
+#   description: 网站描述
+#   avatar: 头像链接
+
+- name: Daochunhan
+  url: https://daochunhan25.site/
+  description: 大大大大大佬
+  avatar: https://img.daochunhan25.site/img/profile.png

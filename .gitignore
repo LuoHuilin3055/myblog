@@ -1,0 +1,15 @@
+# 生成的网站文件
+/public/
+/resources/
+
+# 缓存文件
+.hugo_build.lock
+.hugo-build.lock
+
+# 系统文件
+.DS_Store
+Thumbs.db
+
+# 编辑器文件
+.obsidian/
+.vscode/

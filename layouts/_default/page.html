@@ -1,0 +1,38 @@
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  <div class="flex-l mt2 mw8 center">
+    <article class="page center cf pv5 ph3 ph4-ns mw7">
+      <header>
+        <h1 class="f1">
+          {{ .Title }}
+        </h1>
+      </header>
+      <div class="nested-copy-line-height lh-copy f4 nested-links mid-gray">
+        {{ .Content }}
+      </div>
+    </article>
+  </div>
+  {{ if eq .RelPermalink "/random/" }}
+  <script>
+    // 文章列表 - 自动生成，只包含正式发布的文章，不包含草稿
+    const posts = [
+      {{ range where .Site.RegularPages "Type" "posts" }}
+      "{{ .RelPermalink }}",
+      {{ end }}
+    ];
+    
+    // 随机选择一篇文章
+    const randomPost = posts[Math.floor(Math.random() * posts.length)];
+    
+    // 重定向到随机文章
+    window.location.href = randomPost;
+  </script>
+  {{ end }}
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}

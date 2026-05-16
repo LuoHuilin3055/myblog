@@ -1,0 +1,501 @@
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $bgImage := "images/background.jpg" | absURL }}
+  
+  <style>
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    @keyframes growUp {
+      from {
+        height: 0;
+        opacity: 0;
+      }
+      to {
+        height: var(--height);
+        opacity: 1;
+      }
+    }
+    
+    .timeline-container {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+    }
+    
+    .timeline-header {
+      margin-bottom: 40px;
+      animation: fadeInDown 0.8s ease;
+    }
+    
+    .timeline-header h2 {
+      color: #00ffff;
+      font-size: 1.5em;
+      margin: 0 0 10px;
+    }
+    
+    .timeline-header span {
+      color: #888;
+      font-size: 0.9em;
+    }
+    
+    .timeline {
+      position: relative;
+      padding-left: 30px;
+    }
+    
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, #00ffff, transparent);
+    }
+    
+    .timeline-year {
+      position: relative;
+      margin-bottom: 30px;
+    }
+    
+    .timeline-year::before {
+      content: '';
+      position: absolute;
+      left: -30px;
+      top: 6px;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: #00ffff;
+      box-shadow: 0 0 10px rgba(0,255,255,0.5);
+    }
+    
+    .timeline-year h3 {
+      color: #00ffff;
+      font-size: 1.2em;
+      margin: 0 0 20px;
+    }
+    
+    .timeline-item {
+      position: relative;
+      margin-bottom: 20px;
+      padding: 20px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 8px;
+      border: 1px solid rgba(0,255,255,0.2);
+      transition: all 0.3s ease;
+      display: flex;
+      gap: 20px;
+    }
+    
+    .timeline-item:hover {
+      background: rgba(0,255,255,0.05);
+      transform: translateX(10px);
+      box-shadow: 0 4px 15px rgba(0,255,255,0.3);
+    }
+    
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -36px;
+      top: 28px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      border: 2px solid #00ffff;
+    }
+    
+    .timeline-item-image {
+      flex-shrink: 0;
+      width: 100px;
+      height: 60px;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    
+    .timeline-item-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    
+    .timeline-item:hover .timeline-item-image img {
+      transform: scale(1.1);
+    }
+    
+    .timeline-item-content {
+      flex: 1;
+    }
+    
+    .timeline-item-date {
+      color: #888;
+      font-size: 0.8em;
+      margin-bottom: 8px;
+    }
+    
+    .timeline-item-title {
+      color: #fff;
+      font-size: 1.1em;
+      margin: 0 0 10px;
+    }
+    
+    .timeline-item-title a {
+      color: #fff;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    
+    .timeline-item-title a:hover {
+      color: #00ffff;
+    }
+    
+    .timeline-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    
+    .timeline-tag {
+      font-size: 0.75em;
+      padding: 3px 10px;
+      border-radius: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+    
+    .category-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 18px;
+      justify-content: center;
+      margin-bottom: 60px;
+      padding: 30px;
+      background: rgba(0,0,0,0.6);
+      border-radius: 20px;
+      border: 1px solid rgba(0,255,255,0.2);
+    }
+    
+    .category-cloud a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      padding: 12px 28px;
+      border-radius: 35px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+      z-index: 1;
+    }
+    
+    .category-cloud a::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+      z-index: -1;
+    }
+    
+    .category-cloud a:hover::before {
+      left: 100%;
+    }
+    
+    .category-cloud a:hover {
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 6px 20px rgba(0, 255, 255, 0.4);
+    }
+    
+    .category-cloud a span {
+      margin-left: 8px;
+      font-size: 0.9em;
+      opacity: 0.9;
+      background: rgba(0,0,0,0.2);
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+    }
+    
+    /* 标签大小根据文章数量动态调整 */
+    .category-cloud a:nth-child(1) {
+      font-size: 1.4em;
+      padding: 15px 32px;
+    }
+    
+    .category-cloud a:nth-child(2),
+    .category-cloud a:nth-child(3) {
+      font-size: 1.2em;
+      padding: 13px 28px;
+    }
+    
+    .category-cloud a:nth-child(n+4) {
+      font-size: 1em;
+    }
+  </style>
+  
+  <div style="
+    background-image: url('{{ $bgImage }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    position: relative;
+  " id="page-top">
+    <!-- 背景遮罩 -->
+    <div style="
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 0;
+    "></div>
+    
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;">
+      <!-- 页面标题 -->
+      {{ if eq .Data.Plural "tags" }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Tags ]" 
+          "Title" .Title 
+          "Subtitle" (printf "Total %d Tags" (len .Data.Terms)) 
+        ) }}
+      {{ else if eq .Data.Plural "categories" }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Categories ]" 
+          "Title" .Title 
+          "Subtitle" (printf "Total %d Categories" (len .Data.Terms)) 
+        ) }}
+      {{ else }}
+        {{ partial "page-header.html" (dict 
+          "Prefix" "[ Page ]" 
+          "Title" .Title 
+          "Subtitle" "" 
+        ) }}
+      {{ end }}
+      
+      <!-- 标签统计和可视化 -->
+      {{ if .Data.Terms }}
+        <div style="
+          background: rgba(0,0,0,0.6);
+          border-radius: 15px;
+          border: 1px solid rgba(0,255,255,0.2);
+          padding: 40px;
+          margin-bottom: 40px;
+          animation: fadeInDown 0.8s ease 0.2s both;
+          position: relative;
+        ">
+          <div style="display: flex; justify-content: center;">
+            <!-- 柱状图 - 与下面标签一一对应 -->
+            <div style="width: 100%; max-width: 800px;">
+              <div style="display: flex; align-items: flex-end; justify-content: space-between; height: 100px; gap: 8px;">
+                {{ $sortedTerms := .Data.Terms.Alphabetical }}
+                {{ $maxCount := 0 }}
+                {{ range .Data.Terms.ByCount }}
+                  {{ if gt .Count $maxCount }}
+                    {{ $maxCount = .Count }}
+                  {{ end }}
+                {{ end }}
+                {{ range $index, $term := $sortedTerms }}
+                  {{ $height := mul (div (float $term.Count) (float (add $maxCount 1))) 80 }}
+                  {{ $colors := slice "#00ffff" "#00d4ff" "#00b8ff" "#00a8ff" "#0096ff" "#0084ff" "#0072ff" "#0060ff" "#0048ff" "#0030ff" }}
+                  {{ $colorIndex := mod $index (len $colors) }}
+                  {{ $color := index $colors $colorIndex }}
+                  <a href="{{ $term.Page.RelPermalink }}" class="tag-bar" style="
+                    flex: 1;
+                    background: linear-gradient(to top, {{ $color }}, #0066ff);
+                    border-radius: 2px 2px 0 0;
+                    transition: all 0.3s ease;
+                    height: {{ add $height 10 }}px;
+                    cursor: pointer;
+                    position: relative;
+                  " title="{{ $term.Page.Title }} {{ $term.Count }}篇" onmouseover="this.style.opacity='0.8'; this.style.transform='scaleY(1.05)';" onmouseout="this.style.opacity='1'; this.style.transform='scaleY(1)';">
+                    <!-- 悬停提示 -->
+                    <div style="
+                      position: absolute;
+                      top: -30px;
+                      left: 50%;
+                      transform: translateX(-50%);
+                      background: rgba(0,0,0,0.8);
+                      color: #fff;
+                      padding: 4px 8px;
+                      border-radius: 4px;
+                      font-size: 0.7em;
+                      white-space: nowrap;
+                      opacity: 0;
+                      transition: opacity 0.2s ease;
+                      z-index: 10;
+                    " onmouseover="this.style.opacity='1';" onmouseout="this.style.opacity='0';">
+                      {{ $term.Page.Title }} {{ $term.Count }}篇
+                    </div>
+                  </a>
+                {{ end }}
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- 标签列表 -->
+        <div style="
+          background: rgba(0,0,0,0.6);
+          border-radius: 15px;
+          border: 1px solid rgba(0,255,255,0.2);
+          padding: 30px;
+          animation: fadeInDown 0.8s ease 0.3s both;
+        ">
+          <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 12px;">
+            {{ $colors := slice "#00ffff" "#00d4ff" "#00b8ff" "#00a8ff" "#0096ff" "#0084ff" "#0072ff" "#0060ff" "#0048ff" "#0030ff" }}
+            {{ range $index, $term := .Data.Terms.Alphabetical }}
+              {{ $colorIndex := mod $index (len $colors) }}
+              {{ $tagColor := index $colors $colorIndex }}
+              <a href="{{ $term.Page.RelPermalink }}" id="tag-{{ $index }}" style="
+                display: inline-flex;
+                align-items: center;
+                justify-content: space-between;
+                text-decoration: none;
+                padding: 8px 12px;
+                border-radius: 8px;
+                font-weight: 500;
+                font-size: 0.9em;
+                color: #fff;
+                background: rgba(0,0,0,0.4);
+                border: 1px solid rgba(0,255,255,0.2);
+                transition: all 0.2s ease;
+              " onmouseover="this.style.background='rgba(0,255,255,0.1)'; this.style.borderColor='#00ffff';" onmouseout="this.style.background='rgba(0,0,0,0.4)'; this.style.borderColor='rgba(0,255,255,0.2)';">
+                <span style="display: flex; align-items: center;">
+                  <span style="
+                    width: 6px;
+                    height: 6px;
+                    border-radius: 50%;
+                    background: {{ $tagColor }};
+                    margin-right: 8px;
+                  "></span>
+                  {{ $term.Page.Title }}
+                </span>
+                <span style="
+                  font-size: 0.8em;
+                  color: #888;
+                  background: rgba(0,0,0,0.3);
+                  padding: 1px 6px;
+                  border-radius: 10px;
+                ">{{ $term.Count }}</span>
+              </a>
+            {{ end }}
+          </div>
+        </div>
+        
+        <script>
+          // 获取所有柱形图和标签
+          const bars = document.querySelectorAll('.tag-bar');
+          const tags = document.querySelectorAll('[id^="tag-"]');
+          
+          // 为每个柱形图添加事件监听器
+          bars.forEach((bar, index) => {
+            bar.addEventListener('mouseover', function() {
+              // 高亮对应的标签
+              if (tags[index]) {
+                tags[index].style.background = 'rgba(0,255,255,0.1)';
+                tags[index].style.borderColor = '#00ffff';
+              }
+            });
+            
+            bar.addEventListener('mouseout', function() {
+              // 恢复标签样式
+              if (tags[index]) {
+                tags[index].style.background = 'rgba(0,0,0,0.4)';
+                tags[index].style.borderColor = 'rgba(0,255,255,0.2)';
+              }
+            });
+          });
+          
+
+        </script>
+      {{ end }}
+      
+      <!-- 文章列表 - 按年份和月份组织 -->
+      {{ $pages := .Pages }}
+      <!-- 如果是分类列表页面（如/categories/），则显示所有文章 -->
+      {{ if and (eq .Kind "taxonomy") (eq (len .Pages) 0) (eq .Data.Plural "categories") }}
+        {{ $pages = .Site.RegularPages }}
+      {{ end }}
+      
+      {{ $years := $pages.GroupByDate "2006" }}
+      
+      <!-- 只在Archive页面显示时间线，Tag页面不显示 -->
+      {{ if and $years (not (eq .Data.Plural "tags")) }}
+        <div class="timeline-container">
+          <!-- 归档头部 -->
+          <div class="timeline-header">
+            <h2>全部文章 - {{ len $pages }}</h2>
+            <span>按时间顺序排列</span>
+          </div>
+          
+          <!-- 时间线 -->
+          <div class="timeline">
+            {{ range $years }}
+              <div class="timeline-year">
+                <h3>{{ .Key }}</h3>
+                {{ range .Pages.ByDate.Reverse }}
+                  <div class="timeline-item">
+                    {{ if .Params.cover }}
+                    <div class="timeline-item-image">
+                      <img src="{{ .Params.cover | absURL }}" alt="{{ .Title }}" loading="lazy" />
+                    </div>
+                    {{ end }}
+                    <div class="timeline-item-content">
+                      <div class="timeline-item-date">{{ dateFormat "2006-01-02" .Date }}</div>
+                      <h4 class="timeline-item-title"><a href="{{ .Permalink }}">{{ .Title }}</a></h4>
+                      {{ if .Params.tags }}
+                        {{ $colors := slice "#00ffff" "#a5b4fc" "#50fa7b" "#ffb86c" "#ff79c6" "#bd93f9" "#ff5555" "#8be9fd" "#f1fa8c" "#6272a4" }}
+                        <div class="timeline-tags">
+                          {{ range $index, $tag := .Params.tags }}
+                            {{ $colorIndex := mod $index (len $colors) }}
+                            {{ $tagColor := index $colors $colorIndex }}
+                            <span class="timeline-tag" style="background: {{ $tagColor }}; color: #000;">{{ $tag }}</span>
+                          {{ end }}
+                        </div>
+                      {{ end }}
+                    </div>
+                  </div>
+                {{ end }}
+              </div>
+            {{ end }}
+          </div>
+        </div>
+      {{ else if not $years }}
+        <div style="
+          text-align: center;
+          padding: 80px 20px;
+          color: #666;
+          background: rgba(0,0,0,0.5);
+          border-radius: 16px;
+          border: 1px solid #333;
+        ">
+          <p style="font-size: 1.2em;">暂无内容，敬请期待...</p>
+        </div>
+      {{ end }}
+    </div>
+  </div>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}
