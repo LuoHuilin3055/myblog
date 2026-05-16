@@ -2,7 +2,7 @@
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
-    <title>作业提交 | NGC 2237&#39;s Blog</title>
+    <title>乱七八糟的WP | NGC 2237&#39;s Blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1350,7 +1350,7 @@
   
   
   <div style="
-    background-image: url('https://LuoHuilin3055.github.io/myblog/images/9.jpg');
+    background-image: url('https://LuoHuilin3055.github.io/myblog/images/17.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -1382,8 +1382,8 @@
           border-radius: 15px 15px 0 0;
         ">
           <img 
-            src="https://LuoHuilin3055.github.io/myblog/images/9.jpg"
-            alt="作业提交"
+            src="https://LuoHuilin3055.github.io/myblog/images/17.jpg"
+            alt="乱七八糟的WP"
             loading="eager"
             decoding="async"
             style="
@@ -1407,13 +1407,13 @@
         </div>
         
         
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">作业提交</h1>
+        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: -20px 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">乱七八糟的WP</h1>
         
         <div style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-          <span>📅 2026-04-08</span>
-          <span>✏️ 2026-04-08</span>
-          <span>📝 151 字</span>
-          <span>⏱️ 1 分钟</span>
+          <span>📅 2026-05-15</span>
+          <span>✏️ 2026-05-15</span>
+          <span>📝 1093 字</span>
+          <span>⏱️ 3 分钟</span>
         </div>
         
         
@@ -1423,7 +1423,7 @@
   
     
     
-    <a href="/myblog/tags/%E9%9A%8F%E7%AC%94" 
+    <a href="/myblog/tags/ctf" 
        style="
          display: inline-flex;
          align-items: center;
@@ -1439,7 +1439,28 @@
        "
        onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
-      随笔
+      CTF
+    </a>
+  
+    
+    
+    <a href="/myblog/tags/wp" 
+       style="
+         display: inline-flex;
+         align-items: center;
+         padding: 6px 14px;
+         background: #a5b4fc;
+         border-radius: 18px;
+         color: #000;
+         font-size: 0.85em;
+         font-weight: 500;
+         text-decoration: none;
+         transition: all 0.2s ease;
+         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+       "
+       onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 4px 8px rgba(0, 0, 0, 0.3)'"
+       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 2px 4px rgba(0, 0, 0, 0.2)'">
+      WP
     </a>
   
 </div>
@@ -1447,21 +1468,150 @@
 
         
         <div class="article-content" style="color: #fff; line-height: 1.8; margin-top: 30px; overflow-x: hidden;">
-          <p><strong>写一份指南，避免下次提交作业时又去骚扰AI</strong></p>
-<h1 id="1确保当前工作区干净">1.确保当前工作区干净</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git status
-</span></span></code></pre></div><h1 id="2创建并切换到新分支">2.创建并切换到新分支</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git checkout -b 0x02
-</span></span></code></pre></div><h1 id="3添加文章文件">3.添加文章文件</h1>
+          <h1 id="misc"><code>Misc</code></h1>
+<h2 id="heading"><a href="https://www.nssctf.cn/problem/4207">[SEETF 2023]1337 Word Search - NSSCTF</a></h2>
+<h3 id="思路">思路</h3>
 <ul>
-<li>需要将文章放在本地目录中</li>
+<li>先看题目描述：<strong>这是一个大型的字谜游戏。在网格中找到隐藏的<code>flag</code>，可以在八个方向中的任何一个方向（水平、垂直或对角线）找到。</strong>——可以猜测是一道单词搜索题</li>
+<li>再看附件：文件解压后看见一大堆乱字符，于是我们看：
+<ul>
+<li>有没有图片？——没有，所以不是图片隐写</li>
+<li>有没有压缩包？——没有，所以不是压缩密码</li>
+<li>是不是编码？不像，因为没有规律且有<code>{}</code>与<code>_</code>，不像<code>base64</code></li>
+<li>同时也结合题目强调的<code>grid</code>（网格），说明：这些字符不是一整串，而应该按照二维矩阵理解</li>
 </ul>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git add article.md
-</span></span></code></pre></div><h1 id="4提交更改">4.提交更改</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git commit -m <span class="s2">&#34;添加文章&#34;</span>
-</span></span></code></pre></div><h1 id="5推送新分支到远程仓库">5.推送新分支到远程仓库</h1>
-<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl">git push -u origin 0x02
-</span></span></code></pre></div>
+</li>
+<li>而<code>flag</code>格式给了：</li>
+</ul>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">SEE{}
+</span></span></code></pre></div><ul>
+<li>所以核心思路就是：
+<ol>
+<li>把整个文本按照“矩阵”处理</li>
+<li>从所有 <code>S</code> 开始搜索</li>
+<li>朝 8 个方向尝试读取字符串</li>
+<li>找到完整 <code>SEE{...}</code></li>
+</ol>
+</li>
+</ul>
+<h3 id="exp"><code>EXP</code></h3>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">dirs</span> <span class="o">=</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>   <span class="c1"># →</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># ←</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>   <span class="c1"># ↓</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">),</span>  <span class="c1"># ↑</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span>   <span class="c1"># ↘</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="c1"># ↖</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span>  <span class="c1"># ↙</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>   <span class="c1"># ↗</span>
+</span></span><span class="line"><span class="cl"><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&#34;wordsearch1.txt&#34;</span><span class="p">,</span><span class="s2">&#34;r&#34;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s2">&#34;utf-8&#34;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">grid</span> <span class="o">=</span> <span class="p">[</span><span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">f</span> <span class="k">if</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">()]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">grid</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="n">j</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;S&#39;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">continue</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">dx</span><span class="p">,</span><span class="n">dy</span> <span class="ow">in</span> <span class="n">dirs</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="n">s</span> <span class="o">=</span> <span class="s2">&#34;&#34;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">i</span><span class="p">,</span><span class="n">j</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="n">n</span> <span class="ow">and</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">y</span> <span class="o">&lt;</span> <span class="n">m</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">s</span> <span class="o">+=</span> <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="n">s</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&#34;SEE{&#34;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">s</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&#34;}&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                    <span class="nb">print</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="n">x</span> <span class="o">+=</span> <span class="n">dx</span>
+</span></span><span class="line"><span class="cl">                <span class="n">y</span> <span class="o">+=</span> <span class="n">dy</span>
+</span></span></code></pre></div><p>运行脚本后得到<code>flag</code></p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">SEE{you_found_me_now_try_the_1337er_one}
+</span></span></code></pre></div><hr>
+<h1 id="web"><code>Web</code></h1>
+<h2 id="heading-1"><a href="https://www.nssctf.cn/problem/3861">[LitCTF 2023]我Flag呢？ - NSSCTF</a></h2>
+<h3 id="前置知识">前置知识</h3>
+<ul>
+<li>为什么要做元素审查？
+<ul>
+<li>因为网页显示出来的内容 不等于 网页的真实内容</li>
+</ul>
+</li>
+<li>元素审查看什么
+<ul>
+<li>
+<table>
+  <thead>
+      <tr>
+          <th>内容</th>
+          <th>作用</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HTML</td>
+          <td>页面结构、隐藏内容</td>
+      </tr>
+      <tr>
+          <td>CSS</td>
+          <td>隐藏元素、图片路径</td>
+      </tr>
+      <tr>
+          <td>JavaScript</td>
+          <td>密码、逻辑、接口</td>
+      </tr>
+      <tr>
+          <td>Network 请求</td>
+          <td>API、参数、Cookie</td>
+      </tr>
+      <tr>
+          <td>Storage</td>
+          <td>Token、Session</td>
+      </tr>
+      <tr>
+          <td>Cookie</td>
+          <td>身份验证</td>
+      </tr>
+      <tr>
+          <td>Source</td>
+          <td>前端源码</td>
+      </tr>
+  </tbody>
+</table>
+</li>
+</ul>
+</li>
+<li><a href="https://learn.microsoft.com/zh-cn/microsoft-edge/devtools/about-tools">有关工具列表 - Microsoft Edge Developer documentation | Microsoft Learn</a></li>
+</ul>
+<h3 id="思路-1">思路</h3>
+<ul>
+<li>打开网站发现没有可交互的点，于是<code>F12</code>控制台审查元素</li>
+<li>打开控制台后看到： <img src="NSSCTF/1.png" alt="">
+<blockquote>
+<p><strong>控制台（Console）</strong> 会输出页面资源报错信息/<code>js</code>的执行信息，同时也可以在这个交互式终端中执行<code>js</code>指令</p>
+</blockquote>
+</li>
+<li>彩蛋提示运行<code>giveMeEgg()</code>函数即可拿到彩蛋，所以：  <img src="NSSCTF/2.png" alt=""></li>
+<li>但提交后发现不对😭,<code>CTRL+U</code>查看源码，<code>CTRL+F</code>进行搜索<code>flag</code>，在最下面的注释找到<code>flag</code></li>
+</ul>
+<hr>
+<h2 id="heading-2"><a href="https://www.nssctf.cn/problem/3863">[LitCTF 2023]导弹迷踪 - NSSCTF</a></h2>
+<h3 id="思路-2">思路</h3>
+<ul>
+<li>这是一个小游戏，而针对这种逻辑是基于<code>js</code>的页面游戏，要么采用按照题目要求玩到第六关得到<code>flag</code>，要么就修改或者查看源码寻找<code>flag</code></li>
+<li><code>F12</code>查看源码，在搜索框搜索<code>&quot;level&quot;</code>，找到<code>flag</code>  <img src="NSSCTF/3.png" alt=""></li>
+</ul>
+
         </div>
         
         
@@ -1473,7 +1623,7 @@
     <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
       <span style="color: #888; font-size: 0.9em;">标签：</span>
       
-        <a href="https://LuoHuilin3055.github.io/tags/%E9%9A%8F%E7%AC%94" 
+        <a href="https://LuoHuilin3055.github.io/tags/ctf" 
            style="
              padding: 6px 14px;
              background: rgba(0, 255, 255, 0.15);
@@ -1486,7 +1636,23 @@
            "
            onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
            onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
-          随笔
+          CTF
+        </a>
+      
+        <a href="https://LuoHuilin3055.github.io/tags/wp" 
+           style="
+             padding: 6px 14px;
+             background: rgba(0, 255, 255, 0.15);
+             border: 1px solid rgba(0, 255, 255, 0.4);
+             border-radius: 20px;
+             color: #00ffff;
+             font-size: 0.9em;
+             text-decoration: none;
+             transition: all 0.3s ease;
+           "
+           onmouseover="this.style.background='rgba(0, 255, 255, 0.3)'; this.style.transform='translateY(-2px)'"
+           onmouseout="this.style.background='rgba(0, 255, 255, 0.15)'; this.style.transform='translateY(0)'">
+          WP
         </a>
       
     </div>
@@ -1496,7 +1662,7 @@
   
   <div style="display: flex; gap: 10px;">
     <span style="color: #888; font-size: 0.9em;">分享：</span>
-    <a href="https://twitter.com/intent/tweet?text=%e4%bd%9c%e4%b8%9a%e6%8f%90%e4%ba%a4&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2f%25E4%25BD%259C%25E4%25B8%259A%25E6%258F%2590%25E4%25BA%25A4%25E6%258C%2587%25E5%258D%2597%2f" 
+    <a href="https://twitter.com/intent/tweet?text=%e4%b9%b1%e4%b8%83%e5%85%ab%e7%b3%9f%e7%9a%84WP&url=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2fnss%2f" 
        target="_blank"
        style="
          padding: 6px 12px;
@@ -1509,7 +1675,7 @@
        "
        onmouseover="this.style.opacity='0.8'"
        onmouseout="this.style.opacity='1'">Twitter</a>
-    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2f%25E4%25BD%259C%25E4%25B8%259A%25E6%258F%2590%25E4%25BA%25A4%25E6%258C%2587%25E5%258D%2597%2f" 
+    <a href="https://www.facebook.com/sharer/sharer.php?u=https%3a%2f%2fLuoHuilin3055.github.io%2fmyblog%2fposts%2fnss%2f" 
        target="_blank"
        style="
          padding: 6px 12px;
@@ -1530,7 +1696,7 @@
 <div style="margin-top: 30px; padding-top: 30px; border-top: 1px solid #333;">
   <div style="display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
     
-    <a href="/myblog/posts/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/%E6%99%BA%E8%83%BD%E7%B3%BB%E7%BB%9F%E5%AE%89%E5%85%A8%E8%BF%90%E7%BB%B4%E4%B8%8E%E5%AE%9E%E8%B7%B5/" 
+    <a href="/myblog/posts/%E5%9B%9B%E5%8F%B2%E7%BB%93%E8%AF%BE%E8%AE%BA%E6%96%87/" 
        style="
          flex: 1;
          min-width: 200px;
@@ -1545,29 +1711,12 @@
        onmouseover="this.style.borderColor='#00ffff'; this.style.background='rgba(0,255,255,0.1)'"
        onmouseout="this.style.borderColor='#333'; this.style.background='rgba(0,0,0,0.5)'">
       <div style="font-size: 0.8em; color: #888; margin-bottom: 5px;">← 上一篇</div>
-      <div style="font-weight: bold; color: #00ffff;">智能系统安全运维与实践的笔记</div>
+      <div style="font-weight: bold; color: #00ffff;">“四史”结课论文</div>
     </a>
     
     
     
-    <a href="/myblog/posts/linux/" 
-       style="
-         flex: 1;
-         min-width: 200px;
-         padding: 15px 20px;
-         background: rgba(0,0,0,0.5);
-         border: 1px solid #333;
-         border-radius: 10px;
-         color: #fff;
-         text-decoration: none;
-         text-align: right;
-         transition: all 0.3s ease;
-       "
-       onmouseover="this.style.borderColor='#00ffff'; this.style.background='rgba(0,255,255,0.1)'"
-       onmouseout="this.style.borderColor='#333'; this.style.background='rgba(0,0,0,0.5)'">
-      <div style="font-size: 0.8em; color: #888; margin-bottom: 5px;">下一篇 →</div>
-      <div style="font-weight: bold; color: #00ffff;">Linux学习记录</div>
-    </a>
+    <div style="flex: 1; min-width: 200px;"></div>
     
   </div>
 </div>
@@ -1654,18 +1803,38 @@
           font-size: 1em;
           transition: all 0.3s ease;
         " onmouseover="this.style.color='#fff'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#00ffff'; this.style.paddingLeft='0'">
-          作业提交
+          乱七八糟的WP
         </a>
       </li>
     </ul>
     
     <nav id="TableOfContents">
   <ul>
-    <li><a href="#1确保当前工作区干净">1.确保当前工作区干净</a></li>
-    <li><a href="#2创建并切换到新分支">2.创建并切换到新分支</a></li>
-    <li><a href="#3添加文章文件">3.添加文章文件</a></li>
-    <li><a href="#4提交更改">4.提交更改</a></li>
-    <li><a href="#5推送新分支到远程仓库">5.推送新分支到远程仓库</a></li>
+    <li><a href="#misc"><code>Misc</code></a>
+      <ul>
+        <li><a href="#heading">[SEETF 2023]1337 Word Search - NSSCTF</a>
+          <ul>
+            <li><a href="#思路">思路</a></li>
+            <li><a href="#exp"><code>EXP</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+    <li><a href="#web"><code>Web</code></a>
+      <ul>
+        <li><a href="#heading-1">[LitCTF 2023]我Flag呢？ - NSSCTF</a>
+          <ul>
+            <li><a href="#前置知识">前置知识</a></li>
+            <li><a href="#思路-1">思路</a></li>
+          </ul>
+        </li>
+        <li><a href="#heading-2">[LitCTF 2023]导弹迷踪 - NSSCTF</a>
+          <ul>
+            <li><a href="#思路-2">思路</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
   </ul>
 </nav>
   </div>
