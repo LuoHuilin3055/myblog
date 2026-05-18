@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="utf-8">
+    <title>随机文章 | NGC 2237&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Sans+SC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --font-sans: 'Inter', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            --font-mono: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+            --primary-color: #00ffff;
+            --secondary-color: #a5b4fc;
+            --bg-primary: #000000;
+            --bg-secondary: #1e293b;
+            --text-primary: #ffffff;
+            --text-secondary: #cbd5e1;
+            --text-muted: #94a3b8;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body, html {
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            width: 100%;
+            font-family: var(--font-sans);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: transparent;
+            padding: 20px 0;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 100;
+        }
+        
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        nav a {
+            color: #00ffff;
+            font-size: 1.5em;
+            text-decoration: none;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+        
+        main {
+            background-color: var(--bg-primary);
+        }
+        
+        .hero {
+            background-image: url('/myblog/images/background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 120px 20px 60px;
+            background-color: #000000;
+            position: relative;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 0;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 40px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        article {
+            flex: 1;
+            background: rgba(0,0,0,0.7);
+            border-radius: 15px;
+            padding: 40px;
+            border: 1px solid rgba(0,255,255,0.3);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+            transition: all 0.3s ease;
+            transform: translateY(0);
+        }
+        
+        h1 {
+            color: #00ffff;
+            font-size: clamp(2em, 5vw, 2.5em);
+            margin: 0 0 20px;
+            text-shadow: 0 0 10px rgba(0,255,255,0.3);
+        }
+        
+        .article-content {
+            color: #fff;
+            line-height: 1.8;
+            margin-top: 30px;
+        }
+        
+        footer {
+            background-color: #000;
+            padding: 20px;
+            position: relative;
+            bottom: 0;
+            width: 100%;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-content a {
+            color: #fff;
+            font-size: 1rem;
+            text-decoration: none;
+            padding: 10px 15px;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-content a:hover {
+            color: #00ffff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/myblog/">NGC 2237&#39;s Blog</a>
+        </nav>
+    </header>
+
+    <main>
+        <div class="hero">
+            <div class="hero-content">
+                <article>
+                    <h1>随机文章</h1>
+                    <div class="article-content">
+                        <p>正在跳转到随机文章&hellip;</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <a href="/myblog/">©  NGC 2237's Blog 2026</a>
+        </div>
+    </footer>
+
+    <script>
+        // 文章列表 - 硬编码，只包含正式发布的文章，不包含草稿
+        const posts = [
+            "/myblog/posts/出游/",
+            "/myblog/posts/数据结构/",
+            "/myblog/posts/linux/",
+            "/myblog/posts/作业提交指南/",
+            "/myblog/posts/虚拟机配置/",
+            "/myblog/posts/ctf/",
+            "/myblog/posts/java学习/蓝桥杯/",
+            "/myblog/posts/java学习/题目/"
+        ];
+        
+        // 随机选择一篇文章
+        const randomPost = posts[Math.floor(Math.random() * posts.length)];
+        
+        // 重定向到随机文章
+        window.location.href = randomPost;
+    </script>
+</body>
+</html>

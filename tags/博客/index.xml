@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>博客 on NGC 2237&#39;s Blog</title>
+    <link>http://localhost:1313/myblog/tags/%E5%8D%9A%E5%AE%A2/</link>
+    <description>Recent content in 博客 on NGC 2237&#39;s Blog</description>
+    <generator>Hugo</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Sun, 22 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/myblog/tags/%E5%8D%9A%E5%AE%A2/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>第一篇文章</title>
+      <link>http://localhost:1313/myblog/posts/first-post/</link>
+      <pubDate>Sun, 22 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/myblog/posts/first-post/</guid>
+      <description>&lt;h1 id=&#34;欢迎来到我的博客&#34;&gt;欢迎来到我的博客&lt;/h1&gt;&#xA;&lt;p&gt;这是我的第一篇博客文章！&lt;/p&gt;&#xA;&lt;h2 id=&#34;关于这个博客&#34;&gt;关于这个博客&lt;/h2&gt;&#xA;&lt;p&gt;我会在这里分享：&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;学习笔记&lt;/li&gt;&#xA;&lt;li&gt;技术心得&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;感谢你的关注！&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
