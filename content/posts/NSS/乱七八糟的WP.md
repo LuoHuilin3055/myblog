@@ -2,7 +2,7 @@
 title: 乱七八糟的WP
 date: 2026-05-15
 draft:
-lastmod: 2026-05-15
+lastmod: 2026-05-18
 featured: true
 tags:
   - CTF
@@ -99,9 +99,9 @@ SEE{you_found_me_now_try_the_1337er_one}
 
 ### 思路
 - 打开网站发现没有可交互的点，于是`F12`控制台审查元素
-- 打开控制台后看到： ![](../NSSCTF/1.png)
+- 打开控制台后看到： ![](NSSCTF/1.png)
 	> **控制台（Console）** 会输出页面资源报错信息/`js`的执行信息，同时也可以在这个交互式终端中执行`js`指令
-- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](../NSSCTF/2.png)
+- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](NSSCTF/2.png)
 - 但提交后发现不对😭,`CTRL+U`查看源码，`CTRL+F`进行搜索`flag`，在最下面的注释找到`flag`
 
 ---
