@@ -34,7 +34,7 @@
     {{ $year := .Key | replaceRE "年.*" "" }}
     {{ $month := .Key | replaceRE ".*年|月" "" }}
     {{ $month := printf "%02d" (int $month) }}
-    {{ $link := printf "/myblog/posts/%s/%s/" $year $month }}
+    {{ $link := printf "posts/%s/%s/" $year $month | relURL }}
     <a href="{{ $link }}" style="
       display: flex;
       justify-content: space-between;

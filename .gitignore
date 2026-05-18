@@ -1,6 +1,20 @@
 # 生成的网站文件
 /public/
 /resources/
+/404.html
+/index.html
+/index.xml
+/random.html
+/sitemap.xml
+/about/
+/categories/
+/friends/
+/images/
+/logs/
+/murmur/
+/posts/
+/random/
+/tags/
 
 # 缓存文件
 .hugo_build.lock

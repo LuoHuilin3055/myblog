@@ -1,24 +1,24 @@
-baseURL = "https://LuoHuilin3055.github.io/myblog/"
+baseURL = "https://yourname.github.io/your-blog/"
 languageCode = "zh-cn"
-title = "NGC 2237's Blog"
+title = "Your Blog"
 theme = "theme2"
 
 [params]
-  site_title = "NGC 2237"
-  description = "欢迎来到NGC_2237的博客"
-  author = "NGC 2237"
+  site_title = "Your Name"
+  description = "欢迎来到我的博客"
+  author = "Your Name"
   featured_image = "/images/background.jpg"
-  home_text = "何时葡萄会熟透，你要静候再静候"
+  home_text = "写下你想展示在首页的话"
   custom_404 = true
-  
-  # 个人资料卡片配置
-  avatar = "images/ChenJM.jpg"  # 头像图片路径（去掉开头的/）
-  bio = "Hi, there ~ 👋"  # 个性签名
-  github = "https://github.com/LuoHuilin3055"  # GitHub 链接
+
+  avatar = "images/avatar.jpg"
+  bio = "Hi, there ~"
+  github = "https://github.com/yourname"
   about_subtitle = "欢迎来到我的个人博客"
   random_button_text = "🎲 随机一篇"
   about_button_text = "👤 关于我"
   latest_posts_title = "📝 最新文章"
+
   enable_busuanzi = true
   enable_click_fireworks = true
   enable_image_lightbox = true
@@ -26,20 +26,7 @@ theme = "theme2"
 
   [[params.social_links]]
     name = "GitHub"
-    url = "https://github.com/LuoHuilin3055"
-
-  [[params.social_links]]
-    name = "NSSCTF"
-    url = "https://www.nssctf.cn/user/47738"
-  
-  # 公告内容（支持 Markdown）
-  announcement = """
-虽然不知道你是怎么找到我的，但希望我能给你带来收获
-"""
-  
-  # 网站统计（可选）
-  visitor_count = 115  # 访客数
-  page_views = 328     # 总浏览量
+    url = "https://github.com/yourname"
 
 [menu]
   [[menu.main]]
@@ -65,10 +52,7 @@ theme = "theme2"
   [markup.highlight]
     codeFences = true
     guessSyntax = true
-    hl_Lines = ""
-    lineNoStart = 1
     lineNos = false
-    lineNumbersInTable = false
     noClasses = false
     style = "none"
     tabWidth = 4

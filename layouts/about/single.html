@@ -53,7 +53,7 @@
           />
         </div>
         <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); text-shadow: 0 0 10px rgba(0,255,255,0.3);">{{ .Title }}</h1>
-        <p style="color: #aaa; margin-top: 10px; font-size: 1.1em;">欢迎来到我的个人博客</p>
+        <p style="color: #aaa; margin-top: 10px; font-size: 1.1em;">{{ .Site.Params.about_subtitle | default "欢迎来到我的个人博客" }}</p>
       </div>
       
       <!-- About 内容 -->
@@ -66,7 +66,8 @@
         <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; text-align: center;">
           <p style="color: #888; margin-bottom: 20px;">关注我</p>
           <div style="display: flex; gap: 20px; justify-content: center;">
-            <a href="https://github.com/LuoHuilin3055" target="_blank" style="
+            {{ range .Site.Params.social_links }}
+            <a href="{{ .url }}" target="_blank" style="
               display: inline-flex;
               align-items: center;
               gap: 8px;
@@ -79,23 +80,9 @@
               transition: all 0.3s ease;
             " onmouseover="this.style.background='rgba(0,255,255,0.2)'; this.style.transform='translateY(-2px)';"
                onmouseout="this.style.background='rgba(0,255,255,0.1)'; this.style.transform='translateY(0)';">
-              <span>GitHub</span>
+              <span>{{ .name }}</span>
             </a>
-            <a href="https://www.nssctf.cn/user/47738" target="_blank" style="
-              display: inline-flex;
-              align-items: center;
-              gap: 8px;
-              padding: 10px 25px;
-              background: rgba(0,255,255,0.1);
-              color: #00ffff;
-              text-decoration: none;
-              border-radius: 25px;
-              border: 1px solid rgba(0,255,255,0.3);
-              transition: all 0.3s ease;
-            " onmouseover="this.style.background='rgba(0,255,255,0.2)'; this.style.transform='translateY(-2px)';"
-               onmouseout="this.style.background='rgba(0,255,255,0.1)'; this.style.transform='translateY(0)';">
-              <span>NSSCTF</span>
-            </a>
+            {{ end }}
           </div>
         </div>
       </article>

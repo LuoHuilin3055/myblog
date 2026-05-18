@@ -226,9 +226,12 @@
   });
 </script>
 
+{{ if ne .Site.Params.enable_busuanzi false }}
 <!-- 不蒜子网站统计 -->
 <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+{{ end }}
 
+{{ if ne .Site.Params.enable_image_slider false }}
 <!-- 图片滑动效果脚本 -->
 <script>
   window.addEventListener('DOMContentLoaded', function() {
@@ -299,3 +302,4 @@
     });
   });
 </script>
+{{ end }}

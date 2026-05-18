@@ -1,5 +1,5 @@
 {{ $image := "images/background.jpg" | absURL }}
-{{ $title := .Site.Params.site_title | default "NGC 2237" }}
+{{ $title := .Site.Params.site_title | default .Site.Title }}
 {{ $description := .Site.Params.description }}
 
 <!-- Hero 区域 -->

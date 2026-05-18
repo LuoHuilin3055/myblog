@@ -59,7 +59,7 @@
       请检查网址是否正确，或返回首页查看更多内容。
     </p>
     
-    <a href="/myblog/" style="
+    <a href="{{ "" | relURL }}" style="
       display: inline-flex;
       align-items: center;
       gap: 10px;
@@ -79,10 +79,10 @@
     <div style="margin-top: 60px; animation: fadeIn 1s ease-out 1.2s both;">
       <p style="color: #666; font-size: 0.9em; margin-bottom: 20px;">你可能感兴趣：</p>
       <div style="display: flex; gap: 30px; justify-content: center; flex-wrap: wrap;">
-        <a href="/myblog/about/" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">关于我</a>
-        <a href="/myblog/posts/" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">所有文章</a>
-        <a href="/myblog/tags/" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">标签</a>
-        <a href="/myblog/categories/" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">归档</a>
+        <a href="{{ "about" | relURL }}" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">关于我</a>
+        <a href="{{ "posts" | relURL }}" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">所有文章</a>
+        <a href="{{ "tags" | relURL }}" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">标签</a>
+        <a href="{{ "categories" | relURL }}" style="color: #00ffff; text-decoration: none; transition: all 0.3s ease; padding: 8px 16px; border-radius: 20px;" onmouseover="this.style.background='rgba(0, 255, 255, 0.1)';" onmouseout="this.style.background='none';">归档</a>
       </div>
     </div>
   </div>

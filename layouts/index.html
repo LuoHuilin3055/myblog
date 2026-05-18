@@ -33,7 +33,7 @@
     max-width: 800px;
   ">
     <!-- 随机一篇按钮 -->
-    <button onclick="window.location.href = '/myblog/random'" style="
+    <button onclick="window.location.href = '{{ "random" | relURL }}'" style="
       background: var(--bg-card);
       color: var(--accent-color);
       border: var(--card-border);
@@ -46,11 +46,11 @@
       box-shadow: var(--shadow-card);
     " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" 
        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
-      🎲 随机一篇
+      {{ .Site.Params.random_button_text | default "🎲 随机一篇" }}
     </button>
     
     <!-- 关于我按钮 -->
-    <a href="/myblog/about" style="
+    <a href="{{ "about" | relURL }}" style="
       background: var(--bg-card);
       color: var(--accent-color);
       border: var(--card-border);
@@ -65,13 +65,13 @@
       box-shadow: var(--shadow-card);
     " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" 
        onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
-      👤 关于我
+      {{ .Site.Params.about_button_text | default "👤 关于我" }}
     </a>
   </div>
 
   <!-- 主内容区域：左侧文章列表 + 右侧小组件 -->
   <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px 60px;">
-    <h2 style="font-size: 2em; color: var(--accent-color); margin-bottom: 30px;">📝 最新文章</h2>
+    <h2 style="font-size: 2em; color: var(--accent-color); margin-bottom: 30px;">{{ .Site.Params.latest_posts_title | default "📝 最新文章" }}</h2>
     
     <div style="display: flex; gap: 40px; align-items: flex-start;">
       <!-- 左侧：文章列表 -->
