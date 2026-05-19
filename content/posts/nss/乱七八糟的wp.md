@@ -99,9 +99,9 @@ SEE{you_found_me_now_try_the_1337er_one}
 
 ### 思路
 - 打开网站发现没有可交互的点，于是`F12`控制台审查元素
-- 打开控制台后看到： ![](/myblog/images/nss-wp/1.png)
+- 打开控制台后看到： ![](../nssctf/1.png)
 	> **控制台（Console）** 会输出页面资源报错信息/`js`的执行信息，同时也可以在这个交互式终端中执行`js`指令
-- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](/myblog/images/nss-wp/2.png)
+- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](../nssctf/2.png)
 - 但提交后发现不对😭,`CTRL+U`查看源码，`CTRL+F`进行搜索`flag`，在最下面的注释找到`flag`
 
 ---
@@ -109,6 +109,13 @@ SEE{you_found_me_now_try_the_1337er_one}
 ## [[LitCTF 2023]导弹迷踪 - NSSCTF](https://www.nssctf.cn/problem/3863)
 ### 思路
 - 这是一个小游戏，而针对这种逻辑是基于`js`的页面游戏，要么采用按照题目要求玩到第六关得到`flag`，要么就修改或者查看源码寻找`flag`
-- `F12`查看源码，在搜索框搜索`"level"`，找到`flag`  ![](/myblog/images/nss-wp/3.png)
-- 修改修改修改测试测试测试
-- 测试2
+- `F12`查看源码，在搜索框搜索`"level"`，找到`flag`  ![](../nssctf/3.png)
+
+---
+
+## [[LitCTF 2023]就当无事发生 - NSSCTF](https://www.nssctf.cn/problem/3862)
+### 思路
+- 题目提示：“差点数据没脱敏就发出去了”，同时结合博客网址于是去`Github`上搜索`ProbiusOfficial`
+- 出现两条结果，查看后博客的源码应该在第二个  ![](../nssctf/4.png)
+- 进入仓库后找到`Commits`（提交记录），因为在题目的版本数据中找到题目的上传时间为`2023-05-02`，于是将仓库的查询时间改为`5`月`2`日之前。  ![](../nssctf/5.png)![](../nssctf/6.png)
+- 从查询结果我们发现，`4`月`29`日有两个提交记录，点进后一个提交记录可以看见修改  ![](../nssctf/7.png)
