@@ -3,7 +3,7 @@
 {{ $description := .Site.Params.description }}
 
 <!-- Hero 区域 -->
-<div style="
+<div class="blog-hero" style="
   position: relative;
   height: 100vh;
   width: 100vw;
@@ -13,7 +13,7 @@
   overflow: hidden;
 ">
   <!-- 背景图片 -->
-  <div style="
+  <div id="hero-bg" class="blog-hero-bg" style="
     position: absolute;
     top: 0;
     left: 0;
@@ -24,10 +24,10 @@
     background-position: center top;
     transform: scale(1);
     transition: transform 0.8s ease;
-  " id="hero-bg"></div>
+  "></div>
   
   <!-- 渐变遮罩 -->
-  <div style="
+  <div class="blog-hero-overlay" style="
     position: absolute;
     top: 0;
     left: 0;

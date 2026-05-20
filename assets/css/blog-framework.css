@@ -427,3 +427,415 @@ body {
     gap: 18px !important;
   }
 }
+
+/* Theme polish: unified handwriting font, paper daytime, animated starry night. */
+:root {
+  --blog-brand-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+  --blog-ui-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+  --blog-code-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+  --paper-bg: #f7f1e6;
+  --paper-bg-soft: #fffaf0;
+  --paper-card: rgba(255, 252, 244, 0.9);
+  --paper-card-solid: #fffdf8;
+  --paper-text: #263238;
+  --paper-text-secondary: #43525a;
+  --paper-muted: #7b7164;
+  --paper-border: rgba(129, 103, 72, 0.23);
+  --paper-accent: #16838a;
+  --paper-accent-hover: #0e6e74;
+  --paper-accent-light: rgba(22, 131, 138, 0.12);
+  --paper-shadow: rgba(87, 69, 45, 0.14);
+  --night-bg: #030614;
+  --night-card: rgba(8, 12, 28, 0.78);
+  --night-card-solid: #090d20;
+  --night-border: rgba(132, 220, 255, 0.24);
+  --code-bg: #101421;
+  --code-bg-deep: #070a14;
+  --code-border: rgba(135, 220, 255, 0.28);
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select,
+code,
+pre,
+kbd,
+samp,
+.article-content,
+.article-content *,
+.blog-site-nav,
+.blog-site-nav *,
+.blog-article-card,
+.blog-article-card *,
+.blog-home-sidebar,
+.blog-home-sidebar *,
+.blog-post-toc,
+.blog-post-toc * {
+  font-family: var(--blog-ui-font) !important;
+}
+
+code,
+pre,
+.chroma,
+.highlight,
+.highlight *,
+.article-content code,
+.article-content pre,
+.article-content .chroma,
+.article-content .highlight,
+.article-content .highlight * {
+  font-family: var(--blog-code-font) !important;
+}
+
+body {
+  min-height: 100vh;
+  color: var(--text-primary) !important;
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 82% 20%, rgba(179, 231, 255, 0.8) 0 1px, transparent 2px),
+    radial-gradient(circle at 42% 78%, rgba(0, 255, 255, 0.5) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 12% 88%, rgba(165, 180, 252, 0.55) 0 1px, transparent 1.8px),
+    linear-gradient(140deg, #02040d 0%, #05091a 44%, #0a1027 100%) !important;
+  background-size: 260px 260px, 340px 340px, 420px 420px, 520px 520px, auto;
+  animation: blogStarDrift 28s linear infinite;
+}
+
+body[data-theme="light"] {
+  --bg-primary: var(--paper-bg);
+  --bg-secondary: #efe4d4;
+  --bg-card: var(--paper-card);
+  --bg-hover: #f4eadb;
+  --text-primary: var(--paper-text);
+  --text-secondary: var(--paper-text-secondary);
+  --text-muted: var(--paper-muted);
+  --border-color: rgba(129, 103, 72, 0.28);
+  --border-light: rgba(129, 103, 72, 0.16);
+  --accent-color: var(--paper-accent);
+  --accent-hover: var(--paper-accent-hover);
+  --accent-light: var(--paper-accent-light);
+  --accent-glow: rgba(22, 131, 138, 0.18);
+  --shadow: var(--paper-shadow);
+  --shadow-hover: rgba(22, 131, 138, 0.16);
+  --shadow-card: var(--paper-shadow);
+  --gradient-primary: linear-gradient(135deg, #16838a 0%, #4f7c72 100%);
+  --gradient-accent: linear-gradient(135deg, #16838a 0%, #57a69b 100%);
+  --card-border: 1px solid var(--paper-border);
+  background:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.74), transparent 30%),
+    radial-gradient(circle at 86% 10%, rgba(189, 232, 226, 0.5), transparent 28%),
+    linear-gradient(135deg, #f7f1e6 0%, #fffaf0 45%, #efe3d0 100%) !important;
+  animation: none;
+}
+
+body[data-theme="dark"] {
+  --bg-primary: var(--night-bg);
+  --bg-secondary: #050817;
+  --bg-card: var(--night-card);
+  --bg-hover: rgba(19, 26, 53, 0.9);
+  --text-primary: #f8fbff;
+  --text-secondary: #d3d8e8;
+  --text-muted: #9aa7c5;
+  --border-color: rgba(122, 220, 255, 0.2);
+  --border-light: rgba(122, 220, 255, 0.13);
+  --accent-color: #00ffff;
+  --accent-hover: #8df8ff;
+  --accent-light: rgba(0, 255, 255, 0.12);
+  --accent-glow: rgba(0, 255, 255, 0.26);
+  --shadow-card: rgba(0, 0, 0, 0.42);
+  --card-border: 1px solid var(--night-border);
+}
+
+main {
+  background: transparent !important;
+}
+
+.blog-hero-bg,
+.blog-post-shell,
+.blog-random-shell,
+div[style*="background-image"],
+#page-top {
+  background-image:
+    radial-gradient(circle at 14% 18%, rgba(255, 255, 255, 0.95) 0 1px, transparent 1.8px),
+    radial-gradient(circle at 74% 12%, rgba(143, 224, 255, 0.8) 0 1.2px, transparent 2px),
+    radial-gradient(circle at 26% 78%, rgba(0, 255, 255, 0.5) 0 1px, transparent 1.9px),
+    radial-gradient(circle at 88% 74%, rgba(190, 202, 255, 0.55) 0 1px, transparent 1.8px),
+    linear-gradient(140deg, rgba(2, 4, 13, 0.98) 0%, rgba(5, 9, 26, 0.98) 48%, rgba(8, 17, 43, 0.98) 100%) !important;
+  background-size: 240px 240px, 360px 360px, 440px 440px, 560px 560px, cover !important;
+  animation: blogStarDrift 34s linear infinite !important;
+}
+
+body[data-theme="light"] .blog-hero-bg,
+body[data-theme="light"] .blog-post-shell,
+body[data-theme="light"] .blog-random-shell,
+body[data-theme="light"] div[style*="background-image"],
+body[data-theme="light"] #page-top {
+  background-image:
+    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.72), transparent 30%),
+    radial-gradient(circle at 84% 16%, rgba(185, 224, 215, 0.42), transparent 28%),
+    linear-gradient(135deg, #f7f1e6 0%, #fffaf0 46%, #efe2cf 100%) !important;
+  background-size: cover !important;
+  animation: none !important;
+}
+
+.blog-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(1, 3, 10, 0.28) 0%, rgba(1, 4, 13, 0.16) 44%, rgba(1, 3, 10, 0.42) 100%) !important;
+}
+
+body[data-theme="light"] .blog-hero-overlay {
+  background:
+    linear-gradient(180deg, rgba(247, 241, 230, 0.12) 0%, rgba(247, 241, 230, 0.22) 52%, rgba(247, 241, 230, 0.5) 100%) !important;
+}
+
+.blog-post-shell > div:first-child,
+#page-top > div:first-child,
+.blog-random-overlay {
+  background:
+    radial-gradient(circle at 50% 12%, rgba(0, 255, 255, 0.08), transparent 32%),
+    rgba(0, 0, 0, 0.64) !important;
+}
+
+body[data-theme="light"] .blog-post-shell > div:first-child,
+body[data-theme="light"] #page-top > div:first-child,
+body[data-theme="light"] .blog-random-overlay {
+  background: rgba(247, 241, 230, 0.54) !important;
+}
+
+@keyframes blogStarDrift {
+  0% {
+    background-position: 0 0, 0 0, 0 0, 0 0, center;
+  }
+  50% {
+    background-position: 36px 24px, -42px 28px, 28px -34px, -24px -18px, center;
+  }
+  100% {
+    background-position: 72px 48px, -84px 56px, 56px -68px, -48px -36px, center;
+  }
+}
+
+.blog-site-title,
+.blog-section-title,
+.blog-post-title,
+.blog-random-title,
+.blog-article-title {
+  letter-spacing: 0 !important;
+}
+
+.blog-site-nav a,
+.blog-site-nav button,
+.blog-home-action,
+.blog-read-more,
+.blog-tag-pill {
+  color: var(--text-primary) !important;
+}
+
+.blog-site-title,
+.blog-nav-links a:hover,
+.blog-home-action:hover,
+.blog-read-more,
+.article-content a,
+.blog-post-title,
+.blog-random-title {
+  color: var(--accent-color) !important;
+}
+
+.blog-article-title a,
+.blog-article-title a:hover,
+.blog-article-title a:focus {
+  color: var(--text-primary) !important;
+}
+
+.blog-home-quote,
+.blog-home-action,
+.blog-article-card,
+.blog-post-article,
+.blog-random-card,
+.blog-home-sidebar > div,
+.blog-post-toc > div {
+  background: var(--bg-card) !important;
+  border: var(--card-border) !important;
+  box-shadow: 0 14px 34px var(--shadow-card) !important;
+}
+
+body[data-theme="light"] .blog-home-quote,
+body[data-theme="light"] .blog-home-action,
+body[data-theme="light"] .blog-article-card,
+body[data-theme="light"] .blog-post-article,
+body[data-theme="light"] .blog-random-card,
+body[data-theme="light"] .blog-home-sidebar > div,
+body[data-theme="light"] .blog-post-toc > div {
+  background: var(--paper-card) !important;
+  border-color: var(--paper-border) !important;
+  box-shadow: 0 12px 28px var(--paper-shadow) !important;
+}
+
+.blog-article-card:hover {
+  border-color: var(--accent-color) !important;
+}
+
+.blog-article-body {
+  gap: 0;
+}
+
+.blog-tag-list {
+  margin-top: 18px !important;
+  margin-bottom: 22px !important;
+}
+
+.blog-tag-pill {
+  background: var(--accent-light) !important;
+  color: var(--accent-color) !important;
+  border-color: rgba(0, 255, 255, 0.28) !important;
+  transform: none !important;
+}
+
+body[data-theme="light"] .blog-tag-pill {
+  border-color: rgba(22, 131, 138, 0.26) !important;
+}
+
+.blog-read-more {
+  margin-top: 8px !important;
+  background: rgba(0, 255, 255, 0.08) !important;
+  min-height: 38px;
+}
+
+body[data-theme="light"] .blog-read-more {
+  background: rgba(22, 131, 138, 0.08) !important;
+}
+
+.blog-post-article .article-content p,
+.blog-post-article .article-content li,
+.blog-random-content,
+.article-content {
+  color: var(--text-secondary) !important;
+}
+
+.blog-post-meta,
+.blog-article-meta {
+  color: var(--text-muted) !important;
+}
+
+.blog-post-article .article-content h1,
+.blog-post-article .article-content h2,
+.blog-post-article .article-content h3,
+.article-content h1,
+.article-content h2,
+.article-content h3 {
+  color: var(--accent-color) !important;
+}
+
+.article-content pre,
+.article-content .highlight,
+.article-content .highlight pre,
+.article-content .chroma,
+.article-content .highlight .chroma {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 28px 0 !important;
+  padding: 26px 28px !important;
+  color: #f5f7ff !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0)),
+    var(--code-bg) !important;
+  border: 1px solid var(--code-border) !important;
+  border-radius: 14px !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05), 0 16px 36px rgba(0, 0, 0, 0.26) !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+  line-height: 1.78 !important;
+  font-size: 0.96rem !important;
+  position: relative !important;
+}
+
+.article-content .highlight {
+  padding: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  box-shadow: none !important;
+}
+
+.article-content pre code,
+.article-content .highlight pre code,
+.article-content .chroma code,
+.article-content .highlight .chroma code,
+.article-content .chroma .code,
+.article-content .highlight .chroma .code {
+  display: block !important;
+  padding: 0 !important;
+  color: inherit !important;
+  background: transparent !important;
+  line-height: inherit !important;
+  white-space: pre !important;
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+.article-content .chroma::before,
+.article-content .highlight .chroma::before {
+  content: "复制" !important;
+  position: absolute !important;
+  top: 14px !important;
+  right: 16px !important;
+  z-index: 2 !important;
+  padding: 6px 12px !important;
+  color: #dffcff !important;
+  background: rgba(0, 255, 255, 0.14) !important;
+  border: 1px solid rgba(0, 255, 255, 0.28) !important;
+  border-radius: 8px !important;
+  font-size: 0.82rem !important;
+  line-height: 1 !important;
+  pointer-events: none;
+}
+
+.article-content .chroma:hover::before,
+.article-content .highlight .chroma:hover::before {
+  background: rgba(0, 255, 255, 0.22) !important;
+}
+
+.article-content .chroma.is-copied::before,
+.article-content .highlight .chroma.is-copied::before {
+  content: "已复制" !important;
+  color: #061015 !important;
+  background: rgba(141, 248, 255, 0.92) !important;
+}
+
+.article-content .chroma *,
+.article-content .highlight .chroma * {
+  font-family: var(--blog-code-font) !important;
+}
+
+body[data-theme="light"] .article-content pre,
+body[data-theme="light"] .article-content .highlight pre,
+body[data-theme="light"] .article-content .chroma,
+body[data-theme="light"] .article-content .highlight .chroma {
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06), 0 14px 32px rgba(45, 36, 24, 0.18) !important;
+}
+
+@media (max-width: 760px) {
+  .article-content pre,
+  .article-content .highlight pre,
+  .article-content .chroma,
+  .article-content .highlight .chroma {
+    margin: 22px -4px !important;
+    padding: 22px 18px !important;
+    border-radius: 12px !important;
+    font-size: 0.92rem !important;
+  }
+
+  .article-content .chroma::before,
+  .article-content .highlight .chroma::before {
+    top: 10px !important;
+    right: 10px !important;
+  }
+
+  .blog-tag-list {
+    margin-bottom: 18px !important;
+  }
+}

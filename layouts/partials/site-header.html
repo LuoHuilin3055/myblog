@@ -7,31 +7,23 @@
         <!-- 右上角导航菜单 -->
         <div class="blog-nav-links" style="display: flex; gap: 30px; align-items: center;">
             {{ range .Site.Menus.main }}
-            <a href="{{ .URL | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
-               onmouseover="this.style.color='#00ffff'" 
-               onmouseout="this.style.color='white'">
+            <a href="{{ .URL | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
                 {{ .Name }}
             </a>
             {{ end }}
             
             <!-- 页面标签 -->
-            <a href="{{ "tags" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
-               onmouseover="this.style.color='#00ffff'" 
-               onmouseout="this.style.color='white'">
+            <a href="{{ "tags" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
                 标签
             </a>
             
             <!-- 归档 -->
-            <a href="{{ "categories" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
-               onmouseover="this.style.color='#00ffff'" 
-               onmouseout="this.style.color='white'">
+            <a href="{{ "categories" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
                 归档
             </a>
             
             <!-- 友链 -->
-            <a href="{{ "friends" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);" 
-               onmouseover="this.style.color='#00ffff'" 
-               onmouseout="this.style.color='white'">
+            <a href="{{ "friends" | absURL }}" style="color: white; text-decoration: none; font-size: 1.1em; transition: color 0.3s; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">
                 友链
             </a>
             

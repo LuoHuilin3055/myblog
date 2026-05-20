@@ -44,15 +44,15 @@ theme = "theme2"
 
 [menu]
   [[menu.main]]
-    name = "About"
+    name = "关于"
     url = "/about/"
     weight = 10
   [[menu.main]]
-    name = "Articles"
+    name = "文章"
     url = "/posts/"
     weight = 20
   [[menu.main]]
-    name = "Notes"
+    name = "碎碎念"
     url = "/murmur/"
     weight = 30
 
