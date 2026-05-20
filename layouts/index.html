@@ -6,7 +6,7 @@
   {{ partial "hero-image.html" . }}
 
   {{ with .Site.Params.home_text }}
-  <div style="
+  <div class="blog-home-quote" style="
     text-align: center;
     font-size: 2.2em;
     color: var(--text-primary);
@@ -25,7 +25,7 @@
   {{ end }}
 
   <!-- 按钮区域 -->
-  <div style="
+  <div class="blog-home-actions" style="
     display: flex;
     justify-content: center;
     gap: 30px;
@@ -33,7 +33,7 @@
     max-width: 800px;
   ">
     <!-- 随机一篇按钮 -->
-    <button onclick="window.location.href = '{{ "random" | relURL }}'" style="
+    <button class="blog-home-action" onclick="window.location.href = '{{ "random" | relURL }}'" style="
       background: var(--bg-card);
       color: var(--accent-color);
       border: var(--card-border);
@@ -50,7 +50,7 @@
     </button>
     
     <!-- 关于我按钮 -->
-    <a href="{{ "about" | relURL }}" style="
+    <a class="blog-home-action" href="{{ "about" | relURL }}" style="
       background: var(--bg-card);
       color: var(--accent-color);
       border: var(--card-border);
@@ -70,80 +70,24 @@
   </div>
 
   <!-- 主内容区域：左侧文章列表 + 右侧小组件 -->
-  <div style="max-width: 1400px; margin: 0 auto; padding: 0 20px 60px;">
-    <h2 style="font-size: 2em; color: var(--accent-color); margin-bottom: 30px;">{{ .Site.Params.latest_posts_title | default "📝 最新文章" }}</h2>
+  <div id="content" class="blog-home-main" style="max-width: 1400px; margin: 0 auto; padding: 0 20px 60px;">
+    <h2 class="blog-section-title" style="font-size: 2em; color: var(--accent-color); margin-bottom: 30px;">{{ .Site.Params.latest_posts_title | default "📝 最新文章" }}</h2>
     
-    <div style="display: flex; gap: 40px; align-items: flex-start;">
+    <div class="blog-home-layout" style="display: flex; gap: 40px; align-items: flex-start;">
       <!-- 左侧：文章列表 -->
       <div style="flex: 1;">
-        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
+        <div class="blog-post-grid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;">
           {{ $posts := where .Site.RegularPages "Type" "posts" }}
           {{ range $posts }}
           {{ if not .IsNode }}
-          <div style="
-            background: var(--bg-card);
-            border-radius: 12px;
-            box-shadow: var(--shadow-card);
-            padding: 25px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            border: var(--card-border);
-            display: flex;
-            flex-direction: column;
-            height: 100%;
-          " onmouseover="this.style.transform='translateY(-5px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.border='1px solid ' + getComputedStyle(document.documentElement).getPropertyValue('--accent-color');"
-             onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
-            
-            <!-- 封面图片 -->
-            {{ if .Params.cover }}
-            <div style="
-              width: 100%;
-              height: 160px;
-              overflow: hidden;
-              border-radius: 8px;
-              margin-bottom: 15px;
-            ">
-              <img src="{{ .Params.cover | absURL }}" alt="{{ .Title }}" style="
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                transition: transform 0.3s ease;
-              " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-            </div>
-            {{ end }}
-            
-            <h3 style="font-size: 1.3em; margin: 0 0 10px; line-height: 1.4;">
-              <a href="{{ .Permalink }}" style="color: var(--text-primary); text-decoration: none;">{{ .Title }}</a>
-            </h3>
-            <div style="color: var(--text-muted); font-size: 0.85em; margin-bottom: 15px;">
-              {{ .Date.Format "2006-01-02" }} | {{ partial "custom-readingtime.html" . }} 分钟
-            </div>
-            <div style="color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; flex: 1;">
-              {{ .Summary | plainify | truncate 80 }}
-            </div>
-            
-            <!-- 文章标签 -->
-            {{ partial "article-tags.html" . }}
-            
-            <a href="{{ .Permalink }}" style="
-              display: inline-block;
-              background: var(--accent-color);
-              color: white;
-              padding: 8px 20px;
-              border-radius: 25px;
-              text-decoration: none;
-              font-weight: bold;
-              margin-top: 15px;
-              text-align: center;
-              transition: background 0.3s;
-            " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">阅读全文 →</a>
-          </div>
+          {{ partial "article-card.html" . }}
           {{ end }}
           {{ end }}
         </div>
       </div>
       
       <!-- 右侧：小组件侧边栏 -->
-      <div style="width: 320px; flex-shrink: 0;">
+      <div class="blog-home-sidebar" style="width: 320px; flex-shrink: 0;">
         <!-- 个人资料卡片 -->
         {{ partial "widget-profile.html" . }}
         

@@ -1,5 +1,5 @@
 {{ if .Params.tags }}
-<div style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
+<div class="blog-tag-list" style="margin-top: 15px; display: flex; flex-wrap: wrap; gap: 8px;">
   {{ $colors := slice 
     "#00ffff" 
     "#a5b4fc" 
@@ -20,7 +20,7 @@
   {{ range $index, $tag := .Params.tags }}
     {{ $colorIndex := mod $index (len $colors) }}
     {{ $tagColor := index $colors $colorIndex }}
-    <a href="{{ "tags/" | relURL }}{{ . | urlize }}" 
+    <a class="blog-tag-pill" href="{{ "tags/" | relURL }}{{ . | urlize }}" 
        style="
          display: inline-flex;
          align-items: center;

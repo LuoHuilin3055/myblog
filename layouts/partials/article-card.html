@@ -1,6 +1,6 @@
 {{ $coverImage := .Params.cover | default "" }}
 
-<article style="
+<article class="blog-article-card" style="
   background: var(--bg-card);
   border-radius: 16px;
   border: var(--card-border);
@@ -15,7 +15,7 @@
   
   <!-- 封面图片区域 -->
   {{ if $coverImage }}
-  <div style="
+  <div class="blog-article-cover" style="
     position: relative;
     height: 200px;
     overflow: hidden;
@@ -54,9 +54,9 @@
     width: 100%;
   "></div>
   
-  <div style="padding: 30px; flex: 1; display: flex; flex-direction: column;">
+  <div class="blog-article-body" style="padding: 30px; flex: 1; display: flex; flex-direction: column;">
     <!-- 文章标题 -->
-    <h2 style="
+    <h2 class="blog-article-title" style="
       font-size: 1.8em;
       margin: 0 0 15px;
       line-height: 1.3;
@@ -71,7 +71,7 @@
     </h2>
     
     <!-- 文章元数据 -->
-    <div style="
+    <div class="blog-article-meta" style="
       display: flex;
       gap: 20px;
       color: var(--text-muted);
@@ -85,7 +85,7 @@
     </div>
     
     <!-- 文章摘要 -->
-    <div style="
+    <div class="blog-article-summary" style="
       color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 20px;
@@ -99,7 +99,7 @@
     {{ partial "article-tags.html" . }}
     
     <!-- 阅读更多按钮 -->
-    <a href="{{ .Permalink }}" style="
+    <a class="blog-read-more" href="{{ .Permalink }}" style="
       display: inline-flex;
       align-items: center;
       gap: 8px;

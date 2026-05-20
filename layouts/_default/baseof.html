@@ -138,12 +138,12 @@
             padding: 0 20px;
         }
     </style>
+    {{ block "head" . }}{{ end }}
+    {{ partial "custom-head.html" . }}
     {{ with resources.Get "css/blog-framework.css" }}
       {{ $blogFrameworkCSS := . | minify }}
       <link rel="stylesheet" href="{{ $blogFrameworkCSS.RelPermalink }}">
     {{ end }}
-    {{ block "head" . }}{{ end }}
-    {{ partial "custom-head.html" . }}
 </head>
 <body style="background-color: var(--bg-primary); margin: 0; padding: 0;">
     <!-- 阅读进度条 -->
