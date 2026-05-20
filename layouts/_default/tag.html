@@ -4,6 +4,7 @@
 
 {{ define "main" }}
   {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
   
   <style>
     @keyframes fadeInDown {
@@ -44,6 +45,7 @@
         "Prefix" "[ Tag ]" 
         "Title" .Title 
         "Subtitle" "Related Articles" 
+        "Image" $pageHeaderImage
       ) }}
       
       <!-- 显示该标签下的所有文章 -->

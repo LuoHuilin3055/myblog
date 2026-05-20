@@ -4,6 +4,7 @@
 
 {{ define "main" }}
   {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
   
   <style>
     @keyframes fadeInDown {
@@ -277,18 +278,21 @@
           "Prefix" "[ Tags ]" 
           "Title" .Title 
           "Subtitle" (printf "Total %d Tags" (len .Data.Terms)) 
+          "Image" $pageHeaderImage
         ) }}
       {{ else if eq .Data.Plural "categories" }}
         {{ partial "page-header.html" (dict 
           "Prefix" "[ Categories ]" 
           "Title" .Title 
           "Subtitle" (printf "Total %d Categories" (len .Data.Terms)) 
+          "Image" $pageHeaderImage
         ) }}
       {{ else }}
         {{ partial "page-header.html" (dict 
           "Prefix" "[ Page ]" 
           "Title" .Title 
           "Subtitle" "" 
+          "Image" $pageHeaderImage
         ) }}
       {{ end }}
       

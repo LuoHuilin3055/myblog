@@ -8,6 +8,7 @@ theme = "theme2"
   description = "欢迎来到我的博客"
   author = "Your Name"
   featured_image = "images/background.jpg"
+  page_header_image = "images/background.jpg"
   home_text = "写下你想展示在首页的话"
   custom_404 = true
 

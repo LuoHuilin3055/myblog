@@ -1,6 +1,6 @@
 <!-- 归档 -->
 {{ if .Site.RegularPages }}
-<div style="
+<div class="blog-widget blog-widget-archives" style="
   background: var(--bg-card);
   border-radius: 12px;
   padding: 20px;
@@ -35,7 +35,7 @@
     {{ $month := .Key | replaceRE ".*年|月" "" }}
     {{ $month := printf "%02d" (int $month) }}
     {{ $link := printf "posts/%s/%s/" $year $month | relURL }}
-    <a href="{{ $link }}" style="
+    <a class="blog-widget-archive-link" href="{{ $link }}" style="
       display: flex;
       justify-content: space-between;
       align-items: center;

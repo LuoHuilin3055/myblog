@@ -8,7 +8,7 @@
   {{ $bgImage := .Params.background | default "images/background.jpg" | absURL }}
   {{ $avatarImage := .Site.Params.avatar | default "images/avatar.jpg" | absURL }}
   
-  <div style="
+  <div class="blog-about-shell" style="
     background-image: url('{{ $bgImage }}');
     background-size: cover;
     background-position: center;
@@ -19,7 +19,7 @@
     position: relative;
   ">
     <!-- 背景遮罩 -->
-    <div style="
+    <div class="blog-about-overlay" style="
       position: absolute;
       top: 0;
       left: 0;
@@ -29,10 +29,10 @@
       z-index: 0;
     "></div>
     
-    <div style="max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
+    <div class="blog-about-container" style="max-width: 900px; margin: 0 auto; position: relative; z-index: 1;">
       <!-- 头像区域 -->
-      <div style="text-align: center; margin-bottom: 40px;">
-        <div style="
+      <div class="blog-about-profile" style="text-align: center; margin-bottom: 40px;">
+        <div class="blog-about-avatar" style="
           width: 180px;
           height: 180px;
           margin: 0 auto 30px;
@@ -52,22 +52,22 @@
             "
           />
         </div>
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); text-shadow: 0 0 10px rgba(0,255,255,0.3);">{{ .Title }}</h1>
-        <p style="color: #aaa; margin-top: 10px; font-size: 1.1em;">{{ .Site.Params.about_subtitle | default "欢迎来到我的个人博客" }}</p>
+        <h1 class="blog-about-title" style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); text-shadow: 0 0 10px rgba(0,255,255,0.3);">{{ .Title }}</h1>
+        <p class="blog-about-subtitle" style="color: #aaa; margin-top: 10px; font-size: 1.1em;">{{ .Site.Params.about_subtitle | default "欢迎来到我的个人博客" }}</p>
       </div>
       
       <!-- About 内容 -->
-      <article style="background: rgba(0,0,0,0.9); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
+      <article class="blog-about-article" style="background: rgba(0,0,0,0.9); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5);">
         <div class="article-content" style="color: #fff; line-height: 1.8;">
           {{ .Content }}
         </div>
         
         <!-- 社交链接 -->
-        <div style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; text-align: center;">
-          <p style="color: #888; margin-bottom: 20px;">关注我</p>
-          <div style="display: flex; gap: 20px; justify-content: center;">
+        <div class="blog-about-social" style="margin-top: 40px; padding-top: 30px; border-top: 1px solid #333; text-align: center;">
+          <p class="blog-about-social-title" style="color: #888; margin-bottom: 20px;">关注我</p>
+          <div class="blog-about-social-list" style="display: flex; gap: 20px; justify-content: center;">
             {{ range .Site.Params.social_links }}
-            <a href="{{ .url }}" target="_blank" style="
+            <a class="blog-about-social-link" href="{{ .url }}" target="_blank" style="
               display: inline-flex;
               align-items: center;
               gap: 8px;

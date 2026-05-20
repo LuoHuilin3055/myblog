@@ -4,6 +4,7 @@
 
 {{ define "main" }}
   {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
   
   <style>
     @keyframes fadeIn {
@@ -135,12 +136,13 @@
       z-index: 0;
     "></div>
     
-    <div style="max-width: 800px; margin: 0 auto; position: relative; z-index: 1;" class="murmur-container">
-      <div class="murmur-header">
-        <div style="font-size: 1.2em; color: #00ffff; margin-bottom: 10px; opacity: 0.8;">[ Daily Notes ]</div>
-        <h1 class="murmur-title">Notes</h1>
-        <p class="murmur-subtitle">{{ .Site.Params.author }}'s Daily Life</p>
-      </div>
+    <div style="max-width: 1200px; margin: 0 auto; position: relative; z-index: 1;" class="murmur-container">
+      {{ partial "page-header.html" (dict
+        "Prefix" "[ Daily Notes ]"
+        "Title" "Notes"
+        "Subtitle" (printf "%s's Daily Life" .Site.Params.author)
+        "Image" $pageHeaderImage
+      ) }}
       
       <div class="murmur-list">
         {{ if .Site.Data.murmurs }}

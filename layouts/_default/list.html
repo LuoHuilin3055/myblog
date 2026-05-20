@@ -4,6 +4,7 @@
 
 {{ define "main" }}
   {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
   
   <!-- 判断是否为月度归档页面 -->
   {{ $isMonthlyArchive := false }}
@@ -217,18 +218,21 @@
           "Prefix" "[ Archive ]" 
           "Title" (printf "%d年%d月" $archiveYear $archiveMonth) 
           "Subtitle" "Monthly Collection" 
+          "Image" $pageHeaderImage
         ) }}
       {{ else if eq .Section "posts" }}
         {{ partial "page-header.html" (dict 
           "Prefix" "[ Blog ]" 
           "Title" .Title 
           "Subtitle" (printf "%s's Writing Journey" .Site.Params.author) 
+          "Image" $pageHeaderImage
         ) }}
       {{ else }}
         {{ partial "page-header.html" (dict 
           "Prefix" "[ Page ]" 
           "Title" .Title 
           "Subtitle" "" 
+          "Image" $pageHeaderImage
         ) }}
       {{ end }}
       
