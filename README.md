@@ -56,6 +56,7 @@ title = "Your Blog"
   bio = "Hi, there ~"
   github = "https://github.com/yourname"
   featured_image = "images/background.jpg"
+  page_header_image = "images/background.jpg"
   site_since = "2026-03-21"
 ```
 
@@ -101,6 +102,35 @@ content/posts/my-post/image.png   -> 同目录文章中写 ![](image.png)
 ```
 
 不建议在文章里写死 `/myblog/...` 或 `https://xxx.github.io/...`。仓库名变更、fork 到别人账号、或本地预览时，这类绝对路径最容易失效。
+
+## 列表页横幅图片
+
+文章列表、标签页、归档页、碎碎念等页面顶部的横向大背景横幅由 `config.toml` 中的 `page_header_image` 控制：
+
+```toml
+[params]
+  page_header_image = "images/background.jpg"
+```
+
+图片建议放在 `static/images/` 目录下。例如放入 `static/images/page-banner.jpg` 后，配置写成：
+
+```toml
+[params]
+  page_header_image = "images/page-banner.jpg"
+```
+
+如果只想给某一个列表页单独换图，可以在对应页面的 front matter 中使用 `header_image` 覆盖全局配置：
+
+```toml
++++
+title = "文章"
+header_image = "images/posts-banner.jpg"
++++
+```
+
+优先级是：页面 `header_image` > 全局 `params.page_header_image` > 默认 `images/background.jpg`。
+
+注意：`featured_image` 主要用于站点原有背景/展示图，`page_header_image` 专门用于列表页顶部横幅；两者可以使用不同图片。
 
 ## 数据文件
 
