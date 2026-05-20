@@ -1,9 +1,10 @@
 {{ $friends := .Site.Data.friends }}
 
 {{ if $friends }}
-<div style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px; justify-content: center;">
+<div class="blog-friend-list" style="display: flex; flex-wrap: wrap; gap: 30px; margin-top: 30px; justify-content: center;">
   {{ range $friends }}
   <a 
+    class="blog-friend-card"
     href="{{ .url }}" 
     target="_blank" 
     rel="noopener noreferrer"
@@ -19,8 +20,9 @@
     onmouseover="this.style.transform='translateY(-5px)'; this.querySelector('img').style.boxShadow='0 6px 20px rgba(0,255,255,0.8)'; this.querySelector('img').style.borderColor='#00ffff'"
     onmouseout="this.style.transform='translateY(0)'; this.querySelector('img').style.boxShadow='0 4px 15px rgba(0,255,255,0.3)'; this.querySelector('img').style.borderColor='rgba(0,255,255,0.5)'"
   >
-    <div style="margin-bottom: 10px;">
+    <div class="blog-friend-avatar-wrap" style="margin-bottom: 10px;">
       <img 
+        class="blog-friend-avatar"
         src="{{ .avatar }}" 
         alt="{{ .name }}" 
         style="
@@ -34,8 +36,8 @@
         "
       />
     </div>
-    <h3 style="color: #00ffff; margin: 0 0 5px; font-size: 1em; text-align: center;">{{ .name }}</h3>
-    <p style="color: #ccc; margin: 0; font-size: 0.8em; text-align: center; max-width: 100px;">{{ .description }}</p>
+    <h3 class="blog-friend-name" style="color: #00ffff; margin: 0 0 5px; font-size: 1em; text-align: center;">{{ .name }}</h3>
+    <p class="blog-friend-desc" style="color: #ccc; margin: 0; font-size: 0.8em; text-align: center; max-width: 100px;">{{ .description }}</p>
   </a>
   {{ end }}
 </div>

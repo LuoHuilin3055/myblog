@@ -250,7 +250,7 @@
     }
   </style>
   
-  <div style="
+  <div class="blog-terms-shell" style="
     background-image: url('{{ $bgImage }}');
     background-size: cover;
     background-position: center;
@@ -260,7 +260,7 @@
     position: relative;
   " id="page-top">
     <!-- 背景遮罩 -->
-    <div style="
+    <div class="blog-terms-overlay" style="
       position: absolute;
       top: 0;
       left: 0;
@@ -458,6 +458,10 @@
                     {{ if .Params.cover }}
                     <div class="timeline-item-image">
                       <img src="{{ .Params.cover | absURL }}" alt="{{ .Title }}" loading="lazy" />
+                    </div>
+                    {{ else }}
+                    <div class="timeline-item-image timeline-item-image-fallback">
+                      <span>{{ substr .Title 0 4 }}</span>
                     </div>
                     {{ end }}
                     <div class="timeline-item-content">

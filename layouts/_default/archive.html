@@ -4,95 +4,10 @@
 
 {{ define "main" }}
   {{ $bgImage := "images/background.jpg" | absURL }}
-  
-  <style>
-    @keyframes fadeInDown {
-      from {
-        opacity: 0;
-        transform: translateY(-30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    
-    .archive-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    
-    .archive-header {
-      text-align: center;
-      margin-bottom: 50px;
-    }
-    
-    .archive-header h1 {
-      color: #00ffff;
-      font-size: 2.5em;
-      margin: 0 0 10px;
-      text-shadow: 0 0 20px rgba(0,255,255,0.5);
-    }
-    
-    .archive-header span {
-      color: #888;
-      font-size: 1em;
-    }
-    
-    .archive-list {
-      display: flex;
-      flex-direction: column;
-      gap: 15px;
-    }
-    
-    .archive-item {
-      display: flex;
-      align-items: center;
-      padding: 20px;
-      background: rgba(0,0,0,0.6);
-      border-radius: 12px;
-      border: 1px solid rgba(0,255,255,0.2);
-      transition: all 0.3s ease;
-      text-decoration: none;
-    }
-    
-    .archive-item:hover {
-      background: rgba(0,255,255,0.05);
-      transform: translateX(10px);
-      box-shadow: 0 4px 15px rgba(0,255,255,0.3);
-      border-color: #00ffff;
-    }
-    
-    .archive-item-date {
-      flex-shrink: 0;
-      width: 80px;
-      color: #00ffff;
-      font-size: 0.9em;
-      font-weight: 500;
-    }
-    
-    .archive-item-title {
-      flex: 1;
-      color: #fff;
-      font-size: 1.1em;
-    }
-    
-    .archive-item-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-    
-    .archive-tag {
-      font-size: 0.75em;
-      color: #00ffff;
-      background: rgba(0,255,255,0.1);
-      padding: 3px 10px;
-      border-radius: 12px;
-    }
-  </style>
-  
-  <div style="
+  {{ $posts := where .Site.RegularPages "Type" "posts" }}
+  {{ $posts = sort $posts "Date" "desc" }}
+
+  <div id="page-top" class="blog-archive-shell" style="
     background-image: url('{{ $bgImage }}');
     background-size: cover;
     background-position: center;
@@ -101,8 +16,7 @@
     padding: 120px 20px 60px;
     position: relative;
   ">
-    <!-- 背景遮罩 -->
-    <div style="
+    <div class="blog-archive-overlay" style="
       position: absolute;
       top: 0;
       left: 0;
@@ -111,47 +25,48 @@
       background: rgba(0,0,0,0.85);
       z-index: 0;
     "></div>
-    
-    <div style="max-width: 1000px; margin: 0 auto; position: relative; z-index: 1;">
-      <!-- 归档头部 -->
-      {{ partial "page-header.html" (dict 
-        "Prefix" "[ Archive ]" 
-        "Title" .Title 
-        "Subtitle" (printf "Total %d Articles" (len .Pages)) 
+
+    <div class="blog-archive-container" style="max-width: 1120px; margin: 0 auto; position: relative; z-index: 1;">
+      {{ partial "page-header.html" (dict
+        "Prefix" "[ Archive ]"
+        "Title" .Title
+        "Subtitle" (printf "Total %d Articles" (len $posts))
       ) }}
-      
-      <!-- 文章列表 -->
-      <div class="archive-list">
-        {{ range .Pages.ByDate.Reverse }}
-          <a href="{{ .Permalink }}" class="archive-item">
-            <span class="archive-item-date">{{ dateFormat "01-02" .Date }}</span>
-            <span class="archive-item-title">{{ .Title }}</span>
-            {{ if .Params.tags }}
-              <div class="archive-item-tags">
-                {{ range first 3 .Params.tags }}
-                  <span class="archive-tag">{{ . }}</span>
-                {{ end }}
-              </div>
-            {{ end }}
-          </a>
+
+      <section class="blog-archive-list">
+        {{ range $posts.GroupByDate "2006" }}
+          <section class="blog-archive-year">
+            <h2 class="blog-archive-year-title">{{ .Key }}</h2>
+
+            <div class="blog-archive-year-items">
+              {{ range .Pages }}
+                {{ $cover := .Params.cover | default "" }}
+                <a class="blog-archive-item" href="{{ .Permalink }}">
+                  <div class="blog-archive-thumb">
+                    {{ if $cover }}
+                      <img src="{{ $cover | absURL }}" alt="{{ .Title }}" loading="lazy" decoding="async">
+                    {{ else }}
+                      <span>{{ substr .Title 0 4 }}</span>
+                    {{ end }}
+                  </div>
+
+                  <div class="blog-archive-info">
+                    <h3>{{ .Title }}</h3>
+                    <div class="blog-archive-meta">{{ .Date.Format "2006-01-02" }}</div>
+                    {{ if .Params.tags }}
+                      <div class="blog-archive-tags">
+                        {{ range first 3 .Params.tags }}
+                          <span># {{ . }}</span>
+                        {{ end }}
+                      </div>
+                    {{ end }}
+                  </div>
+                </a>
+              {{ end }}
+            </div>
+          </section>
         {{ end }}
-      </div>
-      
-      <!-- 返回按钮 -->
-      <div style="text-align: center; margin-top: 50px;">
-        <a href="/posts/" style="
-          display: inline-block;
-          padding: 12px 30px;
-          background: rgba(0,255,255,0.1);
-          color: #00ffff;
-          text-decoration: none;
-          border-radius: 25px;
-          border: 1px solid rgba(0,255,255,0.3);
-          transition: all 0.3s ease;
-        " onmouseover="this.style.background='rgba(0,255,255,0.2)'" onmouseout="this.style.background='rgba(0,255,255,0.1)'">
-          返回文章列表
-        </a>
-      </div>
+      </section>
     </div>
   </div>
 {{ end }}

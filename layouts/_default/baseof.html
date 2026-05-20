@@ -209,7 +209,10 @@
             
             // 烟花效果 - 视觉效果保持版
             function createFireworks(x, y) {
-                const colors = ['#00ffff', '#a5b4fc', '#ffffff', '#ff79c6', '#50fa7b', '#bd93f9', '#ffb86c', '#ff5555'];
+                const isLightTheme = document.body.getAttribute('data-theme') === 'light';
+                const colors = isLightTheme
+                    ? ['#0096a6', '#ff9f1c', '#e83f7d', '#087f8c', '#f6bd60', '#2ec4b6']
+                    : ['#00ffff', '#a5b4fc', '#ffffff', '#ff79c6', '#50fa7b', '#bd93f9', '#ffb86c', '#ff5555'];
                 const particles = 25;
                 const maxParticles = 120;
                 let currentParticles = 0;

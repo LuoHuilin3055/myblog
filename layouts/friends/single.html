@@ -8,7 +8,7 @@
   {{ $coverImage := .Params.cover | default "" }}
   {{ $bgImage := $coverImage | default "images/background.jpg" | absURL }}
   
-  <div style="
+  <div class="blog-friends-shell" style="
     background-image: url('{{ $bgImage }}');
     background-size: cover;
     background-position: center;
@@ -19,7 +19,7 @@
     position: relative;
   ">
     <!-- 背景遮罩 -->
-    <div style="
+    <div class="blog-friends-overlay" style="
       position: absolute;
       top: 0;
       left: 0;
@@ -31,7 +31,7 @@
     
     <div style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
       <!-- 文章内容 -->
-      <article style="background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
+      <article class="blog-friends-article" style="background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         <!-- 封面图片 -->
         {{ if $coverImage }}
         <div style="
