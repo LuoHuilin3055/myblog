@@ -118,10 +118,10 @@ SEE{you_found_me_now_try_the_1337er_one}
 - 题目提示：“差点数据没脱敏就发出去了”，同时结合博客网址于是去`Github`上搜索`ProbiusOfficial`
 - 出现两条结果，查看后博客的源码应该在第二个  ![](../nssctf/4.png)
 - 进入仓库后找到`Commits`（提交记录），因为在题目的版本数据中找到题目的上传时间为`2023-05-02`，于是将仓库的查询时间改为`5`月`2`日之前。  ![](../nssctf/5.png)![](../nssctf/6.png)
-- 从查询结果我们发现，`4`月`29`日有两个提交记录，点进后一个提交记录可以看见修改  ![](nssctf/7.png)
+- 从查询结果我们发现，`4`月`29`日有两个提交记录，点进后一个提交记录可以看见修改  ![](../nssctf/7.png)
 
 ---
 
 ## [[LitCTF 2023]Follow me and hack me - NSSCTF](https://www.nssctf.cn/problem/3864)
 ### 思路
-- 使用`HackBar`插件来在浏览器里面进行发送/接收`http`报文  ![](nssctf/8.png)
+- 使用`HackBar`插件来在浏览器里面进行发送/接收`http`报文  ![](../nssctf/8.png)

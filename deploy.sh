@@ -21,4 +21,4 @@ hugo -t theme2 --cleanDestinationDir
 echo "☁️ 已推送源码。GitHub Actions 会自动构建并发布 public/。"
 
 echo -e "\033[0;32m✅ 部署完成！\033[0m"
-echo "🌐 访问: https://LuoHuilin3055.github.io/myblog/"
+echo "🌐 请在 GitHub Pages 页面查看 Actions 发布后的站点地址。"

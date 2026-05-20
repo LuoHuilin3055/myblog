@@ -1,0 +1,51 @@
+.blog-random-shell {
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  min-height: 100vh;
+  padding: 120px 20px 60px;
+  background-color: #000000;
+  position: relative;
+}
+
+.blog-random-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  z-index: 0;
+}
+
+.blog-random-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  gap: 40px;
+  position: relative;
+  z-index: 1;
+}
+
+.blog-random-card {
+  flex: 1;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 15px;
+  padding: 40px;
+  border: 1px solid rgba(0, 255, 255, 0.3);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+  transition: all 0.3s ease;
+  transform: translateY(0);
+}
+
+.blog-random-title {
+  color: #00ffff;
+  font-size: clamp(2em, 5vw, 2.5em);
+  margin: 0 0 20px;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.3);
+  animation: fadeIn 0.8s ease;
+}
+
+.blog-random-content {
+  color: #fff;
+  line-height: 1.8;
+  margin-top: 30px;
+}

@@ -138,6 +138,10 @@
             padding: 0 20px;
         }
     </style>
+    {{ with resources.Get "css/blog-framework.css" }}
+      {{ $blogFrameworkCSS := . | minify }}
+      <link rel="stylesheet" href="{{ $blogFrameworkCSS.RelPermalink }}">
+    {{ end }}
     {{ block "head" . }}{{ end }}
     {{ partial "custom-head.html" . }}
 </head>

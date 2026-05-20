@@ -33,6 +33,7 @@ hugo -t theme2 --cleanDestinationDir
 │   ├── friends.yml          # 友链数据
 │   └── murmurs.yml          # 碎碎念数据
 ├── layouts/                 # 自定义 Hugo 模板
+├── assets/css/              # 可由 Hugo 管线处理的站点样式
 ├── static/                  # 静态资源源文件
 ├── themes/theme2/           # 主题依赖
 ├── archetypes/              # 新文章模板
@@ -54,7 +55,8 @@ title = "Your Blog"
   avatar = "images/avatar.jpg"
   bio = "Hi, there ~"
   github = "https://github.com/yourname"
-  featured_image = "/images/background.jpg"
+  featured_image = "images/background.jpg"
+  site_since = "2026-03-21"
 ```
 
 首页按钮、关于页副标题、统计和交互功能也可以在 `params` 中配置：
@@ -89,6 +91,17 @@ hugo new posts/my-new-post.md
 
 文章内容属于个人数据。如果要把本仓库改造成通用模板，建议把真实文章替换为示例文章，或者将主题部分抽成独立仓库。
 
+## 图片路径
+
+为了避免 GitHub Pages 子路径部署时图片 404，建议统一使用下面两种方式：
+
+```text
+static/images/avatar.jpg          -> Markdown 或配置中写 images/avatar.jpg
+content/posts/my-post/image.png   -> 同目录文章中写 ![](image.png)
+```
+
+不建议在文章里写死 `/myblog/...` 或 `https://xxx.github.io/...`。仓库名变更、fork 到别人账号、或本地预览时，这类绝对路径最容易失效。
+
 ## 数据文件
 
 友链维护在 `data/friends.yml`：
@@ -113,6 +126,12 @@ hugo new posts/my-new-post.md
 
 首次使用时，请在 GitHub 仓库设置中进入 `Settings -> Pages`，将 Source 设置为 `GitHub Actions`。
 
+如果 fork 成自己的博客，至少需要改三处：
+
+1. `config.toml` 中的 `baseURL`、站点名、作者和头像。
+2. `data/friends.yml`、`data/murmurs.yml` 中的个人数据。
+3. GitHub Pages 的发布源必须选择 `GitHub Actions`，不要选择 `Deploy from a branch`。
+
 也可以手动运行：
 
 ```bash
@@ -120,6 +139,13 @@ hugo new posts/my-new-post.md
 ```
 
 脚本会先本地构建检查，再把源码推送到 `master`，由 GitHub Actions 负责发布，避免用生成产物覆盖源码分支。
+
+如果线上看不到新文章或图片，优先检查：
+
+1. Actions 是否构建成功。
+2. `Settings -> Pages` 是否选择了 `GitHub Actions`。
+3. 图片是否位于 `static/images/` 或文章同目录资源中。
+4. Markdown 里是否写死了旧仓库名、旧域名或大小写不一致的路径。
 
 ## 框架化建议
 

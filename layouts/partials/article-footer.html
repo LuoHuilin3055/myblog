@@ -5,7 +5,7 @@
     <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
       <span style="color: #888; font-size: 0.9em;">标签：</span>
       {{ range .Params.tags }}
-        <a href="{{ "/tags/" | absURL }}{{ . | urlize }}" 
+        <a href="{{ printf "tags/%s" (. | urlize) | relURL }}" 
            style="
              padding: 6px 14px;
              background: rgba(0, 255, 255, 0.15);

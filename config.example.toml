@@ -7,7 +7,7 @@ theme = "theme2"
   site_title = "Your Name"
   description = "欢迎来到我的博客"
   author = "Your Name"
-  featured_image = "/images/background.jpg"
+  featured_image = "images/background.jpg"
   home_text = "写下你想展示在首页的话"
   custom_404 = true
 
@@ -23,6 +23,7 @@ theme = "theme2"
   enable_click_fireworks = true
   enable_image_lightbox = true
   enable_image_slider = true
+  site_since = "2026-03-21"
 
   [[params.social_links]]
     name = "GitHub"
