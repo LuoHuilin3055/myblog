@@ -74,11 +74,11 @@ title = "Your Blog"
   enable_image_slider = true
 ```
 
-评论区使用 Waline，可在 `params.comments` 中配置。`server_url` 留空时，页面只显示评论区预留提示，不会加载远程脚本：
+评论区使用 Waline，可在 `params.comments` 中配置。默认关闭；需要评论区时，把 `enable` 改为 `true`，再填写 `server_url`：
 
 ```toml
 [params.comments]
-  enable = true
+  enable = false
   provider = "waline"
   server_url = ""
   placeholder = "欢迎留言，一起交流~"

@@ -27,9 +27,9 @@ theme = "theme2"
   site_since = "2026-03-21"
 
   [params.comments]
-    enable = true
+    enable = false
     provider = "waline"
-    server_url = "https://helloworld-5o17al2be-luohuilin3055s-projects.vercel.app/"
+    server_url = ""
     placeholder = "欢迎留言，一起交流~"
     login = "enable"
 
