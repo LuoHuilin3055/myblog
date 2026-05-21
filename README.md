@@ -74,6 +74,17 @@ title = "Your Blog"
   enable_image_slider = true
 ```
 
+评论区使用 Waline，可在 `params.comments` 中配置。`server_url` 留空时，页面只显示评论区预留提示，不会加载远程脚本：
+
+```toml
+[params.comments]
+  enable = true
+  provider = "waline"
+  server_url = ""
+  placeholder = "欢迎留言，一起交流~"
+  login = "enable"
+```
+
 关于页社交链接使用数组配置：
 
 ```toml
@@ -149,6 +160,28 @@ header_image = "images/posts-banner.jpg"
 - date: "2026-05-18"
   content: "今天写了一点博客。"
 ```
+
+## 评论区部署
+
+当前模板已经把评论区插入到关于页、文章详情页、碎碎念页和友链页。评论系统使用 Waline，博客仓库只负责前端展示；评论数据不会保存在 GitHub Pages 生成产物里，而是由你部署的 Waline 服务端和数据库保存。
+
+推荐按 Waline 官方文档使用 Vercel 部署服务端。流程大致是：
+
+1. 在 Waline 文档中点击 Vercel 部署按钮，用 GitHub 登录 Vercel。
+2. 创建 Waline 服务端项目，并按文档创建或绑定数据库。
+3. 部署完成后打开 Vercel 项目的访问地址，这个地址就是 Waline 的 `serverURL`。
+4. 回到博客仓库，把地址填入 `config.toml`：
+
+```toml
+[params.comments]
+  enable = true
+  provider = "waline"
+  server_url = "https://your-waline-server.vercel.app"
+  placeholder = "欢迎留言，一起交流~"
+  login = "enable"
+```
+
+Waline 默认支持昵称、邮箱、网址等访客信息；如果后续需要评论审核、通知、头像、社交登录或管理后台，请在 Waline 服务端侧继续配置。管理后台通常位于你的 Waline 服务地址后加 `/ui`。
 
 ## 部署
 

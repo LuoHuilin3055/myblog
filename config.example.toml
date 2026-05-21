@@ -26,6 +26,13 @@ theme = "theme2"
   enable_image_slider = true
   site_since = "2026-03-21"
 
+  [params.comments]
+    enable = true
+    provider = "waline"
+    server_url = ""
+    placeholder = "欢迎留言，一起交流~"
+    login = "enable"
+
   [[params.social_links]]
     name = "GitHub"
     url = "https://github.com/yourname"

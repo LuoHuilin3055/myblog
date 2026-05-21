@@ -1,0 +1,38 @@
+{{ $comments := .Site.Params.comments }}
+{{ $enabled := $comments.enable | default false }}
+{{ $provider := $comments.provider | default "waline" }}
+{{ $serverURL := $comments.server_url | default "" }}
+{{ $placeholder := $comments.placeholder | default "欢迎留言，一起交流~" }}
+{{ $login := $comments.login | default "enable" }}
+
+{{ if and $enabled (eq $provider "waline") }}
+  <section class="blog-comments" aria-labelledby="blog-comments-title">
+    <div class="blog-comments-heading">
+      <span class="blog-comments-kicker">Comments</span>
+      <h2 id="blog-comments-title">评论区</h2>
+    </div>
+
+    {{ if $serverURL }}
+      <link rel="stylesheet" href="https://unpkg.com/@waline/client@v3/dist/waline.css">
+      <div id="waline-comments" class="blog-waline"></div>
+      <script type="module">
+        import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+
+        init({
+          el: '#waline-comments',
+          serverURL: {{ $serverURL | jsonify }},
+          path: window.location.pathname,
+          lang: 'zh-CN',
+          placeholder: {{ $placeholder | jsonify }},
+          login: {{ $login | jsonify }},
+          meta: ['nick', 'mail', 'link'],
+          requiredMeta: ['nick', 'mail'],
+        });
+      </script>
+    {{ else }}
+      <div class="blog-comments-placeholder">
+        评论区已预留，部署 Waline 后填写 <code>params.comments.server_url</code> 即可启用。
+      </div>
+    {{ end }}
+  </section>
+{{ end }}
