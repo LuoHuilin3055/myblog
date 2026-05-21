@@ -2,12 +2,12 @@
 title: 乱七八糟的WP
 date: 2026-05-15
 draft:
-lastmod: 2026-05-18
+lastmod: 2026-05-20
 featured: true
 tags:
   - CTF
   - WP
-cover: images/17.jpg
+cover: images/4.jpg
 ---
 # `Misc`
 ## [[SEETF 2023]1337 Word Search - NSSCTF](https://www.nssctf.cn/problem/4207)

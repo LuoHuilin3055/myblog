@@ -8,7 +8,7 @@ tags:
   - 笔记
   - 大一下
   - Python
-cover: images/12.jpg
+cover: images/9.jpg
 ---
 
 ---

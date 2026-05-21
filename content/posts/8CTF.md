@@ -7,7 +7,7 @@ tags:
   - 大一下
 lastmod: 2026-04-02
 draft: true
-cover: images/10.jpg
+cover: images/8.jpg
 featured: false
 ---
 # 2018 DEFCON Quals ghettohackers: Throwback

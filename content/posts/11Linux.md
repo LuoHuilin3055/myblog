@@ -5,7 +5,7 @@ draft:
 tags:
   - 笔记
   - 计算机
-cover: images/16.jpg
+cover: images/11.jpg
 ---
 # 新建文件
 ```bash
