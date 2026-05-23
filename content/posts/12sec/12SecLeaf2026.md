@@ -15,7 +15,7 @@ lastmod: 2026-05-23
 `Find the flag on our YT Channel` [https://www.youtube.com/@SecLeaf](https://www.youtube.com/@SecLeaf)
 
 ### 解题思路
-打开链接发现是赛事通知，展开文章即可看到`flag`  ![](1.png)
+打开链接发现是赛事通知，展开文章即可看到`flag`  ![](12sec/1.png)
 
 ---
 
@@ -45,14 +45,14 @@ Flag format: SecLeaf{}
 ```
 
 ## 解题思路
-附件下载后发现无法直接看出文件类型，于是用`010Editor`打开，在开头也没看出文件类型，拉到最后发现了`flag`~~瞎猫碰上死耗子~~  ![](12SecLeaf/2.png)
+附件下载后发现无法直接看出文件类型，于是用`010Editor`打开，在开头也没看出文件类型，拉到最后发现了`flag`~~瞎猫碰上死耗子~~  ![](12sec/2.png)
 
 也可以用
 ```bash
 strings -a vaultcore | grep -i "SecLeaf"
 ```
 输出得到`flag` 
-![](12SecLeaf/3.png)
+![](12sec/3.png)
 
 ---
 
@@ -69,14 +69,14 @@ U2VjTGVhZntiNDUzNjRfMXNfbjB0XzNuY3J5cHQxMG59
 ```bash
 cat encrypted.txt | base64 -d
 ```
-![](12SecLeaf/4.png)
+![](12sec/4.png)
 
 ---
 
 # `OSINT`
 ## `Can_you_Find_Cafe`
 ### 题目描述
-![](12SecLeaf/whereami.jpeg)
+![](12sec/whereami.jpeg)
 ```txt
 A single image holds all the clues you need. Study the surroundings carefully and identify the exact location where it was taken. Accuracy matters.
 
@@ -87,9 +87,9 @@ Flag Format: SecLeaf{Name_of_the_place+Location_name}
 
 ### 解题思路
 用谷歌识图，选择 **“外观匹配”** 
-![](12SecLeaf/5.png)
+![](12sec/5.png)
 第一篇文章打开后得到这间咖啡店的简介
-![](SecLeaf/6.png)
+![](12sec/6.png)
 根据内容即可得到`flag`
 ```txt
 SecLeaf{Cafe_Goodluck+Deccan_Gymkhana}
