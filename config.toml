@@ -8,7 +8,7 @@ theme = "theme2"
   description = "欢迎来到NGC_2237的博客"
   author = "NGC 2237"
   featured_image = "images/background.jpg"
-  page_header_image = "images/14.jpg"
+  page_header_image = "images/background.jpg"
   home_text = "何时葡萄会熟透，你要静候再静候"
   custom_404 = true
   

@@ -45,11 +45,52 @@ Flag format: SecLeaf{}
 ```
 
 ## 解题思路
-附件下载后发现无法直接看出文件类型，于是用`010Editor`打开，在开头也没看出文件类型，拉到最后发现了`flag`~~瞎猫碰上死耗子~~  ![](2.png)
+附件下载后发现无法直接看出文件类型，于是用`010Editor`打开，在开头也没看出文件类型，拉到最后发现了`flag`~~瞎猫碰上死耗子~~  ![](12SecLeaf/2.png)
 
 也可以用
 ```bash
 strings -a vaultcore | grep -i "SecLeaf"
 ```
 输出得到`flag` 
-![](3.png)
+![](12SecLeaf/3.png)
+
+---
+
+# `Cryptography`
+## 1.`military_grade_encryption`
+### 题目描述
+附件下载后为`txt`文本，内容：
+```txt
+U2VjTGVhZntiNDUzNjRfMXNfbjB0XzNuY3J5cHQxMG59
+```
+
+### 解题思路
+看起来比较像`Base64`编码，解码后得到`flag`
+```bash
+cat encrypted.txt | base64 -d
+```
+![](12SecLeaf/4.png)
+
+---
+
+# `OSINT`
+## `Can_you_Find_Cafe`
+### 题目描述
+![](12SecLeaf/whereami.jpeg)
+```txt
+A single image holds all the clues you need. Study the surroundings carefully and identify the exact location where it was taken. Accuracy matters.
+
+Use "_" instead of spaces.
+
+Flag Format: SecLeaf{Name_of_the_place+Location_name}
+```
+
+### 解题思路
+用谷歌识图，选择 **“外观匹配”** 
+![](12SecLeaf/5.png)
+第一篇文章打开后得到这间咖啡店的简介
+![](SecLeaf/6.png)
+根据内容即可得到`flag`
+```txt
+SecLeaf{Cafe_Goodluck+Deccan_Gymkhana}
+```
