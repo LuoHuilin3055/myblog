@@ -84,7 +84,7 @@
 <script>
   // 搜索数据
   const searchData = [
-    {{ range .Site.RegularPages }}
+    {{ range where .Site.RegularPages "Params.search_exclude" "!=" true }}
     {
       title: "{{ .Title }}",
       url: "{{ .Permalink }}",

@@ -28,10 +28,12 @@ hugo -t theme2 --cleanDestinationDir
 │   ├── logs/                # 日志
 │   ├── about.md             # 关于页
 │   ├── friends.md           # 友链页
+│   ├── schedule.md          # 日程页
 │   └── murmur/              # 碎碎念栏目
 ├── data/                    # YAML 数据
 │   ├── friends.yml          # 友链数据
-│   └── murmurs.yml          # 碎碎念数据
+│   ├── murmurs.yml          # 碎碎念数据
+│   └── schedule.yml         # 日程数据
 ├── layouts/                 # 自定义 Hugo 模板
 ├── assets/css/              # 可由 Hugo 管线处理的站点样式
 ├── static/                  # 静态资源源文件
@@ -83,6 +85,17 @@ title = "Your Blog"
   server_url = ""
   placeholder = "欢迎留言，一起交流~"
   login = "enable"
+```
+
+日程板块使用静态数据文件渲染，可在 `params.schedule` 中调整标题和显示时间范围：
+
+```toml
+[params.schedule]
+  enable = true
+  title = "日程"
+  subtitle = "记录每个时间段在做什么"
+  start_hour = 8
+  end_hour = 24
 ```
 
 关于页社交链接使用数组配置：
@@ -160,6 +173,19 @@ header_image = "images/posts-banner.jpg"
 - date: "2026-05-18"
   content: "今天写了一点博客。"
 ```
+
+日程维护在 `data/schedule.yml`，用于 `/schedule/` 周视图页面。每条记录需要写日期、开始时间、结束时间、公开标题和分类，`summary` 可选：
+
+```yaml
+- date: "2026-05-23"
+  start: "09:00"
+  end: "10:30"
+  title: "算法复习"
+  category: "学习"
+  summary: "刷题与整理笔记"
+```
+
+默认分类为 `学习`、`比赛`、`博客`、`生活`、`休息`；写其它分类也能显示，只是会使用默认颜色。时间格式统一使用 `YYYY-MM-DD` 和 `HH:mm`，页面会按周自动分组，并根据 `start_hour` / `end_hour` 控制每天展示的时间范围。
 
 ## 评论区部署
 

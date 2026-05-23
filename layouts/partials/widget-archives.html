@@ -1,5 +1,6 @@
 <!-- 归档 -->
-{{ if .Site.RegularPages }}
+{{ $archivePosts := where .Site.RegularPages "Type" "posts" }}
+{{ if $archivePosts }}
 <div class="blog-widget blog-widget-archives" style="
   background: var(--bg-card);
   border-radius: 12px;
@@ -29,7 +30,7 @@
   
   <!-- 归档列表 -->
   <div style="display: flex; flex-direction: column;">
-    {{ range .Site.RegularPages.GroupByDate "2006年1月" }}
+    {{ range $archivePosts.GroupByDate "2006年1月" }}
     {{ if .Key }}
     {{ $year := .Key | replaceRE "年.*" "" }}
     {{ $month := .Key | replaceRE ".*年|月" "" }}

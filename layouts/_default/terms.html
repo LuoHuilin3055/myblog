@@ -438,7 +438,7 @@
       {{ $pages := .Pages }}
       <!-- 如果是分类列表页面（如/categories/），则显示所有文章 -->
       {{ if and (eq .Kind "taxonomy") (eq (len .Pages) 0) (eq .Data.Plural "categories") }}
-        {{ $pages = .Site.RegularPages }}
+        {{ $pages = where .Site.RegularPages "Type" "posts" }}
       {{ end }}
       
       {{ $years := $pages.GroupByDate "2006" }}

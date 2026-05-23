@@ -33,6 +33,13 @@ theme = "theme2"
     placeholder = "欢迎留言，一起交流~"
     login = "enable"
 
+  [params.schedule]
+    enable = true
+    title = "日程"
+    subtitle = "记录每个时间段在做什么"
+    start_hour = 8
+    end_hour = 24
+
   [[params.social_links]]
     name = "GitHub"
     url = "https://github.com/yourname"
@@ -50,6 +57,10 @@ theme = "theme2"
     name = "Notes"
     url = "/murmur/"
     weight = 30
+  [[menu.main]]
+    name = "Schedule"
+    url = "/schedule/"
+    weight = 35
 
 [markup]
   defaultMarkdownHandler = "goldmark"

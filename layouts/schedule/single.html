@@ -1,0 +1,231 @@
+{{ define "header" }}
+  {{ partial "site-header.html" . }}
+{{ end }}
+
+{{ define "main" }}
+  {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
+  {{ $schedule := .Site.Params.schedule }}
+  {{ $startHour := $schedule.start_hour | default 8 }}
+  {{ $endHour := $schedule.end_hour | default 24 }}
+  {{ $events := .Site.Data.schedule | default slice }}
+
+  <div class="blog-schedule-shell" style="
+    background-image: url('{{ $bgImage }}');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 120px 20px 60px;
+    position: relative;
+  ">
+    <div class="blog-schedule-overlay"></div>
+
+    <div class="blog-schedule-container">
+      {{ partial "page-header.html" (dict
+        "Prefix" "[ Schedule ]"
+        "Title" ($schedule.title | default .Title)
+        "Subtitle" ($schedule.subtitle | default "记录每个时间段在做什么")
+        "Image" $pageHeaderImage
+      ) }}
+
+      <section class="blog-schedule-panel"
+        data-start-hour="{{ $startHour }}"
+        data-end-hour="{{ $endHour }}">
+        <div class="blog-schedule-toolbar">
+          <div>
+            <p class="blog-schedule-kicker">Weekly Overview</p>
+            <h2 id="schedule-week-title">本周日程</h2>
+          </div>
+          <div class="blog-schedule-controls" aria-label="日程周切换">
+            <button type="button" id="schedule-prev-week">上一周</button>
+            <select id="schedule-week-select" aria-label="选择周"></select>
+            <button type="button" id="schedule-current-week">本周</button>
+            <button type="button" id="schedule-next-week">下一周</button>
+          </div>
+        </div>
+
+        <div class="blog-schedule-week" id="schedule-week-view" aria-live="polite"></div>
+        <div class="blog-schedule-mobile" id="schedule-mobile-view" aria-live="polite"></div>
+        <p class="blog-schedule-empty" id="schedule-empty" hidden>这一周还没有日程记录。</p>
+      </section>
+    </div>
+  </div>
+
+  <script id="schedule-data" type="application/json">{{ $events | jsonify }}</script>
+  <script>
+    (function () {
+      const panel = document.querySelector('.blog-schedule-panel');
+      const weekView = document.getElementById('schedule-week-view');
+      const mobileView = document.getElementById('schedule-mobile-view');
+      const emptyState = document.getElementById('schedule-empty');
+      const title = document.getElementById('schedule-week-title');
+      const weekSelect = document.getElementById('schedule-week-select');
+      const startHour = Number(panel.dataset.startHour || 8);
+      const endHour = Number(panel.dataset.endHour || 24);
+      const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
+      const categories = ['学习', '比赛', '博客', '生活', '休息'];
+      const parsedEvents = JSON.parse(document.getElementById('schedule-data').textContent || '[]');
+      const rawEvents = Array.isArray(parsedEvents) ? parsedEvents : JSON.parse(parsedEvents || '[]');
+      const events = rawEvents
+        .filter(item => item.date && item.start && item.end && item.title)
+        .map(item => ({
+          date: item.date,
+          start: item.start,
+          end: item.end,
+          title: item.title,
+          category: item.category || '其他',
+          summary: item.summary || ''
+        }))
+        .sort((a, b) => `${a.date} ${a.start}`.localeCompare(`${b.date} ${b.start}`));
+
+      const pad = value => String(value).padStart(2, '0');
+      const toDate = value => {
+        const [year, month, day] = value.split('-').map(Number);
+        return new Date(year, month - 1, day);
+      };
+      const formatDate = date => `${date.getFullYear()}-${pad(date.getMonth() + 1)}-${pad(date.getDate())}`;
+      const formatShort = date => `${date.getMonth() + 1}/${date.getDate()}`;
+      const minutesOfDay = time => {
+        const [hour, minute] = time.split(':').map(Number);
+        return hour * 60 + minute;
+      };
+      const mondayOf = date => {
+        const current = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+        const day = current.getDay() || 7;
+        current.setDate(current.getDate() - day + 1);
+        return current;
+      };
+      const addDays = (date, count) => {
+        const next = new Date(date);
+        next.setDate(next.getDate() + count);
+        return next;
+      };
+      const weekKey = date => formatDate(mondayOf(date));
+      const eventWeekKey = item => weekKey(toDate(item.date));
+      const currentWeekKey = weekKey(new Date());
+      const eventWeekKeys = Array.from(new Set(events.map(eventWeekKey))).sort();
+      let visibleWeek = eventWeekKeys.includes(currentWeekKey)
+        ? currentWeekKey
+        : (eventWeekKeys[eventWeekKeys.length - 1] || currentWeekKey);
+
+      function buildWeekOptions() {
+        const keys = Array.from(new Set([currentWeekKey, ...eventWeekKeys])).sort();
+        weekSelect.innerHTML = keys.map(key => {
+          const start = toDate(key);
+          const end = addDays(start, 6);
+          return `<option value="${key}">${formatShort(start)} - ${formatShort(end)}</option>`;
+        }).join('');
+      }
+
+      function categoryClass(category) {
+        const index = categories.indexOf(category);
+        return index === -1 ? 'other' : `cat-${index + 1}`;
+      }
+
+      function render() {
+        const weekStart = toDate(visibleWeek);
+        const weekEnd = addDays(weekStart, 6);
+        const weekDates = Array.from({ length: 7 }, (_, index) => addDays(weekStart, index));
+        const weekDateKeys = weekDates.map(formatDate);
+        const weekEvents = events.filter(item => weekDateKeys.includes(item.date));
+        const totalMinutes = (endHour - startHour) * 60;
+        const hours = Array.from({ length: endHour - startHour + 1 }, (_, index) => startHour + index);
+
+        title.textContent = `${formatShort(weekStart)} - ${formatShort(weekEnd)} 日程`;
+        weekSelect.value = visibleWeek;
+        emptyState.hidden = weekEvents.length !== 0;
+
+        weekView.innerHTML = `
+          <div class="blog-schedule-grid" style="--schedule-hours: ${endHour - startHour};">
+            <div class="blog-schedule-corner"></div>
+            ${weekDates.map((date, index) => `
+              <div class="blog-schedule-day-head">
+                <span>${dayNames[index]}</span>
+                <strong>${formatShort(date)}</strong>
+              </div>
+            `).join('')}
+            <div class="blog-schedule-times">
+              ${hours.map(hour => `<div>${pad(hour)}:00</div>`).join('')}
+            </div>
+            ${weekDates.map(date => {
+              const key = formatDate(date);
+              const dayEvents = weekEvents.filter(item => item.date === key);
+              return `
+                <div class="blog-schedule-day-column">
+                  ${Array.from({ length: endHour - startHour }, () => '<span></span>').join('')}
+                  ${dayEvents.map(item => {
+                    const start = Math.max(minutesOfDay(item.start), startHour * 60);
+                    const end = Math.min(minutesOfDay(item.end), endHour * 60);
+                    const top = ((start - startHour * 60) / totalMinutes) * 100;
+                    const height = Math.max(((end - start) / totalMinutes) * 100, 6);
+                    return `
+                      <article class="blog-schedule-event ${categoryClass(item.category)}"
+                        style="top:${top}%;height:${height}%;">
+                        <span>${item.start} - ${item.end}</span>
+                        <strong>${item.title}</strong>
+                        <em>${item.category}</em>
+                        ${item.summary ? `<p>${item.summary}</p>` : ''}
+                      </article>
+                    `;
+                  }).join('')}
+                </div>
+              `;
+            }).join('')}
+          </div>
+        `;
+
+        mobileView.innerHTML = weekDates.map((date, index) => {
+          const key = formatDate(date);
+          const dayEvents = weekEvents.filter(item => item.date === key);
+          return `
+            <section class="blog-schedule-mobile-day">
+              <h3>${dayNames[index]} <span>${formatShort(date)}</span></h3>
+              ${dayEvents.length ? dayEvents.map(item => `
+                <article class="blog-schedule-mobile-event ${categoryClass(item.category)}">
+                  <span>${item.start} - ${item.end}</span>
+                  <strong>${item.title}</strong>
+                  <em>${item.category}</em>
+                  ${item.summary ? `<p>${item.summary}</p>` : ''}
+                </article>
+              `).join('') : '<p class="blog-schedule-mobile-empty">暂无记录</p>'}
+            </section>
+          `;
+        }).join('');
+      }
+
+      buildWeekOptions();
+      render();
+
+      weekSelect.addEventListener('change', event => {
+        visibleWeek = event.target.value;
+        render();
+      });
+      document.getElementById('schedule-prev-week').addEventListener('click', () => {
+        visibleWeek = formatDate(addDays(toDate(visibleWeek), -7));
+        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
+          weekSelect.insertAdjacentHTML('afterbegin', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
+        }
+        render();
+      });
+      document.getElementById('schedule-next-week').addEventListener('click', () => {
+        visibleWeek = formatDate(addDays(toDate(visibleWeek), 7));
+        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
+          weekSelect.insertAdjacentHTML('beforeend', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
+        }
+        render();
+      });
+      document.getElementById('schedule-current-week').addEventListener('click', () => {
+        visibleWeek = currentWeekKey;
+        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
+          weekSelect.insertAdjacentHTML('beforeend', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
+        }
+        render();
+      });
+    })();
+  </script>
+{{ end }}
+
+{{ define "footer" }}
+  {{ partial "site-footer.html" . }}
+{{ end }}
