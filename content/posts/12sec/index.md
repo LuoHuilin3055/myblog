@@ -7,7 +7,7 @@ date: 2026-05-23
 draft:
 cover: images/12.jpg
 featured: true
-lastmod: 2026-05-23
+lastmod: 2026-05-25
 url: /posts/12secleaf2026/
 aliases:
   - /posts/12sec/12secleaf2026/
@@ -70,10 +70,70 @@ Flag Format: SecLeaf{}
 有些程序员编写代码，另一些则书写诗篇。
 你能读懂这位“数字摇滚巨星”吗？
 每一个空格都至关重要；此外，“i”亦非彼“i”。
+```
+```txt
+（附件内容）
+Midnight is Sec
+Shadow is leaf
+Chaos is poetry 
+Neon is is fun
+
+Dreams are Midnight with Shadow with Chaos with Neon
+
+Say Dreams
 
 ```
 
 ### 解题思路
+**1‍⃣识别语言**:
+根据文件拓展名`.rock`与代码风格（类似歌词的语法），可以识别出这是`"Rockstar"`语言
+```txt
+Rockstar 是一门专门为创意程序员设计的动态类型、图灵完备的“纵欲型”编程语言。它的语法完全基于 20 世纪 80 年代重摇滚和强力情歌（Power Ballads）的歌词 convention 编写，这意味着你的代码即可以是程序，同时也是一首完整的摇滚歌曲。
+```
+
+**2‍⃣了解语法**：
+`Rockstar` 语言的关键特性：
+- `is` / `are` / `was`：变量赋值
+- `with`：字符串拼接
+- `Say` / `Shout` / `Whisper`：输出
+- **Poetic Numbers（诗意数字）**：当赋值语句右侧不以数字或关键字开头时，每个单词的字母数会被解析为十进制数字（忽略空格和非字母字符）
+
+**3‍⃣尝试标准解析：**
+按照 `Rockstar` 标准的 `poetic number` 规则解析：
+
+| 变量       | 右侧内容       | 字母数 → 数字    |
+| -------- | ---------- | ----------- |
+| Midnight | `Sec`      | 3 → `3`     |
+| Shadow   | `leaf`     | 4 → `4`     |
+| Chaos    | `poetry`   | 6 → `6`     |
+| Neon     | `is` `fun` | 2, 3 → `23` |
+
+拼接结果：`34623` — 这显然不是 `flag`。
+
+**4‍⃣分析异常与提示：**
+仔细观察代码，发现两处异常：
+1. **第 3 行**：`Chaos is poetry ` — `poetry` 后面有一个**多余的空格**
+2. **第 4 行**：`Neon is is fun` — 出现了**两个 `is`**
+
+结合提示 **`"every space matters"`** 和 **`"i is not i"`**，可以推断：
+- 不要使用 `Rockstar` 的标准 `poetic number` 解析
+- 将 `is` 右侧的内容视为**原始字符串**
+- 将字母 `i` 替换为数字 `1`
+
+**5‍⃣按原始字符串解析：**
+将每个变量 `is` 右侧的内容作为原始字符串提取（保留所有空格和字符）：
+
+| 变量         | 右侧原始字符串               |
+| ---------- | --------------------- |
+| `Midnight` | `Sec`                 |
+| `Shadow`   | `leaf`                |
+| `Chaos`    | `poetry `（含尾部空格）      |
+| `Neon`     | `is fun`（第二个 `is` 开始） |
+拼接后得到：`Secleafpoetry is fun`
+**同时将`i`替换为`1`**，最后的`flag`
+```txt
+SecLeaf{poetry_1s_fun}
+```
 
 ---
 
@@ -246,7 +306,7 @@ Flag format: SecLeaf{}
 ```
 
 ### 解题思路
-1‍⃣**先将附件解压并查看里面包含的文件**
+**1‍⃣先将附件解压并查看里面包含的文件**
 ```bash
 unzip challenge.zip
 cd force-push-wont-save-you
@@ -260,7 +320,7 @@ ls -la
 
 所以我们除了看当前文件，还要看`Git`历史与`Git`对象
 
-2‍⃣**先看当前文件**
+**2‍⃣先看当前文件**
 ```bash
 cat app.js
 ```
@@ -271,7 +331,7 @@ TODO REMOVE HARDCODED TOKEN
 ```
 我们可以看出以前可能真的提交过敏感信息，但后来被删除了——所以继续查历史
 
-3‍⃣**查询所有能看到的提交历史**
+**3‍⃣查询所有能看到的提交历史**
 ```bsah
 git log --oneline --all --decorate --graph
 ```
@@ -290,7 +350,7 @@ git grep -n "SecLeaf" $(git rev-list --all)
 ![](17.png)
 也不是真正的`flag`
 
-4‍⃣**根据题目说的“Some objects may no longer be referenced”，所以查 dangling objects**
+**4‍⃣根据题目说的“Some objects may no longer be referenced”，所以查 dangling objects**
 ```bash
 git fsck --full --no-reflogs --lost-found
 ```
@@ -299,7 +359,7 @@ git fsck --full --no-reflogs --lost-found
 ![](19.png)
 但是这两个也是假的`flag`。到这里发现题目在故意引导只查`Git`历史与`dangling objects`，但这些都是假的
 
-5‍⃣**继续全局搜索整个目录**
+**5‍⃣继续全局搜索整个目录**
 因为前面找到的全是假的`flag`，所以应该扩大范围
 ```bash
 grep -RIn --binary-files=text "SecLeaf" .
@@ -326,7 +386,38 @@ Flag format: SecLeaf{}
 ```
 
 ### 解题思路
+**1‍⃣解压文件、查看文件内容**：解压后看到大量的日志文件；同时根据题目可以看出：**`flag`是拼接而成的**，同时还会有很多假的`flag`
 
+**2‍⃣先搜索`SecLeaf`**：
+```bash
+grep -RIn "SecLeaf" .
+```
+![](21.png)
+有搜索结果，但是这些都是`{temporary_xxxxx}`——无用的`flag`
+
+**3‍⃣搜索可能的碎片关键词**
+题目说
+```txt
+fragments of sensitive data
+敏感数据碎片
+```
+所以继续搜索关键词
+```bash
+grep -RIn "fragment\|chunk\|recovered\|orphan\|cache\|last" .
+```
+在搜索出来的结果中看见了：
+![](22.png)
+**`5365634c`转成文本就是`SeclL`**
+所以接下来将搜索出来的`hex`转成文本，并从其中提取有效字符串，按合理的顺序拼接起来
+```bash
+grep -RIn "fragment\|chunk\|recovered\|orphan\|cache\|last" . \
+| grep -Eo '[0-9a-fA-F]{8,}' \
+| while read x; do echo "$x -> $(echo "$x" | xxd -r -p)"; done
+```
+![](23.png)
+```txt
+SecLeaf{context_is_the_real_enemy}
+```
 
 ---
 
@@ -341,3 +432,4 @@ Flag format: SecLeaf{}
 - `The Invoice Incident`
 - `Can_you_Find_Cafe`
 - `Force-push-wont-save-you`
+- `needle_in_context`
