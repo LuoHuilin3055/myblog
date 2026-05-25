@@ -33,17 +33,7 @@
   <div style="display: flex; flex-direction: column; gap: 12px;">
     {{ if .Site.Data.friends }}
       {{ range .Site.Data.friends }}
-        <a href="{{ .url }}" target="_blank" rel="noopener noreferrer" style="
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 10px;
-          border-radius: 10px;
-          background: var(--bg-hover);
-          text-decoration: none;
-          transition: all 0.3s ease;
-        " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light'); this.style.transform='translateX(5px)';"
-           onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--bg-hover'); this.style.transform='translateX(0)';">
+        <a class="blog-widget-friend-link" href="{{ .url }}" target="_blank" rel="noopener noreferrer">
           <!-- 头像 -->
           <div style="
             width: 40px;

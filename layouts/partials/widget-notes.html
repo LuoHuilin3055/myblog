@@ -51,19 +51,7 @@
         </div>
       {{ end }}
       
-      <a href="{{ "murmur" | relURL }}" style="
-        display: block;
-        text-align: center;
-        color: var(--text-primary);
-        font-size: 0.85em;
-        padding: 10px;
-        border-radius: 6px;
-        background: var(--accent-light);
-        text-decoration: none;
-        margin-top: 8px;
-        font-family: Comic Sans MS, cursive;
-        transition: background 0.3s;
-      " onmouseover="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-glow');" onmouseout="this.style.background=getComputedStyle(document.documentElement).getPropertyValue('--accent-light');">
+      <a class="blog-widget-more-link" href="{{ "murmur" | relURL }}">
         More →
       </a>
     {{ else }}
