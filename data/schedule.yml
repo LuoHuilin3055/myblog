@@ -26,5 +26,42 @@
   category: "比赛"
   summary: "写WP"
 
+- date: "2026-05-25"
+  start: "8:00"
+  end: "9:50"
+  title: "沉浸式赶作业"
+  category: "作业"
+  summary: "快写不完了😭"
+
+- date: "2026-05-25"
+  start: "14:00"
+  end: "15:00"
+  title: "SecLeaf复现"
+  category: "学"
+  summary: "弄了一小时还有两道题"
+
+- date: "2026-05-25"
+  start: "15:30"
+  end: "17:00"
+  title: "不知道"
+  category: ""
+  summary: "可能在摸鱼吧"
+
+- date: "2026-05-25"
+  start: "17:00"
+  end: "18:00"
+  title: "高数作业"
+  category: "作业"
+  summary: "沉浸式赶高数"
+
+- date: "2026-05-25"
+  start: "19:00"
+  end: "20:00"
+  title: "不知道"
+  category: ""
+  summary: "没打游戏、没刷视频，也没学；给Obsdian设置了个丑丑的主题"
+
+
+
 
 
