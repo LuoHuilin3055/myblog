@@ -113,20 +113,12 @@
       const weekKey = date => formatDate(mondayOf(date));
       const eventWeekKey = item => weekKey(toDate(item.date));
       const currentWeekKey = weekKey(new Date());
-      const eventWeekKeys = Array.from(new Set(events.map(eventWeekKey))).sort();
-      let visibleWeek = eventWeekKeys.includes(currentWeekKey)
-        ? currentWeekKey
-        : (eventWeekKeys[eventWeekKeys.length - 1] || currentWeekKey);
+      const eventDateKeys = new Set(events.map(item => item.date));
+      let visibleWeek = currentWeekKey;
+      let calendarMonth = new Date();
 
       function buildWeekOptions() {
-        const keys = Array.from(new Set([currentWeekKey, ...eventWeekKeys])).sort();
-        weekMenu.innerHTML = keys.map(key => {
-          const start = toDate(key);
-          const end = addDays(start, 6);
-          const label = `${formatShort(start)} - ${formatShort(end)}`;
-          const current = key === currentWeekKey ? '<span>本周</span>' : '';
-          return `<button type="button" class="blog-schedule-week-option" role="option" data-week="${key}" aria-selected="false">${label}${current}</button>`;
-        }).join('');
+        renderCalendarMenu();
       }
 
       function getWeekLabel(key) {
@@ -135,11 +127,44 @@
         return `${formatShort(start)} - ${formatShort(end)}`;
       }
 
-      function ensureWeekOption(key, position) {
-        if (weekMenu.querySelector(`[data-week="${key}"]`)) return;
-        const current = key === currentWeekKey ? '<span>本周</span>' : '';
-        const option = `<button type="button" class="blog-schedule-week-option" role="option" data-week="${key}" aria-selected="false">${getWeekLabel(key)}${current}</button>`;
-        weekMenu.insertAdjacentHTML(position, option);
+      function setCalendarMonthFromWeek(key) {
+        const start = toDate(key);
+        calendarMonth = new Date(start.getFullYear(), start.getMonth(), 1);
+      }
+
+      function addMonths(date, count) {
+        return new Date(date.getFullYear(), date.getMonth() + count, 1);
+      }
+
+      function renderCalendarMenu() {
+        const monthStart = new Date(calendarMonth.getFullYear(), calendarMonth.getMonth(), 1);
+        const gridStart = mondayOf(monthStart);
+        const cells = Array.from({ length: 42 }, (_, index) => addDays(gridStart, index));
+        const monthLabel = `${calendarMonth.getFullYear()}年${calendarMonth.getMonth() + 1}月`;
+        weekMenu.innerHTML = `
+          <div class="blog-schedule-calendar-head">
+            <button type="button" class="blog-schedule-calendar-nav" data-calendar-move="-1" aria-label="上个月">‹</button>
+            <strong>${monthLabel}</strong>
+            <button type="button" class="blog-schedule-calendar-nav" data-calendar-move="1" aria-label="下个月">›</button>
+          </div>
+          <div class="blog-schedule-calendar-days" aria-hidden="true">
+            ${dayNames.map(name => `<span>${name.replace('周', '')}</span>`).join('')}
+          </div>
+          <div class="blog-schedule-calendar-grid" role="listbox" aria-label="选择周">
+            ${cells.map(date => {
+              const key = formatDate(date);
+              const itemWeek = weekKey(date);
+              const classNames = [
+                'blog-schedule-calendar-day',
+                date.getMonth() === calendarMonth.getMonth() ? '' : 'is-muted',
+                itemWeek === visibleWeek ? 'is-selected' : '',
+                itemWeek === currentWeekKey ? 'is-current-week' : '',
+                eventDateKeys.has(key) ? 'has-event' : ''
+              ].filter(Boolean).join(' ');
+              return `<button type="button" class="${classNames}" role="option" data-week="${itemWeek}" aria-selected="${itemWeek === visibleWeek}">${date.getDate()}</button>`;
+            }).join('')}
+          </div>
+        `;
       }
 
       function closeWeekMenu() {
@@ -149,6 +174,10 @@
 
       function toggleWeekMenu() {
         const willOpen = weekMenu.hidden;
+        if (willOpen) {
+          setCalendarMonthFromWeek(visibleWeek);
+          renderCalendarMenu();
+        }
         weekMenu.hidden = !willOpen;
         weekTrigger.setAttribute('aria-expanded', String(willOpen));
       }
@@ -169,9 +198,7 @@
 
         title.textContent = `${formatShort(weekStart)} - ${formatShort(weekEnd)} 日程`;
         weekTriggerText.textContent = getWeekLabel(visibleWeek);
-        weekMenu.querySelectorAll('.blog-schedule-week-option').forEach(option => {
-          option.setAttribute('aria-selected', String(option.dataset.week === visibleWeek));
-        });
+        renderCalendarMenu();
         emptyState.hidden = weekEvents.length !== 0;
 
         weekView.innerHTML = `
@@ -237,9 +264,16 @@
 
       weekTrigger.addEventListener('click', toggleWeekMenu);
       weekMenu.addEventListener('click', event => {
-        const option = event.target.closest('.blog-schedule-week-option');
+        const nav = event.target.closest('.blog-schedule-calendar-nav');
+        if (nav) {
+          calendarMonth = addMonths(calendarMonth, Number(nav.dataset.calendarMove || 0));
+          renderCalendarMenu();
+          return;
+        }
+        const option = event.target.closest('.blog-schedule-calendar-day');
         if (!option) return;
         visibleWeek = option.dataset.week;
+        setCalendarMonthFromWeek(visibleWeek);
         closeWeekMenu();
         render();
       });
@@ -251,19 +285,19 @@
       });
       document.getElementById('schedule-prev-week').addEventListener('click', () => {
         visibleWeek = formatDate(addDays(toDate(visibleWeek), -7));
-        ensureWeekOption(visibleWeek, 'afterbegin');
+        setCalendarMonthFromWeek(visibleWeek);
         closeWeekMenu();
         render();
       });
       document.getElementById('schedule-next-week').addEventListener('click', () => {
         visibleWeek = formatDate(addDays(toDate(visibleWeek), 7));
-        ensureWeekOption(visibleWeek, 'beforeend');
+        setCalendarMonthFromWeek(visibleWeek);
         closeWeekMenu();
         render();
       });
       document.getElementById('schedule-current-week').addEventListener('click', () => {
         visibleWeek = currentWeekKey;
-        ensureWeekOption(visibleWeek, 'beforeend');
+        setCalendarMonthFromWeek(visibleWeek);
         closeWeekMenu();
         render();
       });
