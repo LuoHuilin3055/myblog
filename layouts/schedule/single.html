@@ -262,9 +262,13 @@
       buildWeekOptions();
       render();
 
-      weekTrigger.addEventListener('click', toggleWeekMenu);
+      weekTrigger.addEventListener('click', event => {
+        event.stopPropagation();
+        toggleWeekMenu();
+      });
       weekMenu.addEventListener('click', event => {
-        const nav = event.target.closest('.blog-schedule-calendar-nav');
+        event.stopPropagation();
+        const nav = event.target.closest('[data-calendar-move]');
         if (nav) {
           calendarMonth = addMonths(calendarMonth, Number(nav.dataset.calendarMove || 0));
           renderCalendarMenu();
@@ -276,6 +280,12 @@
         setCalendarMonthFromWeek(visibleWeek);
         closeWeekMenu();
         render();
+      });
+      weekMenu.addEventListener('pointerdown', event => {
+        event.stopPropagation();
+      });
+      weekPicker.addEventListener('pointerdown', event => {
+        event.stopPropagation();
       });
       document.addEventListener('click', event => {
         if (!weekPicker.contains(event.target)) closeWeekMenu();

@@ -547,6 +547,15 @@ body[data-theme="light"] .blog-schedule-controls button {
   line-height: 1;
 }
 
+.blog-schedule-controls .blog-schedule-calendar-nav:hover {
+  border-color: rgba(0, 255, 255, 0.46);
+  background: rgba(0, 255, 255, 0.16);
+}
+
+.blog-schedule-controls .blog-schedule-calendar-nav:active {
+  transform: scale(0.94);
+}
+
 .blog-schedule-calendar-days,
 .blog-schedule-calendar-grid {
   display: grid;
@@ -624,6 +633,11 @@ body[data-theme="light"] .blog-schedule-controls .blog-schedule-calendar-day.is-
 body[data-theme="light"] .blog-schedule-controls .blog-schedule-calendar-day:hover,
 body[data-theme="light"] .blog-schedule-controls .blog-schedule-calendar-day.is-selected {
   background: rgba(22, 131, 138, 0.1);
+}
+
+body[data-theme="light"] .blog-schedule-controls .blog-schedule-calendar-nav:hover {
+  border-color: rgba(22, 131, 138, 0.42);
+  background: rgba(22, 131, 138, 0.14);
 }
 
 body[data-theme="light"] .blog-schedule-controls .blog-schedule-calendar-day.is-selected {
