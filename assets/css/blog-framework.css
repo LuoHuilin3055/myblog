@@ -468,8 +468,7 @@ body[data-theme="light"] .blog-schedule-panel {
   justify-content: flex-end;
 }
 
-.blog-schedule-controls button,
-.blog-schedule-controls select {
+.blog-schedule-controls button {
   min-height: 38px;
   padding: 7px 14px;
   border: 1px solid rgba(0, 255, 255, 0.28);
@@ -480,11 +479,95 @@ body[data-theme="light"] .blog-schedule-panel {
   cursor: pointer;
 }
 
-body[data-theme="light"] .blog-schedule-controls button,
-body[data-theme="light"] .blog-schedule-controls select {
+body[data-theme="light"] .blog-schedule-controls button {
   border-color: rgba(22, 131, 138, 0.28);
   color: #17333a;
   background: rgba(22, 131, 138, 0.08);
+}
+
+.blog-schedule-week-picker {
+  position: relative;
+  min-width: 162px;
+}
+
+.blog-schedule-week-trigger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  white-space: nowrap;
+}
+
+.blog-schedule-week-trigger-icon {
+  font-size: 1.15em;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.blog-schedule-week-trigger[aria-expanded="true"] .blog-schedule-week-trigger-icon {
+  transform: rotate(180deg);
+}
+
+.blog-schedule-week-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 10;
+  width: min(260px, 72vw);
+  max-height: 280px;
+  overflow: auto;
+  padding: 8px;
+  border: 1px solid rgba(0, 255, 255, 0.26);
+  border-radius: 16px;
+  background: rgba(7, 11, 24, 0.96);
+  box-shadow: 0 18px 38px rgba(0, 0, 0, 0.38);
+  backdrop-filter: blur(14px);
+}
+
+.blog-schedule-week-option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 42px;
+  margin: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: var(--text-primary);
+  text-align: left;
+}
+
+.blog-schedule-week-option + .blog-schedule-week-option {
+  margin-top: 4px;
+}
+
+.blog-schedule-week-option:hover,
+.blog-schedule-week-option[aria-selected="true"] {
+  background: rgba(0, 255, 255, 0.14);
+}
+
+.blog-schedule-week-option span {
+  flex: 0 0 auto;
+  padding: 2px 8px;
+  border-radius: 999px;
+  color: #001f24;
+  background: var(--accent-color);
+  font-size: 0.76rem;
+}
+
+body[data-theme="light"] .blog-schedule-week-menu {
+  border-color: rgba(22, 131, 138, 0.24);
+  background: rgba(255, 252, 244, 0.98);
+  box-shadow: 0 18px 34px rgba(87, 69, 45, 0.16);
+}
+
+body[data-theme="light"] .blog-schedule-week-option:hover,
+body[data-theme="light"] .blog-schedule-week-option[aria-selected="true"] {
+  background: rgba(22, 131, 138, 0.1);
 }
 
 .blog-schedule-grid {
@@ -677,8 +760,12 @@ body[data-theme="light"] .blog-schedule-empty {
   }
 
   .blog-schedule-controls button,
-  .blog-schedule-controls select {
+  .blog-schedule-week-picker {
     flex: 1 1 124px;
+  }
+
+  .blog-schedule-week-menu {
+    width: 100%;
   }
 
   .blog-schedule-week {

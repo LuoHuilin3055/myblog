@@ -39,7 +39,13 @@
           </div>
           <div class="blog-schedule-controls" aria-label="日程周切换">
             <button type="button" id="schedule-prev-week">上一周</button>
-            <select id="schedule-week-select" aria-label="选择周"></select>
+            <div class="blog-schedule-week-picker" id="schedule-week-picker">
+              <button type="button" class="blog-schedule-week-trigger" id="schedule-week-trigger" aria-expanded="false" aria-controls="schedule-week-menu">
+                <span id="schedule-week-trigger-text">选择周</span>
+                <span class="blog-schedule-week-trigger-icon" aria-hidden="true">⌄</span>
+              </button>
+              <div class="blog-schedule-week-menu" id="schedule-week-menu" role="listbox" aria-label="选择周" hidden></div>
+            </div>
             <button type="button" id="schedule-current-week">本周</button>
             <button type="button" id="schedule-next-week">下一周</button>
           </div>
@@ -60,7 +66,10 @@
       const mobileView = document.getElementById('schedule-mobile-view');
       const emptyState = document.getElementById('schedule-empty');
       const title = document.getElementById('schedule-week-title');
-      const weekSelect = document.getElementById('schedule-week-select');
+      const weekPicker = document.getElementById('schedule-week-picker');
+      const weekTrigger = document.getElementById('schedule-week-trigger');
+      const weekTriggerText = document.getElementById('schedule-week-trigger-text');
+      const weekMenu = document.getElementById('schedule-week-menu');
       const startHour = Number(panel.dataset.startHour || 8);
       const endHour = Number(panel.dataset.endHour || 24);
       const dayNames = ['周一', '周二', '周三', '周四', '周五', '周六', '周日'];
@@ -111,11 +120,37 @@
 
       function buildWeekOptions() {
         const keys = Array.from(new Set([currentWeekKey, ...eventWeekKeys])).sort();
-        weekSelect.innerHTML = keys.map(key => {
+        weekMenu.innerHTML = keys.map(key => {
           const start = toDate(key);
           const end = addDays(start, 6);
-          return `<option value="${key}">${formatShort(start)} - ${formatShort(end)}</option>`;
+          const label = `${formatShort(start)} - ${formatShort(end)}`;
+          const current = key === currentWeekKey ? '<span>本周</span>' : '';
+          return `<button type="button" class="blog-schedule-week-option" role="option" data-week="${key}" aria-selected="false">${label}${current}</button>`;
         }).join('');
+      }
+
+      function getWeekLabel(key) {
+        const start = toDate(key);
+        const end = addDays(start, 6);
+        return `${formatShort(start)} - ${formatShort(end)}`;
+      }
+
+      function ensureWeekOption(key, position) {
+        if (weekMenu.querySelector(`[data-week="${key}"]`)) return;
+        const current = key === currentWeekKey ? '<span>本周</span>' : '';
+        const option = `<button type="button" class="blog-schedule-week-option" role="option" data-week="${key}" aria-selected="false">${getWeekLabel(key)}${current}</button>`;
+        weekMenu.insertAdjacentHTML(position, option);
+      }
+
+      function closeWeekMenu() {
+        weekMenu.hidden = true;
+        weekTrigger.setAttribute('aria-expanded', 'false');
+      }
+
+      function toggleWeekMenu() {
+        const willOpen = weekMenu.hidden;
+        weekMenu.hidden = !willOpen;
+        weekTrigger.setAttribute('aria-expanded', String(willOpen));
       }
 
       function categoryClass(category) {
@@ -133,7 +168,10 @@
         const hours = Array.from({ length: endHour - startHour + 1 }, (_, index) => startHour + index);
 
         title.textContent = `${formatShort(weekStart)} - ${formatShort(weekEnd)} 日程`;
-        weekSelect.value = visibleWeek;
+        weekTriggerText.textContent = getWeekLabel(visibleWeek);
+        weekMenu.querySelectorAll('.blog-schedule-week-option').forEach(option => {
+          option.setAttribute('aria-selected', String(option.dataset.week === visibleWeek));
+        });
         emptyState.hidden = weekEvents.length !== 0;
 
         weekView.innerHTML = `
@@ -197,29 +235,36 @@
       buildWeekOptions();
       render();
 
-      weekSelect.addEventListener('change', event => {
-        visibleWeek = event.target.value;
+      weekTrigger.addEventListener('click', toggleWeekMenu);
+      weekMenu.addEventListener('click', event => {
+        const option = event.target.closest('.blog-schedule-week-option');
+        if (!option) return;
+        visibleWeek = option.dataset.week;
+        closeWeekMenu();
         render();
+      });
+      document.addEventListener('click', event => {
+        if (!weekPicker.contains(event.target)) closeWeekMenu();
+      });
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') closeWeekMenu();
       });
       document.getElementById('schedule-prev-week').addEventListener('click', () => {
         visibleWeek = formatDate(addDays(toDate(visibleWeek), -7));
-        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
-          weekSelect.insertAdjacentHTML('afterbegin', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
-        }
+        ensureWeekOption(visibleWeek, 'afterbegin');
+        closeWeekMenu();
         render();
       });
       document.getElementById('schedule-next-week').addEventListener('click', () => {
         visibleWeek = formatDate(addDays(toDate(visibleWeek), 7));
-        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
-          weekSelect.insertAdjacentHTML('beforeend', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
-        }
+        ensureWeekOption(visibleWeek, 'beforeend');
+        closeWeekMenu();
         render();
       });
       document.getElementById('schedule-current-week').addEventListener('click', () => {
         visibleWeek = currentWeekKey;
-        if (![...weekSelect.options].some(option => option.value === visibleWeek)) {
-          weekSelect.insertAdjacentHTML('beforeend', `<option value="${visibleWeek}">${formatShort(toDate(visibleWeek))} - ${formatShort(addDays(toDate(visibleWeek), 6))}</option>`);
-        }
+        ensureWeekOption(visibleWeek, 'beforeend');
+        closeWeekMenu();
         render();
       });
     })();
