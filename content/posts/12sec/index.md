@@ -151,6 +151,95 @@ SecLeaf{Invoice_April_2026.docm}
 
 ---
 
+## 3.`wrong_turn`
+### 题目描述
+```txt
+There is Secure vault which has hard coded flag in it.
+
+Decrypt the password to unlock the vault.
+
+Flag Format: SecLeaf{}
+
+此处有一个安全保险库，其中硬编码了一个 Flag。
+
+解密密码以解锁该保险库。
+```
+
+### 解题思路
+1‍⃣**先查看文件类型**
+结果为：
+```txt
+wrong_turn: ELF 64-bit LSB shared object, x86-64, version 1 (SYSV), statically linked, no section header
+```
+所以可以看出
+```txt
+ELF 64-bit        64 位 Linux 可执行文件
+x86-64            x86-64 架构
+statically linked 静态链接
+no section header 没有 section header，可能被处理/加壳过
+```
+所以这是一道`Linux`逆向题
+
+2‍⃣ **运行程序**
+![](27.png)
+所以需要先给执行权限再运行
+```bash
+chmod +x wrong_turn
+./wrong_turn
+```
+运行后需要输入密码，随便输入一个得到`Access denied`的结果，所以程序逻辑大概是：
+```txt
+检查调试器
+    ↓
+提示输入密码
+    ↓
+校验密码
+    ↓
+密码正确就输出 flag
+```
+![](28.png)
+
+3‍⃣**先用`Strings`查看明文线索**
+能看到：
+```txt
+UPX!
+Debugger check
+Decrypting secure vault
+Enter password:
+Access gra
+9Leaf{ha'\d
+7Jts_agaZ}4
+```
+**`UPX`**——说明程序很可能被`UPX`加壳了
+
+>`UPX`（全称 `Ultimate Packer for eXecutables`）是一款免费、开源且跨平台的可执行文件压缩工具。它主要用于对二进制程序（如 `.exe`、`.dll`、`.so` 等）进行无损压缩，通常可将文件体积缩小`%50`至`%70`
+
+```txt
+9Leaf{ha'\d
+7Jts_agaZ}4
+```
+这看起来像被扰乱过的 `flag` 片段，但不是完整明文。所以光靠 `strings` 不够，需要进一步分析程序运行后的真实内容。
+
+4‍⃣**对程序进行脱壳并运行**
+```bash
+upx -d wrong_turn -o wrong_turn_unpacked
+chmod +x wrong_turn_unpacked
+./wrong_turn_unpacked
+```
+![](29.png)  ![](30.png)
+
+5‍⃣**重新查找字符串**
+![](31.png)
+
+---
+
+## 4.`schrodinger`
+### 题目描述
+```txt
+
+```
+
+
 # `OSINT`
 ## `Can_you_Find_Cafe`
 ### 题目描述
@@ -523,6 +612,89 @@ objdump 分析 vuln 函数
 覆盖返回地址，跳转到 win
         ↓
 获得 flag
+```
+
+---
+
+# `Cryptography`
+## 1.`Double Trouble`
+### 题目描述
+```txt
+We intercepted a suspicious encoded transmission during routine monitoring.
+
+Analysts believe the message was processed through multiple transformation layers before being transmitted.
+
+Can you recover the original message?
+
+我们在例行监控中截获了一条可疑的加密传输信息。
+
+分析人员认为，该信息在传输前经过了多层转换处理。
+
+您能恢复原始信息吗？
+```
+附件：
+```txt
+526e4a7757584a756333737759544e66655452734d325666616a526d5957
+64664d3245776148523166513d3d0a
+```
+
+### 解题思路
+1‍⃣ **判断第一层编码**
+由于附件内容仅含：
+```txt
+0-9
+a-f
+```
+且长度为**偶数**，所以可以判断它像**十六进制编码**
+使用`xxd`解码：
+```bash
+cat encrypted.txt | tr -d '\n' | xxd -r -p
+```
+执行后得到：
+```txt
+RnJwWXJuc3swYTNfeTRsM2VfajRmYWdfM2EwaHR1fQ==
+```
+
+2‍⃣ **判断第二层编码：**
+第二层很轻易地判断出为`base64`，所以继续解码：
+```txt
+cat encrypted.txt | tr -d '\n' | xxd -r -p | base64 -d
+```
+得到：
+```txt
+FrpYrns{0a3_y4l3e_j4fag_3a0htu}
+```
+因为得到的结果开头不是`SecLeaf`，所以还要进行解码
+
+3‍⃣ **第三层解码**
+试着对第三层的开头简单的替换：
+```txt
+F -> S
+r -> e
+p -> c
+Y -> L
+r -> e
+n -> a
+s -> f
+```
+推测替换规则为：
+```txt
+A ↔ N
+B ↔ O
+C ↔ P
+...
+a ↔ n
+b ↔ o
+c ↔ p
+...
+```
+后面查`AI`，为`ROT13`
+```bash
+cat encrypted.txt | tr -d '\n' | xxd -r -p | base64 -d | tr 'A-Za-z' 'N-ZA-Mn-za-m'
+```
+得到：
+```txt
+SecLeaf{0n3_l4y3r_w4snt_3n0ugh}
 ```
 
 ---
