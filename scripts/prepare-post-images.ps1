@@ -94,6 +94,12 @@ function Test-IsObsidianPastedImageName {
   return $FileName -match '^(?i)Pasted image \d{14}\.(png|jpe?g|gif|webp|svg|bmp|avif)$'
 }
 
+function Get-FileSha256 {
+  param([string]$FilePath)
+
+  return (Get-FileHash -LiteralPath $FilePath -Algorithm SHA256).Hash
+}
+
 function Get-NextImageName {
   param(
     [string]$Directory,
@@ -188,6 +194,49 @@ function Invoke-PrepareMarkdownImages {
   $imagePattern = '!\[(?<alt>[^\]]*)\]\((?<target>[^)\r\n]+)\)'
   $obsidianImagePattern = '!\[\[(?<target>[^\]\r\n]+)\]\]'
 
+  function Add-OrphanObsidianDeleteCandidates {
+    $articleImagesByHash = @{}
+    Get-ChildItem -LiteralPath $articleDir -File -Filter "img-*.*" | ForEach-Object {
+      if ($_.Extension -match '^(?i)\.(png|jpe?g|gif|webp|svg|bmp|avif)$') {
+        $hash = Get-FileSha256 -FilePath $_.FullName
+        if (-not $articleImagesByHash.ContainsKey($hash)) {
+          $articleImagesByHash[$hash] = $_.FullName
+        }
+      }
+    }
+
+    if ($articleImagesByHash.Count -eq 0) {
+      return
+    }
+
+    $current = Get-Item -LiteralPath $articleDir
+    while ($current) {
+      Get-ChildItem -LiteralPath $current.FullName -File -Filter "Pasted image *.*" | ForEach-Object {
+        if (-not (Test-IsObsidianPastedImageName $_.Name)) {
+          return
+        }
+
+        $source = $_.FullName
+        $hash = Get-FileSha256 -FilePath $source
+        if (-not $articleImagesByHash.ContainsKey($hash)) {
+          return
+        }
+
+        $target = $articleImagesByHash[$hash]
+        if ([System.IO.Path]::GetFullPath($source) -eq [System.IO.Path]::GetFullPath($target)) {
+          return
+        }
+
+        $deleteCandidates.Add([pscustomobject]@{
+          Source = $source
+          Target = $target
+        }) | Out-Null
+      }
+
+      $current = $current.Parent
+    }
+  }
+
   function Convert-LocalImageReference {
     param(
       [string]$PathText,
@@ -266,6 +315,10 @@ function Invoke-PrepareMarkdownImages {
 
   if ($updated -ne $content -and -not $WhatIfPreference) {
     Write-Utf8Text -FilePath $MarkdownFile.FullName -Text $updated
+  }
+
+  if ($DeleteOriginalObsidianImages) {
+    Add-OrphanObsidianDeleteCandidates
   }
 
   if ($DeleteOriginalObsidianImages -and $deleteCandidates.Count -gt 0) {
