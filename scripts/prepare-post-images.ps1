@@ -1,6 +1,9 @@
+[CmdletBinding(SupportsShouldProcess = $true)]
 param(
   [Parameter(Mandatory = $true, Position = 0)]
-  [string]$Path
+  [string]$Path,
+
+  [switch]$DeleteOriginalObsidianImages
 )
 
 $ErrorActionPreference = "Stop"
@@ -83,6 +86,12 @@ function Split-ObsidianImageTarget {
     Path = $path
     Alt = $alt
   }
+}
+
+function Test-IsObsidianPastedImageName {
+  param([string]$FileName)
+
+  return $FileName -match '^(?i)Pasted image \d{14}\.(png|jpe?g|gif|webp|svg|bmp|avif)$'
 }
 
 function Get-NextImageName {
@@ -173,6 +182,9 @@ function Invoke-PrepareMarkdownImages {
   $sourceToTarget = @{}
   $copied = New-Object System.Collections.Generic.List[string]
   $skippedMissing = New-Object System.Collections.Generic.List[string]
+  $deleteCandidates = New-Object System.Collections.Generic.List[object]
+  $deletedOriginals = New-Object System.Collections.Generic.List[string]
+  $skippedDeletes = New-Object System.Collections.Generic.List[string]
   $imagePattern = '!\[(?<alt>[^\]]*)\]\((?<target>[^)\r\n]+)\)'
   $obsidianImagePattern = '!\[\[(?<target>[^\]\r\n]+)\]\]'
 
@@ -181,7 +193,8 @@ function Invoke-PrepareMarkdownImages {
       [string]$PathText,
       [string]$Alt,
       [string]$Suffix,
-      [string]$OriginalText
+      [string]$OriginalText,
+      [bool]$IsObsidianReference = $false
     )
 
     $imagePath = $PathText.Trim()
@@ -209,9 +222,19 @@ function Invoke-PrepareMarkdownImages {
     } else {
       $targetName = Get-NextImageName -Directory $articleDir -Extension $extension
       $destination = Join-Path $articleDir $targetName
-      Copy-Item -LiteralPath $sourceItem.FullName -Destination $destination
+      if (-not $WhatIfPreference) {
+        Copy-Item -LiteralPath $sourceItem.FullName -Destination $destination
+      }
       $sourceToTarget[$sourceKey] = $targetName
       $copied.Add($targetName) | Out-Null
+    }
+
+    if ($script:DeleteOriginalObsidianImages -and $IsObsidianReference -and (Test-IsObsidianPastedImageName $sourceItem.Name)) {
+      $destinationPath = Join-Path $articleDir $targetName
+      $deleteCandidates.Add([pscustomobject]@{
+        Source = $sourceItem.FullName
+        Target = $destinationPath
+      }) | Out-Null
     }
 
     return "![{0}]({1}{2})" -f $Alt, $targetName, $Suffix
@@ -225,7 +248,8 @@ function Invoke-PrepareMarkdownImages {
       -PathText $target.Path `
       -Alt $match.Groups['alt'].Value `
       -Suffix $target.Suffix `
-      -OriginalText $match.Value
+      -OriginalText $match.Value `
+      -IsObsidianReference $false
   })
 
   $updated = [regex]::Replace($updated, $obsidianImagePattern, {
@@ -236,17 +260,50 @@ function Invoke-PrepareMarkdownImages {
       -PathText $target.Path `
       -Alt $target.Alt `
       -Suffix "" `
-      -OriginalText $match.Value
+      -OriginalText $match.Value `
+      -IsObsidianReference $true
   })
 
-  if ($updated -ne $content) {
+  if ($updated -ne $content -and -not $WhatIfPreference) {
     Write-Utf8Text -FilePath $MarkdownFile.FullName -Text $updated
+  }
+
+  if ($DeleteOriginalObsidianImages -and $deleteCandidates.Count -gt 0) {
+    $deleteCandidates |
+      Group-Object Source |
+      ForEach-Object {
+        $candidate = $_.Group[0]
+        $source = $candidate.Source
+        $target = $candidate.Target
+
+        if (-not (Test-Path -LiteralPath $source -PathType Leaf)) {
+          $skippedDeletes.Add("$source (source missing)") | Out-Null
+          return
+        }
+
+        if (-not $WhatIfPreference -and -not (Test-Path -LiteralPath $target -PathType Leaf)) {
+          $skippedDeletes.Add("$source (copied target missing)") | Out-Null
+          return
+        }
+
+        if ([System.IO.Path]::GetFullPath($source) -eq [System.IO.Path]::GetFullPath($target)) {
+          $skippedDeletes.Add("$source (source is target)") | Out-Null
+          return
+        }
+
+        if ($PSCmdlet.ShouldProcess($source, "Delete original Obsidian pasted image")) {
+          Remove-Item -LiteralPath $source -Force
+          $deletedOriginals.Add($source) | Out-Null
+        }
+      }
   }
 
   [pscustomobject]@{
     File = $MarkdownFile.FullName
     Copied = @($copied)
     Missing = @($skippedMissing | Sort-Object -Unique)
+    Deleted = @($deletedOriginals)
+    DeleteSkipped = @($skippedDeletes)
   }
 }
 
@@ -257,12 +314,18 @@ if ($markdownFiles.Count -eq 0) {
 }
 
 $totalCopied = 0
+$totalDeleted = 0
 foreach ($markdownFile in $markdownFiles) {
   $result = Invoke-PrepareMarkdownImages -MarkdownFile $markdownFile
   $totalCopied += $result.Copied.Count
+  $totalDeleted += $result.Deleted.Count
 
   Write-Host "Processed: $($result.File)"
-  Write-Host "Copied images: $($result.Copied.Count)"
+  if ($WhatIfPreference) {
+    Write-Host "Images to copy: $($result.Copied.Count)"
+  } else {
+    Write-Host "Copied images: $($result.Copied.Count)"
+  }
   if ($result.Copied.Count -gt 0) {
     $result.Copied | ForEach-Object { Write-Host "  $_" }
   }
@@ -270,6 +333,24 @@ foreach ($markdownFile in $markdownFiles) {
     Write-Warning "Skipped missing local images:"
     $result.Missing | ForEach-Object { Write-Warning "  $_" }
   }
+  if ($DeleteOriginalObsidianImages) {
+    if ($WhatIfPreference) {
+      Write-Host "Obsidian originals to delete: see WhatIf messages above"
+    } else {
+      Write-Host "Deleted Obsidian originals: $($result.Deleted.Count)"
+    }
+    if ($result.Deleted.Count -gt 0) {
+      $result.Deleted | ForEach-Object { Write-Host "  $_" }
+    }
+    if ($result.DeleteSkipped.Count -gt 0) {
+      Write-Warning "Skipped deleting Obsidian originals:"
+      $result.DeleteSkipped | ForEach-Object { Write-Warning "  $_" }
+    }
+  }
 }
 
-Write-Host "Done. Markdown files: $($markdownFiles.Count), copied images: $totalCopied"
+if ($WhatIfPreference) {
+  Write-Host "Done. Markdown files: $($markdownFiles.Count), images to copy: $totalCopied. No files were changed because -WhatIf was used."
+} else {
+  Write-Host "Done. Markdown files: $($markdownFiles.Count), copied images: $totalCopied, deleted Obsidian originals: $totalDeleted"
+}

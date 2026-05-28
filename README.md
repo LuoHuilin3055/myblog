@@ -253,6 +253,20 @@ content/posts/my-post/
 ![](img-001.png)
 ```
 
+如果希望整理完成后顺手删除 Obsidian 生成的原始粘贴图，可以先用 `-WhatIf` 预览：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\my-post -DeleteOriginalObsidianImages -WhatIf
+```
+
+确认列表没有问题后，再真正删除：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\my-post -DeleteOriginalObsidianImages
+```
+
+这个删除只会处理已经成功复制并改写引用的 `Pasted image 20260528170436.png` 这类 Obsidian 粘贴图片；普通图片、网络图片、公共资源、以及文章目录里的 `img-001.png` 不会被删除。
+
 ## 列表页横幅图片
 
 文章列表、标签页、归档页、碎碎念、日程等页面顶部的横向大背景横幅由 `config.toml` 中的 `page_header_image` 控制：
