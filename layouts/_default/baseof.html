@@ -269,6 +269,8 @@
                             alpha: 0,
                             scale: 0,
                             gravity: 0.3,
+                            age: 0,
+                            fadeAfter: 8,
                             fadeStarted: false
                         });
                     }
@@ -286,11 +288,18 @@
                         particle.x += particle.vx;
                         particle.y += particle.vy + particle.gravity;
                         particle.gravity += 0.03;
-                        particle.alpha = Math.min(particle.alpha + 0.1, 1);
+                        particle.age += 1;
                         particle.scale = Math.min(particle.scale + 0.1, 1);
 
-                        if (particle.alpha > 0.7 || particle.fadeStarted) {
+                        if (!particle.fadeStarted) {
+                            particle.alpha = Math.min(particle.alpha + 0.1, 1);
+                        }
+
+                        if (particle.age >= particle.fadeAfter) {
                             particle.fadeStarted = true;
+                        }
+
+                        if (particle.fadeStarted) {
                             particle.alpha -= 0.032;
                         }
 
