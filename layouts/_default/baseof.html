@@ -208,7 +208,7 @@
             });
             
             {{ if .Site.Params.enable_click_fireworks }}
-            // 轻量 Canvas 点击烟花：避免频繁创建 DOM 节点导致卡顿
+            // Canvas 点击烟花：保留旧版粒子观感，避免频繁创建 DOM 节点导致卡顿
             if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
                 const canvas = document.createElement('canvas');
                 const ctx = canvas.getContext('2d', { alpha: true });
@@ -216,7 +216,7 @@
                     return;
                 }
                 const particles = [];
-                const maxParticles = 90;
+                const maxParticles = 120;
                 const clickCooldown = 200;
                 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
                 let animationFrame = null;
@@ -250,23 +250,26 @@
 
                 function createFireworks(x, y) {
                     const colors = getFireworkColors();
-                    const count = isCoarsePointer ? 10 : 16;
+                    const count = isCoarsePointer ? 14 : 24;
                     const availableSlots = Math.max(maxParticles - particles.length, 0);
                     const particleCount = Math.min(count, availableSlots);
 
                     for (let i = 0; i < particleCount; i++) {
-                        const angle = (Math.PI * 2 / particleCount) * i + (Math.random() - 0.5) * 0.35;
-                        const speed = isCoarsePointer ? 2 + Math.random() * 1.6 : 2.4 + Math.random() * 2.2;
+                        const angle = (Math.PI * 2 / particleCount) * i + Math.random() * 0.2;
+                        const distance = (isCoarsePointer ? 48 : 60) + Math.random() * (isCoarsePointer ? 26 : 40);
+                        const speed = distance * 0.06;
 
                         particles.push({
                             x,
                             y,
                             vx: Math.cos(angle) * speed,
                             vy: Math.sin(angle) * speed,
-                            size: 2 + Math.random() * 2.5,
+                            size: 2 + Math.random() * 4,
                             color: colors[Math.floor(Math.random() * colors.length)],
-                            life: 1,
-                            decay: 0.026 + Math.random() * 0.012
+                            alpha: 0,
+                            scale: 0,
+                            gravity: 0.3,
+                            fadeStarted: false
                         });
                     }
 
@@ -281,21 +284,27 @@
                     for (let i = particles.length - 1; i >= 0; i--) {
                         const particle = particles[i];
                         particle.x += particle.vx;
-                        particle.y += particle.vy;
-                        particle.vy += 0.055;
-                        particle.life -= particle.decay;
+                        particle.y += particle.vy + particle.gravity;
+                        particle.gravity += 0.03;
+                        particle.alpha = Math.min(particle.alpha + 0.1, 1);
+                        particle.scale = Math.min(particle.scale + 0.1, 1);
 
-                        if (particle.life <= 0) {
+                        if (particle.alpha > 0.7 || particle.fadeStarted) {
+                            particle.fadeStarted = true;
+                            particle.alpha -= 0.032;
+                        }
+
+                        if (particle.alpha <= 0) {
                             particles.splice(i, 1);
                             continue;
                         }
 
-                        ctx.globalAlpha = Math.max(particle.life, 0);
+                        ctx.globalAlpha = Math.max(particle.alpha, 0);
                         ctx.fillStyle = particle.color;
                         ctx.shadowColor = particle.color;
-                        ctx.shadowBlur = isCoarsePointer ? 0 : 4;
+                        ctx.shadowBlur = isCoarsePointer ? 3 : Math.min(particle.size * 2, 9);
                         ctx.beginPath();
-                        ctx.arc(particle.x, particle.y, particle.size * particle.life, 0, Math.PI * 2);
+                        ctx.arc(particle.x, particle.y, particle.size * particle.scale, 0, Math.PI * 2);
                         ctx.fill();
                     }
 
