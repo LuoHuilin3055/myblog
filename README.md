@@ -76,6 +76,32 @@ title = "Your Blog"
   enable_image_slider = true
 ```
 
+## SEO 与分享
+
+模板会自动生成基础 SEO 和分享信息，包括 `description`、canonical、RSS、Open Graph、Twitter Card，以及首页/文章页的 JSON-LD 结构化数据。
+
+站点默认描述和默认分享图来自 `config.toml`：
+
+```toml
+[params]
+  description = "站点描述"
+  featured_image = "images/background.jpg"
+```
+
+单篇文章可以在 front matter 中覆盖分享描述和图片：
+
+```yaml
+description: "这篇文章的一句话简介"
+cover: "images/post-cover.jpg"
+```
+
+也可以使用 `images` 数组，模板会优先取第一张：
+
+```yaml
+images:
+  - "images/post-share.jpg"
+```
+
 评论区使用 Waline，可在 `params.comments` 中配置。默认关闭；需要评论区时，把 `enable` 改为 `true`，再填写 `server_url`：
 
 ```toml

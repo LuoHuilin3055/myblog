@@ -7,6 +7,7 @@ theme = "theme2"
   site_title = "Your Name"
   description = "欢迎来到我的博客"
   author = "Your Name"
+  # 默认分享图；单篇文章可用 cover 或 images 覆盖
   featured_image = "images/background.jpg"
   page_header_image = "images/background.jpg"
   home_text = "写下你想展示在首页的话"
