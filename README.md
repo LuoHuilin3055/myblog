@@ -217,6 +217,7 @@ content/posts/my-post/
 ```markdown
 ![](D:\Pictures\截图 2026-05-28.png)
 ![](..\临时图片\demo.jpg)
+![[Pasted image 20260528170436.png]]
 ```
 
 写完后在仓库根目录运行：
@@ -239,6 +240,18 @@ content/posts/my-post/
 ```
 
 脚本默认只复制不移动原图；会跳过 `http/https` 网络图片、`images/...` 公共资源，以及已经整理好的 `img-001.png` 这类图片。`static/images/` 仍然适合放头像、背景图、封面图和多篇文章共用的素材。
+
+如果你在 Obsidian 里粘贴图片，脚本也会把 `![[图片名.png]]` 转成标准 Markdown 图片语法，并复制到文章文件夹，例如：
+
+```markdown
+![[Pasted image 20260528170436.png]]
+```
+
+会整理成：
+
+```markdown
+![](img-001.png)
+```
 
 ## 列表页横幅图片
 

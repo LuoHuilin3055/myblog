@@ -65,6 +65,26 @@ function Split-MarkdownImageTarget {
   }
 }
 
+function Split-ObsidianImageTarget {
+  param([string]$Target)
+
+  $parts = $Target.Trim() -split '\|', 2
+  $path = $parts[0].Trim()
+  $alt = ""
+
+  if ($parts.Count -gt 1) {
+    $candidateAlt = $parts[1].Trim()
+    if ($candidateAlt -notmatch '^\d+(x\d+)?$') {
+      $alt = $candidateAlt
+    }
+  }
+
+  return [pscustomobject]@{
+    Path = $path
+    Alt = $alt
+  }
+}
+
 function Get-NextImageName {
   param(
     [string]$Directory,
@@ -88,6 +108,39 @@ function Get-NextImageName {
   } while (Test-Path -LiteralPath $target)
 
   return $name
+}
+
+function Resolve-LocalImageSource {
+  param(
+    [string]$ArticleDirectory,
+    [string]$PathText
+  )
+
+  if ([System.IO.Path]::IsPathRooted($PathText)) {
+    return $PathText
+  }
+
+  $sourcePath = Join-Path $ArticleDirectory $PathText
+  if (Test-Path -LiteralPath $sourcePath -PathType Leaf) {
+    return $sourcePath
+  }
+
+  $hasDirectory = $PathText.Contains('/') -or $PathText.Contains('\')
+  if ($hasDirectory) {
+    return $sourcePath
+  }
+
+  $current = Get-Item -LiteralPath $ArticleDirectory
+  while ($current) {
+    $candidate = Join-Path $current.FullName $PathText
+    if (Test-Path -LiteralPath $candidate -PathType Leaf) {
+      return $candidate
+    }
+
+    $current = $current.Parent
+  }
+
+  return $sourcePath
 }
 
 function Get-MarkdownFiles {
@@ -121,33 +174,33 @@ function Invoke-PrepareMarkdownImages {
   $copied = New-Object System.Collections.Generic.List[string]
   $skippedMissing = New-Object System.Collections.Generic.List[string]
   $imagePattern = '!\[(?<alt>[^\]]*)\]\((?<target>[^)\r\n]+)\)'
+  $obsidianImagePattern = '!\[\[(?<target>[^\]\r\n]+)\]\]'
 
-  $updated = [regex]::Replace($content, $imagePattern, {
-    param($match)
+  function Convert-LocalImageReference {
+    param(
+      [string]$PathText,
+      [string]$Alt,
+      [string]$Suffix,
+      [string]$OriginalText
+    )
 
-    $alt = $match.Groups['alt'].Value
-    $target = Split-MarkdownImageTarget $match.Groups['target'].Value
-    $pathText = $target.Path
+    $imagePath = $PathText.Trim()
 
-    if (Test-IsSkippedImagePath $pathText) {
-      return $match.Value
+    if (Test-IsSkippedImagePath $imagePath) {
+      return $OriginalText
     }
 
-    if ([System.IO.Path]::IsPathRooted($pathText)) {
-      $sourcePath = $pathText
-    } else {
-      $sourcePath = Join-Path $articleDir $pathText
-    }
+    $sourcePath = Resolve-LocalImageSource -ArticleDirectory $articleDir -PathText $imagePath
 
     if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
-      $skippedMissing.Add($pathText) | Out-Null
-      return $match.Value
+      $skippedMissing.Add($imagePath) | Out-Null
+      return $OriginalText
     }
 
     $sourceItem = Get-Item -LiteralPath $sourcePath
     $extension = $sourceItem.Extension
     if ($extension -notmatch '^(?i)\.(png|jpe?g|gif|webp|svg|bmp|avif)$') {
-      return $match.Value
+      return $OriginalText
     }
 
     $sourceKey = $sourceItem.FullName.ToLowerInvariant()
@@ -161,7 +214,29 @@ function Invoke-PrepareMarkdownImages {
       $copied.Add($targetName) | Out-Null
     }
 
-    return "![{0}]({1}{2})" -f $alt, $targetName, $target.Suffix
+    return "![{0}]({1}{2})" -f $Alt, $targetName, $Suffix
+  }
+
+  $updated = [regex]::Replace($content, $imagePattern, {
+    param($match)
+
+    $target = Split-MarkdownImageTarget $match.Groups['target'].Value
+    Convert-LocalImageReference `
+      -PathText $target.Path `
+      -Alt $match.Groups['alt'].Value `
+      -Suffix $target.Suffix `
+      -OriginalText $match.Value
+  })
+
+  $updated = [regex]::Replace($updated, $obsidianImagePattern, {
+    param($match)
+
+    $target = Split-ObsidianImageTarget $match.Groups['target'].Value
+    Convert-LocalImageReference `
+      -PathText $target.Path `
+      -Alt $target.Alt `
+      -Suffix "" `
+      -OriginalText $match.Value
   })
 
   if ($updated -ne $content) {
