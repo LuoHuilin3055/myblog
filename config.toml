@@ -34,7 +34,7 @@ theme = "theme2"
     login = "enable"
 
   [params.schedule]
-    enable = true
+    enable = false
     title = "日程"
     subtitle = "记录每个时间段在做什么"
     start_hour = 8
@@ -70,11 +70,7 @@ theme = "theme2"
     name = "碎碎念"
     url = "/murmur/"
     weight = 30
-  [[menu.main]]
-    name = "日程"
-    url = "/schedule/"
-    weight = 35
-
+ 
 [markup]
   defaultMarkdownHandler = "goldmark"
   [markup.goldmark]
