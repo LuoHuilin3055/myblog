@@ -233,13 +233,6 @@ chmod +x wrong_turn_unpacked
 
 ---
 
-## 4.`schrodinger`
-### 题目描述
-```txt
-
-```
-
-
 # `OSINT`
 ## `Can_you_Find_Cafe`
 ### 题目描述
@@ -704,3 +697,20 @@ SecLeaf{0n3_l4y3r_w4snt_3n0ugh}
 - 报名这场比赛时我只是想着给我的周末“找事干”，同时还没有用`GPT`打过比赛，另外还有在过去大半年也断断续续学了点（真的只有一点），想着检测一下学习成果。有点不好意思的是，比赛刚开始时除了签到题我是自己做的外，其他题目都是直接用`AI`梭（虽然这后来看了下其中很多题也差不多属于签到题，连我这样的水平也能一眼看到解题思路）。“二战转折点”在`Can_you_Find_Cafe`出来后，我已经从最开始打比赛时追求排名的激情转向了“得把梭出来的题自己做一遍”，于是就尝试了一下那道社工题。
 ![](12.png)
 （这是我们队成绩最好的一次了）
+
+- [ ] `schrodinger`
+- [ ] `vector_ghost`
+- [ ] `terminal_panite`
+- [ ] `Ghost Signal`
+- `not_all_tools_agree`
+- `one_billion_tries`
+- `memory_bin`
+- `backup_leak`
+- `emoji-exe`
+- `DHURANDHAR`
+- `View`
+- `Logs`
+- `Gotta Find emall!`
+- `EGO`
+- `Treasure Box`
+- `SecureVault API`
