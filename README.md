@@ -114,7 +114,55 @@ title = "Your Blog"
 hugo new posts/my-new-post.md
 ```
 
+推荐使用脚本创建 Page Bundle，新文章会默认是草稿：
+
+```powershell
+.\scripts\new-post.ps1 "我的新文章"
+```
+
+生成结构如下：
+
+```text
+content/posts/我的新文章/
+└── index.md
+```
+
+生成的 `index.md` 会包含明确的 `draft: true`。写完并确认要发布时，再手动改成：
+
+```yaml
+draft: false
+```
+
 文章内容属于个人数据。如果要把本仓库改造成通用模板，建议把真实文章替换为示例文章，或者将主题部分抽成独立仓库。
+
+### 推荐写作流程
+
+1. 新建文章：
+
+```powershell
+.\scripts\new-post.ps1 "文章标题"
+```
+
+2. 写正文，并临时插入本地图片路径。
+3. 整理文章图片：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\文章标题
+```
+
+也可以直接传入 Markdown 文件：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\文章标题\index.md
+```
+
+4. 发布前检查：
+
+```powershell
+.\scripts\check-blog.ps1
+```
+
+5. 确认要发布时，把文章 front matter 中的 `draft: true` 改为 `draft: false`，再提交推送。
 
 ## 图片路径
 
@@ -149,6 +197,12 @@ content/posts/my-post/
 
 ```powershell
 .\scripts\prepare-post-images.ps1 content\posts\my-post\index.md
+```
+
+如果传入的是文章文件夹，脚本会优先处理文件夹里的 `index.md`：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\my-post
 ```
 
 脚本会把本地图片复制到文章所在文件夹，并把 Markdown 自动改成稳定的同目录相对路径：
@@ -270,6 +324,14 @@ Waline 默认支持昵称、邮箱、网址等访客信息；如果后续需要�
 2. `Settings -> Pages` 是否选择了 `GitHub Actions`。
 3. 图片是否位于 `static/images/` 或文章同目录资源中。
 4. Markdown 里是否写死了旧仓库名、旧域名或大小写不一致的路径。
+
+提交前也可以先运行：
+
+```powershell
+.\scripts\check-blog.ps1
+```
+
+它会检查 Hugo 构建、空 `draft:`、失效图片路径、超过 2MB 的图片，以及文章里硬编码的 `/myblog/` 或 `github.io` 链接。这个脚本只报告问题，不会修改文章内容。
 
 ## 框架化建议
 

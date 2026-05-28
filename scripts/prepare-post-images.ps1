@@ -1,6 +1,6 @@
 param(
   [Parameter(Mandatory = $true, Position = 0)]
-  [string]$MarkdownPath
+  [string]$Path
 )
 
 $ErrorActionPreference = "Stop"
@@ -76,67 +76,111 @@ function Get-NextImageName {
   return $name
 }
 
-$resolvedMarkdown = Resolve-Path -LiteralPath $MarkdownPath
-$markdownFile = Get-Item -LiteralPath $resolvedMarkdown
-$articleDir = $markdownFile.Directory.FullName
-$content = Get-Content -LiteralPath $markdownFile.FullName -Raw
-$sourceToTarget = @{}
-$copied = New-Object System.Collections.Generic.List[string]
-$skippedMissing = New-Object System.Collections.Generic.List[string]
+function Get-MarkdownFiles {
+  param([string]$InputPath)
 
-$imagePattern = '!\[(?<alt>[^\]]*)\]\((?<target>[^)\r\n]+)\)'
-$updated = [regex]::Replace($content, $imagePattern, {
-  param($match)
+  $resolved = Resolve-Path -LiteralPath $InputPath
+  $item = Get-Item -LiteralPath $resolved
 
-  $alt = $match.Groups['alt'].Value
-  $target = Split-MarkdownImageTarget $match.Groups['target'].Value
-  $pathText = $target.Path
+  if ($item.PSIsContainer) {
+    $bundleIndex = Join-Path $item.FullName "index.md"
+    if (Test-Path -LiteralPath $bundleIndex -PathType Leaf) {
+      return @(Get-Item -LiteralPath $bundleIndex)
+    }
 
-  if (Test-IsSkippedImagePath $pathText) {
-    return $match.Value
+    return @(Get-ChildItem -LiteralPath $item.FullName -File -Filter "*.md" | Sort-Object FullName)
   }
 
-  if ([System.IO.Path]::IsPathRooted($pathText)) {
-    $sourcePath = $pathText
-  } else {
-    $sourcePath = Join-Path $articleDir $pathText
+  if ($item.Extension -ine ".md") {
+    throw "Input file must be a Markdown file: $($item.FullName)"
   }
 
-  if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
-    $skippedMissing.Add($pathText) | Out-Null
-    return $match.Value
-  }
-
-  $sourceItem = Get-Item -LiteralPath $sourcePath
-  $extension = $sourceItem.Extension
-  if ($extension -notmatch '^(?i)\.(png|jpe?g|gif|webp|svg|bmp|avif)$') {
-    return $match.Value
-  }
-
-  $sourceKey = $sourceItem.FullName.ToLowerInvariant()
-  if ($sourceToTarget.ContainsKey($sourceKey)) {
-    $targetName = $sourceToTarget[$sourceKey]
-  } else {
-    $targetName = Get-NextImageName -Directory $articleDir -Extension $extension
-    $destination = Join-Path $articleDir $targetName
-    Copy-Item -LiteralPath $sourceItem.FullName -Destination $destination
-    $sourceToTarget[$sourceKey] = $targetName
-    $copied.Add($targetName) | Out-Null
-  }
-
-  return "![{0}]({1}{2})" -f $alt, $targetName, $target.Suffix
-})
-
-if ($updated -ne $content) {
-  Set-Content -LiteralPath $markdownFile.FullName -Value $updated -NoNewline -Encoding UTF8
+  return @($item)
 }
 
-Write-Host "Processed: $($markdownFile.FullName)"
-Write-Host "Copied images: $($copied.Count)"
-if ($copied.Count -gt 0) {
-  $copied | ForEach-Object { Write-Host "  $_" }
+function Invoke-PrepareMarkdownImages {
+  param([System.IO.FileInfo]$MarkdownFile)
+
+  $articleDir = $MarkdownFile.Directory.FullName
+  $content = Get-Content -LiteralPath $MarkdownFile.FullName -Raw
+  $sourceToTarget = @{}
+  $copied = New-Object System.Collections.Generic.List[string]
+  $skippedMissing = New-Object System.Collections.Generic.List[string]
+  $imagePattern = '!\[(?<alt>[^\]]*)\]\((?<target>[^)\r\n]+)\)'
+
+  $updated = [regex]::Replace($content, $imagePattern, {
+    param($match)
+
+    $alt = $match.Groups['alt'].Value
+    $target = Split-MarkdownImageTarget $match.Groups['target'].Value
+    $pathText = $target.Path
+
+    if (Test-IsSkippedImagePath $pathText) {
+      return $match.Value
+    }
+
+    if ([System.IO.Path]::IsPathRooted($pathText)) {
+      $sourcePath = $pathText
+    } else {
+      $sourcePath = Join-Path $articleDir $pathText
+    }
+
+    if (-not (Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+      $skippedMissing.Add($pathText) | Out-Null
+      return $match.Value
+    }
+
+    $sourceItem = Get-Item -LiteralPath $sourcePath
+    $extension = $sourceItem.Extension
+    if ($extension -notmatch '^(?i)\.(png|jpe?g|gif|webp|svg|bmp|avif)$') {
+      return $match.Value
+    }
+
+    $sourceKey = $sourceItem.FullName.ToLowerInvariant()
+    if ($sourceToTarget.ContainsKey($sourceKey)) {
+      $targetName = $sourceToTarget[$sourceKey]
+    } else {
+      $targetName = Get-NextImageName -Directory $articleDir -Extension $extension
+      $destination = Join-Path $articleDir $targetName
+      Copy-Item -LiteralPath $sourceItem.FullName -Destination $destination
+      $sourceToTarget[$sourceKey] = $targetName
+      $copied.Add($targetName) | Out-Null
+    }
+
+    return "![{0}]({1}{2})" -f $alt, $targetName, $target.Suffix
+  })
+
+  if ($updated -ne $content) {
+    Set-Content -LiteralPath $MarkdownFile.FullName -Value $updated -NoNewline -Encoding UTF8
+  }
+
+  [pscustomobject]@{
+    File = $MarkdownFile.FullName
+    Copied = @($copied)
+    Missing = @($skippedMissing | Sort-Object -Unique)
+  }
 }
-if ($skippedMissing.Count -gt 0) {
-  Write-Warning "Skipped missing local images:"
-  $skippedMissing | Sort-Object -Unique | ForEach-Object { Write-Warning "  $_" }
+
+$markdownFiles = Get-MarkdownFiles -InputPath $Path
+if ($markdownFiles.Count -eq 0) {
+  Write-Warning "No Markdown files found."
+  return
 }
+
+$totalCopied = 0
+foreach ($markdownFile in $markdownFiles) {
+  $result = Invoke-PrepareMarkdownImages -MarkdownFile $markdownFile
+  $totalCopied += $result.Copied.Count
+
+  Write-Host "Processed: $($result.File)"
+  Write-Host "Copied images: $($result.Copied.Count)"
+  if ($result.Copied.Count -gt 0) {
+    $result.Copied | ForEach-Object { Write-Host "  $_" }
+  }
+  if ($result.Missing.Count -gt 0) {
+    Write-Warning "Skipped missing local images:"
+    $result.Missing | ForEach-Object { Write-Warning "  $_" }
+  }
+}
+
+Write-Host "Done. Markdown files: $($markdownFiles.Count), copied images: $totalCopied"
