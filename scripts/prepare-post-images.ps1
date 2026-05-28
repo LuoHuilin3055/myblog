@@ -4,6 +4,20 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+$Utf8NoBom = New-Object System.Text.UTF8Encoding($false)
+
+function Read-Utf8Text {
+  param([string]$FilePath)
+  return [System.IO.File]::ReadAllText($FilePath, [System.Text.Encoding]::UTF8)
+}
+
+function Write-Utf8Text {
+  param(
+    [string]$FilePath,
+    [string]$Text
+  )
+  [System.IO.File]::WriteAllText($FilePath, $Text, $script:Utf8NoBom)
+}
 
 function Test-IsSkippedImagePath {
   param([string]$PathText)
@@ -102,7 +116,7 @@ function Invoke-PrepareMarkdownImages {
   param([System.IO.FileInfo]$MarkdownFile)
 
   $articleDir = $MarkdownFile.Directory.FullName
-  $content = Get-Content -LiteralPath $MarkdownFile.FullName -Raw
+  $content = Read-Utf8Text -FilePath $MarkdownFile.FullName
   $sourceToTarget = @{}
   $copied = New-Object System.Collections.Generic.List[string]
   $skippedMissing = New-Object System.Collections.Generic.List[string]
@@ -151,7 +165,7 @@ function Invoke-PrepareMarkdownImages {
   })
 
   if ($updated -ne $content) {
-    Set-Content -LiteralPath $MarkdownFile.FullName -Value $updated -NoNewline -Encoding UTF8
+    Write-Utf8Text -FilePath $MarkdownFile.FullName -Text $updated
   }
 
   [pscustomobject]@{

