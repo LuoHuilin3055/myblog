@@ -127,6 +127,39 @@ content/posts/my-post/image.png   -> 同目录文章中写 ![](image.png)
 
 不建议在文章里写死 `/myblog/...` 或 `https://xxx.github.io/...`。仓库名变更、fork 到别人账号、或本地预览时，这类绝对路径最容易失效。
 
+### 图片写作简化
+
+推荐新文章使用 Page Bundle，也就是“一篇文章一个文件夹”：
+
+```text
+content/posts/my-post/
+├── index.md
+├── img-001.png
+└── img-002.jpg
+```
+
+写文章时可以先直接插入本地图片路径，例如：
+
+```markdown
+![](D:\Pictures\截图 2026-05-28.png)
+![](..\临时图片\demo.jpg)
+```
+
+写完后在仓库根目录运行：
+
+```powershell
+.\scripts\prepare-post-images.ps1 content\posts\my-post\index.md
+```
+
+脚本会把本地图片复制到文章所在文件夹，并把 Markdown 自动改成稳定的同目录相对路径：
+
+```markdown
+![](img-001.png)
+![](img-002.jpg)
+```
+
+脚本默认只复制不移动原图；会跳过 `http/https` 网络图片、`images/...` 公共资源，以及已经整理好的 `img-001.png` 这类图片。`static/images/` 仍然适合放头像、背景图、封面图和多篇文章共用的素材。
+
 ## 列表页横幅图片
 
 文章列表、标签页、归档页、碎碎念、日程等页面顶部的横向大背景横幅由 `config.toml` 中的 `page_header_image` 控制：
