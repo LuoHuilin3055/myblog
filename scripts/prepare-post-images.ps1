@@ -39,7 +39,7 @@ function Test-IsSkippedImagePath {
     return $true
   }
 
-  if ($slashPath -match '^(?i)img-\d{3}\.[a-z0-9]+$') {
+  if ($slashPath -match '^(?i)(\.\./)?img-\d{3}\.[a-z0-9]+$') {
     return $true
   }
 
@@ -185,6 +185,7 @@ function Invoke-PrepareMarkdownImages {
 
   $articleDir = $MarkdownFile.Directory.FullName
   $content = Read-Utf8Text -FilePath $MarkdownFile.FullName
+  $usesBundleRelativeImages = $MarkdownFile.BaseName -ieq "index" -or $MarkdownFile.BaseName -ieq "_index"
   $sourceToTarget = @{}
   $copied = New-Object System.Collections.Generic.List[string]
   $skippedMissing = New-Object System.Collections.Generic.List[string]
@@ -286,7 +287,12 @@ function Invoke-PrepareMarkdownImages {
       }) | Out-Null
     }
 
-    return "![{0}]({1}{2})" -f $Alt, $targetName, $Suffix
+    $targetReference = $targetName
+    if (-not $usesBundleRelativeImages) {
+      $targetReference = "../$targetName"
+    }
+
+    return "![{0}]({1}{2})" -f $Alt, $targetReference, $Suffix
   }
 
   $updated = [regex]::Replace($content, $imagePattern, {
