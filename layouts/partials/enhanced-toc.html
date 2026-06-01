@@ -84,32 +84,7 @@
 </div>
 {{ end }}
 
-<!-- 回顶按钮 -->
-<div class="blog-backtop" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999;">
-  <button 
-    class="blog-backtop-button"
-    aria-label="回到顶部"
-    onclick="window.scrollTo({top: 0, behavior: 'smooth'})"
-    style="
-      background: linear-gradient(135deg, rgba(0,255,255,0.3), rgba(0,255,255,0.1));
-      border: 2px solid #00ffff;
-      color: #00ffff;
-      padding: 15px 20px;
-      border-radius: 50%;
-      cursor: pointer;
-      font-size: 1.4em;
-      transition: all 0.3s ease;
-      box-shadow: 0 6px 20px rgba(0,255,255,0.5);
-      backdrop-filter: blur(10px);
-      opacity: 1;
-      visibility: visible;
-    "
-    onmouseover="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.4), rgba(0,255,255,0.2))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 8px 25px rgba(0,255,255,0.7)'; this.style.transform='translateY(-5px)'
-    onmouseout="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.3), rgba(0,255,255,0.1))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 6px 20px rgba(0,255,255,0.5)'; this.style.transform='translateY(0)'
-  >
-    ↑
-  </button>
-</div>
+{{ partial "backtop.html" . }}
 
 <style>
   .enhanced-toc ul {

@@ -125,12 +125,25 @@
 <script>
   document.addEventListener('DOMContentLoaded', function() {
     const heroBg = document.getElementById('hero-bg');
-    if (heroBg) {
-      window.addEventListener('scroll', function() {
-        const scrolled = window.pageYOffset;
-        const rate = scrolled * 0.2;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const coarsePointer = window.matchMedia('(pointer: coarse)').matches;
+
+    if (heroBg && !reduceMotion && !coarsePointer) {
+      let ticking = false;
+
+      function updateHeroParallax() {
+        const rate = window.pageYOffset * 0.2;
         heroBg.style.transform = 'scale(1) translateY(' + rate + 'px)';
-      });
+        ticking = false;
+      }
+
+      window.addEventListener('scroll', function() {
+        if (ticking) {
+          return;
+        }
+        ticking = true;
+        requestAnimationFrame(updateHeroParallax);
+      }, { passive: true });
     }
   });
 </script>

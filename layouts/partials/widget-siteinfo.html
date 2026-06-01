@@ -38,6 +38,26 @@
       <span style="color: var(--text-primary); font-size: 0.9em;">{{ .Site.Params.site_since | default "2026-03-21" }}</span>
     </div>
     
+    <!-- 最后活动 -->
+    {{ $lastActivity := time "1970-01-01" }}
+    {{ range where .Site.RegularPages "Draft" false }}
+      {{ $pageTime := .Lastmod }}
+      {{ if not $pageTime }}
+        {{ $pageTime = .Date }}
+      {{ end }}
+      {{ if $pageTime.After $lastActivity }}
+        {{ $lastActivity = $pageTime }}
+      {{ end }}
+    {{ end }}
+    <div style="
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    ">
+      <span style="color: var(--text-muted); font-size: 0.9em;">最后活动：</span>
+      <span style="color: var(--text-primary); font-size: 0.9em;">{{ $lastActivity.Format "2006-01-02" }}</span>
+    </div>
+
     <!-- 文章数目 -->
     <div style="
       display: flex;

@@ -44,10 +44,13 @@
             position: fixed;
             top: 0;
             left: 0;
+            width: 100%;
             height: 3px;
             background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
             z-index: 1000;
-            transition: width 0.2s ease;
+            transform-origin: left center;
+            transform: scaleX(0);
+            will-change: transform;
         }
         
         /* Lightbox 样式 */
@@ -163,19 +166,48 @@
     {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
     
     <script>
-        // 阅读进度条
-        window.addEventListener('scroll', function() {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            document.getElementById("readingProgress").style.width = scrolled + "%";
-        });
-        
         // Lightbox 功能
         document.addEventListener('DOMContentLoaded', function() {
             const lightbox = document.getElementById('lightbox');
             const lightboxImage = document.getElementById('lightboxImage');
             const lightboxClose = document.getElementById('lightboxClose');
+            const readingProgress = document.getElementById('readingProgress');
+            const backtop = document.querySelector('[data-backtop]');
+            const backtopButton = document.querySelector('[data-backtop-button]');
+            let scrollTicking = false;
+
+            function updateScrollState() {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const progress = height > 0 ? Math.min(winScroll / height, 1) : 0;
+
+                if (readingProgress) {
+                    readingProgress.style.transform = 'scaleX(' + progress + ')';
+                }
+
+                if (backtop) {
+                    backtop.classList.toggle('is-visible', winScroll > 400);
+                }
+
+                scrollTicking = false;
+            }
+
+            function requestScrollStateUpdate() {
+                if (scrollTicking) {
+                    return;
+                }
+                scrollTicking = true;
+                requestAnimationFrame(updateScrollState);
+            }
+
+            window.addEventListener('scroll', requestScrollStateUpdate, { passive: true });
+            updateScrollState();
+
+            if (backtopButton) {
+                backtopButton.addEventListener('click', function() {
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                });
+            }
             
             // 为所有图片添加点击事件
             const images = document.querySelectorAll('img');
@@ -217,9 +249,9 @@
                     return;
                 }
                 const particles = [];
-                const maxParticles = 120;
-                const clickCooldown = 200;
                 const isCoarsePointer = window.matchMedia('(pointer: coarse)').matches;
+                const maxParticles = isCoarsePointer ? 72 : 96;
+                const clickCooldown = 200;
                 let animationFrame = null;
                 let lastClickTime = 0;
                 let dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -251,7 +283,7 @@
 
                 function createFireworks(x, y) {
                     const colors = getFireworkColors();
-                    const count = isCoarsePointer ? 14 : 24;
+                    const count = isCoarsePointer ? 10 : 18;
                     const availableSlots = Math.max(maxParticles - particles.length, 0);
                     const particleCount = Math.min(count, availableSlots);
 
@@ -312,7 +344,7 @@
                         ctx.globalAlpha = Math.max(particle.alpha, 0);
                         ctx.fillStyle = particle.color;
                         ctx.shadowColor = particle.color;
-                        ctx.shadowBlur = isCoarsePointer ? 3 : Math.min(particle.size * 2, 9);
+                        ctx.shadowBlur = isCoarsePointer ? 2 : Math.min(particle.size * 1.5, 6);
                         ctx.beginPath();
                         ctx.arc(particle.x, particle.y, particle.size * particle.scale, 0, Math.PI * 2);
                         ctx.fill();

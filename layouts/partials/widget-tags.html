@@ -35,12 +35,12 @@
   ">
     {{ range .Site.Taxonomies.tags.ByCount }}
     <a class="blog-widget-tag-link" href="{{ .Page.Permalink }}" style="
-      color: var(--text-secondary);
+      color: #ffffff;
       text-decoration: none;
       font-size: 0.85em;
-      transition: all 0.3s;
+      transition: transform 0.2s ease, text-decoration-color 0.2s ease;
       line-height: 1.8;
-    " onmouseover="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.transform='scale(1.1)'" onmouseout="this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--text-secondary'); this.style.transform='scale(1)'">
+    ">
       {{ .Page.Title }}
     </a>
     {{ end }}
