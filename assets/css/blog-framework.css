@@ -2624,3 +2624,19 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
   text-shadow: inherit !important;
   white-space: inherit !important;
 }
+
+.article-content :not(pre) > code {
+  display: inline !important;
+  padding: 0 !important;
+  color: inherit !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-family: inherit !important;
+  font-size: inherit !important;
+  font-weight: inherit !important;
+  line-height: inherit !important;
+  text-shadow: inherit !important;
+  white-space: inherit !important;
+}
