@@ -8,7 +8,7 @@
   {{ $coverImage := .Params.cover | default "" }}
   {{ $bgImage := $coverImage | default "images/background.jpg" | absURL }}
   
-  <div style="
+  <div class="blog-post-shell" style="
     background-image: url('{{ $bgImage }}');
     background-size: cover;
     background-position: center;
@@ -29,12 +29,12 @@
       z-index: 0;
     "></div>
     
-    <div style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
+    <div class="blog-post-layout" style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
       <!-- 文章内容 -->
-      <article style="flex: 1; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
+      <article class="blog-post-article" style="flex: 1; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         <!-- 封面图片 -->
         {{ if $coverImage }}
-        <div style="
+        <div class="blog-post-cover" style="
           margin: -40px -40px 30px -40px;
           position: relative;
           overflow: hidden;
@@ -66,9 +66,9 @@
         </div>
         {{ end }}
         
-        <h1 style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: {{ if $coverImage }}-20px{{ else }}0{{ end }} 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">{{ .Title }}</h1>
+        <h1 class="blog-post-title" style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: {{ if $coverImage }}-20px{{ else }}0{{ end }} 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">{{ .Title }}</h1>
         
-        <div style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+        <div class="blog-post-meta" style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
           <span>📅 {{ .Date.Format "2006-01-02" }}</span>
           <span>✏️ {{ if .Lastmod }}{{ .Lastmod.Format "2006-01-02" }}{{ else }}{{ .Date.Format "2006-01-02" }}{{ end }}</span>
           <span>📝 {{ partial "custom-wordcount.html" . }} 字</span>
@@ -91,7 +91,7 @@
       </article>
       
       <!-- 右侧目录栏 -->
-      <div style="flex-shrink: 0; width: 280px;">
+      <div class="blog-post-toc" style="flex-shrink: 0; width: 280px;">
         {{ partial "enhanced-toc.html" . }}
       </div>
     </div>
@@ -281,25 +281,4 @@
     }
   }
 </style>
-<script>
-  // 代码块复制功能
-  document.addEventListener('DOMContentLoaded', function() {
-    const codeBlocks = document.querySelectorAll('.article-content .chroma, .article-content .highlight .chroma');
-    codeBlocks.forEach(block => {
-      block.addEventListener('click', function(e) {
-        if (e.target === this || e.target === this.querySelector('code')) {
-          const code = this.querySelector('code').textContent;
-          navigator.clipboard.writeText(code).then(() => {
-            this.classList.add('is-copied');
-            setTimeout(() => {
-              this.classList.remove('is-copied');
-            }, 1600);
-          }).catch(err => {
-            console.error('复制失败:', err);
-          });
-        }
-      });
-    });
-  });
-</script>
 {{ end }}

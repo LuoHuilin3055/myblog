@@ -30,8 +30,10 @@
       <span style="font-size: 1.2em;">📋</span>
       <span>目录</span>
     </h3>
-    <button 
-      onclick="toggleTOC()"
+    <button
+      type="button"
+      class="toc-collapse-button"
+      data-toc-toggle
       style="
         background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0.05));
         border: 1px solid rgba(0,255,255,0.4);
@@ -46,8 +48,6 @@
         position: relative;
         overflow: hidden;
       "
-      onmouseover="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.2), rgba(0,255,255,0.1))'; this.style.borderColor='#00ffff'; this.style.boxShadow='0 4px 12px rgba(0,255,255,0.3)'; this.style.transform='translateY(-2px)'
-      onmouseout="this.style.background='linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0.05))'; this.style.borderColor='rgba(0,255,255,0.4)'; this.style.boxShadow='0 2px 8px rgba(0,255,255,0.1)'; this.style.transform='translateY(0)'
     >
       <span style="display: flex; align-items: center; gap: 6px;">
         <span style="font-size: 1.1em;">📋</span>
@@ -73,7 +73,7 @@
           padding: 8px 0;
           font-size: 1em;
           transition: all 0.3s ease;
-        " onmouseover="this.style.color='#fff'; this.style.paddingLeft='8px'" onmouseout="this.style.color='#00ffff'; this.style.paddingLeft='0'">
+        ">
           {{ .Title }}
         </a>
       </li>
@@ -236,104 +236,3 @@
     transform: translateX(5px);
   }
 </style>
-
-<script>
-  let tocCollapsed = false;
-  
-  function toggleTOC() {
-    const tocContent = document.getElementById('toc-content');
-    const button = event.target.closest('button');
-    const buttonText = document.getElementById('toc-toggle-text');
-    
-    if (tocCollapsed) {
-      tocContent.style.maxHeight = '1000px';
-      tocContent.style.opacity = '1';
-      buttonText.textContent = '收起';
-    } else {
-      tocContent.style.maxHeight = '0';
-      tocContent.style.opacity = '0';
-      buttonText.textContent = '展开';
-    }
-    
-    tocCollapsed = !tocCollapsed;
-  }
-  
-  // 高亮当前章节
-  document.addEventListener('DOMContentLoaded', function() {
-    // 目录高亮逻辑
-    const headings = document.querySelectorAll('h1, h2, h3, h4, h5, h6');
-    const tocLinks = document.querySelectorAll('.enhanced-toc a');
-    
-    if (headings.length > 0 && tocLinks.length > 0) {
-      const observerOptions = {
-        root: null,
-        rootMargin: '-10% 0px -80% 0px',
-        threshold: 0
-      };
-      
-      const observer = new IntersectionObserver(function(entries) {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.getAttribute('id');
-            tocLinks.forEach(link => {
-              link.classList.remove('active');
-              if (link.getAttribute('href') === '#' + id) {
-                link.classList.add('active');
-                // 自动滚动到当前高亮的目录项
-                const tocContainer = document.getElementById('toc-container');
-                const activeLink = link;
-                
-                if (tocContainer && activeLink) {
-                  // 计算滚动位置，使高亮项居中
-                  // 注意：使用getBoundingClientRect来获取相对于容器的位置
-                  const containerRect = tocContainer.getBoundingClientRect();
-                  const linkRect = activeLink.getBoundingClientRect();
-                  
-                  // 计算相对于容器的偏移量
-                  const relativeTop = linkRect.top - containerRect.top;
-                  
-                  // 计算滚动位置，使高亮项居中
-                  const scrollPosition = tocContainer.scrollTop + relativeTop - (containerRect.height / 2) + (linkRect.height / 2);
-                  
-                  // 确保滚动位置在合理范围内
-                  const finalScrollPosition = Math.max(0, scrollPosition);
-                  
-                  // 使用平滑滚动
-                  tocContainer.scrollTo({
-                    top: finalScrollPosition,
-                    behavior: 'smooth'
-                  });
-                }
-              }
-            });
-          }
-        });
-      }, observerOptions);
-      
-      headings.forEach(heading => {
-        if (heading.getAttribute('id')) {
-          observer.observe(heading);
-        }
-      });
-    }
-    
-    // 添加目录项展开/折叠功能
-    const tocItems = document.querySelectorAll('.enhanced-toc li');
-    tocItems.forEach(item => {
-      const sublist = item.querySelector('ul');
-      if (sublist) {
-        const toggle = document.createElement('button');
-        toggle.className = 'toc-toggle';
-        toggle.innerHTML = '▶';
-        toggle.onclick = function() {
-          sublist.style.display = sublist.style.display === 'none' ? 'block' : 'none';
-          this.innerHTML = sublist.style.display === 'none' ? '▶' : '▼';
-        };
-        const link = item.querySelector('a');
-        if (link) {
-          link.parentNode.insertBefore(toggle, link);
-        }
-      }
-    });
-  });
-</script>

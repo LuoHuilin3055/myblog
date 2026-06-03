@@ -2,7 +2,7 @@
 title: Python复习
 date: 2026-04-23
 lastmod: 2026-04-23
-draft:
+draft: true
 tags:
   - 计算机
   - 笔记

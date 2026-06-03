@@ -10,8 +10,7 @@
   display: flex;
   flex-direction: column;
   box-shadow: var(--shadow-card);
-" onmouseover="this.style.transform='translateY(-8px)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color'); this.style.boxShadow='0 20px 40px ' + getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover');"
-   onmouseout="this.style.transform='translateY(0)'; this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--border-color'); this.style.boxShadow='none'">
+">
   
   <!-- 封面图片区域 -->
   {{ if $coverImage }}
@@ -32,8 +31,6 @@
         object-fit: cover;
         transition: transform 0.5s ease;
       "
-      onmouseover="this.style.transform='scale(1.1)'"
-      onmouseout="this.style.transform='scale(1)'"
     />
     <!-- 渐变遮罩 -->
     <div style="
@@ -112,8 +109,7 @@
       border-bottom: 2px solid var(--accent-color);
       transition: all 0.3s;
       margin-top: auto;
-    " onmouseover="this.style.gap='12px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-hover');"
-       onmouseout="this.style.gap='8px'; this.style.color=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');">
+    ">
       阅读文章
       <span style="font-size: 1.2em;">→</span>
     </a>

@@ -6,24 +6,21 @@
   {{ $bgImage := "images/background.jpg" | absURL }}
   {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
   
-  <!-- 判断是否为月度归档页面 -->
   {{ $isMonthlyArchive := false }}
   {{ $archiveYear := 0 }}
   {{ $archiveMonth := 0 }}
   
-  <!-- 从URL路径提取年份和月份 -->
-  {{ $pathParts := split .RelPermalink "/" }}
-  {{ if ge (len $pathParts) 5 }}
-    {{ if eq (index $pathParts 1) "myblog" }}
-      {{ if eq (index $pathParts 2) "posts" }}
-        {{ $yearStr := index $pathParts 3 }}
-        {{ $monthStr := index $pathParts 4 }}
-        {{ if and (eq (len $yearStr) 4) (eq (len $monthStr) 2) }}
-          {{ $archiveYear = int $yearStr }}
-          {{ $archiveMonth = int $monthStr }}
-          {{ if and (ge $archiveYear 2000) (le $archiveYear 2100) (ge $archiveMonth 1) (le $archiveMonth 12) }}
-            {{ $isMonthlyArchive = true }}
-          {{ end }}
+  <!-- 从内容路径判断月度归档，避免依赖 baseURL 子路径 -->
+  {{ with .File }}
+    {{ $pathParts := split (replace .Path "\\" "/") "/" }}
+    {{ if and (ge (len $pathParts) 4) (eq (index $pathParts 0) "posts") }}
+      {{ $yearStr := index $pathParts 1 }}
+      {{ $monthStr := index $pathParts 2 }}
+      {{ if and (eq (len $yearStr) 4) (eq (len $monthStr) 2) }}
+        {{ $archiveYear = int $yearStr }}
+        {{ $archiveMonth = int $monthStr }}
+        {{ if and (ge $archiveYear 2000) (le $archiveYear 2100) (ge $archiveMonth 1) (le $archiveMonth 12) }}
+          {{ $isMonthlyArchive = true }}
         {{ end }}
       {{ end }}
     {{ end }}

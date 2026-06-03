@@ -1492,7 +1492,7 @@ body[data-theme="light"] .blog-backtop-button {
 :root {
   --blog-brand-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
   --blog-ui-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
-  --blog-code-font: "Comic Sans MS", "楷体", "KaiTi", "STKaiti", serif;
+  --blog-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Microsoft YaHei Mono", monospace;
   --paper-bg: #f7f1e6;
   --paper-bg-soft: #fffaf0;
   --paper-card: rgba(255, 252, 244, 0.9);
@@ -2482,6 +2482,148 @@ body[data-theme="light"] .blog-friend-avatar {
 }
 
 /* Final precedence layer for the third visual correction pass. */
+:root {
+  --blog-code-font: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, "Microsoft YaHei Mono", monospace;
+}
+
+.blog-search input:focus {
+  width: 200px !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 0 10px var(--accent-glow) !important;
+  outline: none;
+}
+
+.blog-search-result {
+  display: block;
+  padding: 12px;
+  color: var(--text-primary);
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background 0.2s ease, color 0.2s ease;
+  margin-bottom: 8px;
+}
+
+.blog-search-result:hover {
+  color: var(--accent-color);
+  background: var(--accent-light);
+}
+
+.blog-search-result-title {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 1rem;
+}
+
+.blog-search-result-date,
+.blog-search-empty {
+  color: var(--text-muted);
+  font-size: 0.82rem;
+}
+
+.blog-search-empty {
+  padding: 20px;
+  text-align: center;
+}
+
+.blog-search-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  color: var(--accent-color);
+  font-size: 0.72rem;
+}
+
+.blog-search-tags span {
+  background: var(--accent-light);
+  border-radius: 999px;
+  padding: 2px 8px;
+}
+
+.blog-firework-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 9999;
+}
+
+.blog-article-card:hover {
+  transform: translateY(-8px) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 20px 40px var(--shadow-hover) !important;
+}
+
+.blog-article-cover img {
+  transform: scale(1);
+  will-change: transform;
+}
+
+.blog-article-card:hover .blog-article-cover img {
+  transform: scale(1.06) !important;
+}
+
+.blog-home-action:hover {
+  transform: translateY(-3px) !important;
+  border-color: var(--accent-color) !important;
+  box-shadow: 0 14px 28px var(--shadow-hover) !important;
+}
+
+.blog-read-more:hover {
+  color: var(--accent-hover) !important;
+  gap: 12px !important;
+}
+
+.toc-collapse-button:hover {
+  background: linear-gradient(135deg, rgba(0,255,255,0.2), rgba(0,255,255,0.1)) !important;
+  border-color: #00ffff !important;
+  box-shadow: 0 4px 12px rgba(0,255,255,0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.enhanced-toc > ul:first-child a:hover {
+  color: #ffffff !important;
+  padding-left: 8px !important;
+}
+
+.blog-site-footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+}
+
+.blog-footer-home:hover,
+.ananke-socials a:hover {
+  color: var(--accent-color) !important;
+}
+
+.ananke-socials a {
+  color: var(--text-primary) !important;
+}
+
+.runtime {
+  text-align: center;
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-color);
+  color: var(--accent-color);
+  font-size: 0.9rem;
+}
+
+code,
+pre,
+kbd,
+samp,
+.article-content code,
+.article-content pre,
+.article-content .chroma,
+.article-content .highlight,
+.article-content .highlight * {
+  font-family: var(--blog-code-font) !important;
+}
+
 body[data-theme="light"] .blog-site-header {
   background: transparent !important;
   box-shadow: none !important;
@@ -2721,4 +2863,18 @@ body[data-theme="dark"] .blog-widget-tags .blog-widget-tag-link,
     scroll-behavior: auto !important;
     transition-duration: 0.001ms !important;
   }
+}
+
+body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link {
+  color: #23545b !important;
+  opacity: 1 !important;
+  text-shadow: none !important;
+}
+
+body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:hover,
+body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
+  color: #0f6e77 !important;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
 }

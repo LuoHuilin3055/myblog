@@ -1,0 +1,13 @@
+[
+{{- $pages := where .Site.RegularPages "Params.search_exclude" "!=" true -}}
+{{- range $index, $page := $pages -}}
+  {{- if $index -}},{{- end }}
+  {
+    "title": {{ $page.Title | jsonify }},
+    "url": {{ $page.Permalink | jsonify }},
+    "content": {{ $page.Plain | truncate 240 | jsonify }},
+    "date": {{ $page.Date.Format "2006-01-02" | jsonify }},
+    "tags": {{ $page.Params.tags | default (slice) | jsonify }}
+  }
+{{- end }}
+]

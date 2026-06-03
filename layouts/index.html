@@ -33,7 +33,7 @@
     max-width: 800px;
   ">
     <!-- 随机一篇按钮 -->
-    <button class="blog-home-action" onclick="window.location.href = '{{ "random" | relURL }}'" style="
+    <a class="blog-home-action" href="{{ "random" | relURL }}" style="
       background: var(--bg-card);
       color: var(--accent-color);
       border: var(--card-border);
@@ -44,10 +44,12 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-card);
-    " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    ">
       {{ .Site.Params.random_button_text | default "🎲 随机一篇" }}
-    </button>
+    </a>
     
     <!-- 关于我按钮 -->
     <a class="blog-home-action" href="{{ "about" | relURL }}" style="
@@ -63,8 +65,7 @@
       text-align: center;
       transition: all 0.3s ease;
       box-shadow: var(--shadow-card);
-    " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-hover'); this.style.borderColor=getComputedStyle(document.documentElement).getPropertyValue('--accent-color');" 
-       onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow=getComputedStyle(document.documentElement).getPropertyValue('--shadow-card'); this.style.border=getComputedStyle(document.documentElement).getPropertyValue('--card-border');">
+    ">
       {{ .Site.Params.about_button_text | default "👤 关于我" }}
     </a>
   </div>

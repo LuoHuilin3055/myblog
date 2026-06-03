@@ -1,7 +1,7 @@
 ---
 title: Linux学习记录
 date: 2026-04-08
-draft:
+draft: true
 tags:
   - 笔记
   - 计算机

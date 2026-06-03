@@ -10,7 +10,9 @@ param(
 
   [switch]$Apply,
 
-  [switch]$IncludeUntracked
+  [switch]$IncludeUntracked,
+
+  [switch]$ReportLarge
 )
 
 $ErrorActionPreference = "Stop"
@@ -146,6 +148,17 @@ try {
     -RepoRoot $repoRoot `
     -TrackedFiles $trackedFiles `
     -AllowUntracked:$IncludeUntracked)
+
+  if ($ReportLarge) {
+    $largeImages = $candidates | Sort-Object Length -Descending
+    foreach ($image in $largeImages) {
+      $relativePath = [System.IO.Path]::GetRelativePath($repoRoot, $image.FullName)
+      Write-Host ("LARGE {0} ({1:N0} bytes)" -f $relativePath, $image.Length)
+    }
+
+    Write-Host ("Done (large-report). Checked: {0}, threshold: {1:N0} bytes." -f @($largeImages).Count, $MinBytes)
+    return
+  }
 
   foreach ($image in $candidates) {
     $processed += 1

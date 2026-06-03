@@ -269,6 +269,28 @@ content/posts/my-post/
 
 如果文章已经在上一次运行时改成了 `![](img-001.png)`，脚本也会继续检查文章目录和上级目录里的 Obsidian 粘贴图；只有当原图内容和文章目录里的 `img-001.png` 完全一致时才会删除，避免误删还没有整理进文章的图片。
 
+### 图片压缩
+
+仓库提供了图片压缩脚本，适合发布前压缩文章图片、封面图和背景图：
+
+```powershell
+.\scripts\optimize-images.ps1 -Path content,static
+```
+
+默认是预览模式，只显示哪些图片会变小，不会覆盖文件。确认后加 `-Apply` 才会真正替换：
+
+```powershell
+.\scripts\optimize-images.ps1 -Path content,static -Apply
+```
+
+脚本默认只处理 Git 已跟踪、且大于 `512KB` 的 `jpg/jpeg/png` 图片；压缩后如果文件反而变大，会自动跳过。JPG 默认质量为 `82`，通常网页展示看不出明显变化；如果想更保守，可以改成：
+
+```powershell
+.\scripts\optimize-images.ps1 -Path content,static -JpegQuality 88 -Apply
+```
+
+如果要连未提交的新图片一起处理，可以加 `-IncludeUntracked`。建议先不加 `-Apply` 预览一遍。
+
 ## 列表页横幅图片
 
 文章列表、标签页、归档页、碎碎念、日程等页面顶部的横向大背景横幅由 `config.toml` 中的 `page_header_image` 控制：
