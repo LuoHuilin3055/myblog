@@ -2603,7 +2603,13 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
 .article-content li code,
 .article-content td code,
 .article-content th code,
-.article-content blockquote code {
+.article-content blockquote code,
+.article-content h1 code,
+.article-content h2 code,
+.article-content h3 code,
+.article-content h4 code,
+.article-content h5 code,
+.article-content h6 code {
   display: inline !important;
   padding: 0 !important;
   color: inherit !important;
