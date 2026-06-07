@@ -30,6 +30,9 @@
       <span style="font-size: 1.2em;">📋</span>
       <span>目录</span>
     </h3>
+    <div class="toc-backtop-slot">
+      {{ partial "backtop.html" . }}
+    </div>
     <button
       type="button"
       class="toc-collapse-button"
@@ -83,8 +86,6 @@
   </div>
 </div>
 {{ end }}
-
-{{ partial "backtop.html" . }}
 
 <style>
   .enhanced-toc ul {
