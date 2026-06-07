@@ -29,6 +29,7 @@
     initImageSlider();
     initCodeCopy();
     initToc();
+    initRandomQuote();
     initRuntime();
     initFireworks();
   });
@@ -48,6 +49,7 @@
     const readingProgress = byId('readingProgress');
     const backtop = document.querySelector('[data-backtop]');
     const backtopButton = document.querySelector('[data-backtop-button]');
+    const scrollQuote = document.querySelector('[data-random-quote="scroll"]');
     let scrollTicking = false;
 
     function updateScrollState() {
@@ -61,6 +63,10 @@
 
       if (backtop) {
         backtop.classList.toggle('is-visible', winScroll > 400);
+      }
+
+      if (scrollQuote) {
+        scrollQuote.classList.toggle('is-visible', winScroll > 120);
       }
 
       scrollTicking = false;
@@ -81,6 +87,85 @@
     }
 
     updateScrollState();
+  }
+
+  function initRandomQuote() {
+    const targets = document.querySelectorAll('[data-random-quote]');
+    if (!targets.length) {
+      return;
+    }
+
+    const fallback = {
+      text: '何时葡萄会熟透，你要静候再静候',
+      meta: ''
+    };
+
+    function setQuote(quote) {
+      targets.forEach(function (target) {
+        const variant = target.getAttribute('data-random-quote');
+        const textEl = target.matches('[data-random-quote]') && !target.querySelector('[data-random-quote-text]')
+          ? target
+          : target.querySelector('[data-random-quote-text]');
+        const metaEl = target.querySelector('[data-random-quote-meta]');
+
+        if (textEl) {
+          textEl.textContent = variant === 'hero' ? quote.text : '“' + quote.text + '”';
+        }
+
+        if (metaEl) {
+          metaEl.textContent = quote.meta || '';
+          metaEl.toggleAttribute('hidden', !quote.meta);
+        }
+      });
+    }
+
+    function normalizeJinrishici(data) {
+      return {
+        text: data && data.content ? String(data.content).trim() : '',
+        meta: [data && data.author, data && data.origin].filter(Boolean).join(' · ')
+      };
+    }
+
+    function normalizeHitokoto(data) {
+      return {
+        text: data && data.hitokoto ? String(data.hitokoto).trim() : '',
+        meta: [data && data.from_who, data && data.from].filter(Boolean).join(' · ')
+      };
+    }
+
+    function fetchQuote() {
+      const apis = [
+        {
+          url: 'https://v1.jinrishici.com/all.json',
+          normalize: normalizeJinrishici
+        },
+        {
+          url: 'https://v1.hitokoto.cn/?c=d&c=i&c=k&c=f&encode=json&max_length=40',
+          normalize: normalizeHitokoto
+        }
+      ];
+      const api = apis[Math.floor(Math.random() * apis.length)];
+
+      return fetch(api.url, { cache: 'no-store' })
+        .then(function (response) {
+          if (!response.ok) {
+            throw new Error('Random quote request failed: ' + response.status);
+          }
+          return response.json();
+        })
+        .then(function (data) {
+          const quote = api.normalize(data);
+          if (!quote.text) {
+            throw new Error('Random quote response is empty');
+          }
+          return quote;
+        });
+    }
+
+    setQuote(fallback);
+    fetchQuote().then(setQuote).catch(function () {
+      setQuote(fallback);
+    });
   }
 
   function initSearch() {

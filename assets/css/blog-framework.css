@@ -2598,6 +2598,60 @@ body[data-theme="light"] .blog-friend-avatar {
   z-index: 9999;
 }
 
+.blog-random-quote {
+  font-family: var(--blog-ui-font);
+}
+
+[data-random-quote="hero"] {
+  display: block !important;
+  min-width: min(640px, 72vw);
+  border: 4px solid rgba(127, 218, 255, 0.86);
+  background: rgba(30, 58, 90, 0.18);
+  box-shadow: 0 0 24px rgba(127, 218, 255, 0.2);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+.blog-random-quote-scroll {
+  position: fixed;
+  top: 3px;
+  left: 0;
+  right: 0;
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  padding: 8px 24px;
+  color: rgba(248, 251, 255, 0.88);
+  background: rgba(4, 7, 18, 0.86);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: opacity 0.28s ease, transform 0.28s ease;
+}
+
+.blog-random-quote-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.blog-random-quote-scroll .blog-random-quote-text {
+  max-width: min(820px, 72vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.blog-random-quote-scroll .blog-random-quote-meta {
+  color: rgba(203, 213, 225, 0.72);
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
 code,
 pre,
 kbd,
@@ -2765,6 +2819,25 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
   margin: 0 auto;
 }
 
+.blog-random-quote-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  width: min(1200px, calc(100% - 40px));
+  margin: 8px auto 0;
+  color: var(--text-secondary);
+  text-align: right;
+}
+
+.blog-random-quote-footer .blog-random-quote-text {
+  max-width: min(620px, 70vw);
+}
+
+.blog-random-quote-footer .blog-random-quote-meta {
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
 .blog-site-footer .runtime {
   width: 100%;
   margin: 8px auto 0;
@@ -2804,9 +2877,42 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
     height: 46px !important;
     font-size: 1rem !important;
   }
+
+  .blog-random-quote-scroll {
+    min-height: 40px;
+    padding: 7px 14px;
+    font-size: 0.9rem;
+  }
+
+  .blog-random-quote-scroll .blog-random-quote-meta {
+    display: none;
+  }
 }
 
 @media (max-width: 760px) {
+  [data-random-quote="hero"] {
+    min-width: min(86vw, 520px);
+    border-width: 3px;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+  }
+
+  .blog-random-quote-footer {
+    justify-content: center;
+    flex-direction: column;
+    gap: 4px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .blog-random-quote-footer .blog-random-quote-text {
+    max-width: 100%;
+  }
+
+  .blog-random-quote-footer .blog-random-quote-meta {
+    white-space: normal;
+  }
+
   .blog-post-article .article-content pre,
   .blog-post-article .article-content .highlight,
   .blog-post-article .article-content .highlight pre,

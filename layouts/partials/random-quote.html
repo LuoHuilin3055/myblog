@@ -1,0 +1,5 @@
+{{ $variant := .variant | default "inline" }}
+<div class="blog-random-quote blog-random-quote-{{ $variant }}" data-random-quote="{{ $variant }}">
+  <span class="blog-random-quote-text" data-random-quote-text></span>
+  <span class="blog-random-quote-meta" data-random-quote-meta></span>
+</div>
