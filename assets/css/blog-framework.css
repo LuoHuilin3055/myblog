@@ -2749,6 +2749,28 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
   bottom: 30px !important;
 }
 
+.blog-site-footer {
+  position: relative;
+  bottom: 0;
+  width: 100%;
+  padding: 20px;
+  background-color: var(--bg-secondary);
+}
+
+.blog-site-footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.blog-site-footer .runtime {
+  width: 100%;
+  margin: 8px auto 0;
+  text-align: center;
+}
+
 @media (max-width: 1024px) {
   .blog-post-layout .blog-post-toc {
     width: 100% !important;

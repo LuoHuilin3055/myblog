@@ -1,5 +1,5 @@
-<footer class="blog-site-footer" role="contentinfo" style="position: relative; bottom: 0; width: 100%; padding: 20px; background-color: var(--bg-secondary);">
-  <div style="display: flex; justify-content: space-between; align-items: center; max-width: 1200px; margin: 0 auto;">
+<footer class="blog-site-footer" role="contentinfo">
+  <div class="blog-site-footer-inner">
     <a class="blog-footer-home" href="{{ .Site.Home.Permalink }}" style="color: var(--text-primary); font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;">
       &copy; {{ with .Site.Copyright | compare.Default .Site.Title }} {{ . | safe.HTML }} {{ now.Format "2006"}} {{ end }}
     </a>
