@@ -313,6 +313,43 @@
 
     const headings = document.querySelectorAll('h1[id], h2[id], h3[id], h4[id], h5[id], h6[id]');
     const tocLinks = document.querySelectorAll('.enhanced-toc a');
+    const tocContainer = byId('toc-container');
+    const tocContent = byId('toc-content');
+
+    function syncActiveTocLink(id) {
+      let activeLink = null;
+      tocLinks.forEach(function (link) {
+        const isActive = link.getAttribute('href') === '#' + id;
+        link.classList.toggle('active', isActive);
+        if (isActive) {
+          activeLink = link;
+        }
+      });
+
+      if (!activeLink || !tocContainer || (tocContent && tocContent.getAttribute('data-collapsed') === 'true')) {
+        return;
+      }
+
+      requestAnimationFrame(function () {
+        const activeItem = activeLink.closest('li') || activeLink;
+        const containerRect = tocContainer.getBoundingClientRect();
+        const itemRect = activeItem.getBoundingClientRect();
+        const topBuffer = 86;
+        const bottomBuffer = 28;
+        const isAbove = itemRect.top < containerRect.top + topBuffer;
+        const isBelow = itemRect.bottom > containerRect.bottom - bottomBuffer;
+
+        if (!isAbove && !isBelow) {
+          return;
+        }
+
+        tocContainer.scrollTo({
+          top: tocContainer.scrollTop + itemRect.top - containerRect.top - topBuffer,
+          behavior: 'smooth'
+        });
+      });
+    }
+
     if (headings.length && tocLinks.length) {
       const observer = new IntersectionObserver(function (entries) {
         entries.forEach(function (entry) {
@@ -321,9 +358,7 @@
           }
 
           const id = entry.target.getAttribute('id');
-          tocLinks.forEach(function (link) {
-            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
-          });
+          syncActiveTocLink(id);
         });
       }, {
         root: null,
@@ -334,6 +369,10 @@
       headings.forEach(function (heading) {
         observer.observe(heading);
       });
+
+      if (window.location.hash) {
+        syncActiveTocLink(window.location.hash.slice(1));
+      }
     }
 
     document.querySelectorAll('.enhanced-toc li').forEach(function (item) {
