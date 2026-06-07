@@ -2671,6 +2671,28 @@ body[data-theme="light"] .blog-friend-avatar {
   white-space: nowrap;
 }
 
+body[data-theme="light"] .blog-random-quote-scroll {
+  color: var(--paper-text);
+  background:
+    linear-gradient(90deg, rgba(129, 103, 72, 0.07) 0 1px, transparent 1px 100%),
+    repeating-linear-gradient(0deg, rgba(129, 103, 72, 0.045) 0 1px, transparent 1px 11px),
+    linear-gradient(135deg, rgba(255, 252, 244, 0.96) 0%, rgba(247, 239, 224, 0.94) 100%);
+  background-size: 18px 100%, 100% 12px, 100% 100%;
+  border-bottom: 1px solid rgba(129, 103, 72, 0.2);
+  box-shadow:
+    0 8px 20px rgba(87, 69, 45, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.66);
+}
+
+body[data-theme="light"] .blog-random-quote-scroll .blog-random-quote-text {
+  color: var(--paper-text);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.58);
+}
+
+body[data-theme="light"] .blog-random-quote-scroll .blog-random-quote-meta {
+  color: var(--paper-muted);
+}
+
 code,
 pre,
 kbd,
