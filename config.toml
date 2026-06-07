@@ -9,7 +9,7 @@ theme = "theme2"
   author = "NGC 2237"
   featured_image = "images/background.jpg"
   page_header_image = ""
-  home_text = "何时葡萄会熟透，你要静候再静候"
+  home_text = "欢迎来到NGC 2237的博客"
   custom_404 = true
   
   # 个人资料卡片配置

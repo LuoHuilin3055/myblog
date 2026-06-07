@@ -109,7 +109,11 @@
         const metaEl = target.querySelector('[data-random-quote-meta]');
 
         if (textEl) {
-          textEl.textContent = variant === 'hero' ? quote.text : '“' + quote.text + '”';
+          if (variant === 'hero') {
+            typeHeroQuote(textEl, quote.text);
+          } else {
+            textEl.textContent = '“' + quote.text + '”';
+          }
         }
 
         if (metaEl) {
@@ -117,6 +121,40 @@
           metaEl.toggleAttribute('hidden', !quote.meta);
         }
       });
+    }
+
+    function typeHeroQuote(element, text) {
+      const value = String(text || '');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      element.classList.remove('is-typing', 'is-typing-done');
+      element.textContent = '';
+
+      if (reduceMotion || !value) {
+        element.textContent = value;
+        element.classList.add('is-typing-done');
+        return;
+      }
+
+      let index = 0;
+      const speed = Math.max(38, Math.min(86, 1400 / Math.max(value.length, 1)));
+      element.classList.add('is-typing');
+
+      function tick() {
+        index += 1;
+        element.textContent = value.slice(0, index);
+
+        if (index < value.length) {
+          window.setTimeout(tick, speed);
+        } else {
+          window.setTimeout(function () {
+            element.classList.remove('is-typing');
+            element.classList.add('is-typing-done');
+          }, 480);
+        }
+      }
+
+      tick();
     }
 
     function normalizeJinrishici(data) {

@@ -2605,11 +2605,30 @@ body[data-theme="light"] .blog-friend-avatar {
 [data-random-quote="hero"] {
   display: block !important;
   min-width: min(640px, 72vw);
-  border: 4px solid rgba(127, 218, 255, 0.86);
-  background: rgba(30, 58, 90, 0.18);
-  box-shadow: 0 0 24px rgba(127, 218, 255, 0.2);
-  backdrop-filter: blur(2px);
-  -webkit-backdrop-filter: blur(2px);
+  min-height: 1.4em;
+  border: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  text-align: center;
+}
+
+[data-random-quote="hero"].is-typing::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  margin-left: 0.12em;
+  vertical-align: -0.08em;
+  background: currentColor;
+  animation: quoteCaretBlink 0.8s steps(1) infinite;
+}
+
+@keyframes quoteCaretBlink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .blog-random-quote-scroll {
@@ -2819,18 +2838,34 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
   margin: 0 auto;
 }
 
+.blog-site-footer-side {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 14px;
+  min-width: 0;
+  flex: 1;
+}
+
 .blog-random-quote-footer {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 10px;
-  width: min(1200px, calc(100% - 40px));
-  margin: 8px auto 0;
+  width: auto;
+  max-width: min(760px, 68vw);
+  margin: 0;
+  padding: 10px 0;
   color: var(--text-secondary);
   text-align: right;
+  line-height: 1.5;
 }
 
 .blog-random-quote-footer .blog-random-quote-text {
-  max-width: min(620px, 70vw);
+  max-width: min(560px, 52vw);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .blog-random-quote-footer .blog-random-quote-meta {
@@ -2892,9 +2927,18 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
 @media (max-width: 760px) {
   [data-random-quote="hero"] {
     min-width: min(86vw, 520px);
-    border-width: 3px;
     padding-left: 18px !important;
     padding-right: 18px !important;
+  }
+
+  .blog-site-footer-inner {
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .blog-site-footer-side {
+    width: 100%;
+    justify-content: center;
   }
 
   .blog-random-quote-footer {

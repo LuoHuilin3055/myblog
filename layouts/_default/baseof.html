@@ -148,9 +148,7 @@
 <body style="background-color: var(--bg-primary); margin: 0; padding: 0;">
     <!-- 阅读进度条 -->
     <div class="reading-progress" id="readingProgress"></div>
-    {{ if not .IsHome }}
-      {{ partial "random-quote.html" (dict "variant" "scroll") }}
-    {{ end }}
+    {{ partial "random-quote.html" (dict "variant" "scroll") }}
     
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">

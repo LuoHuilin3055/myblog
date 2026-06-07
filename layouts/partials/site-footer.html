@@ -3,9 +3,11 @@
     <a class="blog-footer-home" href="{{ .Site.Home.Permalink }}" style="color: var(--text-primary); font-size: 1rem; text-decoration: none; padding: 10px 15px; transition: all 0.3s ease;">
       &copy; {{ with .Site.Copyright | compare.Default .Site.Title }} {{ . | safe.HTML }} {{ now.Format "2006"}} {{ end }}
     </a>
-    <div>{{ partials.IncludeCached "social/follow.html" . }}</div>
+    <div class="blog-site-footer-side">
+      {{ partial "random-quote.html" (dict "variant" "footer") }}
+      <div>{{ partials.IncludeCached "social/follow.html" . }}</div>
+    </div>
   </div>
-  {{ partial "random-quote.html" (dict "variant" "footer") }}
   <div class="runtime" id="runtime" data-runtime-start="2026-03-21T00:00:00+08:00">
     本站居然运行了 <span data-runtime-days>0</span> 天 <span data-runtime-hours>0</span> 小时 <span data-runtime-minutes>0</span> 分 <span data-runtime-seconds>0</span> 秒❤️
   </div>
