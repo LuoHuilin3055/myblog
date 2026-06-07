@@ -2648,3 +2648,75 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
   text-shadow: inherit !important;
   white-space: inherit !important;
 }
+
+.blog-post-article .article-content p,
+.blog-post-article .article-content ul,
+.blog-post-article .article-content ol {
+  margin-top: 12px !important;
+  margin-bottom: 12px !important;
+}
+
+.blog-post-article .article-content li {
+  margin-top: 6px !important;
+  margin-bottom: 6px !important;
+}
+
+.blog-post-article .article-content p:has(> img:only-child) {
+  margin-top: 14px !important;
+  margin-bottom: 14px !important;
+  line-height: 1 !important;
+}
+
+.blog-post-article .article-content img:not(.slider-image) {
+  margin-top: 8px !important;
+  margin-bottom: 8px !important;
+}
+
+.blog-post-article .single-image-container,
+.blog-post-article .image-slider-container,
+.blog-post-article .article-content figure {
+  margin-top: 14px !important;
+  margin-bottom: 14px !important;
+}
+
+.blog-post-article .article-content pre,
+.blog-post-article .article-content .highlight,
+.blog-post-article .article-content .highlight pre,
+.blog-post-article .article-content .chroma,
+.blog-post-article .article-content .highlight .chroma {
+  margin-top: 14px !important;
+  margin-bottom: 14px !important;
+}
+
+.blog-post-article .article-content pre,
+.blog-post-article .article-content .highlight pre,
+.blog-post-article .article-content .chroma,
+.blog-post-article .article-content .highlight .chroma {
+  padding-top: 18px !important;
+  padding-bottom: 18px !important;
+}
+
+.blog-post-toc .blog-backtop {
+  left: 30px !important;
+  right: auto !important;
+  bottom: 30px !important;
+}
+
+@media (max-width: 1024px) {
+  .blog-post-toc .blog-backtop {
+    left: auto !important;
+    right: 20px !important;
+    bottom: 20px !important;
+  }
+}
+
+@media (max-width: 760px) {
+  .blog-post-article .article-content pre,
+  .blog-post-article .article-content .highlight,
+  .blog-post-article .article-content .highlight pre,
+  .blog-post-article .article-content .chroma,
+  .blog-post-article .article-content .highlight .chroma {
+    margin-top: 12px !important;
+    margin-bottom: 12px !important;
+  }
+}
