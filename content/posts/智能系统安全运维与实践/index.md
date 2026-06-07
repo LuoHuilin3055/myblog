@@ -82,18 +82,18 @@ lastmod: 2026-06-03
 ## 2‍⃣实验过程
 - 对`zip`文件进行解压
 - 启动`ProcessMonitor`   
-![](../picture/3.png)
+![](img-012.png)
 - 在`Process Monitor`中添加过滤条件（`CTRL+L`），使其只显示`homework.exe`相关操作记录，条件添加成功后，**点击 `Apply`**   
-![](../picture/1.png)
+![](img-013.png)
 - 此时我们会看见后面显示为空白，是因为还没有运行`homework.exe`程序
 - 接下来我们需要运行`.exe`程序
 	- 打开`powershell`并`cd`到文件所在目录
 	- ```bash
 	   .\homework.exe 202512063055
 	  ```
-![](../picture/4.jpg)
+![](img-014.jpg)
 - 因为已知目标文件为`jpg`文件，所以进一步缩小范围
-	- `CTRL+F`进行查找，然后复制文件地址，打开即可得到图片  ![](../picture/5.png) ![](../picture/6.png)![](../picture/4.jpg)
+	- `CTRL+F`进行查找，然后复制文件地址，打开即可得到图片  ![](img-015.png) ![](img-016.png)![](img-014.jpg)
 
 # 杀毒作业
 ## 实验准备
