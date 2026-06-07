@@ -216,8 +216,21 @@ body {
 }
 
 .blog-post-shell .blog-post-layout {
-  gap: 16px !important;
-  max-width: 1280px !important;
+  gap: 12px !important;
+  max-width: 1262px !important;
+  justify-content: center !important;
+}
+
+.blog-post-layout .blog-post-toc {
+  width: 350px !important;
+}
+
+.blog-post-toc > #toc-container {
+  position: sticky !important;
+  right: auto !important;
+  top: 100px !important;
+  width: 350px !important;
+  min-width: 0 !important;
 }
 
 @media (min-width: 1025px) and (max-width: 1380px) {
@@ -2737,6 +2750,18 @@ body[data-theme="light"] .blog-widget-tags .blog-widget-tag-link:focus-visible {
 }
 
 @media (max-width: 1024px) {
+  .blog-post-layout .blog-post-toc {
+    width: 100% !important;
+  }
+
+  .blog-post-toc > #toc-container {
+    position: relative !important;
+    right: auto !important;
+    top: auto !important;
+    width: 100% !important;
+    max-width: 400px !important;
+  }
+
   .blog-post-toc > .blog-backtop {
     left: auto !important;
     right: 20px !important;
