@@ -13,7 +13,7 @@ theme = "theme2"
   custom_404 = true
   
   # 个人资料卡片配置
-  avatar = "images/ChenJM.jpg"  # 头像图片路径（去掉开头的/）
+  avatar = "images/avatar.jpg"  # 头像图片路径（去掉开头的/）
   bio = "Hi, there ~ 👋"  # 个性签名
   github = "https://github.com/LuoHuilin3055"  # GitHub 链接
   about_subtitle = "欢迎来到我的个人博客"
