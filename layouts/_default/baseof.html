@@ -2,7 +2,7 @@
 <html lang="{{ site.LanguageCode }}">
 <head>
     <meta charset="utf-8">
-    <title>{{ .Title }} | {{ .Site.Title }}</title>
+    <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {{ partial "seo.html" . }}
     <style>
@@ -78,14 +78,18 @@
             position: absolute;
             top: 20px;
             right: 30px;
+            border: 0;
+            background: transparent;
             color: white;
             font-size: 40px;
             cursor: pointer;
             transition: color 0.3s ease;
         }
         
-        .lightbox-close:hover {
+        .lightbox-close:hover,
+        .lightbox-close:focus-visible {
             color: var(--primary-color);
+            outline: none;
         }
         
         h1, h2, h3, h4, h5, h6 {
@@ -152,7 +156,7 @@
     
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
-        <span class="lightbox-close" id="lightboxClose">&times;</span>
+        <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览">&times;</button>
         <img class="lightbox-content" id="lightboxImage" src="" alt="">
     </div>
     

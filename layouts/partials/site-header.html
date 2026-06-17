@@ -28,12 +28,12 @@
             </a>
             
             <!-- 主题切换 -->
-            <button class="theme-toggle" type="button" data-theme-toggle title="切换主题">🌙</button>
+            <button class="theme-toggle" type="button" data-theme-toggle title="切换主题" aria-label="切换主题">🌙</button>
             
             {{ if ne .Site.Params.enable_search false }}
             <!-- 搜索 -->
             <div class="blog-search" style="position: relative;">
-                <input type="text" id="search-input" placeholder="搜索..." 
+                <input type="text" id="search-input" placeholder="搜索..." aria-label="搜索文章"
                        style="
                          background: var(--bg-card);
                          border: var(--card-border);
@@ -55,7 +55,7 @@
                   color: var(--accent-color);
                   cursor: pointer;
                   font-size: 1em;
-                " type="button" data-search-button>🔍</button>
+                " type="button" data-search-button aria-label="执行搜索">🔍</button>
                 
                 <!-- 搜索结果 -->
                 <div id="search-results" style="

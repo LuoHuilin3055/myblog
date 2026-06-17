@@ -50,30 +50,30 @@ hugo -t theme2 --cleanDestinationDir
 baseURL = "https://yourname.github.io/your-repo/"
 title = "Your Blog"
 
-[params]
-  site_title = "Your Name"
+\\\[params]
+  site\\\_title = "Your Name"
   description = "站点描述"
   author = "Your Name"
   avatar = "images/avatar.jpg"
-  bio = "Hi, there ~"
+  bio = "Hi, there \\\~"
   github = "https://github.com/yourname"
-  featured_image = "images/background.jpg"
-  page_header_image = "images/background.jpg"
-  site_since = "2026-03-21"
+  featured\\\_image = "images/background.jpg"
+  page\\\_header\\\_image = "images/background.jpg"
+  site\\\_since = "2026-03-21"
 ```
 
 首页按钮、关于页副标题、统计和交互功能也可以在 `params` 中配置：
 
 ```toml
-[params]
-  about_subtitle = "欢迎来到我的个人博客"
-  random_button_text = "🎲 随机一篇"
-  about_button_text = "👤 关于我"
-  latest_posts_title = "📝 最新文章"
-  enable_busuanzi = true
-  enable_click_fireworks = true
-  enable_image_lightbox = true
-  enable_image_slider = true
+\\\[params]
+  about\\\_subtitle = "欢迎来到我的个人博客"
+  random\\\_button\\\_text = "🎲 随机一篇"
+  about\\\_button\\\_text = "👤 关于我"
+  latest\\\_posts\\\_title = "📝 最新文章"
+  enable\\\_busuanzi = true
+  enable\\\_click\\\_fireworks = true
+  enable\\\_image\\\_lightbox = true
+  enable\\\_image\\\_slider = true
 ```
 
 ## SEO 与分享
@@ -83,9 +83,9 @@ title = "Your Blog"
 站点默认描述和默认分享图来自 `config.toml`：
 
 ```toml
-[params]
+\\\[params]
   description = "站点描述"
-  featured_image = "images/background.jpg"
+  featured\\\_image = "images/background.jpg"
 ```
 
 单篇文章可以在 front matter 中覆盖分享描述和图片：
@@ -102,32 +102,32 @@ images:
   - "images/post-share.jpg"
 ```
 
-评论区使用 Waline，可在 `params.comments` 中配置。默认关闭；需要评论区时，把 `enable` 改为 `true`，再填写 `server_url`：
+评论区使用 Waline，可在 `params.comments` 中配置。默认关闭；需要评论区时，把 `enable` 改为 `true`，再填写 `server\\\_url`：
 
 ```toml
-[params.comments]
+\\\[params.comments]
   enable = false
   provider = "waline"
-  server_url = ""
-  placeholder = "欢迎留言，一起交流~"
+  server\\\_url = ""
+  placeholder = "欢迎留言，一起交流\\\~"
   login = "enable"
 ```
 
 日程板块使用静态数据文件渲染，可在 `params.schedule` 中调整标题和显示时间范围：
 
 ```toml
-[params.schedule]
+\\\[params.schedule]
   enable = true
   title = "日程"
   subtitle = "记录每个时间段在做什么"
-  start_hour = 8
-  end_hour = 24
+  start\\\_hour = 8
+  end\\\_hour = 24
 ```
 
 关于页社交链接使用数组配置：
 
 ```toml
-[[params.social_links]]
+\\\[\\\[params.social\\\_links]]
   name = "GitHub"
   url = "https://github.com/yourname"
 ```
@@ -143,7 +143,7 @@ hugo new posts/my-new-post.md
 推荐使用脚本创建 Page Bundle，新文章会默认是草稿：
 
 ```powershell
-.\scripts\new-post.ps1 "我的新文章"
+.\\\\scripts\\\\new-post.ps1 "我的新文章"
 ```
 
 生成结构如下：
@@ -166,26 +166,26 @@ draft: false
 1. 新建文章：
 
 ```powershell
-.\scripts\new-post.ps1 "文章标题"
+.\\\\scripts\\\\new-post.ps1 "文章标题"
 ```
 
 2. 写正文，并临时插入本地图片路径。
 3. 整理文章图片：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\文章标题
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\文章标题
 ```
 
 也可以直接传入 Markdown 文件：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\文章标题\index.md
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\文章标题\\\\index.md
 ```
 
 4. 发布前检查：
 
 ```powershell
-.\scripts\check-blog.ps1
+.\\\\scripts\\\\check-blog.ps1
 ```
 
 5. 确认要发布时，把文章 front matter 中的 `draft: true` 改为 `draft: false`，再提交推送。
@@ -196,7 +196,7 @@ draft: false
 
 ```text
 static/images/avatar.jpg          -> Markdown 或配置中写 images/avatar.jpg
-content/posts/my-post/image.png   -> 同目录文章中写 ![](image.png)
+content/posts/my-post/image.png   -> 同目录文章中写 !\\\[](image.png)
 ```
 
 不建议在文章里写死 `/myblog/...` 或 `https://xxx.github.io/...`。仓库名变更、fork 到别人账号、或本地预览时，这类绝对路径最容易失效。
@@ -215,112 +215,112 @@ content/posts/my-post/
 写文章时可以先直接插入本地图片路径，例如：
 
 ```markdown
-![](D:\Pictures\截图 2026-05-28.png)
-![](..\临时图片\demo.jpg)
-![[Pasted image 20260528170436.png]]
+!\\\[](D:\\\\Pictures\\\\截图 2026-05-28.png)
+!\\\[](..\\\\临时图片\\\\demo.jpg)
+!\\\[\\\[Pasted image 20260528170436.png]]
 ```
 
 写完后在仓库根目录运行：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\my-post\index.md
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\my-post\\\\index.md
 ```
 
 如果传入的是文章文件夹，脚本会优先处理文件夹里的 `index.md`：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\my-post
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\my-post
 ```
 
 脚本会把本地图片复制到文章所在文件夹，并把 Markdown 自动改成稳定的同目录相对路径：
 
 ```markdown
-![](img-001.png)
-![](img-002.jpg)
+!\\\[](img-001.png)
+!\\\[](img-002.jpg)
 ```
 
 脚本默认只复制不移动原图；会跳过 `http/https` 网络图片、`images/...` 公共资源，以及已经整理好的 `img-001.png` 这类图片。`static/images/` 仍然适合放头像、背景图、封面图和多篇文章共用的素材。
 
-如果你在 Obsidian 里粘贴图片，脚本也会把 `![[图片名.png]]` 转成标准 Markdown 图片语法，并复制到文章文件夹，例如：
+如果你在 Obsidian 里粘贴图片，脚本也会把 `!\\\[\\\[图片名.png]]` 转成标准 Markdown 图片语法，并复制到文章文件夹，例如：
 
 ```markdown
-![[Pasted image 20260528170436.png]]
+!\\\[\\\[Pasted image 20260528170436.png]]
 ```
 
 会整理成：
 
 ```markdown
-![](img-001.png)
+!\\\[](img-001.png)
 ```
 
 如果希望整理完成后顺手删除 Obsidian 生成的原始粘贴图，可以先用 `-WhatIf` 预览：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\my-post -DeleteOriginalObsidianImages -WhatIf
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\my-post -DeleteOriginalObsidianImages -WhatIf
 ```
 
 确认列表没有问题后，再真正删除：
 
 ```powershell
-.\scripts\prepare-post-images.ps1 content\posts\my-post -DeleteOriginalObsidianImages
+.\\\\scripts\\\\prepare-post-images.ps1 content\\\\posts\\\\my-post -DeleteOriginalObsidianImages
 ```
 
 这个删除只会处理已经成功复制并改写引用的 `Pasted image 20260528170436.png` 这类 Obsidian 粘贴图片；普通图片、网络图片、公共资源、以及文章目录里的 `img-001.png` 不会被删除。
 
-如果文章已经在上一次运行时改成了 `![](img-001.png)`，脚本也会继续检查文章目录和上级目录里的 Obsidian 粘贴图；只有当原图内容和文章目录里的 `img-001.png` 完全一致时才会删除，避免误删还没有整理进文章的图片。
+如果文章已经在上一次运行时改成了 `!\\\[](img-001.png)`，脚本也会继续检查文章目录和上级目录里的 Obsidian 粘贴图；只有当原图内容和文章目录里的 `img-001.png` 完全一致时才会删除，避免误删还没有整理进文章的图片。
 
 ### 图片压缩
 
 仓库提供了图片压缩脚本，适合发布前压缩文章图片、封面图和背景图：
 
 ```powershell
-.\scripts\optimize-images.ps1 -Path content,static
+.\\\\scripts\\\\optimize-images.ps1 -Path content,static
 ```
 
 默认是预览模式，只显示哪些图片会变小，不会覆盖文件。确认后加 `-Apply` 才会真正替换：
 
 ```powershell
-.\scripts\optimize-images.ps1 -Path content,static -Apply
+.\\\\scripts\\\\optimize-images.ps1 -Path content,static -Apply
 ```
 
 脚本默认只处理 Git 已跟踪、且大于 `512KB` 的 `jpg/jpeg/png` 图片；压缩后如果文件反而变大，会自动跳过。JPG 默认质量为 `82`，通常网页展示看不出明显变化；如果想更保守，可以改成：
 
 ```powershell
-.\scripts\optimize-images.ps1 -Path content,static -JpegQuality 88 -Apply
+.\\\\scripts\\\\optimize-images.ps1 -Path content,static -JpegQuality 88 -Apply
 ```
 
 如果要连未提交的新图片一起处理，可以加 `-IncludeUntracked`。建议先不加 `-Apply` 预览一遍。
 
 ## 列表页横幅图片
 
-文章列表、标签页、归档页、碎碎念、日程等页面顶部的横向大背景横幅由 `config.toml` 中的 `page_header_image` 控制：
+文章列表、标签页、归档页、碎碎念、日程等页面顶部的横向大背景横幅由 `config.toml` 中的 `page\\\_header\\\_image` 控制：
 
 ```toml
-[params]
-  page_header_image = "images/background.jpg"
+\\\[params]
+  page\\\_header\\\_image = "images/background.jpg"
 ```
 
 图片建议放在 `static/images/` 目录下。例如放入 `static/images/page-banner.jpg` 后，配置写成：
 
 ```toml
-[params]
-  page_header_image = "images/page-banner.jpg"
+\\\[params]
+  page\\\_header\\\_image = "images/page-banner.jpg"
 ```
 
-如果只想给某一个列表页单独换图，可以在对应页面的 front matter 中使用 `header_image` 覆盖全局配置：
+如果只想给某一个列表页单独换图，可以在对应页面的 front matter 中使用 `header\\\_image` 覆盖全局配置：
 
 ```toml
 +++
 title = "文章"
-header_image = "images/posts-banner.jpg"
+header\\\_image = "images/posts-banner.jpg"
 +++
 ```
 
-优先级是：页面 `header_image` > 全局 `params.page_header_image` > 默认 `images/background.jpg`。
+优先级是：页面 `header\\\_image` > 全局 `params.page\\\_header\\\_image` > 默认 `images/background.jpg`。
 
-日程页入口是 `content/schedule.md`。如果这个文件里写了 `header_image`，日程页会优先使用它；如果希望日程页跟随全局 `page_header_image`，不要在 `content/schedule.md` 中单独设置 `header_image`。
+日程页入口是 `content/schedule.md`。如果这个文件里写了 `header\\\_image`，日程页会优先使用它；如果希望日程页跟随全局 `page\\\_header\\\_image`，不要在 `content/schedule.md` 中单独设置 `header\\\_image`。
 
-注意：`featured_image` 主要用于站点原有背景/展示图，`page_header_image` 专门用于列表页顶部横幅；两者可以使用不同图片。
+注意：`featured\\\_image` 主要用于站点原有背景/展示图，`page\\\_header\\\_image` 专门用于列表页顶部横幅；两者可以使用不同图片。
 
 ## 数据文件
 
@@ -351,7 +351,7 @@ header_image = "images/posts-banner.jpg"
   summary: "刷题与整理笔记"
 ```
 
-默认分类为 `学习`、`比赛`、`博客`、`生活`、`休息`；写其它分类也能显示，只是会使用默认颜色。时间格式统一使用 `YYYY-MM-DD` 和 `HH:mm`，页面会按周自动分组，并根据 `start_hour` / `end_hour` 控制每天展示的时间范围。
+默认分类为 `学习`、`比赛`、`博客`、`生活`、`休息`；写其它分类也能显示，只是会使用默认颜色。时间格式统一使用 `YYYY-MM-DD` 和 `HH:mm`，页面会按周自动分组，并根据 `start\\\_hour` / `end\\\_hour` 控制每天展示的时间范围。
 
 ## 评论区部署
 
@@ -365,11 +365,11 @@ header_image = "images/posts-banner.jpg"
 4. 回到博客仓库，把地址填入 `config.toml`：
 
 ```toml
-[params.comments]
+\\\[params.comments]
   enable = true
   provider = "waline"
-  server_url = "https://your-waline-server.vercel.app"
-  placeholder = "欢迎留言，一起交流~"
+  server\\\_url = "https://your-waline-server.vercel.app"
+  placeholder = "欢迎留言，一起交流\\\~"
   login = "enable"
 ```
 
@@ -405,7 +405,7 @@ Waline 默认支持昵称、邮箱、网址等访客信息；如果后续需要�
 提交前也可以先运行：
 
 ```powershell
-.\scripts\check-blog.ps1
+.\\\\scripts\\\\check-blog.ps1
 ```
 
 它会检查 Hugo 构建、空 `draft:`、失效图片路径、超过 2MB 的图片，以及文章里硬编码的 `/myblog/` 或 `github.io` 链接。这个脚本只报告问题，不会修改文章内容。
@@ -417,3 +417,4 @@ Waline 默认支持昵称、邮箱、网址等访客信息；如果后续需要�
 1. 将真实文章迁出，仅保留示例内容。
 2. 把 `layouts` 中的大段内联 CSS/JS 拆到 `assets/css` 和 `assets/js`。
 3. 将 `themes/theme2` 与当前自定义模板整理成独立 Hugo theme。
+

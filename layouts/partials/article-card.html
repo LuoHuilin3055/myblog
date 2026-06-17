@@ -58,7 +58,7 @@
       margin: 0 0 15px;
       line-height: 1.3;
     ">
-      <a href="{{ .Permalink }}" style="
+      <a href="{{ .RelPermalink }}" style="
         color: var(--text-primary);
         text-decoration: none;
         transition: color 0.3s;
@@ -96,7 +96,7 @@
     {{ partial "article-tags.html" . }}
     
     <!-- 阅读更多按钮 -->
-    <a class="blog-read-more" href="{{ .Permalink }}" style="
+    <a class="blog-read-more" href="{{ .RelPermalink }}" style="
       display: inline-flex;
       align-items: center;
       gap: 8px;

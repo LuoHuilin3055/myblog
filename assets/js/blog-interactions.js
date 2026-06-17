@@ -130,7 +130,6 @@
       element.dataset.typingToken = token;
 
       element.classList.remove('is-typing', 'is-typing-done');
-      element.textContent = '';
 
       if (reduceMotion || !value) {
         element.textContent = value;
@@ -166,6 +165,7 @@
         if (element.dataset.typingToken !== token) {
           return;
         }
+        element.textContent = '';
         element.classList.add('is-typing');
         tick();
       }
