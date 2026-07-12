@@ -7,6 +7,7 @@ featured:
 tags:
   - Java
   - 笔记
+cover: images/12.jpg
 ---
 Java考试前的补天
 
