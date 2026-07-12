@@ -1,6 +1,6 @@
 ---
 title: BYU CTF的WriteUp
-draft: true
+draft: false
 tags:
   - WP
   - CTF
@@ -54,18 +54,18 @@ chals.cyberjousting.com:1370
 ### 解题思路
 1‍⃣首先使用`nc`连接题目服务
 输入`pwd`测试当前目录
-![[Pasted image 20260603140913.png]]
+![](img-001.png)
 根据返回结果得知当前工作目录在`/app`
 2‍⃣发现过滤规则
 尝试查看当前目录文件，但根据返回的报错可以看出：题目服务会删除命令中的空格
-![[Pasted image 20260603141212.png]]
+![](img-002.png)
 3‍⃣绕过空格过滤
 用`${IFS}`代替空格使用
-![[Pasted image 20260603141401.png]]
+![](img-003.png)
 但还是会报错：说明不能直接使用普通外部命令
 4‍⃣使用 `bash` 内置功能列目录
-![[Pasted image 20260603143216.png]]
-![[Pasted image 20260603143543.png]]
+![](img-004.png)
+![](img-005.png)
 
 ---
 ## `3.Chromatic`
@@ -76,7 +76,7 @@ chals.cyberjousting.com:1370
 
 ### 解题思路
 先检查`mp4`文件
-![[Pasted image 20260603151837.png]]
+![](img-006.png)
 根据
 ```txt
 30 fps
