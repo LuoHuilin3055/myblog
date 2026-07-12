@@ -1,239 +1,42 @@
 {{ if .TableOfContents }}
-<div style="
-  position: fixed;
-  right: 30px;
-  top: 100px;
-  height: fit-content;
-  min-height: 300px;
-  background: rgba(0,0,0,0.9);
-  border-radius: 12px;
-  padding: 20px;
-  border: 1px solid rgba(0,255,255,0.3);
-  max-height: 85vh;
-  overflow-y: auto;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
-  transition: all 0.3s ease;
-  z-index: 1000;
-  min-width: 320px;
-  width: 350px;
-" id="toc-container">
-  <div style="
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid rgba(0,255,255,0.2);
-  ">
-    <h3 style="color: #00ffff; margin: 0; font-size: 1.1em; display: flex; align-items: center; gap: 8px;">
-      <span style="font-size: 1.2em;">📋</span>
-      <span>目录</span>
-    </h3>
-    <div class="toc-backtop-slot">
-      {{ partial "backtop.html" . }}
+<nav id="toc-container" class="blog-toc-panel" aria-label="文章目录">
+  <div class="blog-toc-header">
+    <div class="blog-toc-heading">
+      <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M4 6h16" />
+        <path d="M4 12h16" />
+        <path d="M4 18h10" />
+      </svg>
+      <h3>目录</h3>
     </div>
-    <button
-      type="button"
-      class="toc-collapse-button"
-      data-toc-toggle
-      style="
-        background: linear-gradient(135deg, rgba(0,255,255,0.1), rgba(0,255,255,0.05));
-        border: 1px solid rgba(0,255,255,0.4);
-        color: #00ffff;
-        padding: 6px 12px;
-        border-radius: 8px;
-        cursor: pointer;
-        font-size: 0.85em;
-        transition: all 0.3s ease;
-        box-shadow: 0 2px 8px rgba(0,255,255,0.1);
-        backdrop-filter: blur(5px);
-        position: relative;
-        overflow: hidden;
-      "
-    >
-      <span style="display: flex; align-items: center; gap: 6px;">
-        <span style="font-size: 1.1em;">📋</span>
+
+    <div class="blog-toc-actions">
+      <div class="toc-backtop-slot">
+        {{ partial "backtop.html" . }}
+      </div>
+      <button
+        type="button"
+        class="toc-collapse-button"
+        data-toc-toggle
+        aria-expanded="true"
+        aria-controls="toc-content"
+        title="折叠目录"
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m6 9 6 6 6-6" />
+        </svg>
         <span id="toc-toggle-text">收起</span>
-      </span>
-    </button>
+      </button>
+    </div>
   </div>
-  
-  <div class="enhanced-toc" style="
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-    max-height: 1000px;
-    opacity: 1;
-    overflow: visible;
-  " id="toc-content">
-    <!-- 文章主标题 -->
-    <ul>
-      <li>
-        <a href="#" style="
-          color: #00ffff;
-          font-weight: bold;
-          text-decoration: none;
-          display: block;
-          padding: 8px 0;
-          font-size: 1em;
-          transition: all 0.3s ease;
-        ">
-          {{ .Title }}
-        </a>
+
+  <div class="enhanced-toc" id="toc-content" data-collapsed="false">
+    <ul class="blog-toc-root">
+      <li class="blog-toc-title-item">
+        <a href="#page-top">{{ .Title }}</a>
       </li>
     </ul>
-    <!-- Markdown 目录 -->
     {{ .TableOfContents }}
   </div>
-</div>
+</nav>
 {{ end }}
-
-<style>
-  .enhanced-toc ul {
-    list-style: none;
-    padding-left: 0;
-    margin: 0;
-  }
-  
-  .enhanced-toc li {
-    margin: 8px 0;
-    position: relative;
-  }
-  
-  .enhanced-toc li::before {
-    content: '';
-    position: absolute;
-    left: -15px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 6px;
-    height: 6px;
-    background: rgba(0,255,255,0.5);
-    border-radius: 50%;
-    transition: all 0.3s ease;
-  }
-  
-  .enhanced-toc li:hover::before {
-    background: #00ffff;
-    transform: translateY(-50%) scale(1.3);
-  }
-  
-  .enhanced-toc a {
-    color: #ccc;
-    text-decoration: none;
-    transition: all 0.3s ease;
-    display: block;
-    padding: 4px 0;
-    font-size: 0.9em;
-    line-height: 1.5;
-  }
-  
-  .enhanced-toc a:hover {
-    color: #00ffff;
-    padding-left: 8px;
-  }
-  
-  .enhanced-toc a.active {
-    color: #00ffff;
-    font-weight: bold;
-    padding-left: 8px;
-    background: rgba(0,255,255,0.1);
-    border-left: 3px solid #00ffff;
-    padding-left: 12px;
-    border-radius: 0 4px 4px 0;
-  }
-  
-  .enhanced-toc a.active::before {
-    content: '▸';
-    margin-right: 5px;
-  }
-  
-  .enhanced-toc ul ul {
-    padding-left: 20px;
-    margin-top: 8px;
-    border-left: 2px solid rgba(0,255,255,0.2);
-  }
-  
-  .enhanced-toc ul ul li {
-    margin: 6px 0;
-  }
-  
-  .enhanced-toc ul ul li::before {
-    left: -12px;
-    width: 4px;
-    height: 4px;
-  }
-  
-  /* 滚动条样式 */
-  #toc-container::-webkit-scrollbar {
-    width: 8px;
-  }
-  
-  #toc-container::-webkit-scrollbar-track {
-    background: rgba(0,0,0,0.3);
-    border-radius: 4px;
-  }
-  
-  #toc-container::-webkit-scrollbar-thumb {
-    background: rgba(0,255,255,0.3);
-    border-radius: 4px;
-    transition: all 0.3s ease;
-  }
-  
-  #toc-container::-webkit-scrollbar-thumb:hover {
-    background: rgba(0,255,255,0.5);
-  }
-  
-  /* 目录项展开/折叠按钮 */
-  .toc-toggle {
-    background: none;
-    border: none;
-    color: #00ffff;
-    cursor: pointer;
-    font-size: 0.8em;
-    margin-right: 5px;
-    transition: all 0.3s ease;
-  }
-  
-  .toc-toggle:hover {
-    color: #fff;
-    transform: rotate(90deg);
-  }
-  
-  /* 响应式设计 */
-  @media (max-width: 1024px) {
-    #toc-container {
-      position: relative;
-      right: auto;
-      top: auto;
-      width: 100%;
-      max-width: 400px;
-      margin: 0 auto 30px;
-      max-height: 400px;
-    }
-    
-    .blog-backtop {
-      right: 20px;
-      bottom: 20px;
-    }
-    
-    .blog-backtop-button {
-      padding: 12px 16px;
-      font-size: 1.2em;
-    }
-  }
-  
-  /* 目录容器动画 */
-  #toc-container:hover {
-    box-shadow: 0 10px 40px rgba(0,255,255,0.6);
-    transform: translateY(-2px);
-  }
-  
-  /* 目录项动画 */
-  .enhanced-toc li {
-    transition: all 0.3s ease;
-  }
-  
-  .enhanced-toc li:hover {
-    transform: translateX(5px);
-  }
-</style>

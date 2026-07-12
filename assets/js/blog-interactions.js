@@ -438,7 +438,8 @@
   window.toggleTOC = function toggleTOC() {
     const tocContent = byId('toc-content');
     const buttonText = byId('toc-toggle-text');
-    if (!tocContent || !buttonText) {
+    const toggleButton = document.querySelector('[data-toc-toggle]');
+    if (!tocContent || !buttonText || !toggleButton) {
       return;
     }
 
@@ -446,6 +447,8 @@
     tocContent.style.maxHeight = collapsed ? '1000px' : '0';
     tocContent.style.opacity = collapsed ? '1' : '0';
     tocContent.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
+    toggleButton.setAttribute('aria-expanded', collapsed ? 'true' : 'false');
+    toggleButton.setAttribute('title', collapsed ? '折叠目录' : '展开目录');
     buttonText.textContent = collapsed ? '收起' : '展开';
   };
 

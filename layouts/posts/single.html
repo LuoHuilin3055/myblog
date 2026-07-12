@@ -29,7 +29,9 @@
       z-index: 0;
     "></div>
     
-    <div class="blog-post-layout" style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
+    <div class="blog-post-layout">
+      {{ partial "post-left-sidebar.html" . }}
+
       <!-- 文章内容 -->
       <article class="blog-post-article" style="flex: 1; max-width: 1000px; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         <!-- 封面图片 -->
@@ -91,9 +93,9 @@
       </article>
       
       <!-- 右侧目录栏 -->
-      <div class="blog-post-toc" style="flex-shrink: 0; width: 280px;">
+      <aside class="blog-post-toc" aria-label="文章目录">
         {{ partial "enhanced-toc.html" . }}
-      </div>
+      </aside>
     </div>
   </div>
 {{ end }}
