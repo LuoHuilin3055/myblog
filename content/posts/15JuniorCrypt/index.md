@@ -1,7 +1,7 @@
 ---
 title: JuniorCrypt2026的WP
 date: 2026-07-12
-lastmod:
+lastmod: 2026-07-13
 draft:
 tags:
   - CTF
@@ -301,7 +301,7 @@ grodno{U1tr@_m3g@_5up3r_Gul_M1d_SF_1000-7}
 
 ## Ghost Layers
 ### 题目描述
-![[屏幕截图 2026-07-11 171127.png]]
+![](img-007.png)
 >What stays visible is not always what matters most.  
 >一直可见的东西，并不总是最重要的。
 
@@ -334,6 +334,117 @@ defs        只定义、不直接显示
 ```
 中隐藏数据
 于是先用VS Code打开文件，再用CTRL+F搜索“mask”，找到名字为“mk9”的蒙版
-![[Pasted image 20260713110642.png]]
-![[Pasted image 20260713110734.png]]
-这个表示当前这个图层正在使用“mk9”蒙版
+![](img-008.png)
+```txt
+<mask id="mk9">
+    <rect x="0" y="0"
+          width="577"
+          height="635"
+          fill="black"/>
+
+    <polyline points="..."
+              stroke="white"
+              .../>
+</mask>
+```
+这里可以理解为
+```txt
+黑色区域：隐藏
+白色区域：显示
+灰色区域：部分显示
+```
+这里先使用黑色矩形遮住整个画布，然后指通过一些白色线条显示少量内容，因此隐藏图形很难被观察到
+
+#### 找到使用蒙版的图层
+![](img-009.png)
+从中我们可以看到信息：
+```XML
+<g id="ghost-wash"
+   opacity="0.72"   ——  降低透明度
+   mask="url(#mk9)"  ——  使用蒙版mk9
+   filter="url(#glowSoft)">  ——  使用发光、模糊效果
+```
+同时还有
+```txt
+clip-path="url(#cp4)"
+```
+说明真正决定图形轮廓的可能是cp4
+
+#### 分析cp4的裁剪路径
+搜索
+```txt
+id="cp4"
+```
+![](img-010.png)
+引用id为s17的图形，并把它作为裁剪区域
+于是继续搜索
+```txt
+id="s17"
+```
+找到
+```XML
+<g id="s17">
+    <g transform="translate(62.500,454.000)
+                  scale(0.009400,-0.009400)"
+       fill="#f8efc9"
+       stroke="#f8efc9"
+       stroke-width="36"
+       stroke-linejoin="round">
+
+        <path d="..."/>
+        <path d="..."/>
+        ...
+    </g>
+</g>
+```
+`s17` 内部包含大量 `<path>` 标签。
+这些路径不是随机数据，而是由文字转换得到的矢量轮廓。也就是说，隐藏的 Flag 已经被转换为一组路径，所以直接搜索：
+```txt
+grodno
+```
+无法找到明文
+
+#### 隐藏原理
+```txt
+s17
+│
+│ 保存 Flag 文字的矢量路径
+↓
+cp4
+│
+│ 将 s17 作为裁剪形状
+↓
+ghost-wash
+│
+│ 只在 Flag 文字内部绘制渐变和线条
+↓
+mk9
+│
+│ 再通过蒙版遮挡绝大部分区域
+↓
+glowSoft + opacity
+│
+│ 添加发光并降低透明度
+↓
+Flag 变得若隐若现
+```
+于是试图直接显示隐藏图层
+
+### EXP
+先将原文件复制一份
+用VS Code打开文件，跳转到结尾，找到
+```XML
+</svg>
+```
+在其前面加上
+```XML
+<rect x="0"
+      y="390"
+      width="577"
+      height="110"
+      fill="black"/>
+
+<use href="#s17"/>
+```
+保存文件后用浏览器打开即可看见flag
+![](img-011.png)
