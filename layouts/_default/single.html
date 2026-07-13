@@ -29,11 +29,7 @@
       z-index: 0;
     "></div>
     
-    {{ partial "post-workspace-controls.html" . }}
-
-    <div class="blog-post-layout">
-      {{ partial "post-left-sidebar.html" . }}
-
+    <div class="blog-post-layout" style="max-width: 1400px; margin: 0 auto; display: flex; gap: 40px; position: relative; z-index: 1;">
       <!-- 文章内容 -->
       <article class="blog-post-article" style="flex: 1; background: rgba(0,0,0,0.7); border-radius: 15px; padding: 40px; border: 1px solid rgba(0,255,255,0.3); backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(0,0,0,0.5); transition: all 0.3s ease; transform: translateY(0);">
         <!-- 封面图片 -->
@@ -69,8 +65,7 @@
           "></div>
         </div>
         {{ end }}
-
-        <div class="blog-post-content-column">
+        
         <h1 class="blog-post-title" style="color: #00ffff; font-size: clamp(2em, 5vw, 2.5em); margin: {{ if $coverImage }}-20px{{ else }}0{{ end }} 0 20px; text-shadow: 0 0 10px rgba(0,255,255,0.3); animation: fadeIn 0.8s ease;">{{ .Title }}</h1>
         
         <div class="blog-post-meta" style="color: #ccc; margin: 20px 0; display: flex; gap: 20px; flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,0.1);">
@@ -93,13 +88,12 @@
         </div>
 
         {{ partial "comments.html" . }}
-        </div>
       </article>
       
       <!-- 右侧目录栏 -->
-      <aside class="blog-post-toc" id="post-toc-sidebar" aria-label="文章目录">
+      <div class="blog-post-toc" style="flex-shrink: 0; width: 280px;">
         {{ partial "enhanced-toc.html" . }}
-      </aside>
+      </div>
     </div>
   </div>
 {{ end }}

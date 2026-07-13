@@ -28,7 +28,6 @@
     initLightbox();
     initImageSlider();
     initCodeCopy();
-    initPostWorkspace();
     initToc();
     initRandomQuote();
     initRuntime();
@@ -51,17 +50,11 @@
     const backtop = document.querySelector('[data-backtop]');
     const backtopButton = document.querySelector('[data-backtop-button]');
     const scrollQuote = document.querySelector('[data-random-quote="scroll"]');
-    const articleScroller = document.querySelector('.blog-post-page .blog-post-article');
-    const scrollTarget = articleScroller || window;
     let scrollTicking = false;
 
     function updateScrollState() {
-      const winScroll = articleScroller
-        ? articleScroller.scrollTop
-        : document.body.scrollTop || document.documentElement.scrollTop;
-      const height = articleScroller
-        ? articleScroller.scrollHeight - articleScroller.clientHeight
-        : document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+      const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
       const progress = height > 0 ? Math.min(winScroll / height, 1) : 0;
 
       if (readingProgress) {
@@ -79,7 +72,7 @@
       scrollTicking = false;
     }
 
-    scrollTarget.addEventListener('scroll', function () {
+    window.addEventListener('scroll', function () {
       if (scrollTicking) {
         return;
       }
@@ -89,7 +82,7 @@
 
     if (backtopButton) {
       backtopButton.addEventListener('click', function () {
-        scrollTarget.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       });
     }
 
@@ -442,76 +435,10 @@
     });
   }
 
-  function initPostWorkspace() {
-    const leftSidebar = byId('post-left-sidebar');
-    const rightSidebar = byId('post-toc-sidebar');
-    const backdrop = document.querySelector('[data-post-workspace-backdrop]');
-    const toggles = document.querySelectorAll('[data-post-sidebar-toggle]');
-
-    if (!leftSidebar || !rightSidebar || !backdrop || !toggles.length) {
-      return;
-    }
-
-    function setDrawer(side, open) {
-      const className = side === 'left' ? 'post-left-open' : 'post-toc-open';
-      document.body.classList.toggle(className, open);
-      toggles.forEach(function (toggle) {
-        if (toggle.getAttribute('data-post-sidebar-toggle') === side) {
-          toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
-          toggle.setAttribute('title', (open ? '关闭' : '打开') + (side === 'left' ? '文章侧栏' : '文章目录'));
-        }
-      });
-    }
-
-    function closeDrawers() {
-      setDrawer('left', false);
-      setDrawer('right', false);
-    }
-
-    toggles.forEach(function (toggle) {
-      toggle.addEventListener('click', function () {
-        const side = toggle.getAttribute('data-post-sidebar-toggle');
-        const isOpen = side === 'left'
-          ? document.body.classList.contains('post-left-open')
-          : document.body.classList.contains('post-toc-open');
-        closeDrawers();
-        setDrawer(side, !isOpen);
-      });
-    });
-
-    backdrop.addEventListener('click', closeDrawers);
-    document.addEventListener('keydown', function (event) {
-      if (event.key === 'Escape') {
-        closeDrawers();
-      }
-    });
-
-    rightSidebar.addEventListener('click', function (event) {
-      if (window.innerWidth <= 1300 && event.target.closest('a')) {
-        setDrawer('right', false);
-      }
-    });
-
-    leftSidebar.addEventListener('click', function (event) {
-      if (window.innerWidth < 900 && event.target.closest('a')) {
-        setDrawer('left', false);
-      }
-    });
-
-    window.addEventListener('resize', function () {
-      if (window.innerWidth > 1300) {
-        closeDrawers();
-      } else if (window.innerWidth >= 900) {
-        setDrawer('left', false);
-      }
-    }, { passive: true });
-  }
-
   window.toggleTOC = function toggleTOC() {
     const tocContent = byId('toc-content');
     const buttonText = byId('toc-toggle-text');
-    const toggleButton = document.querySelector('[data-toc-toggle]');
-    if (!tocContent || !buttonText || !toggleButton) {
+    if (!tocContent || !buttonText) {
       return;
     }
 
@@ -519,8 +446,6 @@
     tocContent.style.maxHeight = collapsed ? '1000px' : '0';
     tocContent.style.opacity = collapsed ? '1' : '0';
     tocContent.setAttribute('data-collapsed', collapsed ? 'false' : 'true');
-    toggleButton.setAttribute('aria-expanded', collapsed ? 'true' : 'false');
-    toggleButton.setAttribute('title', collapsed ? '折叠目录' : '展开目录');
     buttonText.textContent = collapsed ? '收起' : '展开';
   };
 
