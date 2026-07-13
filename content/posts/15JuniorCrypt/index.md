@@ -296,3 +296,44 @@ print(repr(text))
 ```txt
 grodno{U1tr@_m3g@_5up3r_Gul_M1d_SF_1000-7}
 ```
+
+---
+
+## Ghost Layers
+### 题目描述
+![[屏幕截图 2026-07-11 171127.png]]
+>What stays visible is not always what matters most.  
+>一直可见的东西，并不总是最重要的。
+
+### 解题思路
+#### 检查文件
+查看文件后缀为.svg文件
+```txt
+.svg是一种矢量图片文件，全称是：
+Scalable Vector Graphics（可缩放矢量图形）
+SVG通常用代码描述图形，例如线条、圆形、颜色和文字
+特点：
+	放大不会模糊；
+	文件通常比较小；
+	可用浏览器直接打开；
+	可以修改颜色、大小和形状；
+	本质上是一种XML文本文件，可以用VS Code、记事本打开查看代码
+	可以通过CSS或JavaScript添加动画和交互
+SVG内部可以包含脚本代码
+```
+
+#### 寻找隐藏数据
+SVG中通常会在
+```txt
+mask        蒙版
+clipPath    裁剪
+opacity     透明度
+display     是否显示
+visibility  是否可见
+defs        只定义、不直接显示
+```
+中隐藏数据
+于是先用VS Code打开文件，再用CTRL+F搜索“mask”，找到名字为“mk9”的蒙版
+![[Pasted image 20260713110642.png]]
+![[Pasted image 20260713110734.png]]
+这个表示当前这个图层正在使用“mk9”蒙版

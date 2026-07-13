@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode }}">
+<head>
+  <meta charset="utf-8">
+  <title>{{ block "title" . }}{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}{{ end }}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {{ partial "seo.html" . }}
+  <style>
+    :root {
+      --font-sans: "Comic Sans MC", "Comic Sans MS", "楷体", "KaiTi", "STKaiti", cursive, serif;
+      --font-mono: "Comic Sans MC", "Comic Sans MS", "楷体", "KaiTi", "STKaiti", cursive, serif;
+      --primary-color: #00ffff;
+      --secondary-color: #a5b4fc;
+      --bg-primary: #111111;
+      --bg-secondary: #111111;
+      --text-primary: #ffffff;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      color: var(--text-primary);
+      background: var(--bg-primary);
+      font-family: var(--font-sans);
+    }
+
+    .reading-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1000;
+      width: 100%;
+      height: 3px;
+      background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+      transform: scaleX(0);
+      transform-origin: left center;
+      will-change: transform;
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.9);
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 8px;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      color: #fff;
+      background: transparent;
+      border: 0;
+      font-size: 40px;
+      cursor: pointer;
+    }
+  </style>
+  {{ block "head" . }}{{ end }}
+  {{ partial "custom-head.html" . }}
+  {{ with resources.Get "css/blog-framework.css" }}
+    {{ $blogFrameworkCSS := . | minify }}
+    <link rel="stylesheet" href="{{ $blogFrameworkCSS.RelPermalink }}">
+  {{ end }}
+</head>
+<body class="{{ if and .IsPage (eq .Type "posts") }}blog-post-page{{ end }}">
+  <div class="reading-progress" id="readingProgress"></div>
+  {{ partial "random-quote.html" (dict "variant" "scroll") }}
+
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="关闭图片预览">&times;</button>
+    <img class="lightbox-content" id="lightboxImage" src="" alt="">
+  </div>
+
+  {{ block "header" . }}{{ partial "site-header.html" . }}{{ end }}
+  <main>
+    {{ block "main" . }}{{ end }}
+  </main>
+  {{ block "footer" . }}{{ partial "site-footer.html" . }}{{ end }}
+
+  <script>
+    window.blogConfig = {
+      enableSearch: {{ ne .Site.Params.enable_search false }},
+      enableImageLightbox: {{ ne .Site.Params.enable_image_lightbox false }},
+      enableImageSlider: {{ ne .Site.Params.enable_image_slider false }},
+      enableClickFireworks: {{ ne .Site.Params.enable_click_fireworks false }},
+      searchIndexUrl: {{ "index.json" | relURL | jsonify | safeJS }}
+    };
+  </script>
+  {{ with resources.Get "js/blog-interactions.js" }}
+    {{ $blogInteractionsJS := . | minify }}
+    <script src="{{ $blogInteractionsJS.RelPermalink }}" defer></script>
+  {{ end }}
+</body>
+</html>

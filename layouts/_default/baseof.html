@@ -149,7 +149,7 @@
       <link rel="stylesheet" href="{{ $blogFrameworkCSS.RelPermalink }}">
     {{ end }}
 </head>
-<body style="background-color: var(--bg-primary); margin: 0; padding: 0;">
+<body class="{{ if and .IsPage (eq .Type "posts") }}blog-post-page{{ end }}" style="background-color: var(--bg-primary); margin: 0; padding: 0;">
     <!-- 阅读进度条 -->
     <div class="reading-progress" id="readingProgress"></div>
     {{ partial "random-quote.html" (dict "variant" "scroll") }}
