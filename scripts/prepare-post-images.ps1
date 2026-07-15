@@ -135,16 +135,6 @@ function Resolve-LocalImageSource {
     return $PathText
   }
 
-  $sourcePath = Join-Path $ArticleDirectory $PathText
-  if (Test-Path -LiteralPath $sourcePath -PathType Leaf) {
-    return $sourcePath
-  }
-
-  $hasDirectory = $PathText.Contains('/') -or $PathText.Contains('\')
-  if ($hasDirectory) {
-    return $sourcePath
-  }
-
   $current = Get-Item -LiteralPath $ArticleDirectory
   while ($current) {
     $candidate = Join-Path $current.FullName $PathText
@@ -155,7 +145,7 @@ function Resolve-LocalImageSource {
     $current = $current.Parent
   }
 
-  return $sourcePath
+  return (Join-Path $ArticleDirectory $PathText)
 }
 
 function Get-MarkdownFiles {
