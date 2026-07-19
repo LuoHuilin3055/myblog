@@ -54,18 +54,18 @@ chals.cyberjousting.com:1370
 ### 解题思路
 1‍⃣首先使用`nc`连接题目服务
 输入`pwd`测试当前目录
-![](img-001.png)
+![](14byuctf/img-001.png)
 根据返回结果得知当前工作目录在`/app`
 2‍⃣发现过滤规则
 尝试查看当前目录文件，但根据返回的报错可以看出：题目服务会删除命令中的空格
-![](img-002.png)
+![](14byuctf/img-002.png)
 3‍⃣绕过空格过滤
 用`${IFS}`代替空格使用
-![](img-003.png)
+![](14byuctf/img-003.png)
 但还是会报错：说明不能直接使用普通外部命令
 4‍⃣使用 `bash` 内置功能列目录
-![](img-004.png)
-![](img-005.png)
+![](14byuctf/img-004.png)
+![](14byuctf/img-005.png)
 
 ---
 ## `3.Chromatic`
@@ -76,7 +76,7 @@ chals.cyberjousting.com:1370
 
 ### 解题思路
 先检查`mp4`文件
-![](img-006.png)
+![](14byuctf/img-006.png)
 根据
 ```txt
 30 fps

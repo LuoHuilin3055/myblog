@@ -1,5 +1,5 @@
 ---
-title: BUUCTF的WP
+title: BUUCTF新手村题单
 draft:
 date: 2026-07-17
 lastmod: 2026-07-18
@@ -16,28 +16,28 @@ cover: images/17.jpg
 sudo apt install imagemagick
 convert aaa.gif frame_%03d.png
 ```
-![](img-001.png)![](img-002.png)![](img-003.png)
+![](17buuctf/img-001.png)![](17buuctf/img-002.png)![](17buuctf/img-003.png)
 得到flag
 
 ----
 ## 02二维码
 [CTF²](https://ctf2.dasctf.com/dashboard/practice/b9bbb32f-f186-458f-b90b-12440c0f6aea?tab=challenges&challenge=7a44e5a1-beea-4663-9b23-ebe1baf38765)
 先用QRCode扫码得到
-![](img-004.png)
+![](17buuctf/img-004.png)
 直接扫描并没有得到flag
 ```Bash
  strings QR_code.png
 ```
-![](img-005.png)
+![](17buuctf/img-005.png)
 于是binwalk提取得到`1D7`压缩包，尝试解压但是需要密码
-![](img-006.png)
+![](17buuctf/img-006.png)
 压缩包中的文件为`4number.txt`，所以密码很可能是4位纯数字，用fcrackzip爆破
 ```Bash
 fcrackzip -b -c 1 -l 4-4 -u 1D7.zip
 ```
-![](img-007.png)
+![](17buuctf/img-007.png)
 接下来继续解压缩得到txt文件，进而得到flag
-![](img-008.png)
+![](17buuctf/img-008.png)
 
 ---
 ## 03N种方法解决
@@ -51,7 +51,7 @@ file KEY.exe
 ```Bash
 head -c 100 KEY.exe
 ```
-![](img-009.png)
+![](17buuctf/img-009.png)
 >文件类型：jpg图片  +   Base64编码的图片数据
 ```Bash
 sed 's/^data:image\/[^;]*;base64,//' KEY.exe | base64 -d > key.png
@@ -62,13 +62,13 @@ sed 's/^data:image\/[^;]*;base64,//' KEY.exe | base64 -d > key.png
 agick key.png -filter point -resize 800% \
 ```
 再用扫码工具扫码
-![](img-010.png)
+![](17buuctf/img-010.png)
 
 ---
 ## 04大白
 [CTF²](https://ctf2.dasctf.com/dashboard/practice/b9bbb32f-f186-458f-b90b-12440c0f6aea?tab=challenges&challenge=c99d060f-ba8b-4803-a23e-52b4b8a34b68)
 打开图片发现只有上半截，于是修改宽高
-![](img-011.png)
+![](17buuctf/img-011.png)
 
 ---
 ## 05你竟然赶我走
@@ -84,13 +84,13 @@ strings biubiu.jpg
 # Web
 ## 06[极客大挑战 2019]Havefun
 [CTF²](https://ctf2.dasctf.com/dashboard/practice/b9bbb32f-f186-458f-b90b-12440c0f6aea?tab=challenges&challenge=cb1461de-6e25-4bee-b0d4-12bc6106cb47)
-![](img-012.png)
+![](17buuctf/img-012.png)
 网页会读取URL中名为`cat`的参数，当参数值等于dog时输出flag
 于是在URL后面加上
 ```txt
 ?cat=dog
 ```
-![](img-013.png)
+![](17buuctf/img-013.png)
 
 ---
 ## 07[极客大挑战 2019]EasySQL
@@ -108,7 +108,7 @@ SELECT * FROM users WHERE username='$username' AND password='$password';
 ![](img-014.png)
 页面出现SQL语法错误，说明输入的单引号被拼接进了SQL语句，因此存在SQL注入漏洞
 ### 构造Payload
-![](img-015.png)![](img-016.png)
+![](17buuctf/img-015.png)![](17buuctf/img-016.png)
 
 ### 原理分析
 将输入内容带入后，SQL语句变成
@@ -141,9 +141,9 @@ or 1=1
 ## 08[HCTF 2018]WarmUp
 [CTF²](https://ctf2.dasctf.com/dashboard/practice/b9bbb32f-f186-458f-b90b-12440c0f6aea?tab=challenges&challenge=0b1c4df1-92df-4818-b564-76bda414acfd)
 查看源码，看到有文件`source.php`
-![](img-017.png)
+![](17buuctf/img-017.png)
 于是访问source.php
-![](img-018.png)
+![](17buuctf/img-018.png)
 代码中存在白名单
 ```PHP
 $whitelist = [
@@ -164,9 +164,9 @@ include $_REQUEST['file'];
 ```txt
 /index.php?file=hint.php
 ```
-![](img-019.png)
+![](17buuctf/img-019.png)
 尝试直接访问
-![](img-020.png)
+![](17buuctf/img-020.png)
 因为ffffllllaaaagggg不在白名单中，所以无法访问
 分析白名单检查漏洞
 ```PHP
@@ -187,13 +187,13 @@ if (in_array($_page, $whitelist)) {
 ```
 程序检查时读取?前面的hint.php，读取通过
 后面的`/../../../../../../`返回上级目录，最后读取`ffffllllaaaagggg`文件
-![](img-021.png)
+![](17buuctf/img-021.png)
 
 ---
 ## 09[ACTF2020 新生赛]Include
 [CTF²](https://ctf2.dasctf.com/dashboard/practice/b9bbb32f-f186-458f-b90b-12440c0f6aea?tab=challenges&challenge=e5d73d5f-5971-46ad-8816-3aea17085aa3)
 打开靶机地址，看到有个`tips`，点击进去
-![](img-022.png)
+![](17buuctf/img-022.png)
 地址栏中看到
 ```txt
 ?file=flag.php
@@ -206,9 +206,9 @@ if (in_array($_page, $whitelist)) {
 ```txt
 php://filter/read=convert.base64-encode/resource=flag.php
 ```
-![](img-023.png)
+![](17buuctf/img-023.png)
 将显示出来的字符用Base64解密
-![](img-024.png)
+![](17buuctf/img-024.png)
 ### Payload含义
 ```txt
 php://filter
@@ -230,18 +230,18 @@ resource=flag.php
 ```txt
 127.0.0.1
 ```
-![](img-025.png)
+![](17buuctf/img-025.png)
 这一步确认网页确实在调用ping
 在输入框中输入
 ```txt
 127.0.0.1;ls
 ```
-![](img-026.png)
+![](17buuctf/img-026.png)
 查看根目录
 ```txt
 127.0.0.1;ls /
 ```
-![](img-027.png)
+![](17buuctf/img-027.png)
 于是读取flag
 ```txt
 127.0.0.1;cat /flag
@@ -256,13 +256,13 @@ resource=flag.php
 ```Bash
 file easyre.exe
 ```
-![](img-028.png)
+![](17buuctf/img-028.png)
 说明是一个Windows可执行程序
 检查可读字符串
 ```Bash
 strings easyre.php | grep -i flag
 ```
-![](img-029.png)
+![](17buuctf/img-029.png)
 找到了flag
 
 ---
@@ -285,10 +285,10 @@ strings reverse_1.exe | grep -Ei "flag|input|right|wrong"
 ```
 输出中并没有直接出线最终flag，所以要继续查看程序的判断逻辑
 用**IDA**打开程序
-![](img-030.png)
-![](img-031.png)
+![](17buuctf/img-030.png)
+![](17buuctf/img-031.png)
 双击main_0，进去后点击F5
-![](img-032.png)
+![](17buuctf/img-032.png)
 看程序，程序会把字符串中的所有字母`o`替换成数字`0`
 ```txt
 {hello_world}

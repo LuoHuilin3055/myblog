@@ -12,7 +12,7 @@ featured:
 # Misc
 ## 1000-7
 ### 题目描述
-![](img-001.png)
+![](15JuniorCrypt/img-001.png)
 >有些旋律会一直留在你的**脑海里**。  
 >有些旋律则会在离开后留下**别的东西**。
 
@@ -70,7 +70,7 @@ for number, track in enumerate(midi.tracks):
 ```bash
 python3 check.py
 ```
-![](img-002.png)
+![](15JuniorCrypt/img-002.png)
 从中我们可以看出
 ```txt
 MIDI类型：1   ——  文件中可以包含多条轨道，各轨道分别保存不同内容，但共用同一时间轴。
@@ -125,7 +125,7 @@ print("前 30 个 pitchwheel 数值：")
 print(pitch_values[:30])
 ```
 运行后得到
-![](img-003.png)
+![](15JuniorCrypt/img-003.png)
 从结果我们可以看出
 ```txt
 pitchwheel总数量：752
@@ -170,7 +170,7 @@ print(Counter(pairs))
 print("前 20 组：")
 print(pairs[:20])
 ```
-![](img-004.png)
+![](15JuniorCrypt/img-004.png)
 从输出结果可以看出：
 ```txt
 总共有376组
@@ -227,7 +227,7 @@ for i in range(0, len(bits), 8):
 
 print()
 ```
-![](img-005.png)
+![](15JuniorCrypt/img-005.png)
 每8位试着转换成一个字符
 ```txt
 11000000  → 192，干扰字符
@@ -291,7 +291,7 @@ for i in range(0, len(bits), 8):
 print("解码结果：")
 print(repr(text))
 ```
-![](img-006.png)
+![](15JuniorCrypt/img-006.png)
 所以最终flag为
 ```txt
 grodno{U1tr@_m3g@_5up3r_Gul_M1d_SF_1000-7}
@@ -301,7 +301,7 @@ grodno{U1tr@_m3g@_5up3r_Gul_M1d_SF_1000-7}
 
 ## Ghost Layers
 ### 题目描述
-![](img-007.png)
+![](15JuniorCrypt/img-007.png)
 >What stays visible is not always what matters most.  
 >一直可见的东西，并不总是最重要的。
 
@@ -334,7 +334,7 @@ defs        只定义、不直接显示
 ```
 中隐藏数据
 于是先用VS Code打开文件，再用CTRL+F搜索“mask”，找到名字为“mk9”的蒙版
-![](img-008.png)
+![](15JuniorCrypt/img-008.png)
 ```txt
 <mask id="mk9">
     <rect x="0" y="0"
@@ -356,7 +356,7 @@ defs        只定义、不直接显示
 这里先使用黑色矩形遮住整个画布，然后指通过一些白色线条显示少量内容，因此隐藏图形很难被观察到
 
 #### 找到使用蒙版的图层
-![](img-009.png)
+![](15JuniorCrypt/img-009.png)
 从中我们可以看到信息：
 ```XML
 <g id="ghost-wash"
@@ -375,7 +375,7 @@ clip-path="url(#cp4)"
 ```txt
 id="cp4"
 ```
-![](img-010.png)
+![](15JuniorCrypt/img-010.png)
 引用id为s17的图形，并把它作为裁剪区域
 于是继续搜索
 ```txt
@@ -447,4 +447,4 @@ Flag 变得若隐若现
 <use href="#s17"/>
 ```
 保存文件后用浏览器打开即可看见flag
-![](img-011.png)
+![](15JuniorCrypt/img-011.png)
