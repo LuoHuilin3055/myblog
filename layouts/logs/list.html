@@ -3,7 +3,7 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $bgImage := "images/background.jpg" | relURL }}
   
   <style>
     @keyframes fadeInDown {
@@ -228,7 +228,7 @@
                   <div class="timeline-item">
                     {{ if .Params.cover }}
                     <div class="timeline-item-image">
-                      <img src="{{ .Params.cover | absURL }}" alt="{{ .Title }}" loading="lazy" />
+                      <img src="{{ .Params.cover | relURL }}" alt="{{ .Title }}" loading="lazy" />
                     </div>
                     {{ end }}
                     <div class="timeline-item-content">

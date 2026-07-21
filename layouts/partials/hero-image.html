@@ -1,4 +1,4 @@
-{{ $image := "images/background.jpg" | absURL }}
+{{ $image := "images/background.jpg" | relURL }}
 {{ $title := .Site.Params.site_title | default .Site.Title }}
 {{ $description := .Site.Params.description }}
 

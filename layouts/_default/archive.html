@@ -3,8 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := "images/background.jpg" | absURL }}
-  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
+  {{ $bgImage := "images/background.jpg" | relURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | relURL }}
   {{ $posts := where .Site.RegularPages "Type" "posts" }}
   {{ $posts = sort $posts "Date" "desc" }}
 
@@ -46,7 +46,7 @@
                 <a class="blog-archive-item" href="{{ .Permalink }}">
                   <div class="blog-archive-thumb">
                     {{ if $cover }}
-                      <img src="{{ $cover | absURL }}" alt="{{ .Title }}" loading="lazy" decoding="async">
+                      <img src="{{ $cover | relURL }}" alt="{{ .Title }}" loading="lazy" decoding="async">
                     {{ else }}
                       <span>{{ substr .Title 0 4 }}</span>
                     {{ end }}

@@ -21,7 +21,7 @@
     background: var(--bg-hover);
   ">
     <img 
-      src="{{ $coverImage | absURL }}"
+      src="{{ $coverImage | relURL }}"
       alt="{{ .Title }}"
       loading="lazy"
       decoding="async"

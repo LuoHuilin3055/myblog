@@ -3,8 +3,8 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := "images/background.jpg" | absURL }}
-  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | absURL }}
+  {{ $bgImage := "images/background.jpg" | relURL }}
+  {{ $pageHeaderImage := .Params.header_image | default .Site.Params.page_header_image | default "images/background.jpg" | relURL }}
   {{ $schedule := .Site.Params.schedule }}
   {{ $startHour := $schedule.start_hour | default 8 }}
   {{ $endHour := $schedule.end_hour | default 24 }}

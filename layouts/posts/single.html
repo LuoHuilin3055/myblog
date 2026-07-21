@@ -6,7 +6,7 @@
 
 {{ define "main" }}
   {{ $coverImage := .Params.cover | default "" }}
-  {{ $bgImage := $coverImage | default "images/background.jpg" | absURL }}
+  {{ $bgImage := $coverImage | default "images/background.jpg" | relURL }}
   
   <div class="blog-post-shell" style="
     background-image: url('{{ $bgImage }}');
@@ -41,7 +41,7 @@
           border-radius: 15px 15px 0 0;
         ">
           <img 
-            src="{{ $coverImage | absURL }}"
+            src="{{ $coverImage | relURL }}"
             alt="{{ .Title }}"
             loading="eager"
             decoding="async"

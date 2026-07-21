@@ -5,8 +5,8 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := .Params.background | default "images/background.jpg" | absURL }}
-  {{ $avatarImage := .Site.Params.avatar | default "images/avatar.jpg" | absURL }}
+  {{ $bgImage := .Params.background | default "images/background.jpg" | relURL }}
+  {{ $avatarImage := .Site.Params.avatar | default "images/avatar.jpg" | relURL }}
   
   <div class="blog-about-shell" style="
     background-image: url('{{ $bgImage }}');

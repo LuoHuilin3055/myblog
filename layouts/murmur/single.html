@@ -3,7 +3,7 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := "images/background.jpg" | absURL }}
+  {{ $bgImage := "images/background.jpg" | relURL }}
   
   <style>
     @keyframes fadeIn {

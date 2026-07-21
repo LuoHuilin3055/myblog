@@ -9,7 +9,7 @@
 {{ if $src }}
 <figure style="margin: 0; position: relative; overflow: hidden; border-radius: 8px; {{ $style }}">
   <img 
-    src="{{ $src | absURL }}"
+    src="{{ $src | relURL }}"
     alt="{{ $alt }}"
     class="{{ $class }}"
     loading="{{ $loading }}"

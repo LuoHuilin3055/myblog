@@ -3,7 +3,7 @@
 {{ end }}
 
 {{ define "main" }}
-  {{ $bgImage := .Params.cover | default "images/background.jpg" | absURL }}
+  {{ $bgImage := .Params.cover | default "images/background.jpg" | relURL }}
   
   <style>
     @keyframes fadeInDown {
