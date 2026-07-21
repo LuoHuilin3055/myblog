@@ -1,15 +1,15 @@
 baseURL = "https://clairis.cn/"
 languageCode = "zh-cn"
-title = "NGC 2237's Blog"
+title = "Clairis's Blog"
 theme = "theme2"
 
 [params]
-  site_title = "NGC 2237"
-  description = "欢迎来到NGC_2237的博客"
-  author = "NGC 2237"
+  site_title = "Clairis"
+  description = "欢迎来到Clairis的博客"
+  author = "Clairis"
   featured_image = "images/background.jpg"
   page_header_image = ""
-  home_text = "欢迎来到NGC 2237的博客"
+  home_text = "欢迎来到Clairis的博客"
   custom_404 = true
   
   # 个人资料卡片配置
