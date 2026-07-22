@@ -22,6 +22,7 @@ theme = "theme2"
   latest_posts_title = "📝 最新文章"
   enable_search = true
   enable_busuanzi = true
+  busuanzi_cooldown_minutes = 30 # 同一浏览器访问同一页面的重复统计冷却时间
   enable_click_fireworks = true
   enable_image_lightbox = true
   enable_image_slider = true
