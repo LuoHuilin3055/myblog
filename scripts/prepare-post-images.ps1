@@ -239,6 +239,22 @@ function Invoke-PrepareMarkdownImages {
 
     $imagePath = $PathText.Trim()
 
+    # A Page Bundle resolves image paths relative to index.md. If a reference
+    # repeats the bundle directory name (for example, post-name/img-001.png),
+    # Hugo would publish a broken post-name/post-name/img-001.png URL. Normalize
+    # it to img-001.png when that file exists beside index.md.
+    if ($usesBundleRelativeImages -and -not [System.IO.Path]::IsPathRooted($imagePath)) {
+      $slashPath = $imagePath -replace '\\', '/'
+      $bundlePrefix = $MarkdownFile.Directory.Name + "/"
+      if ($slashPath.StartsWith($bundlePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        $bundleRelativePath = $slashPath.Substring($bundlePrefix.Length)
+        $bundleTarget = Join-Path $articleDir ($bundleRelativePath -replace '/', '\\')
+        if (Test-Path -LiteralPath $bundleTarget -PathType Leaf) {
+          return "![{0}]({1}{2})" -f $Alt, $bundleRelativePath, $Suffix
+        }
+      }
+    }
+
     if (Test-IsSkippedImagePath $imagePath) {
       return $OriginalText
     }
