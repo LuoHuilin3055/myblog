@@ -255,6 +255,47 @@ function Invoke-PrepareMarkdownImages {
       }
     }
 
+    # Files such as article.md are published one URL level below their source
+    # directory. Reuse images that already live anywhere inside that article
+    # directory and generate the correct ../ path instead of copying them.
+    if (-not [System.IO.Path]::IsPathRooted($imagePath)) {
+      $slashPath = $imagePath -replace '\\', '/'
+      $sourceRelativePath = $slashPath
+      if (-not $usesBundleRelativeImages -and $sourceRelativePath.StartsWith('../')) {
+        $sourceRelativePath = $sourceRelativePath.Substring(3)
+      }
+      $localTarget = Join-Path $articleDir ($sourceRelativePath -replace '/', '\\')
+
+      if (-not (Test-Path -LiteralPath $localTarget -PathType Leaf)) {
+        $articlePrefix = $MarkdownFile.Directory.Name + "/"
+        if ($slashPath.StartsWith($articlePrefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+          $withoutArticlePrefix = $slashPath.Substring($articlePrefix.Length)
+          $prefixedTarget = Join-Path $articleDir ($withoutArticlePrefix -replace '/', '\\')
+          if (Test-Path -LiteralPath $prefixedTarget -PathType Leaf) {
+            $localTarget = $prefixedTarget
+          }
+        }
+      }
+
+      if (-not (Test-Path -LiteralPath $localTarget -PathType Leaf) -and $slashPath -notmatch '/') {
+        $sameNameImages = @(Get-ChildItem -LiteralPath $articleDir -Recurse -File -Filter $slashPath)
+        if ($sameNameImages.Count -eq 1) {
+          $localTarget = $sameNameImages[0].FullName
+        }
+      }
+
+      if (Test-Path -LiteralPath $localTarget -PathType Leaf) {
+        $localItem = Get-Item -LiteralPath $localTarget
+        if ($localItem.Extension -match '^(?i)\.(png|jpe?g|gif|webp|svg|bmp|avif)$') {
+          $localReference = [System.IO.Path]::GetRelativePath($articleDir, $localItem.FullName) -replace '\\', '/'
+          if (-not $usesBundleRelativeImages) {
+            $localReference = "../$localReference"
+          }
+          return "![{0}]({1}{2})" -f $Alt, $localReference, $Suffix
+        }
+      }
+    }
+
     if (Test-IsSkippedImagePath $imagePath) {
       return $OriginalText
     }

