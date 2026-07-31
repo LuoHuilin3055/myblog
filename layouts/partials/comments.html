@@ -20,11 +20,11 @@
 
         init({
           el: '#waline-comments',
-          serverURL: {{ $serverURL | jsonify }},
+          serverURL: {{ $serverURL | jsonify | safeJS }},
           path: window.location.pathname,
           lang: 'zh-CN',
-          placeholder: {{ $placeholder | jsonify }},
-          login: {{ $login | jsonify }},
+          placeholder: {{ $placeholder | jsonify | safeJS }},
+          login: {{ $login | jsonify | safeJS }},
           meta: ['nick', 'mail', 'link'],
           requiredMeta: ['nick', 'mail'],
         });

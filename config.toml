@@ -29,9 +29,9 @@ theme = "theme2"
   site_since = "2026-03-21"
 
   [params.comments]
-    enable = false
+    enable = true
     provider = "waline"
-    server_url = ""
+    server_url = "https://clairis-waline.vercel.app"
     placeholder = "欢迎留言，一起交流~"
     login = "enable"
 
