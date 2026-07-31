@@ -1185,7 +1185,24 @@ body[data-theme="light"] .blog-about-social-link {
 }
 
 .blog-waline {
-  color: rgba(255, 255, 255, 0.86);
+  color: #dce8ec;
+  --waline-white: #f7ffff;
+  --waline-light-grey: #9cafb5;
+  --waline-dark-grey: #c7d5d9;
+  --waline-theme-color: #35d9dc;
+  --waline-active-color: #75f4f6;
+  --waline-color: #dce8ec;
+  --waline-bg-color: rgba(5, 12, 18, 0.72);
+  --waline-bg-color-light: rgba(255, 255, 255, 0.07);
+  --waline-bg-color-hover: rgba(53, 217, 220, 0.1);
+  --waline-border-color: rgba(87, 225, 228, 0.28);
+  --waline-disable-bg-color: rgba(255, 255, 255, 0.07);
+  --waline-disable-color: #72868c;
+  --waline-code-bg-color: #111b20;
+  --waline-bq-color: rgba(255, 255, 255, 0.08);
+  --waline-badge-color: #35d9dc;
+  --waline-info-bg-color: rgba(255, 255, 255, 0.1);
+  --waline-info-color: #c4d1d5;
 }
 
 .blog-waline,
@@ -1238,12 +1255,21 @@ body[data-theme="light"] .blog-comments-placeholder code {
 
 body[data-theme="light"] .blog-waline {
   color: #243036;
+  --waline-white: #fff;
+  --waline-light-grey: #6f7c81;
+  --waline-dark-grey: #3d4a4f;
   --waline-theme-color: #16838a;
   --waline-active-color: #126f76;
   --waline-color: #243036;
-  --waline-bgcolor: rgba(255, 252, 244, 0.92);
-  --waline-bgcolor-light: #f4f8f7;
+  --waline-bg-color: rgba(255, 252, 244, 0.92);
+  --waline-bg-color-light: #f4f8f7;
+  --waline-bg-color-hover: #e9f2f0;
   --waline-border-color: rgba(22, 131, 138, 0.2);
+  --waline-disable-bg-color: #edf2f1;
+  --waline-disable-color: #91a09f;
+  --waline-bq-color: #edf3f2;
+  --waline-info-bg-color: #edf3f2;
+  --waline-info-color: #5f6f73;
 }
 
 body[data-theme="light"] .blog-waline .wl-panel {
