@@ -79,6 +79,11 @@ theme = "theme2"
 [markup]
   defaultMarkdownHandler = "goldmark"
   [markup.goldmark]
+    [markup.goldmark.extensions.passthrough]
+      enable = true
+      [markup.goldmark.extensions.passthrough.delimiters]
+        block = [["$$", "$$"], ["\\[", "\\]"]]
+        inline = [["$", "$"], ["\\(", "\\)"]]
     [markup.goldmark.renderer]
       unsafe = true
       hardWraps = false
