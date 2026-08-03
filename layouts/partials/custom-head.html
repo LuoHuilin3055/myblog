@@ -1,3 +1,10 @@
+{{ if and .IsPage (in .RawContent "$") }}
+<!-- KaTeX：仅在含数学公式的内容页加载。 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/katex.min.css" integrity="sha384-KfwFj/Q/jGrY4ijtfzWyW5NXzT5irvfnTq6aRnH2xPvLzLdi1XyVr7w4l2uwTq0V" crossorigin="anonymous">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/katex.min.js" integrity="sha384-OE4SMRr5gMJQzKSD08J46vKsKgY8NxVtO1LW+/q3NJ0WHsGsdN4oebgEjwwWuyvG" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.18.0/dist/contrib/auto-render.min.js" integrity="sha384-bjyGPfbij8/NDKJhSGZNP/khQVgtHUE5exjm4Ydllo42FwIgYsdLO2lXGmRBf5Mz" crossorigin="anonymous" onload="const root=document.querySelector('.article-content');if(root)renderMathInElement(root,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false},{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false});"></script>
+{{ end }}
+
 <!-- 全局字体样式 -->
 <style>
   /* 主题切换按钮样式 */
@@ -92,6 +99,12 @@
   kbd,
   samp {
     font-family: var(--font-mono, "Comic Sans MC", "Comic Sans MS", "楷体", "KaiTi", "STKaiti", cursive, serif) !important;
+  }
+
+  .article-content .katex-display {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.35rem 0;
   }
 
   a, button {

@@ -103,23 +103,6 @@
 {{ end }}
 
 {{ define "head" }}
-<!-- KaTeX 数学公式渲染 -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css" integrity="sha384-n8MVd4RsNHUEE2G4P0DR5JGxg0VxLh0RBJkhaq3n4+3v0C6CnHJcAUmNgCwRqfx" crossorigin="anonymous">
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js" integrity="sha384-XjKyOOlGwcjNTAQc3HJG9eVYOpcHGMetcFXxUQx38pEBxN1mYVG1NKFjwM3wPtf" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" integrity="sha384-+VBxd3r6XgLBlGs5lYH0KEcLY6MNxF1oA4s8ckH8zBUE7LhBvOqNQHP8OlA+MFK" crossorigin="anonymous"></script>
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
-    renderMathInElement(document.querySelector(".article-content"), {
-      delimiters: [
-        {left: "$$", right: "$$", display: true},
-        {left: "$", right: "$", display: false},
-        {left: "\\[", right: "\\]", display: true},
-        {left: "\\(", right: "\\)", display: false}
-      ],
-      throwOnError: false
-    });
-  });
-</script>
 <style>
   @keyframes fadeIn {
     from {
