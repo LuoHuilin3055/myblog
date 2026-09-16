@@ -16,7 +16,7 @@ cover: images/17.jpg
 sudo apt install imagemagick
 convert aaa.gif frame_%03d.png
 ```
-![](img-001.png)![](img-002.png)![](img-003.png)
+![](17buuctf/img-001.png)![](img-002.png)![](img-003.png)
 得到flag
 
 ----

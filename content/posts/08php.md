@@ -5,7 +5,7 @@ lastmod: 2026-08-07
 tags:
   - 笔记
   - php
-draft:
+draft: true
 cover: images/8.jpg
 ---
 # PHP基本格式
