@@ -5,7 +5,7 @@ tags:
   - 计算机
   - 笔记
 date: 2026-04-08
-draft:
+draft: true
 cover: images/6.jpg
 lastmod: 2026-07-15
 ---

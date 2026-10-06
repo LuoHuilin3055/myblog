@@ -4,14 +4,14 @@ tags:
   - CTF
   - WP
 cover: images/13.jpg
-draft:
+draft: false
 lastmod: 2026-09-15
 date: 2026-09-15
 ---
 # 9.1
 [[羊城杯 2022]where_is_secret - NSSCTF](https://www.nssctf.cn/problem/2582)
 用维吉尼亚密码破解器破解得出密钥为`gwht`，压缩包密码为`GWHT@R1nd0yyds`
-![[Pasted image 20260915204554.png]]
+![](img-001.png)
 同时提示也给了加密脚本，根据脚本得出解密脚本
 ```python
 #!/usr/bin/env python3

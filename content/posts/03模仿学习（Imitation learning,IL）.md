@@ -1,7 +1,7 @@
 ---
 title: 模仿学习笔记
 date: 2026-07-31
-draft:
+draft: true
 tags:
   - 笔记
 lastmod: 2026-07-31
