@@ -1,0 +1,34 @@
+---
+import { siteFeatureConfig } from "../../config";
+import { getSortedPosts } from "../../utils/content-utils";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const { class: className, style } = Astro.props;
+const posts = (await getSortedPosts()).filter((post) => !post.data.draft);
+const wordCounts = await Promise.all(posts.map(async (post) => {
+	const { remarkPluginFrontmatter } = await post.render();
+	return Number(remarkPluginFrontmatter.words) || 0;
+}));
+const totalWords = wordCounts.reduce((total, count) => total + count, 0);
+const lastUpdated = posts.reduce<Date | undefined>((latest, post) => {
+	const updated = post.data.updated || post.data.published;
+	return !latest || updated > latest ? updated : latest;
+}, undefined);
+---
+<WidgetLayout name="站点信息" id="site-info" class={className} style={style}>
+	<div class="flex flex-col gap-3 text-sm">
+		<div class="flex justify-between gap-3"><span class="text-50">建站时间</span><span class="text-75">{siteFeatureConfig.since}</span></div>
+		<div class="flex justify-between gap-3"><span class="text-50">文章数</span><span class="text-75">{posts.length}</span></div>
+		<div class="flex justify-between gap-3"><span class="text-50">累计字数</span><span class="text-75">{totalWords.toLocaleString("zh-CN")}</span></div>
+		{lastUpdated && <div class="flex justify-between gap-3"><span class="text-50">最近更新</span><span class="text-75">{formatDateToYYYYMMDD(lastUpdated)}</span></div>}
+		<div class="border-t border-dashed border-black/10 dark:border-white/15 pt-3 flex flex-col gap-2">
+			<div class="flex justify-between gap-3"><span class="text-50">本站访客</span><span id="busuanzi_site_uv" class="text-75" aria-live="polite">加载中</span></div>
+			<div class="flex justify-between gap-3"><span class="text-50">总浏览量</span><span id="busuanzi_site_pv" class="text-75" aria-live="polite">加载中</span></div>
+		</div>
+	</div>
+</WidgetLayout>

@@ -2,6 +2,7 @@
 title: "JuniorCrypt2026的WP"
 published: 2026-07-12
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-07-13
 image: "/images/15.jpg"

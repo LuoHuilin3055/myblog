@@ -1,0 +1,19 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import SpaceNavigation from "../../components/SpaceNavigation.astro";
+import { murmurs } from "../../data/space";
+---
+<MainGridLayout title="碎碎念" description="Clairis 的日常碎碎念">
+	<div class="card-base px-6 md:px-9 py-7">
+		<SpaceNavigation current="murmur" />
+		<h1 class="text-3xl font-bold text-90 mb-2">碎碎念</h1>
+		<p class="text-75 leading-7 mb-7">短一点的记录，也认真保存下来。</p>
+		<div class="relative ml-2 border-l-2 border-dashed border-[var(--line-divider)] pl-6 flex flex-col gap-7">
+			{murmurs.map((murmur) => <article class="relative">
+				<span class="absolute -left-[calc(1.5rem+5px)] top-1.5 w-2.5 h-2.5 rounded-full bg-[var(--primary)] ring-4 ring-[var(--card-bg)]"></span>
+				<time datetime={murmur.date} class="text-xs text-50">{murmur.date.replaceAll("-", "/")}</time>
+				<p class="text-75 leading-7 whitespace-pre-line mt-2">{murmur.content}</p>
+			</article>)}
+		</div>
+	</div>
+</MainGridLayout>

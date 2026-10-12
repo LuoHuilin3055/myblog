@@ -2,6 +2,7 @@
 title: "BYU CTF的WriteUp"
 published: 2026-06-01
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-06-03
 image: "/images/14.jpg"

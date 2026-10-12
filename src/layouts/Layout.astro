@@ -7,7 +7,7 @@ import "../styles/scrollbar.css";
 import "../styles/photoswipe.css";
 
 import ConfigCarrier from "@components/ConfigCarrier.astro";
-import { profileConfig, siteConfig } from "@/config";
+import { profileConfig, siteConfig, siteFeatureConfig } from "@/config";
 import {
 	AUTO_MODE,
 	BANNER_HEIGHT,
@@ -149,6 +149,7 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
+		<script id="busuanzi-script" defer src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
 
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
@@ -457,6 +458,24 @@ if (window?.swup?.hooks) {
 	document.addEventListener('swup:enable', setup)
 }
 
+function refreshBusuanzi() {
+	const oldScript = document.getElementById('busuanzi-script')
+	const script = document.createElement('script')
+	script.id = 'busuanzi-script'
+	script.src = 'https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js'
+	script.defer = true
+	oldScript?.remove()
+	document.head.appendChild(script)
+}
+
+if (window?.swup?.hooks) {
+	window.swup.hooks.on('page:view', refreshBusuanzi)
+} else {
+	document.addEventListener('swup:enable', () => {
+		window.swup?.hooks.on('page:view', refreshBusuanzi)
+	})
+}
+
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
@@ -567,4 +586,46 @@ if (window.swup) {
 } else {
 	document.addEventListener("swup:enable", setup)
 }
+</script>
+
+<script is:inline type="module" define:vars={{ WALINE_SERVER_URL: siteFeatureConfig.walineServerURL }}>
+	let walineInstance;
+	let mountedCommentsElement;
+
+	async function mountWaline() {
+		const element = document.getElementById("waline-comments");
+		if (!element || element === mountedCommentsElement) return;
+		walineInstance?.destroy?.();
+		const { init } = await import("https://unpkg.com/@waline/client@v3/dist/waline.js");
+		if (!element.isConnected) return;
+		mountedCommentsElement = element;
+		walineInstance = init({
+			el: element,
+			serverURL: WALINE_SERVER_URL,
+			path: window.location.pathname,
+			lang: "zh-CN",
+			placeholder: "欢迎留言，一起交流～",
+			login: "enable",
+			meta: ["nick", "mail", "link"],
+			requiredMeta: ["nick", "mail"],
+		});
+	}
+
+	function bindWalineToSwup() {
+		if (!window.swup?.hooks) return;
+		window.swup.hooks.on("content:replace", () => {
+			walineInstance?.destroy?.();
+			walineInstance = undefined;
+			mountedCommentsElement = undefined;
+		}, { before: true });
+		window.swup.hooks.on("page:view", mountWaline);
+		mountWaline();
+	}
+
+	if (window.swup?.hooks) {
+		bindWalineToSwup();
+	} else {
+		document.addEventListener("swup:enable", bindWalineToSwup, { once: true });
+		mountWaline();
+	}
 </script>

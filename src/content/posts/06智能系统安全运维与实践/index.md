@@ -2,6 +2,7 @@
 title: "智能系统安全运维与实践的笔记"
 published: 2026-04-08
 draft: true
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-07-15
 image: "/images/6.jpg"

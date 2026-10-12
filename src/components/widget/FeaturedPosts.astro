@@ -1,0 +1,25 @@
+---
+import { siteFeatureConfig } from "../../config";
+import { getSortedPosts } from "../../utils/content-utils";
+import { getPostUrlBySlug } from "../../utils/url-utils";
+import { formatDateToYYYYMMDD } from "../../utils/date-utils";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const { class: className, style } = Astro.props;
+const allPosts = (await getSortedPosts()).filter((post) => !post.data.draft);
+const featuredPosts = siteFeatureConfig.featuredPostTitles
+	.map((title) => allPosts.find((post) => post.data.title === title))
+	.filter((post) => post !== undefined);
+---
+{featuredPosts.length > 0 && <WidgetLayout name="精选文章" id="featured-posts" class={className} style={style}>
+	<div class="flex flex-col gap-1">
+		{featuredPosts.map((post) => <a href={getPostUrlBySlug(post.slug)} class="group block rounded-lg px-3 py-2 hover:bg-black/5 dark:hover:bg-white/5">
+			<div class="text-sm text-75 leading-6 group-hover:text-[var(--primary)] line-clamp-2">{post.data.title}</div>
+			<div class="text-xs text-50 mt-1">{formatDateToYYYYMMDD(post.data.published)}</div>
+		</a>)}
+	</div>
+</WidgetLayout>}

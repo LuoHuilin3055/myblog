@@ -2,6 +2,7 @@
 title: "SecLeaf2026的WP"
 published: 2026-05-23
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-05-25
 image: "/images/12.jpg"

@@ -1,0 +1,79 @@
+export const friendLinks = [
+	{
+		name: "Daochunhan",
+		url: "https://daochunhan25.site/",
+		description: "大大大大大佬",
+		avatar: "https://img.daochunhan25.site/img/profile.png",
+	},
+];
+
+export const murmurs = [
+	{
+		date: "2026-07-22",
+		content: "昨天换域名，今天修图片，刚刚看见之前五一的图片又想去江南了\n西湖真的好美啊",
+	},
+	{
+		date: "2026-06-07",
+		content: "突然想起碎碎念\n接了一言 Hitokoto，同时对文章的布局进行了微调",
+	},
+	{
+		date: "2026-05-28",
+		content: "让CodeX写了个自动挪图片的脚本，我再也不用手动复制粘贴啦",
+	},
+	{
+		date: "2026-05-25",
+		content: "今天还是有效学习了大半天的\n花一小时给Obsdian设置了一个丑丑的主题——最怕人灵机一动",
+	},
+	{
+		date: "2026-05-24",
+		content: "沉浸式写了大概5小时的WP，后面就再也没干正事了\n我安慰自己，人的精力是有限的",
+	},
+	{
+		date: "2026-05-23",
+		content: "红狼大战AG输了😭\n用AI梭了SecLeaf，希望能在明天把它弄明白",
+	},
+	{
+		date: "2026-05-20",
+		content: "又畅聊一下午，在外观上对博客进行了“大小改”——改得又多又不多；\n黑夜模式下细节更优化，白天模式重新设计",
+	},
+	{
+		date: "2026-05-19",
+		content: "用CodeX对博客进行了框架上的修改，各部分之间没那么无章序",
+	},
+	{
+		date: "2026-05-18",
+		content: "折腾了一下午，“乱七八糟的WP”终于带着图片成功上传；\n正式、严肃加入GPTplus大军；\nGPT是第一个让我心甘情愿充钱的工具；\nGoogle账号回来了",
+	},
+	{
+		date: "2026-05-13",
+		content: "哈哈账号被封了哈哈/(ㄒoㄒ)/~~；好像懂了一点点Git的推送",
+	},
+	{
+		date: "2026-05-12",
+		content: "我！终！于！成！功！申！请！了！Google！账！号！",
+	},
+	{
+		date: "2026-05-11",
+		content: "“四史”结课作业完成了——一份查重率为2.6的史",
+	},
+	{
+		date: "2026-05-09",
+		content: "请把周末还给周末！",
+	},
+	{
+		date: "2026-05-08",
+		content: "心情不好就背单词吧，一背一个不吱声\n四级还是太有嚼劲了",
+	},
+	{
+		date: "2026-05-08",
+		content: "给网站增加了碎碎念部分\n它即将取代QQ空间，成为我新的日记本",
+	},
+];
+
+export const quotes = [
+	{ text: "道阻且长，行则将至。", source: "" },
+	{ text: "纸上得来终觉浅，绝知此事要躬行。", source: "陆游" },
+	{ text: "慢慢来，比较快。", source: "" },
+	{ text: "知不足而奋进，望远山而前行。", source: "" },
+	{ text: "Stay curious, keep learning.", source: "" },
+];

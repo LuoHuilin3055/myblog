@@ -2,6 +2,7 @@
 title: "乱七八糟的WP"
 published: 2026-05-15
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-05-28
 image: "/images/4.jpg"

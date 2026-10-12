@@ -2,6 +2,7 @@
 title: "Java字符串操作"
 published: 2026-07-12
 draft: false
+category: "编程学习"
 lang: "zh_CN"
 updated: 2026-07-12
 image: "/images/13.jpg"

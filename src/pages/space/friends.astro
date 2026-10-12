@@ -1,0 +1,21 @@
+---
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import SpaceNavigation from "../../components/SpaceNavigation.astro";
+import { friendLinks } from "../../data/space";
+---
+<MainGridLayout title="友情链接" description="Clairis 的友情链接">
+	<div class="card-base px-6 md:px-9 py-7">
+		<SpaceNavigation current="friends" />
+		<h1 class="text-3xl font-bold text-90 mb-2">友情链接</h1>
+		<p class="text-75 leading-7 mb-6">欢迎交换友链，期待在网络的角落里遇见更多有趣的人。</p>
+		<div class="grid sm:grid-cols-2 gap-4">
+			{friendLinks.map((friend) => <a href={friend.url} target="_blank" rel="noopener noreferrer" class="group card-base border border-black/10 dark:border-white/10 p-4 flex items-center gap-4 hover:border-[var(--primary)]">
+				<img src={friend.avatar} alt={`${friend.name} 的头像`} loading="lazy" class="w-14 h-14 rounded-full object-cover bg-black/5 dark:bg-white/10" />
+				<span class="min-w-0">
+					<span class="block font-bold text-90 group-hover:text-[var(--primary)]">{friend.name}</span>
+					<span class="block text-sm text-50 mt-1 truncate">{friend.description}</span>
+				</span>
+			</a>)}
+		</div>
+	</div>
+</MainGridLayout>

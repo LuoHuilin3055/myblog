@@ -1,8 +1,13 @@
 ---
 import type { MarkdownHeading } from "astro";
 import Categories from "./Categories.astro";
+import FeaturedPosts from "./FeaturedPosts.astro";
+import Friends from "./Friends.astro";
 import Profile from "./Profile.astro";
+import Quote from "./Quote.astro";
+import SiteInfo from "./SiteInfo.astro";
 import Tag from "./Tags.astro";
+import Clock from "./Clock.svelte";
 
 interface Props {
 	class?: string;
@@ -18,5 +23,10 @@ const className = Astro.props.class;
     <div id="sidebar-sticky" class="transition-all duration-700 flex flex-col w-full gap-4 top-4 sticky top-4">
         <Categories class="onload-animation" style="animation-delay: 150ms"></Categories>
         <Tag class="onload-animation" style="animation-delay: 200ms"></Tag>
+        <Quote class="onload-animation" style="animation-delay: 250ms"></Quote>
+        <FeaturedPosts class="onload-animation" style="animation-delay: 300ms"></FeaturedPosts>
+        <Friends class="onload-animation" style="animation-delay: 350ms"></Friends>
+        <Clock client:load class="onload-animation" style="animation-delay: 400ms"></Clock>
+        <SiteInfo class="onload-animation" style="animation-delay: 450ms"></SiteInfo>
     </div>
 </div>

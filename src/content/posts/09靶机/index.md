@@ -2,6 +2,7 @@
 title: "ClubShare靶机"
 published: 2026-09-10
 draft: true
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-09-10
 image: "/images/9.jpg"

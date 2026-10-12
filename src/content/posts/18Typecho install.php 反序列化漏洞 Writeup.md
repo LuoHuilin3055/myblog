@@ -2,6 +2,7 @@
 title: Typecho install.php 反序列化漏洞 Writeup
 published: 2026-08-03
 draft: false
+category: "网络安全"
 lang: zh_CN
 tags:
   - WP

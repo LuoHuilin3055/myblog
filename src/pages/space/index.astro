@@ -1,0 +1,35 @@
+---
+import { Icon } from "astro-icon/components";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import SpaceNavigation from "../../components/SpaceNavigation.astro";
+import { friendLinks, murmurs } from "../../data/space";
+import { url } from "../../utils/url-utils";
+---
+<MainGridLayout title="空间" description="友链与碎碎念">
+	<div class="card-base px-6 md:px-9 py-7">
+		<SpaceNavigation current="space" />
+		<div class="mb-7">
+			<p class="text-sm text-50 mb-2">PERSONAL SPACE</p>
+			<h1 class="text-3xl font-bold text-90 mb-3">空间</h1>
+			<p class="text-75 leading-7">这里放一些博客之外的小角落：认识的朋友，以及不想写成文章的日常记录。</p>
+		</div>
+		<div class="grid md:grid-cols-2 gap-4">
+			<a href={url("/space/friends/")} class="group rounded-2xl border border-black/10 dark:border-white/10 p-5 transition hover:border-[var(--primary)] hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
+				<div class="flex items-center gap-3 mb-3">
+					<span class="w-11 h-11 rounded-xl bg-[var(--btn-regular-bg)] text-[var(--primary)] flex items-center justify-center"><Icon name="material-symbols:link-rounded" class="text-2xl" /></span>
+					<span class="text-xl font-bold text-90 group-hover:text-[var(--primary)]">友情链接</span>
+				</div>
+				<p class="text-sm text-50 mb-3">去拜访一些有趣的个人网站。</p>
+				<span class="text-sm text-[var(--primary)]">{friendLinks.length} 个链接 →</span>
+			</a>
+			<a href={url("/space/murmur/")} class="group rounded-2xl border border-black/10 dark:border-white/10 p-5 transition hover:border-[var(--primary)] hover:bg-black/[0.02] dark:hover:bg-white/[0.03]">
+				<div class="flex items-center gap-3 mb-3">
+					<span class="w-11 h-11 rounded-xl bg-[var(--btn-regular-bg)] text-[var(--primary)] flex items-center justify-center"><Icon name="material-symbols:chat-bubble-outline-rounded" class="text-2xl" /></span>
+					<span class="text-xl font-bold text-90 group-hover:text-[var(--primary)]">碎碎念</span>
+				</div>
+				<p class="text-sm text-50 mb-3">零碎的想法、近况和一些小记录。</p>
+				<span class="text-sm text-[var(--primary)]">{murmurs.length} 条记录 →</span>
+			</a>
+		</div>
+	</div>
+</MainGridLayout>

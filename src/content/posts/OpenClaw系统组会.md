@@ -2,6 +2,7 @@
 title: "OpenClaw组会"
 published: 2026-04-23
 draft: true
+category: "AI 与研究"
 lang: "zh_CN"
 updated: 2026-05-04
 tags:

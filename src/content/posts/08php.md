@@ -2,6 +2,7 @@
 title: "php笔记"
 published: 2026-08-07
 draft: true
+category: "编程学习"
 lang: "zh_CN"
 updated: 2026-08-07
 image: "/images/8.jpg"

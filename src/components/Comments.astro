@@ -1,0 +1,27 @@
+---
+interface Props {
+	class?: string;
+}
+const className = Astro.props.class;
+---
+<section class:list={["card-base px-6 md:px-9 py-6", className]} aria-labelledby="comments-title">
+	<div class="mb-5">
+		<div class="text-xs uppercase tracking-widest text-50">Comments</div>
+		<h2 id="comments-title" class="text-xl font-bold text-90 mt-1">评论区</h2>
+		<p class="text-sm text-50 mt-1">欢迎留言，一起交流～</p>
+	</div>
+	<div id="waline-comments"></div>
+</section>
+
+<style is:global>
+	#waline-comments {
+		--waline-theme-color: var(--primary);
+		--waline-active-color: var(--primary);
+		--waline-bgcolor: var(--card-bg);
+		--waline-bgcolor-light: var(--page-bg);
+		--waline-border-color: var(--line-divider);
+		--waline-disable-bgcolor: var(--page-bg);
+		--waline-color: var(--deep-text);
+		--waline-light-grey: color-mix(in srgb, var(--deep-text) 55%, transparent);
+	}
+</style>

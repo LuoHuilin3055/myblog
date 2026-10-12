@@ -2,6 +2,7 @@
 title: "BUUCTF新手村题单"
 published: 2026-07-17
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-07-18
 image: "/images/17.jpg"

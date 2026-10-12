@@ -2,6 +2,7 @@
 title: "每日一题"
 published: 2026-09-15
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-09-15
 image: "/images/13.jpg"

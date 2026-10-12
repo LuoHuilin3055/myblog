@@ -1,0 +1,23 @@
+---
+import { friendLinks } from "../../data/space";
+import { url } from "../../utils/url-utils";
+import WidgetLayout from "./WidgetLayout.astro";
+
+interface Props {
+	class?: string;
+	style?: string;
+}
+const { class: className, style } = Astro.props;
+---
+<WidgetLayout name="友情链接" id="friends-widget" class={className} style={style}>
+	<div class="flex flex-col gap-2">
+		{friendLinks.map((friend) => <a href={friend.url} target="_blank" rel="noopener noreferrer" class="flex items-center gap-3 rounded-lg p-2 hover:bg-black/5 dark:hover:bg-white/5">
+			<img src={friend.avatar} alt={`${friend.name} 的头像`} loading="lazy" class="w-10 h-10 rounded-full object-cover bg-black/5 dark:bg-white/10" />
+			<span class="min-w-0">
+				<span class="block text-sm text-75 font-medium truncate">{friend.name}</span>
+				<span class="block text-xs text-50 truncate">{friend.description}</span>
+			</span>
+		</a>)}
+		<a href={url("/space/friends/")} class="text-xs text-[var(--primary)] px-2 pt-1">查看全部友链 →</a>
+	</div>
+</WidgetLayout>

@@ -1,0 +1,14 @@
+---
+import { url } from "../utils/url-utils";
+const current = Astro.props.current;
+const items = [
+	{ name: "空间首页", href: "/space/", key: "space" },
+	{ name: "友链", href: "/space/friends/", key: "friends" },
+	{ name: "碎碎念", href: "/space/murmur/", key: "murmur" },
+];
+---
+<nav aria-label="空间导航" class="flex flex-wrap gap-2 mb-6">
+	{items.map((item) => <a href={url(item.href)} class:list={["rounded-full px-4 py-2 text-sm transition", current === item.key ? "bg-[var(--primary)] text-white" : "btn-plain bg-black/5 dark:bg-white/5"]}>
+		{item.name}
+	</a>)}
+</nav>

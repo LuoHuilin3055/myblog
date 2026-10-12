@@ -2,6 +2,7 @@
 title: "模仿学习笔记"
 published: 2026-07-31
 draft: true
+category: "AI 与研究"
 lang: "zh_CN"
 updated: 2026-07-31
 image: "/images/3.jpg"

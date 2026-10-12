@@ -2,6 +2,7 @@
 title: "GCCCTF的WP"
 published: 2026-08-05
 draft: false
+category: "网络安全"
 lang: "zh_CN"
 updated: 2026-09-03
 image: "/images/7.jpg"

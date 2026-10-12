@@ -38,14 +38,8 @@ export const navBarConfig: NavBarConfig = {
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{
-			name: "GitHub",
-			url: "https://github.com/LuoHuilin3055",
-			external: true,
-		},
-		{
-			name: "NSSCTF",
-			url: "https://www.nssctf.cn/user/47738",
-			external: true,
+			name: "空间",
+			url: "/space/",
 		},
 	],
 };
@@ -72,6 +66,15 @@ export const licenseConfig: LicenseConfig = {
 	enable: true,
 	name: "CC BY-NC-SA 4.0",
 	url: "https://creativecommons.org/licenses/by-nc-sa/4.0/",
+};
+
+export const siteFeatureConfig = {
+	since: "2026-03-21",
+	walineServerURL: "https://clairis-waline.vercel.app",
+	featuredPostTitles: [
+		"每日一题",
+		"GCCCTF的WP",
+	],
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {

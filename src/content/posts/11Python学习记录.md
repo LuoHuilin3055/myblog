@@ -2,6 +2,7 @@
 title: "Python学习记录"
 published: 2026-07-14
 draft: true
+category: "编程学习"
 lang: "zh_CN"
 image: "/images/11.jpg"
 tags:
