@@ -4,11 +4,9 @@ import { Icon } from "astro-icon/components";
 
 <!-- There can't be a filter on parent element, or it will break `fixed` -->
 <div class="back-to-top-wrapper">
-    <div id="back-to-top-btn" class="back-to-top-btn hide flex items-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
-        <button aria-label="Back to Top" class="btn-card h-[3.75rem] w-[3.75rem]">
-            <Icon name="material-symbols:keyboard-arrow-up-rounded" class="mx-auto"></Icon>
-        </button>
-    </div>
+    <button id="back-to-top-btn" type="button" aria-label="回到顶部" title="回到顶部" class="back-to-top-btn hide btn-card flex h-[3.75rem] w-[3.75rem] items-center justify-center rounded-2xl overflow-hidden transition" onclick="backToTop()">
+        <Icon name="material-symbols:keyboard-arrow-up-rounded"></Icon>
+    </button>
 </div>
 
 <style lang="stylus">
@@ -26,11 +24,11 @@ import { Icon } from "astro-icon/components";
     font-weight: bold
     border: none
     position: fixed
-    bottom: 2rem
-    right: 1rem
+    bottom: 5.5rem
+    right: 1.25rem
     opacity: 1
     cursor: pointer
-    transform: translateX(5rem)
+    transform: translateX(0)
     pointer-events: auto
     z-index: 60
     i
@@ -40,7 +38,7 @@ import { Icon } from "astro-icon/components";
         opacity: 0
         pointer-events: none
     &:active
-      transform: translateX(5rem) scale(0.9)
+      transform: translateX(0) scale(0.9)
 
 </style>
 
