@@ -1,14 +1,15 @@
 ---
-title: "乱七八糟的WP"
+title: 乱七八糟的WP
 published: 2026-05-15
 draft: false
-category: "网络安全"
-lang: "zh_CN"
+category: 网络安全
+lang: zh_CN
 updated: 2026-05-28
-image: "/images/4.jpg"
+image: /images/4.jpg
 tags:
-  - "CTF"
-  - "WP"
+  - CTF
+  - WP
+featured: true
 ---
 # `Misc`
 ## [[SEETF 2023]1337 Word Search - NSSCTF](https://www.nssctf.cn/problem/4207)

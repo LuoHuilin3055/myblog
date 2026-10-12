@@ -1,14 +1,15 @@
 ---
-title: "每日一题"
+title: 每日一题
 published: 2026-09-15
 draft: false
-category: "网络安全"
-lang: "zh_CN"
+featured: false
+category: 网络安全
+lang: zh_CN
 updated: 2026-09-15
-image: "/images/13.jpg"
+image: /images/13.jpg
 tags:
-  - "CTF"
-  - "WP"
+  - CTF
+  - WP
 ---
 # 9.1
 [[羊城杯 2022]where_is_secret - NSSCTF](https://www.nssctf.cn/problem/2582)

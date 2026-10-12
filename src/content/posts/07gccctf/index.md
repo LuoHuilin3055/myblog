@@ -1,15 +1,16 @@
 ---
-title: "GCCCTF的WP"
+title: GCCCTF的WP
 published: 2026-08-05
 draft: false
-category: "网络安全"
-lang: "zh_CN"
+featured: false
+category: 网络安全
+lang: zh_CN
 updated: 2026-09-03
-image: "/images/7.jpg"
+image: /images/7.jpg
 tags:
-  - "WP"
-  - "CTF"
-  - "GCCCTF"
+  - WP
+  - CTF
+  - GCCCTF
 ---
 # Web
 ## PHP签到

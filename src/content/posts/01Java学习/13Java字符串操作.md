@@ -1,14 +1,15 @@
 ---
-title: "Java字符串操作"
+title: Java字符串操作
 published: 2026-07-12
 draft: false
-category: "编程学习"
-lang: "zh_CN"
+category: 编程学习
+lang: zh_CN
 updated: 2026-07-12
-image: "/images/13.jpg"
+image: /images/13.jpg
 tags:
-  - "Java"
-  - "笔记"
+  - Java
+  - 笔记
+featured: false
 ---
 Java考试前的补天
 

@@ -1,5 +1,4 @@
 ---
-import { siteFeatureConfig } from "../../config";
 import { getSortedPosts } from "../../utils/content-utils";
 import { getPostUrlBySlug } from "../../utils/url-utils";
 import { formatDateToYYYYMMDD } from "../../utils/date-utils";
@@ -11,9 +10,7 @@ interface Props {
 }
 const { class: className, style } = Astro.props;
 const allPosts = (await getSortedPosts()).filter((post) => !post.data.draft);
-const featuredPosts = siteFeatureConfig.featuredPostTitles
-	.map((title) => allPosts.find((post) => post.data.title === title))
-	.filter((post) => post !== undefined);
+const featuredPosts = allPosts.filter((post) => post.data.featured).slice(0, 2);
 ---
 {featuredPosts.length > 0 && <WidgetLayout name="精选文章" id="featured-posts" class={className} style={style}>
 	<div class="flex flex-col gap-1">

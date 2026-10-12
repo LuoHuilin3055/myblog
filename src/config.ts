@@ -71,10 +71,6 @@ export const licenseConfig: LicenseConfig = {
 export const siteFeatureConfig = {
 	since: "2026-03-21",
 	walineServerURL: "https://clairis-waline.vercel.app",
-	featuredPostTitles: [
-		"每日一题",
-		"GCCCTF的WP",
-	],
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {
