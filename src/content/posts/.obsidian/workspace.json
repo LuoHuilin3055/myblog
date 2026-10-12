@@ -1,0 +1,213 @@
+{
+  "main": {
+    "id": "5041021dbf324b95",
+    "type": "split",
+    "children": [
+      {
+        "id": "2d5efa55ba19e3d1",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b969757c7071af18",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "03模仿学习（Imitation learning,IL）.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "03模仿学习（Imitation learning,IL）"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "d5b49c6b57fb1375",
+    "type": "split",
+    "children": [
+      {
+        "id": "aeacc6fff2eb76a7",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "f12b534736d3d53a",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "文件列表"
+            }
+          },
+          {
+            "id": "44428ddcacc37551",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "搜索"
+            }
+          },
+          {
+            "id": "ccb51ff1b1cda661",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "书签"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "58b4b553fdfc5aa1",
+    "type": "split",
+    "children": [
+      {
+        "id": "2d3557ed2f279985",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "ed2f6b73ca9be7e5",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "03模仿学习（Imitation learning,IL）.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "反向链接"
+            }
+          },
+          {
+            "id": "77f32a391457c734",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "03模仿学习（Imitation learning,IL）.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "出链"
+            }
+          },
+          {
+            "id": "a082a674bc6830d4",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "标签"
+            }
+          },
+          {
+            "id": "8d9751eacd0daa82",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "添加笔记属性"
+            }
+          },
+          {
+            "id": "cc3bff19e3bcabb5",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "03模仿学习（Imitation learning,IL）.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "大纲"
+            }
+          }
+        ],
+        "currentTab": 4
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:打开快速切换": false,
+      "graph:查看关系图谱": false,
+      "canvas:新建白板": false,
+      "daily-notes:打开/创建今天的日记": false,
+      "templates:插入模板": false,
+      "command-palette:打开命令面板": false,
+      "bases:新建数据库": false
+    }
+  },
+  "active": "b969757c7071af18",
+  "lastOpenFiles": [
+    "脚本.md",
+    "07gccctf/evidence/evidence-08.png",
+    "07gccctf/evidence/evidence-07.png",
+    "07gccctf/evidence/evidence-06.png",
+    "07gccctf/evidence/evidence-05.png",
+    "07gccctf/evidence/evidence-04.png",
+    "07gccctf/evidence/evidence-03.png",
+    "07gccctf/evidence/evidence-02.png",
+    "07gccctf/evidence/evidence-01.png",
+    "07gccctf/evidence",
+    "待办.md",
+    "论文阅读.md",
+    "论文阅读2.md",
+    "OpenClaw系统组会.md",
+    "API.md",
+    "Pasted image 20260910185745.png",
+    "Pasted image 20260910183954.png",
+    "18Typecho install.php 反序列化漏洞 Writeup.md",
+    "12sec/index.md"
+  ]
+}

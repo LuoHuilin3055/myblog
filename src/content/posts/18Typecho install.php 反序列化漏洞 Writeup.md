@@ -1,35 +1,32 @@
 ---
-title: "WP2"
+title: Typecho install.php 反序列化漏洞 Writeup
 published: 2026-08-03
-draft: true
-lang: "zh_CN"
-tags: []
+draft: false
+lang: zh_CN
+tags:
+  - WP
+  - CTF
 ---
+# 题目信息
 
-
-# Typecho install.php 反序列化漏洞 Writeup
-
-## 题目信息
-
-| 项目 | 内容 |
-|------|------|
-| **靶机地址** | `node4.anna.nssctf.cn:2161` |
-| **题目类型** | Web - PHP反序列化 |
-| **框架** | Typecho CMS |
-| **版本** | 1.0/14.10.10 |
+| 项目       | 内容                                             |
+| -------- | ---------------------------------------------- |
+| **题目类型** | Web - PHP反序列化                                  |
+| **框架**   | Typecho CMS                                    |
+| **版本**   | 1.0/14.10.10                                   |
 | **Flag** | `NSSCTF{7142be72-772e-4691-9c42-972da71e605a}` |
 
 ---
 
-## 漏洞概述
+# 漏洞概述
 
 Typecho 是一款 PHP 博客系统。题目的附件是 Typecho 源码，在 `install.php` 中存在 **PHP 反序列化漏洞**。攻击者可以通过构造恶意的序列化 Cookie，触发远程代码执行（RCE），最终获取服务器上的 Flag。
 
 ---
 
-## 漏洞分析
+# 漏洞分析
 
-### 1. 漏洞点定位
+## 1. 漏洞点定位
 
 在 `install.php` 中有两处反序列化入口：
 
@@ -47,7 +44,7 @@ $config = unserialize(base64_decode(Typecho_Cookie::get('__typecho_config')));
 
 两种路径都是从 Cookie `__typecho_config` 中读取 **base64 编码的序列化数据** 并执行 `unserialize()`，这构成了 PHP 反序列化漏洞入口。
 
-### 2. CSRF 检查绕过
+## 2. CSRF 检查绕过
 
 `install.php` 第63-76行有 Referer 检查：
 ```php
@@ -59,7 +56,7 @@ if (!empty($_GET) || !empty($_POST)) {
 
 **绕过方式**：由于是从 `install.php` 同页面发起 `fetch()` 请求，浏览器会自动携带正确的 `Referer` 头，无需额外处理。
 
-### 3. Cookie 编码注意事项
+## 3. Cookie 编码注意事项
 
 `Typecho_Cookie::set()` 使用 `rawurlencode()` 编码 Cookie 值：
 ```php
@@ -70,7 +67,7 @@ setrawcookie($key, rawurlencode($value), $expire, self::$_path);
 - base64 中的 `+` 号会被 URL-decode 成**空格**
 - 需要在 JavaScript 中使用 `encodeURIComponent()` 对 Cookie 值编码（`+` → `%2B`），确保 PHP 解码后 base64 正确还原
 
-### 4. Gadget Chain（利用链）
+## 4. Gadget Chain（利用链）
 
 完整的反序列化利用链如下：
 
@@ -92,7 +89,7 @@ call_user_func($filter, $command_string)
 system('cat /flag') → RCE！
 ```
 
-#### 详细步骤：
+### 详细步骤：
 
 **Step 1** — 反序列化后得到：
 ```
@@ -136,9 +133,9 @@ private function _applyFilter($value) {
 
 ---
 
-## 漏洞利用
+# 漏洞利用
 
-### Payload 结构
+## Payload 结构
 
 ```python
 payload = {
@@ -159,14 +156,14 @@ payload = {
 # serialized → base64 → set as Cookie
 ```
 
-### 利用步骤
+## 利用步骤
 
 1. **生成 Payload**：使用 Python 脚本 `exploit.py` 构造 PHP 序列化 Payload，base64 编码后写入 Cookie
 2. **绕过 CSRF**：在目标 `install.php` 页面通过浏览器 Console 执行 JavaScript 的 `fetch()`，同源请求自动携带 Referer
 3. **触发反序列化**：设置 Cookie 为恶意 Payload 后，请求 `install.php?start`
 4. **获取 Flag**：`system('cat /flag')` 在服务器上执行，输出出现在 HTTP 响应正文中
 
-### 浏览器 Console 执行
+## 浏览器 Console 执行
 
 最终使用的 JavaScript 代码（已写入 `exploit_system.js`）：
 
@@ -178,7 +175,7 @@ fetch("install.php?start", {credentials: "include"})
   .then(t => console.log(t));
 ```
 
-### 利用结果
+## 利用结果
 
 服务器返回的 HTTP 响应中直接包含 Flag：
 ```
@@ -187,7 +184,7 @@ NSSCTF{7142be72-772e-4691-9c42-972da71e605a}
 
 ---
 
-## 关键问题与解决
+# 关键问题与解决
 
 | 问题 | 原因 | 解决方案 |
 |------|------|----------|
@@ -197,7 +194,7 @@ NSSCTF{7142be72-772e-4691-9c42-972da71e605a}
 
 ---
 
-## 总结
+# 总结
 
 这是一个PHP反序列化漏洞的综合利用，涉及以下考点：
 
@@ -206,9 +203,3 @@ NSSCTF{7142be72-772e-4691-9c42-972da71e605a}
 3. **类自动加载机制**：PHP unserialize 时通过 `spl_autoload_register` 自动加载未定义的类
 4. **Cookie 编码问题**：PHP `$_COOKIE` 的 URL-decode 特性对 Payload 的影响及修复
 5. **PHP 配置差异**：`assert()` 在不同 PHP 版本中的行为差异，使用 `system()` 作为备选
-
-## 参考
-
-- Typecho 源码版本: 1.0/14.10.10
-- 漏洞类型: CWE-502 (Deserialization of Untrusted Data)
-- 利用文件: `exploit.py`, `exploit_system.js`

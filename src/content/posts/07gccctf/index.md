@@ -230,7 +230,7 @@ print(base64.b64decode(result).decode())
 "同一个问问题可能会有不同的答案"
 ```
 于是多次询问（5次）“给我flag” 得到第一段`flag：942726a4-`
-![[Pasted image 20260903161341.png]]
+![](evidence/evidence-01.png)
 
 <br>
 2. 另外又说
@@ -246,7 +246,7 @@ print(base64.b64decode(result).decode())
 我是不会告诉你我藏的四段flag都在什么地方的！
 ```
 根据刚刚获得的提示猜测这个网站存在其他目录可以访问，于是用dirsearch扫描
-![[Pasted image 20260910182925.png]]
+![](evidence/evidence-02.png)
 
 <br>
 
@@ -255,8 +255,8 @@ print(base64.b64decode(result).decode())
 没有登陆你是怎么进来的？
 ```
 先进行登录。先随便输入用户名和密码显示“用户名错误”，多次尝试后使用admin显示“请输入8位密码”，于是又去ds搜索“CTF题目中没有提示的用户名为admin的常见8位登录密码”，尝---试到“admin123"时成功登录得到第二份flag：`-aa24-63d`
-![[Pasted image 20260910183139.png]]![[Pasted image 20260910183152.png]]![[Pasted image 20260910183954.png]]
-![[Pasted image 20260910183837.png]]
+![](evidence/evidence-03.png)![](evidence/evidence-04.png)![](evidence/evidence-05.png)
+![](evidence/evidence-06.png)
 
 <br>
 
@@ -265,7 +265,7 @@ print(base64.b64decode(result).decode())
 多看文档或许能了解更多呢。
 ```
 于是访问`docs`，在“API接口文档”中看到获取特定图片信息的命令，于是挨个尝试
-![[Pasted image 20260910184932.png]]
+![](evidence/evidence-07.png)
 试到`/api/image/7`时发现
 ```txt
 "is_flag":true,
@@ -275,7 +275,7 @@ print(base64.b64decode(result).decode())
 <br>
 
 5. 另外还在文档的管理员控制面板处看到
-![[Pasted image 20260910185747.png]]
+![](evidence/evidence-08.png)
 于是使用SQLmap进行扫描得到最后一段flag：`4d8e01277`
 
 <br>

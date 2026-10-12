@@ -17,7 +17,7 @@ export const siteConfig: SiteConfig = {
 	},
 	banner: {
 		enable: true,
-		src: "/images/background.jpg",
+		src: "/images/background-fuwari.png",
 		position: "center",
 		credit: {
 			enable: false,
