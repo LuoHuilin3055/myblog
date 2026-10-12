@@ -149,8 +149,6 @@ const bannerOffset =
 		<slot name="head"></slot>
 
 		<link rel="alternate" type="application/rss+xml" title={profileConfig.name} href={`${Astro.site}rss.xml`}/>
-		<script id="busuanzi-script" defer src="https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js"></script>
-
 	</head>
 	<body class=" min-h-screen transition " class:list={[{"lg:is-home": isHomePage, "enable-banner": enableBanner}]}
 		  data-overlayscrollbars-initialize
@@ -458,24 +456,6 @@ if (window?.swup?.hooks) {
 	document.addEventListener('swup:enable', setup)
 }
 
-function refreshBusuanzi() {
-	const oldScript = document.getElementById('busuanzi-script')
-	const script = document.createElement('script')
-	script.id = 'busuanzi-script'
-	script.src = 'https://cdn.busuanzi.cc/busuanzi/3.6.9/busuanzi.min.js'
-	script.defer = true
-	oldScript?.remove()
-	document.head.appendChild(script)
-}
-
-if (window?.swup?.hooks) {
-	window.swup.hooks.on('page:view', refreshBusuanzi)
-} else {
-	document.addEventListener('swup:enable', () => {
-		window.swup?.hooks.on('page:view', refreshBusuanzi)
-	})
-}
-
 let backToTopBtn = document.getElementById('back-to-top-btn');
 let toc = document.getElementById('toc-wrapper');
 let navbar = document.getElementById('navbar-wrapper')
@@ -591,6 +571,102 @@ if (window.swup) {
 <script is:inline type="module" define:vars={{ WALINE_SERVER_URL: siteFeatureConfig.walineServerURL }}>
 	let walineInstance;
 	let mountedCommentsElement;
+	let visitorCountPromise;
+	let lastTrackedLocation = "";
+	const SITE_PV_PATH = "/__clairis_stats__/site-pv";
+	const SITE_UV_PATH = "/__clairis_stats__/site-uv";
+	const VISITOR_STORAGE_KEY = "clairis-site-visitor-counted-v1";
+	const isLiveSite = ["clairis.cn", "www.clairis.cn"].includes(window.location.hostname);
+
+	async function requestCounter(path, increment) {
+		const controller = new AbortController();
+		const timeout = window.setTimeout(() => controller.abort(), 10000);
+		const url = new URL(`${WALINE_SERVER_URL.replace(/\/+$/, "")}/api/article`);
+		const lang = "zh-CN";
+
+		try {
+			let response;
+			if (increment) {
+				url.searchParams.set("lang", lang);
+				response = await fetch(url, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ path, type: ["time"], action: "inc" }),
+					signal: controller.signal,
+				});
+			} else {
+				url.searchParams.set("path", path);
+				url.searchParams.set("type", "time");
+				url.searchParams.set("lang", lang);
+				response = await fetch(url, { signal: controller.signal });
+			}
+
+			if (!response.ok) throw new Error(`Waline counter returned HTTP ${response.status}`);
+			const result = await response.json();
+			if (result.errno) throw new Error(result.errmsg || `Waline counter error ${result.errno}`);
+			return Number(result.data?.[0]?.time ?? 0);
+		} finally {
+			window.clearTimeout(timeout);
+		}
+	}
+
+	function renderCounter(element, promise, label) {
+		if (!element) return Promise.resolve();
+		return promise.then((count) => {
+			element.textContent = count.toLocaleString("zh-CN");
+		}).catch((error) => {
+			console.error(`${label} failed to load:`, error);
+			element.textContent = "暂不可用";
+			element.title = "统计服务暂时不可用";
+		});
+	}
+
+	function getSiteVisitorCount() {
+		if (!visitorCountPromise) {
+			visitorCountPromise = (async () => {
+				let shouldIncrement = false;
+				if (isLiveSite) {
+					try {
+						shouldIncrement = localStorage.getItem(VISITOR_STORAGE_KEY) !== "1";
+					} catch {
+						// If persistent browser storage is unavailable, avoid inflating unique visitors.
+					}
+				}
+
+				const count = await requestCounter(SITE_UV_PATH, shouldIncrement);
+				if (shouldIncrement) {
+					try {
+						localStorage.setItem(VISITOR_STORAGE_KEY, "1");
+					} catch {
+						// Keep the count available even when storage is restricted.
+					}
+				}
+				return count;
+			})().catch((error) => {
+				visitorCountPromise = undefined;
+				throw error;
+			});
+		}
+		return visitorCountPromise;
+	}
+
+	async function trackCounters() {
+		const route = `${window.location.pathname}${window.location.search}`;
+		if (route === lastTrackedLocation) return;
+		lastTrackedLocation = route;
+
+		const sitePvElement = document.getElementById("waline-site-pv-count");
+		const siteUvElement = document.getElementById("waline-site-uv-count");
+		const pagePvElement = document.getElementById("waline-page-pv-count");
+		const tasks = [
+			renderCounter(sitePvElement, requestCounter(SITE_PV_PATH, isLiveSite), "Site pageviews"),
+			renderCounter(siteUvElement, getSiteVisitorCount(), "Site visitors"),
+		];
+		if (pagePvElement) {
+			tasks.push(renderCounter(pagePvElement, requestCounter(window.location.pathname, isLiveSite), "Article pageviews"));
+		}
+		await Promise.all(tasks);
+	}
 
 	async function mountWaline() {
 		const element = document.getElementById("waline-comments");
@@ -619,7 +695,9 @@ if (window.swup) {
 			mountedCommentsElement = undefined;
 		}, { before: true });
 		window.swup.hooks.on("page:view", mountWaline);
+		window.swup.hooks.on("page:view", trackCounters);
 		mountWaline();
+		trackCounters();
 	}
 
 	if (window.swup?.hooks) {
@@ -627,5 +705,6 @@ if (window.swup) {
 	} else {
 		document.addEventListener("swup:enable", bindWalineToSwup, { once: true });
 		mountWaline();
+		trackCounters();
 	}
 </script>

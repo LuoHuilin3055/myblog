@@ -27,8 +27,8 @@ const lastUpdated = posts.reduce<Date | undefined>((latest, post) => {
 		<div class="flex justify-between gap-3"><span class="text-50">累计字数</span><span class="text-75">{totalWords.toLocaleString("zh-CN")}</span></div>
 		{lastUpdated && <div class="flex justify-between gap-3"><span class="text-50">最近更新</span><span class="text-75">{formatDateToYYYYMMDD(lastUpdated)}</span></div>}
 		<div class="border-t border-dashed border-black/10 dark:border-white/15 pt-3 flex flex-col gap-2">
-			<div class="flex justify-between gap-3"><span class="text-50">本站访客</span><span id="busuanzi_site_uv" class="text-75" aria-live="polite">加载中</span></div>
-			<div class="flex justify-between gap-3"><span class="text-50">总浏览量</span><span id="busuanzi_site_pv" class="text-75" aria-live="polite">加载中</span></div>
+			<div class="flex justify-between gap-3"><span class="text-50">本站访客</span><span id="waline-site-uv-count" class="text-75" aria-live="polite" title="按浏览器本地存储去重估算">加载中</span></div>
+			<div class="flex justify-between gap-3"><span class="text-50">总浏览量</span><span id="waline-site-pv-count" class="text-75" aria-live="polite">加载中</span></div>
 		</div>
 	</div>
 </WidgetLayout>
