@@ -575,6 +575,8 @@ if (window.swup) {
 	let lastTrackedLocation = "";
 	const SITE_PV_PATH = "/__clairis_stats__/site-pv";
 	const SITE_UV_PATH = "/__clairis_stats__/site-uv";
+	const SITE_PV_COOLDOWN_MS = 5 * 60 * 1000;
+	const SITE_PV_STORAGE_PREFIX = "clairis-site-pv-counted-at-v1:";
 	const VISITOR_STORAGE_KEY = "clairis-site-visitor-counted-v1";
 	const isLiveSite = ["clairis.cn", "www.clairis.cn"].includes(window.location.hostname);
 
@@ -650,6 +652,36 @@ if (window.swup) {
 		return visitorCountPromise;
 	}
 
+	async function getSitePageviewCount(path) {
+		if (!isLiveSite) return requestCounter(SITE_PV_PATH, false);
+
+		const storageKey = `${SITE_PV_STORAGE_PREFIX}${encodeURIComponent(path)}`;
+		const countedAt = Date.now();
+		try {
+			const lastCountedAt = Number(localStorage.getItem(storageKey));
+			if (lastCountedAt > 0 && countedAt - lastCountedAt < SITE_PV_COOLDOWN_MS) {
+				return requestCounter(SITE_PV_PATH, false);
+			}
+			localStorage.setItem(storageKey, String(countedAt));
+		} catch {
+			// Without persistent storage, read the count but do not inflate it on every refresh.
+			return requestCounter(SITE_PV_PATH, false);
+		}
+
+		try {
+			return await requestCounter(SITE_PV_PATH, true);
+		} catch (error) {
+			try {
+				if (localStorage.getItem(storageKey) === String(countedAt)) {
+					localStorage.removeItem(storageKey);
+				}
+			} catch {
+				// Keep the original request error if browser storage is unavailable.
+			}
+			throw error;
+		}
+	}
+
 	async function trackCounters() {
 		const route = `${window.location.pathname}${window.location.search}`;
 		if (route === lastTrackedLocation) return;
@@ -659,7 +691,7 @@ if (window.swup) {
 		const siteUvElement = document.getElementById("waline-site-uv-count");
 		const pagePvElement = document.getElementById("waline-page-pv-count");
 		const tasks = [
-			renderCounter(sitePvElement, requestCounter(SITE_PV_PATH, isLiveSite), "Site pageviews"),
+			renderCounter(sitePvElement, getSitePageviewCount(window.location.pathname), "Site pageviews"),
 			renderCounter(siteUvElement, getSiteVisitorCount(), "Site visitors"),
 		];
 		if (pagePvElement) {
