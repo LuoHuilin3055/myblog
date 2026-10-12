@@ -1,5 +1,23 @@
 @tailwind components;
 
+/*
+ * Keep Latin letters and numbers in Comic Sans MS while allowing Chinese
+ * glyphs to fall back to KaiTi. The fallback names cover Windows and macOS.
+ */
+:root {
+    --site-font-family: "Comic Sans MS", "KaiTi", "楷体", "STKaiti", "Kaiti SC", "Kaiti TC", cursive;
+}
+
+html,
+body,
+button,
+input,
+textarea,
+select,
+option {
+    font-family: var(--site-font-family);
+}
+
 @layer components {
     .card-base {
         @apply rounded-[var(--radius-large)] overflow-hidden bg-[var(--card-bg)] transition;
