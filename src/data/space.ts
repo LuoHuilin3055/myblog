@@ -1,9 +1,9 @@
 export const friendLinks = [
 	{
 		name: "Daochunhan",
-		url: "https://daochunhan25.site/",
+		url: "https://daochunhan.me/",
 		description: "大大大大大佬",
-		avatar: "https://img.daochunhan25.site/img/profile.png",
+		avatar: "https://static.daochunhan.me/profile.png",
 	},
 ];
 

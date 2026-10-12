@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "03模仿学习（Imitation learning,IL）.md",
+                "file": "05五一出游总结/5五一出游总结.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "03模仿学习（Imitation learning,IL）"
+              "title": "5五一出游总结"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "03模仿学习（Imitation learning,IL）.md",
+                "file": "05五一出游总结/5五一出游总结.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "03模仿学习（Imitation learning,IL）.md",
+                "file": "05五一出游总结/5五一出游总结.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "03模仿学习（Imitation learning,IL）.md",
+                "file": "05五一出游总结/5五一出游总结.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,23 +190,26 @@
   },
   "active": "b969757c7071af18",
   "lastOpenFiles": [
+    "05五一出游总结/image-optimized/shanghai5.webp",
+    "05五一出游总结/image-optimized/shanghai4.webp",
+    "05五一出游总结/image-optimized/shanghai3.webp",
+    "05五一出游总结/image-optimized/shanghai2.webp",
+    "05五一出游总结/image-optimized/shanghai1.webp",
+    "05五一出游总结/image-optimized/home3.webp",
+    "05五一出游总结/image-optimized/home2.webp",
+    "05五一出游总结/image-optimized/home1.webp",
+    "05五一出游总结/image-optimized/28-7.webp",
+    "05五一出游总结/image-optimized/28-6.webp",
+    "05五一出游总结/image-optimized/28-5.webp",
+    "05五一出游总结/image-optimized",
+    "03模仿学习（Imitation learning,IL）.md",
     "脚本.md",
-    "07gccctf/evidence/evidence-08.png",
-    "07gccctf/evidence/evidence-07.png",
-    "07gccctf/evidence/evidence-06.png",
-    "07gccctf/evidence/evidence-05.png",
-    "07gccctf/evidence/evidence-04.png",
-    "07gccctf/evidence/evidence-03.png",
-    "07gccctf/evidence/evidence-02.png",
-    "07gccctf/evidence/evidence-01.png",
     "07gccctf/evidence",
     "待办.md",
     "论文阅读.md",
     "论文阅读2.md",
     "OpenClaw系统组会.md",
     "API.md",
-    "Pasted image 20260910185745.png",
-    "Pasted image 20260910183954.png",
     "18Typecho install.php 反序列化漏洞 Writeup.md",
     "12sec/index.md"
   ]
