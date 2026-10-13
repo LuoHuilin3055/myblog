@@ -23,6 +23,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
+const isTravelPost = entry.slug === "05五一出游总结/5五一出游总结";
 
 const { remarkPluginFrontmatter } = await entry.render();
 
@@ -95,7 +96,7 @@ const jsonLd = {
                 <div class="border-[var(--line-divider)] border-dashed border-b-[1px] mb-5"></div>
             </div>
 
-            <Markdown class="mb-6 markdown-content onload-animation">
+            <Markdown class={`mb-6 markdown-content onload-animation${isTravelPost ? " travel-photo-layout" : ""}`}>
                 <Content />
             </Markdown>
 

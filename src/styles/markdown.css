@@ -120,3 +120,43 @@
     }
     
 }
+
+/* Photo album layout used only by the May travel post. */
+.travel-photo-layout .travel-gallery {
+    column-count: 2;
+    column-gap: 0.875rem;
+    margin: 1.5rem 0 2rem;
+}
+
+.travel-photo-layout .travel-gallery[data-count="1"] {
+    column-count: 1;
+    max-width: 40rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.travel-photo-layout .travel-gallery[data-count="3"] {
+    column-count: 3;
+}
+
+.travel-photo-layout .travel-gallery > p {
+    break-inside: avoid;
+    margin: 0 0 0.875rem !important;
+}
+
+.travel-photo-layout .travel-gallery img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 !important;
+    border-radius: 0.75rem;
+    box-shadow: 0 6px 18px rgb(0 0 0 / 10%);
+    cursor: zoom-in;
+}
+
+@media (max-width: 540px) {
+    .travel-photo-layout .travel-gallery,
+    .travel-photo-layout .travel-gallery[data-count="3"] {
+        column-count: 1;
+    }
+}

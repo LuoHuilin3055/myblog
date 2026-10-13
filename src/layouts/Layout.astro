@@ -544,28 +544,7 @@ function createPhotoSwipe() {
 	lightbox.init()
 }
 
-const setup = () => {
-	if (!lightbox) {
-		createPhotoSwipe()
-	}
-	window.swup.hooks.on("page:view", () => {
-		createPhotoSwipe()
-	})
-
-	window.swup.hooks.on(
-		"content:replace",
-		() => {
-			lightbox?.destroy?.()
-		},
-		{ before: true },
-	)
-}
-
-if (window.swup) {
-	setup()
-} else {
-	document.addEventListener("swup:enable", setup)
-}
+createPhotoSwipe()
 </script>
 
 <script is:inline type="module" define:vars={{
