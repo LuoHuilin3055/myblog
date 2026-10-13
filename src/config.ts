@@ -71,6 +71,12 @@ export const licenseConfig: LicenseConfig = {
 export const siteFeatureConfig = {
 	since: "2026-03-21",
 	walineServerURL: "https://clairis-waline.vercel.app",
+	// Snapshot from the original Busuanzi service on 2026-10-13.
+	// Its lookup counted one page view, so subtract that probe from sitePv.
+	legacyBusuanziStats: {
+		siteUv: 393,
+		sitePv: 669,
+	},
 };
 
 export const expressiveCodeConfig: ExpressiveCodeConfig = {

@@ -568,7 +568,11 @@ if (window.swup) {
 }
 </script>
 
-<script is:inline type="module" define:vars={{ WALINE_SERVER_URL: siteFeatureConfig.walineServerURL }}>
+<script is:inline type="module" define:vars={{
+	WALINE_SERVER_URL: siteFeatureConfig.walineServerURL,
+	LEGACY_SITE_PV: siteFeatureConfig.legacyBusuanziStats.sitePv,
+	LEGACY_SITE_UV: siteFeatureConfig.legacyBusuanziStats.siteUv,
+}}>
 	let walineInstance;
 	let mountedCommentsElement;
 	let visitorCountPromise;
@@ -612,14 +616,14 @@ if (window.swup) {
 		}
 	}
 
-	function renderCounter(element, promise, label) {
+	function renderCounter(element, promise, label, legacyCount = 0) {
 		if (!element) return Promise.resolve();
 		return promise.then((count) => {
-			element.textContent = count.toLocaleString("zh-CN");
+			element.textContent = (legacyCount + count).toLocaleString("zh-CN");
 		}).catch((error) => {
 			console.error(`${label} failed to load:`, error);
-			element.textContent = "暂不可用";
-			element.title = "统计服务暂时不可用";
+			element.textContent = legacyCount > 0 ? legacyCount.toLocaleString("zh-CN") : "暂不可用";
+			element.title = legacyCount > 0 ? "仅显示历史数据，实时统计暂不可用" : "统计服务暂时不可用";
 		});
 	}
 
@@ -691,8 +695,8 @@ if (window.swup) {
 		const siteUvElement = document.getElementById("waline-site-uv-count");
 		const pagePvElement = document.getElementById("waline-page-pv-count");
 		const tasks = [
-			renderCounter(sitePvElement, getSitePageviewCount(window.location.pathname), "Site pageviews"),
-			renderCounter(siteUvElement, getSiteVisitorCount(), "Site visitors"),
+			renderCounter(sitePvElement, getSitePageviewCount(window.location.pathname), "Site pageviews", LEGACY_SITE_PV),
+			renderCounter(siteUvElement, getSiteVisitorCount(), "Site visitors", LEGACY_SITE_UV),
 		];
 		if (pagePvElement) {
 			tasks.push(renderCounter(pagePvElement, requestCounter(window.location.pathname, isLiveSite), "Article pageviews"));
