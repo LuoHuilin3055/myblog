@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "14byuctf/index.md",
+                "file": "13十月每日一题/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -83,7 +83,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 240.16668701171875
   },
   "right": {
     "id": "58b4b553fdfc5aa1",
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "14byuctf/index.md",
+                "file": "13十月每日一题/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -175,7 +175,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 264.83331298828125
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -190,7 +190,10 @@
   },
   "active": "b969757c7071af18",
   "lastOpenFiles": [
-    "13每日一题/index.md",
+    "18Typecho install.php 反序列化漏洞 Writeup.md",
+    "13十月每日一题/index.md",
+    "13每日一题/未命名.md",
+    "14byuctf/index.md",
     "12sec/index.md",
     "12sec/whereami.jpeg",
     "09靶机/index.md",
@@ -219,7 +222,6 @@
     "论文阅读.md",
     "论文阅读2.md",
     "OpenClaw系统组会.md",
-    "API.md",
-    "18Typecho install.php 反序列化漏洞 Writeup.md"
+    "API.md"
   ]
 }

@@ -1,3 +1,5 @@
 {
-  "interfaceFontFamily": "Comic Sans MS,楷体"
+  "interfaceFontFamily": "Comic Sans MS,楷体",
+  "textFontFamily": "Comic Sans MS,楷体",
+  "monospaceFontFamily": "Comic Sans MS,楷体"
 }
