@@ -23,7 +23,7 @@ export async function getStaticPaths() {
 
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
-const isTravelPost = entry.slug === "05五一出游总结/5五一出游总结";
+const isTravelPost = entry.slug === "05五一出游总结/5五一出游总结" || entry.id.startsWith("19十一假期出游/");
 
 const { remarkPluginFrontmatter } = await entry.render();
 
