@@ -60,7 +60,7 @@ updated: 2026-10-14
 
 :::
 
-- 下火车后因为园长还有一段时间才到，我们跟着嘴哥去吃了碗羊汤。羊汤挺香的而且不像预知菜，但有点可惜我不爱吃内脏（那个汤超级香超级好喝）
+- 下火车后因为园长还有一段时间才到，我们跟着嘴哥去吃了碗羊汤。羊汤挺香的而且不像预制菜，但有点可惜我不爱吃内脏（那个汤超级香超级好喝）
 
 :::div{.travel-gallery data-count="1"}
 
@@ -148,4 +148,64 @@ updated: 2026-10-14
 - 吃完后去体验北方的洗浴文化，我这个纯种南方人很无措很羞耻很害怕（那个按摩按得我有点疼）
 
 # 10.5——营口
-- 5号等我们睡醒收拾完租好车已经下午了，原定的去营口海边看日落的计划被迫改为在高速路上看晚霞。
+- 5号等我们睡醒收拾完租好车已经下午了，原定的去营口海边看日落的计划被迫改为在高速路上追晚霞。于是我们听着吵吵闹闹的歌，聊着乱七八糟的话题——像回到了小时候，一群人开心地叽叽喳喳坐上去春游的车。
+
+:::div{.travel-gallery data-count="2"}
+
+![车窗外的晚霞和城市](image-optimized/1005-drive-sunset-1.webp)
+
+![去营口路上的落日](image-optimized/1005-drive-sunset-2.webp)
+
+:::
+
+- 吃完晚饭后天已经很黑了，但大家一直惦记着我说没看过海，带我在城区找海无果，于是驱车到五十多公里外的海滨公园，光明正大地走过门禁，打着手机手电筒在漆黑的有点寒冷的夜里寻找能够下到海边的路。因为没有灯光污染，我第一次看见这么多这么亮的星星，在海边捡贝壳时被海水浸湿了鞋子，海浪裹挟着的风有股淡淡的鱼腥味。
+
+:::div{.travel-gallery data-count="5"}
+
+![在海边捡到的贝壳](image-optimized/1005-seashells.webp)
+
+![营口海边夜景水彩明信片](image-optimized/1005-seaside-night-postcard.webp)
+
+![夜空和树梢上的星星](image-optimized/1005-starry-sky.webp)
+
+![海边夜空下停泊的小船](image-optimized/1005-night-harbor.webp)
+
+![夜晚的风车](image-optimized/1005-night-windmill.webp)
+
+:::
+- 真的 特别 感动
+- 回去后酒店楼下的台球馆还没关门，我们想着多睡一小时少睡一小时一样困，索性又去台球馆玩了一小时。之前只在电视中看到过打台球，第一次上手我连球都戳不到（哭），玩了会终于能打到球了但台球馆要关门了，遗憾离场。
+
+# 10.6——营口到长白山
+- 回到酒店已经两点了，睡了三小时五点起床收拾东西去看日出。营口的红海滩真的很好看，但可惜我们的时间有点紧迫，刚到海边看了五分钟就得赶往高铁站了。
+
+:::div{.travel-gallery data-count="4"}
+
+![营口日出时路上的晚霞](image-optimized/1006-sunrise-drive-1.webp)
+
+![营口日出时的街景](image-optimized/1006-sunrise-drive-2.webp)
+
+![红色湿地水彩明信片](image-optimized/1006-red-wetland-postcard.webp)
+
+![清晨的红海滩](image-optimized/1006-red-beach-sunrise.webp)
+
+:::
+
+- 在高铁上园长鼠子和我三个命苦的孩子，一直在赶作业
+- 中午十二点我们到达了白山市，刚下高铁就被震撼了，急匆匆到酒店放下行李就赶往露水河。
+
+:::div{.travel-gallery data-count="2"}
+
+![白山市站外的长白山雪景](image-optimized/1006-changbai-station-view-1.webp)
+
+![白山市站外远望长白山](image-optimized/1006-changbai-station-view-2.webp)
+
+:::
+
+- 十多度的白山市，我以为我们的漂流是在船上看风景，但现实是四个人两艘船在松花江寒冷的江水中拿着水枪和浆板互相泼水，最后大家打着哆嗦回到了酒店。
+
+:::div{.travel-gallery data-count="1"}
+
+![白山市秋日湖泊水彩明信片](image-optimized/1006-autumn-lake-postcard.webp)
+
+:::
