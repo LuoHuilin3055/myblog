@@ -5,6 +5,12 @@ export const friendLinks = [
 		description: "大大大大大佬",
 		avatar: "https://static.daochunhan.me/img/profile.png",
 	},
+	{
+		name: "嘴哥",
+		url: "https://mouthbig324-ai.github.io/",
+		description: "好朋友",
+		avatar: "https://mouthbig324-ai.github.io/_astro/graffiti-avatar.DiKG8znJ_Z2nUuKm.webp",
+	},
 ];
 
 export const murmurs = [
