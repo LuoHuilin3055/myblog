@@ -11,6 +11,12 @@ export const friendLinks = [
 		description: "好朋友",
 		avatar: "https://mouthbig324-ai.github.io/_astro/graffiti-avatar.DiKG8znJ_Z2nUuKm.webp",
 	},
+	{
+		name: "Serral828",
+		url: "https://serral828.github.io/",
+		description: "记录技术与生活。",
+		avatar: "https://serral828.github.io/favicon.png",
+	},
 ];
 
 export const murmurs = [
