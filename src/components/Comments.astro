@@ -17,11 +17,27 @@ const className = Astro.props.class;
 	#waline-comments {
 		--waline-theme-color: var(--primary);
 		--waline-active-color: var(--primary);
-		--waline-bgcolor: var(--card-bg);
-		--waline-bgcolor-light: var(--page-bg);
+		--waline-bg-color: var(--card-bg);
+		--waline-bg-color-light: var(--page-bg);
+		--waline-bg-color-hover: var(--btn-plain-bg-hover);
 		--waline-border-color: var(--line-divider);
-		--waline-disable-bgcolor: var(--page-bg);
+		--waline-disable-bg-color: var(--page-bg);
+		--waline-disable-color: var(--waline-light-grey);
 		--waline-color: var(--deep-text);
 		--waline-light-grey: color-mix(in srgb, var(--deep-text) 55%, transparent);
+		--waline-dark-grey: color-mix(in srgb, var(--deep-text) 75%, transparent);
+		--waline-code-bg-color: var(--codeblock-bg);
+		--waline-bq-color: var(--btn-regular-bg);
+		--waline-info-bg-color: var(--page-bg);
+		--waline-info-color: var(--waline-light-grey);
+	}
+
+	:root.dark #waline-comments {
+		--waline-white: var(--page-bg);
+		--waline-color: rgb(255 255 255 / 78%);
+		--waline-light-grey: rgb(255 255 255 / 48%);
+		--waline-dark-grey: rgb(255 255 255 / 68%);
+		--waline-disable-color: rgb(255 255 255 / 30%);
+		--waline-info-color: rgb(255 255 255 / 48%);
 	}
 </style>
